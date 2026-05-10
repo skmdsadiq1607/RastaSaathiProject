@@ -116,25 +116,46 @@ const Guide = () => {
           />
         </div>
 
-        {/* Detailed First Aid Protocol */}
-        <div className="glass-panel" style={{ padding: '60px', marginBottom: '80px' }}>
-          <h2 style={{ fontSize: '2rem', fontWeight: '800', marginBottom: '40px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '15px' }}>
-            <Book size={28} color="#ef4444" /> {t('first_aid_title')}
-          </h2>
-          
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '40px' }}>
-            <ProtocolItem 
-              title={t('protocol_bleeding')}
-              steps={[t('step_pressure'), t('step_elevate'), t('step_dressing')]}
-            />
-            <ProtocolItem 
-              title={t('protocol_fracture')}
-              steps={[t('step_nomove'), t('step_cold'), t('step_splint')]}
-            />
-            <ProtocolItem 
-              title={t('protocol_shock')}
-              steps={[t('step_flat'), t('step_warm'), t('step_loose')]}
-            />
+        {/* Precision Orchestration Section */}
+        <div style={{ marginBottom: '140px' }}>
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            style={{ textAlign: 'center', marginBottom: '80px' }}
+          >
+            <h2 style={{ fontSize: '3rem', fontWeight: '900', marginBottom: '20px' }}>
+              {t('orch_title')}
+            </h2>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', maxWidth: '800px', margin: '0 auto' }}>
+              Our platform uses advanced AI-geospatial synchronization to orchestrate rescue operations with millisecond precision.
+            </p>
+          </motion.div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px' }}>
+            <motion.div whileHover={{ y: -10 }} className="glass-panel" style={{ padding: '50px', background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, transparent 100%)' }}>
+              <div style={{ marginBottom: '24px', background: 'rgba(59, 130, 246, 0.1)', width: '60px', height: '60px', borderRadius: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <MapPin size={30} color="#3b82f6" />
+              </div>
+              <h3 style={{ fontSize: '1.6rem', marginBottom: '20px', fontWeight: '800' }}>{t('orch_feature1_title')}</h3>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: '1.8', fontSize: '1.1rem' }}>{t('orch_feature1_desc')}</p>
+            </motion.div>
+
+            <motion.div whileHover={{ y: -10 }} className="glass-panel" style={{ padding: '50px', background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, transparent 100%)' }}>
+              <div style={{ marginBottom: '24px', background: 'rgba(239, 68, 68, 0.1)', width: '60px', height: '60px', borderRadius: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Zap size={30} color="#ef4444" />
+              </div>
+              <h3 style={{ fontSize: '1.6rem', marginBottom: '20px', fontWeight: '800' }}>{t('orch_feature2_title')}</h3>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: '1.8', fontSize: '1.1rem' }}>{t('orch_feature2_desc')}</p>
+            </motion.div>
+
+            <motion.div whileHover={{ y: -10 }} className="glass-panel" style={{ padding: '50px', background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, transparent 100%)' }}>
+              <div style={{ marginBottom: '24px', background: 'rgba(16, 185, 129, 0.1)', width: '60px', height: '60px', borderRadius: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Shield size={30} color="#10b981" />
+              </div>
+              <h3 style={{ fontSize: '1.6rem', marginBottom: '20px', fontWeight: '800' }}>{t('orch_feature3_title')}</h3>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: '1.8', fontSize: '1.1rem' }}>{t('orch_feature3_desc')}</p>
+            </motion.div>
           </div>
         </div>
 
