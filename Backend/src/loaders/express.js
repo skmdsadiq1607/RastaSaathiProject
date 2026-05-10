@@ -28,6 +28,10 @@ async function initExpress({ app, io }) {
   });
 
   const router = express.Router();
+  
+  // Health Check
+  router.get('/health', (req, res) => res.json({ status: 'Healthy', timestamp: new Date() }));
+
   router.use('/auth', authRoutes());
   router.use('/sos', sosRoutes());
   router.use('/incident', incidentRoutes());
