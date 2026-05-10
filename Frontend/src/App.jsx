@@ -52,17 +52,17 @@ function App() {
         <nav className="glass-nav" style={{ position: 'sticky', top: 0, zIndex: 1000 }}>
           <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '80px', padding: '0 20px' }}>
             <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <svg width="34" height="34" viewBox="0 0 100 100" style={{ filter: 'drop-shadow(0 0 10px rgba(239, 68, 68, 0.5))' }}>
+              <svg width="34" height="34" viewBox="0 0 100 100" style={{ filter: 'drop-shadow(0 0 10px rgba(239, 68, 68, 0.4))' }}>
                 <path 
-                  d="M50 85c-20-15-40-30-40-50 0-10 8-18 18-18 7 0 13 4 17 10 4-6 10-10 17-10 10 0 18 8 18 18 0 20-20 35-40 50z" 
+                  d="M50 85 C 50 85, 20 60, 20 40 C 20 30, 28 22, 38 22 C 45 22, 50 27, 50 27 C 50 27, 55 22, 62 22 C 72 22, 80 30, 80 40 C 80 60, 50 85, 50 85" 
                   fill="none" 
                   stroke="#ef4444" 
-                  strokeWidth="5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+                  strokeWidth="6" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
                 />
                 <path 
-                  d="M25 45h10l5-15 10 35 5-20h20" 
+                  d="M32 45h8l5-15 8 30 5-15h10" 
                   fill="none" 
                   stroke="white" 
                   strokeWidth="5" 
