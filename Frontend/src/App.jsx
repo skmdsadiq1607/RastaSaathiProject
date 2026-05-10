@@ -153,7 +153,7 @@ function App() {
               
               <div style={{ maxWidth: '600px' }}>
                 <p style={{ color: 'var(--text-primary)', fontWeight: '600', marginBottom: '8px', fontSize: '1.1rem' }}>
-                  Made with ❤️ by Team-RastaSaathi
+                  Made with ❤️ by Team-<span style={{ color: 'white' }}>Rasta</span><span style={{ color: '#ef4444' }}>Saathi</span>
                 </p>
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.6', letterSpacing: '0.5px' }}>
                   Dr.Lakshmi | Sadiq | Krishna | Chakravarthi | Hasini
