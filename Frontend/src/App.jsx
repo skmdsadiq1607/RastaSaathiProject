@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { LayoutDashboard, LogOut, User } from 'lucide-react';
+import { Shield, LayoutDashboard, LogOut, User } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // Pages
@@ -54,7 +54,7 @@ function App() {
           <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '80px', padding: '0 20px' }}>
             <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex', alignItems: 'center', gap: '15px' }}>
               <Logo size={38} />
-              <span style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', fontWeight: '900', letterSpacing: '-0.8px' }}>
+              <span style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', fontWeight: '900', letterSpacing: '-0.8px', color: 'white' }}>
                 Rasta<span style={{ color: '#ef4444' }}>Saathi</span>
               </span>
             </Link>
@@ -145,14 +145,16 @@ function App() {
           <div className="container">
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <Logo size={24} />
-                <span style={{ fontFamily: 'var(--font-heading)', fontWeight: '700', fontSize: '1.2rem' }}>RastaSaathi</span>
+                <Shield color="#ef4444" size={24} />
+                <span style={{ fontFamily: 'var(--font-heading)', fontWeight: '700', fontSize: '1.2rem', color: 'white' }}>
+                  Rasta<span style={{ color: '#ef4444' }}>Saathi</span>
+                </span>
               </div>
               
               <div style={{ maxWidth: '600px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', color: 'var(--text-primary)', fontWeight: '600', marginBottom: '8px', fontSize: '1.1rem' }}>
-                  Made with <Logo size={16} /> by Team-RastaSaathi
-                </div>
+                <p style={{ color: 'var(--text-primary)', fontWeight: '600', marginBottom: '8px', fontSize: '1.1rem' }}>
+                  Made with ❤️ by Team-RastaSaathi
+                </p>
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.6', letterSpacing: '0.5px' }}>
                   Dr.Lakshmi | Sadiq | Krishna | Chakravarthi | Hasini
                 </p>

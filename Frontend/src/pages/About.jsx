@@ -13,8 +13,8 @@ const About = () => {
     >
       {/* Header */}
       <div style={{ textAlign: 'center', marginBottom: '80px' }}>
-        <h1 style={{ fontSize: '3.5rem', fontWeight: '800', marginBottom: '20px' }}>
-          About <span style={{ color: '#ef4444' }}>RastaSaathi</span>
+        <h1 style={{ fontSize: '3.5rem', fontWeight: '800', marginBottom: '20px', color: 'white' }}>
+          About Rasta<span style={{ color: '#ef4444' }}>Saathi</span>
         </h1>
         <p style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', maxWidth: '800px', margin: '0 auto' }}>
           Revolutionizing road safety through AI-powered emergency response and real-time trauma care orchestration.
