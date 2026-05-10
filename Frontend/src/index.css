@@ -270,6 +270,78 @@ main {
   transition: opacity 300ms;
 }
 
+/* Responsive Overrides */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 20px;
+  }
+  
+  .glass-panel {
+    padding: 40px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 3rem !important;
+    letter-spacing: -1px !important;
+  }
+  
+  h2 {
+    font-size: 2.2rem !important;
+  }
+  
+  h3 {
+    font-size: 1.8rem !important;
+  }
+
+  .container {
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
+  }
+
+  /* Section Spacing */
+  div[style*="marginBottom: '140px'"],
+  div[style*="marginBottom: '160px'"],
+  section {
+    margin-bottom: 80px !important;
+  }
+
+  /* Grid Adjustments */
+  div[style*="gridTemplateColumns"] {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
+
+  /* Navbar Mobile fixes */
+  .glass-nav .container {
+    height: 70px !important;
+  }
+
+  /* Buttons */
+  .btn, .premium-button {
+    width: 100%;
+    padding: 15px 20px !important;
+  }
+
+  /* Stats and Metrics */
+  div[style*="gridTemplateColumns: '1fr 1fr'"] {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2.5rem !important;
+  }
+  
+  .glass-panel {
+    padding: 30px 20px !important;
+    border-radius: 16px !important;
+  }
+}
+
 /* SOS Pulse Animation */
 @keyframes pulse-ring {
   0% {
