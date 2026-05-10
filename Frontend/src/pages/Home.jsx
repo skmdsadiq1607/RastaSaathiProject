@@ -49,33 +49,40 @@ const Home = () => {
             transition={{ delay: 0.6 }}
             style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}
           >
-            <Link to="/guide" className="premium-button sos-pulse" style={{ 
-              padding: '20px 40px', 
-              fontSize: '1.2rem', 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: '12px',
-              textDecoration: 'none',
-              background: 'linear-gradient(135deg, #ef4444 0%, #991b1b 100%)',
-              color: 'white',
-              borderRadius: '12px',
-              fontWeight: '700',
-              boxShadow: '0 10px 20px rgba(239, 68, 68, 0.3)'
-            }}>
-              <BookOpen size={20} /> {t('view_guide')}
-            </Link>
-            <Link to="/about" className="btn btn-outline" style={{ 
-              padding: '20px 40px', 
-              fontSize: '1.2rem', 
-              border: '1px solid rgba(255,255,255,0.1)', 
-              color: 'white', 
-              textDecoration: 'none',
-              borderRadius: '12px',
-              background: 'rgba(255,255,255,0.03)',
-              fontWeight: '600'
-            }}>
-              {t('vision')}
-            </Link>
+            <motion.div whileHover={{ scale: 1.05, translateY: -5 }} whileTap={{ scale: 0.95 }}>
+              <Link to="/guide" className="premium-button sos-pulse" style={{ 
+                padding: '20px 40px', 
+                fontSize: '1.2rem', 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '12px',
+                textDecoration: 'none',
+                background: 'linear-gradient(135deg, #ef4444 0%, #991b1b 100%)',
+                color: 'white',
+                borderRadius: '12px',
+                fontWeight: '700',
+                boxShadow: '0 10px 20px rgba(239, 68, 68, 0.3)',
+                transition: 'box-shadow 0.3s ease'
+              }}>
+                <BookOpen size={20} /> {t('view_guide')}
+              </Link>
+            </motion.div>
+
+            <motion.div whileHover={{ scale: 1.05, translateY: -5 }} whileTap={{ scale: 0.95 }}>
+              <Link to="/about" className="btn btn-outline" style={{ 
+                padding: '20px 40px', 
+                fontSize: '1.2rem', 
+                border: '1px solid rgba(255,255,255,0.1)', 
+                color: 'white', 
+                textDecoration: 'none',
+                borderRadius: '12px',
+                background: 'rgba(255,255,255,0.03)',
+                fontWeight: '600',
+                transition: 'all 0.3s ease'
+              }}>
+                {t('vision')}
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
 
