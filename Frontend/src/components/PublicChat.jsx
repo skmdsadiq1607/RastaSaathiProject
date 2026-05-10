@@ -1,3 +1,6 @@
+import React, { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MessageSquare, X, Send, Stethoscope, ShieldAlert } from 'lucide-react';
 import EMERGENCIES from '../data/emergencies.json';
 
 const PublicChat = () => {
@@ -60,8 +63,8 @@ const PublicChat = () => {
             {/* Header */}
             <div style={{ background: 'rgba(239, 68, 68, 0.1)', padding: '15px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <LifeBuoy size={20} color="#ef4444" className="sos-pulse-small" />
-                <span style={{ fontWeight: '700', letterSpacing: '1px' }}>INSTANT AID RESPONDER</span>
+                <Stethoscope size={20} color="#ef4444" className="sos-pulse-small" />
+                <span style={{ fontWeight: '700', letterSpacing: '1px' }}>RASTASAATHI RESCUE BOT</span>
               </div>
               <X size={20} onClick={() => setIsOpen(false)} style={{ cursor: 'pointer' }} />
             </div>
@@ -155,7 +158,7 @@ const PublicChat = () => {
       >
         {isOpen ? <X color="white" /> : <MessageSquare color="white" />}
         {!isOpen && (
-           <div style={{ position: 'absolute', top: '-5px', right: '-5px', background: 'white', color: '#ef4444', width: '24px', height: '24px', borderRadius: '50%', fontSize: '0.7rem', fontWeight: '900', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 5px rgba(0,0,0,0.2)' }}>AID</div>
+           <div style={{ position: 'absolute', top: '-5px', right: '-5px', background: 'white', color: '#ef4444', width: '24px', height: '24px', borderRadius: '50%', fontSize: '0.7rem', fontWeight: '900', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 5px rgba(0,0,0,0.2)' }}>BOT</div>
         )}
       </motion.div>
     </div>
