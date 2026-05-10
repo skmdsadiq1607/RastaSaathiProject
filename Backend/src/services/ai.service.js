@@ -66,12 +66,13 @@ async function callClaude({ system, user, maxTokens = 600 }) {
   try {
     return await callClaudeWithRetry({ system, user, maxTokens });
   } catch (claudeError) {
-    logger.error(`[AI Service] Claude Failed completely: ${claudeError.message}. Falling back to Gemini...`);
+    logger.error(`[AI Service] Claude Failed: ${claudeError.message}`);
     try {
       return await callGeminiWithRetry({ system, user });
     } catch (geminiError) {
-      logger.error(`[AI Service] Gemini also Failed: ${geminiError.message}. Entire AI pipeline exhausted.`);
-      throw new AppError('AI Service currently unavailable due to rate limits', 503, 'AI_EXHAUSTED');
+      logger.error(`[AI Service] Gemini Failed: ${geminiError.message}`);
+      // Return the actual error message so the user can see it in their console
+      throw new AppError(`AI Brain Error: ${claudeError.message} / ${geminiError.message}`, 503, 'AI_EXHAUSTED');
     }
   }
 }
