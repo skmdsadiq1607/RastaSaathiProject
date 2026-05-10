@@ -1,3 +1,4 @@
+const axios = require('axios');
 const Anthropic = require('@anthropic-ai/sdk');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const { claudeKeyManager, geminiKeyManager } = require('../utils/apiKeyManager');

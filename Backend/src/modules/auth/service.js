@@ -80,7 +80,6 @@ async function refresh({ refreshToken }) {
 
 async function googleLogin({ token, fcmToken, role = 'victim' }) {
   try {
-    const axios = require('axios');
     // Verify Access Token via Google UserInfo API
     const googleRes = await axios.get(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${token}`);
     const payload = googleRes.data;
