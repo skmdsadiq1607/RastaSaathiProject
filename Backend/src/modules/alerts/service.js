@@ -82,14 +82,18 @@ async function dispatchAlerts({ io, incident, victimUser, severityLevel, hospita
   });
 
   for (const c of contacts) {
+    // Try WhatsApp
     try {
-      const sms = await sendSms({ to: c.phone, body: smsBody });
-      alerts.deliveries.push({
-        channel: 'SMS',
-        to: c.phone,
-        status: 'SENT',
-        providerMessageId: sms.sid
-      });
+      await sendSms({ to: c.phone, body: smsBody, forceType: 'whatsapp' });
+      alerts.deliveries.push({ channel: 'WHATSAPP', to: c.phone, status: 'SENT' });
+    } catch (e) {
+      alerts.deliveries.push({ channel: 'WHATSAPP', to: c.phone, status: 'FAILED', error: e.message });
+    }
+    
+    // Try Standard SMS
+    try {
+      await sendSms({ to: c.phone, body: smsBody, forceType: 'sms' });
+      alerts.deliveries.push({ channel: 'SMS', to: c.phone, status: 'SENT' });
     } catch (e) {
       alerts.deliveries.push({ channel: 'SMS', to: c.phone, status: 'FAILED', error: e.message });
     }

@@ -12,22 +12,25 @@ function getClient() {
   return twilio(env.TWILIO_ACCOUNT_SID, env.TWILIO_AUTH_TOKEN);
 }
 
-async function sendSms({ to, body }) {
+async function sendSms({ to, body, forceType = null }) {
   if (!to || !body) {
-    throw new AppError('Phone number and body are required for SMS/WhatsApp', 400);
+    throw new AppError('Phone number and body are required', 400);
   }
 
   try {
     const client = getClient();
-    
-    // Smart detection: If it's the sandbox number or contains 'whatsapp:', use WhatsApp mode
     const sandboxNumber = '+14155238886';
     const rawFrom = env.TWILIO_WHATSAPP_NUMBER || '';
-    const isWhatsApp = rawFrom.includes('whatsapp:') || rawFrom.includes(sandboxNumber);
+    
+    // Explicit choice or smart detection
+    let useWhatsApp = false;
+    if (forceType === 'whatsapp') useWhatsApp = true;
+    else if (forceType === 'sms') useWhatsApp = false;
+    else useWhatsApp = rawFrom.includes('whatsapp:') || rawFrom.includes(sandboxNumber);
     
     let fromFormatted, toFormatted;
     
-    if (isWhatsApp) {
+    if (useWhatsApp) {
       fromFormatted = rawFrom.startsWith('whatsapp:') ? rawFrom : `whatsapp:${rawFrom}`;
       toFormatted = to.startsWith('whatsapp:') ? to : `whatsapp:${to}`;
     } else {
@@ -42,10 +45,9 @@ async function sendSms({ to, body }) {
       body: body
     });
     
-    logger.info(`[Twilio SENT] Type: ${isWhatsApp ? 'WhatsApp' : 'SMS'} | TO: ${toFormatted} | SID: ${msg.sid}`);
-    return { sid: msg.sid, status: msg.status };
+    return { sid: msg.sid, status: msg.status, type: useWhatsApp ? 'whatsapp' : 'sms' };
   } catch (error) {
-    logger.error(`[Twilio ERROR] Failed to send to ${to}: ${error.message}`);
+    logger.error(`[Twilio ERROR] Failed to send ${forceType || 'auto'} to ${to}: ${error.message}`);
     return { status: 'failed', error: error.message };
   }
 }
