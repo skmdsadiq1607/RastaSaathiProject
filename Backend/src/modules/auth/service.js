@@ -129,5 +129,18 @@ function sanitizeUser(user) {
   };
 }
 
-module.exports = { register, login, logout, refresh, googleLogin };
+async function updateProfile(userId, data) {
+  const user = await User.findById(userId);
+  if (!user) throw new AppError('User not found', 404, 'NOT_FOUND');
+
+  const { name, language, emergencyContacts } = data;
+  if (name) user.name = name;
+  if (language) user.language = language;
+  if (emergencyContacts) user.emergencyContacts = emergencyContacts;
+
+  await user.save();
+  return sanitizeUser(user);
+}
+
+module.exports = { register, login, logout, refresh, googleLogin, updateProfile };
 

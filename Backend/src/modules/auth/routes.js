@@ -1,4 +1,5 @@
 const express = require('express');
+const { requireAuth } = require('../../middleware/auth.middleware');
 const { validate } = require('../../middleware/validate.middleware');
 const { registerSchema, loginSchema, refreshSchema } = require('./validator');
 const {
@@ -6,7 +7,8 @@ const {
   loginController,
   logoutController,
   refreshController,
-  googleLoginController
+  googleLoginController,
+  updateProfileController
 } = require('./controller');
 
 function authRoutes() {
@@ -17,6 +19,7 @@ function authRoutes() {
   router.post('/google', googleLoginController); // Google Auth
   router.post('/refresh', validate(refreshSchema), refreshController);
   router.post('/logout', logoutController);
+  router.put('/profile', requireAuth(), updateProfileController);
 
   return router;
 }

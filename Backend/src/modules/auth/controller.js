@@ -1,5 +1,6 @@
+const { requireAuth } = require('../../middleware/auth.middleware');
 const { ok } = require('../../utils/responseFormatter');
-const { register, login, logout, refresh, googleLogin } = require('./service');
+const { register, login, logout, refresh, googleLogin, updateProfile } = require('./service');
 
 async function registerController(req, res, next) {
   try {
@@ -50,5 +51,13 @@ async function googleLoginController(req, res, next) {
   }
 }
 
-module.exports = { registerController, loginController, logoutController, refreshController, googleLoginController };
+async function updateProfileController(req, res, next) {
+  try {
+    const result = await updateProfile(req.user.sub, req.body);
+    res.json(ok({ data: result, message: 'Profile updated' }));
+  } catch (err) {
+    next(err);
+  }
+}
 
+module.exports = { registerController, loginController, logoutController, refreshController, googleLoginController, updateProfileController };
