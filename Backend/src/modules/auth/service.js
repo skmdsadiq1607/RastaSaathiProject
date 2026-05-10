@@ -78,27 +78,24 @@ async function refresh({ refreshToken }) {
   };
 }
 
-async function googleLogin({ idToken, fcmToken, role = 'victim' }) {
-  const client = new OAuth2Client(env.GOOGLE_CLIENT_ID);
-  
+async function googleLogin({ token, fcmToken, role = 'victim' }) {
   try {
-    const ticket = await client.verifyIdToken({
-      idToken: idToken,
-      audience: env.GOOGLE_CLIENT_ID,
-    });
-    const payload = ticket.getPayload();
+    const axios = require('axios');
+    // Verify Access Token via Google UserInfo API
+    const googleRes = await axios.get(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${token}`);
+    const payload = googleRes.data;
+    
+    if (!payload.sub) throw new Error('Invalid token');
+
     const { email, name, sub: googleId } = payload;
     
-    // Check if user exists by email or googleId (we can use phone field temporarily or add email)
-    // Let's assume we map Google email to phone field for simplicity in this schema
     let user = await User.findOne({ phone: email });
     
     if (!user) {
-      // Create user if not exists
       user = await User.create({
         name: name,
-        phone: email, // Using email in place of phone for google users
-        passwordHash: await bcrypt.hash(googleId, 12), // Dummy password
+        phone: email, 
+        passwordHash: await bcrypt.hash(googleId, 12),
         role: role,
         language: 'en'
       });
@@ -115,6 +112,7 @@ async function googleLogin({ idToken, fcmToken, role = 'victim' }) {
       refreshToken: signRefreshToken(user)
     };
   } catch (error) {
+    console.error('Google Auth Error:', error.response?.data || error.message);
     throw new AppError('Invalid Google Token', 401, 'UNAUTHORIZED');
   }
 }
