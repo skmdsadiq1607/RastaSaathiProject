@@ -60,19 +60,22 @@ function App() {
             <div className="desktop-menu" style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
               <Link to="/" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: '500' }}>{t('home')}</Link>
               <Link to="/about" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: '500' }}>{t('about')}</Link>
+              <Link to="/about" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: '500' }}>{t('vision_mission')}</Link>
               <Link to="/guide" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: '500' }}>{t('guide')}</Link>
               <Link to="/contact" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: '500' }}>{t('contact')}</Link>
               
-              {isLoggedIn && (
-                <Link to="/dashboard" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '600' }}>{t('dashboard')}</Link>
-              )}
-
               <LanguageSwitcher />
-              
+
               {!isLoggedIn ? (
-                <Link to="/login" className="btn btn-primary" style={{ padding: '8px 20px' }}>{t('login')}</Link>
+                <>
+                  <Link to="/login" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: '500' }}>{t('login')}</Link>
+                  <Link to="/register" className="btn btn-primary" style={{ padding: '8px 20px' }}>Register</Link>
+                </>
               ) : (
-                <button onClick={handleLogout} className="btn btn-outline" style={{ border: '1px solid #ef4444', color: '#ef4444' }}>Logout</button>
+                <>
+                  <Link to="/dashboard" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '600' }}>{t('dashboard')}</Link>
+                  <button onClick={handleLogout} className="btn btn-outline" style={{ border: '1px solid #ef4444', color: '#ef4444', padding: '8px 15px' }}>Logout</button>
+                </>
               )}
             </div>
 
@@ -95,18 +98,27 @@ function App() {
                 exit={{ height: 0, opacity: 0 }}
                 style={{ background: 'rgba(2, 6, 23, 0.95)', borderTop: '1px solid var(--border-glass)', overflow: 'hidden' }}
               >
-                <div style={{ display: 'flex', flexDirection: 'column', padding: '20px', gap: '20px', textAlign: 'center' }}>
-                  <Link to="/" onClick={() => setIsMenuOpen(false)} style={{ color: 'white', textDecoration: 'none', fontSize: '1.2rem' }}>{t('home')}</Link>
-                  <Link to="/about" onClick={() => setIsMenuOpen(false)} style={{ color: 'white', textDecoration: 'none', fontSize: '1.2rem' }}>{t('about')}</Link>
-                  <Link to="/guide" onClick={() => setIsMenuOpen(false)} style={{ color: 'white', textDecoration: 'none', fontSize: '1.2rem' }}>{t('guide')}</Link>
-                  <Link to="/contact" onClick={() => setIsMenuOpen(false)} style={{ color: 'white', textDecoration: 'none', fontSize: '1.2rem' }}>{t('contact')}</Link>
-                  {isLoggedIn ? (
+                <div style={{ display: 'flex', flexDirection: 'column', padding: '20px', gap: '15px', textAlign: 'center' }}>
+                  <Link to="/" onClick={() => setIsMenuOpen(false)} style={{ color: 'white', textDecoration: 'none', fontSize: '1.1rem' }}>{t('home')}</Link>
+                  <Link to="/about" onClick={() => setIsMenuOpen(false)} style={{ color: 'white', textDecoration: 'none', fontSize: '1.1rem' }}>{t('about')}</Link>
+                  <Link to="/about" onClick={() => setIsMenuOpen(false)} style={{ color: 'white', textDecoration: 'none', fontSize: '1.1rem' }}>{t('vision_mission')}</Link>
+                  <Link to="/guide" onClick={() => setIsMenuOpen(false)} style={{ color: 'white', textDecoration: 'none', fontSize: '1.1rem' }}>{t('guide')}</Link>
+                  <Link to="/contact" onClick={() => setIsMenuOpen(false)} style={{ color: 'white', textDecoration: 'none', fontSize: '1.1rem' }}>{t('contact')}</Link>
+                  
+                  <div style={{ padding: '10px 0', borderTop: '1px solid rgba(255,255,255,0.1)', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+                    <LanguageSwitcher />
+                  </div>
+
+                  {!isLoggedIn ? (
                     <>
-                      <Link to="/dashboard" onClick={() => setIsMenuOpen(false)} style={{ color: 'white', textDecoration: 'none', fontSize: '1.2rem' }}>{t('dashboard')}</Link>
-                      <button onClick={handleLogout} className="premium-button">Logout</button>
+                      <Link to="/login" onClick={() => setIsMenuOpen(false)} style={{ color: 'white', textDecoration: 'none', fontSize: '1.1rem' }}>{t('login')}</Link>
+                      <Link to="/register" onClick={() => setIsMenuOpen(false)} className="btn btn-primary">Register</Link>
                     </>
                   ) : (
-                    <Link to="/login" onClick={() => setIsMenuOpen(false)} className="premium-button">{t('login')}</Link>
+                    <>
+                      <Link to="/dashboard" onClick={() => setIsMenuOpen(false)} style={{ color: 'white', textDecoration: 'none', fontSize: '1.1rem', fontWeight: '700' }}>{t('dashboard')}</Link>
+                      <button onClick={() => { handleLogout(); setIsMenuOpen(false); }} className="btn btn-danger">Logout</button>
+                    </>
                   )}
                 </div>
               </motion.div>
