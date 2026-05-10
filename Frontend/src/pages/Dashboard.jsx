@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { ShieldAlert, Activity, Navigation, MessageCircle, Send, MapPin } from 'lucide-react';
+import { Activity, Navigation, MessageCircle, Send, MapPin } from 'lucide-react';
 import axios from 'axios';
 import GoogleMapReact from 'google-map-react';
+import Logo from '../components/Logo';
 
 const Marker = ({ text, type }) => (
   <motion.div 
@@ -186,8 +187,8 @@ const Dashboard = () => {
                     border: '8px solid rgba(239, 68, 68, 0.3)', color: 'white', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 0 50px rgba(239, 68, 68, 0.5)'
                   }}
                 >
-                  <ShieldAlert size={50} style={{ marginBottom: '8px' }} />
-                  <span style={{ fontFamily: 'var(--font-heading)', fontSize: '1.8rem', fontWeight: '800' }}>SOS</span>
+                  <Logo size={60} />
+                  <span style={{ fontFamily: 'var(--font-heading)', fontSize: '1.8rem', fontWeight: '800', marginTop: '8px' }}>SOS</span>
                 </motion.button>
               </div>
             ) : (

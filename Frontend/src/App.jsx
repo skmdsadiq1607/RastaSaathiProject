@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { Shield, LayoutDashboard, LogOut, User } from 'lucide-react';
+import { LayoutDashboard, LogOut, User } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // Pages
@@ -14,6 +14,7 @@ import Contact from './pages/Contact';
 import Guide from './pages/Guide';
 import PublicChat from './components/PublicChat';
 import LanguageSwitcher from './components/LanguageSwitcher';
+import Logo from './components/Logo';
 import { useLanguage } from './context/LanguageContext';
 
 function App() {
@@ -52,43 +53,7 @@ function App() {
         <nav className="glass-nav" style={{ position: 'sticky', top: 0, zIndex: 1000 }}>
           <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '80px', padding: '0 20px' }}>
             <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex', alignItems: 'center', gap: '15px' }}>
-              <motion.div
-                animate={{ 
-                  scale: [1, 1.05, 1],
-                  filter: [
-                    'drop-shadow(0 0 8px rgba(239, 68, 68, 0.4))',
-                    'drop-shadow(0 0 15px rgba(239, 68, 68, 0.7))',
-                    'drop-shadow(0 0 8px rgba(239, 68, 68, 0.4))'
-                  ]
-                }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-              >
-                <svg width="38" height="38" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    <linearGradient id="heartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#ef4444" />
-                      <stop offset="100%" stopColor="#b91c1c" />
-                    </linearGradient>
-                  </defs>
-                  <path 
-                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" 
-                    stroke="url(#heartGradient)" 
-                    strokeWidth="2" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
-                  />
-                  <motion.path 
-                    d="M6 12h3l2-5 2 10 2-5h3" 
-                    stroke="white" 
-                    strokeWidth="2" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
-                    animate={{ opacity: [0.4, 1, 0.4] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  />
-                </svg>
-              </motion.div>
+              <Logo size={38} />
               <span style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', fontWeight: '900', letterSpacing: '-0.8px' }}>
                 Rasta<span style={{ color: '#ef4444' }}>Saathi</span>
               </span>
@@ -180,14 +145,14 @@ function App() {
           <div className="container">
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <Shield color="#ef4444" size={24} />
+                <Logo size={24} />
                 <span style={{ fontFamily: 'var(--font-heading)', fontWeight: '700', fontSize: '1.2rem' }}>RastaSaathi</span>
               </div>
               
               <div style={{ maxWidth: '600px' }}>
-                <p style={{ color: 'var(--text-primary)', fontWeight: '600', marginBottom: '8px', fontSize: '1.1rem' }}>
-                  Made with ❤️ by Team-RastaSaathi
-                </p>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', color: 'var(--text-primary)', fontWeight: '600', marginBottom: '8px', fontSize: '1.1rem' }}>
+                  Made with <Logo size={16} /> by Team-RastaSaathi
+                </div>
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.6', letterSpacing: '0.5px' }}>
                   Dr.Lakshmi | Sadiq | Krishna | Chakravarthi | Hasini
                 </p>

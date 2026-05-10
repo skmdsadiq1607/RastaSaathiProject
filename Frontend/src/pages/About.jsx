@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Target, Eye, Users, Shield, ShieldCheck } from 'lucide-react';
+import { Target, Eye, Users, ShieldCheck } from 'lucide-react';
+import Logo from '../components/Logo';
 
 const About = () => {
   return (
@@ -50,7 +51,7 @@ const About = () => {
           
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-              <Shield color="#ef4444" size={28} />
+              <Logo size={28} />
               <h3 style={{ fontSize: '1.4rem' }}>Unified SOS Protocol</h3>
             </div>
             <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7' }}>
