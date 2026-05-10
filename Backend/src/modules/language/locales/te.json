@@ -1,0 +1,8 @@
+{
+  "errors.UNAUTHORIZED": "అనధికారము",
+  "errors.FORBIDDEN": "నిషేధితం",
+  "errors.NOT_FOUND": "కనపడలేదు",
+  "alerts.SOS_TITLE": "అత్యవసర SOS",
+  "alerts.SOS_BODY": "ప్రమాదం నివేదించబడింది. తక్షణ సహాయం అవసరం.",
+  "sms.SOS": "SOS|{lat},{lng}|{severity}|{hospital}|{eta}"
+}

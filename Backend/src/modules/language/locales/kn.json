@@ -1,0 +1,8 @@
+{
+  "errors.UNAUTHORIZED": "ಅನಧಿಕೃತ",
+  "errors.FORBIDDEN": "ನಿಷೇಧಿಸಲಾಗಿದೆ",
+  "errors.NOT_FOUND": "ಕಂಡುಬಂದಿಲ್ಲ",
+  "alerts.SOS_TITLE": "ತುರ್ತು SOS",
+  "alerts.SOS_BODY": "ಅಪಘಾತ ವರದಿಯಾಗಿದೆ. ತಕ್ಷಣ ಸಹಾಯ ಬೇಕು.",
+  "sms.SOS": "SOS|{lat},{lng}|{severity}|{hospital}|{eta}"
+}

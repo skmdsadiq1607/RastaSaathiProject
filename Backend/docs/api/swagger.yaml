@@ -1,0 +1,137 @@
+openapi: 3.0.0
+info:
+  title: RoadSoS API
+  description: AI-powered emergency response system for road accident victims.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/api
+    description: Local development server
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []
+paths:
+  /auth/register:
+    post:
+      summary: Register a new user
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                role:
+                  type: string
+                  enum: [victim, responder, admin]
+                phone:
+                  type: string
+      responses:
+        '201':
+          description: User registered successfully
+  /auth/login:
+    post:
+      summary: Login user
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Successful login
+  /sos/trigger:
+    post:
+      summary: Trigger SOS emergency
+      tags: [SOS]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                lat:
+                  type: number
+                lng:
+                  type: number
+                injuryType:
+                  type: string
+                vehicleType:
+                  type: string
+      responses:
+        '200':
+          description: SOS triggered successfully
+  /severity/predict:
+    post:
+      summary: Predict accident severity
+      tags: [Severity]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                speed:
+                  type: number
+                impactForce:
+                  type: number
+                vehicleType:
+                  type: string
+                injuryDescription:
+                  type: string
+                consciousnessLevel:
+                  type: string
+                age:
+                  type: number
+      responses:
+        '200':
+          description: Severity prediction returned
+  /hospital/select:
+    post:
+      summary: Select best hospital
+      tags: [Hospital]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                lat:
+                  type: number
+                lng:
+                  type: number
+                severityLevel:
+                  type: string
+                injuryType:
+                  type: string
+      responses:
+        '200':
+          description: Returns top 3 hospitals
+  /dashboard/live:
+    get:
+      summary: Get live dashboard incidents
+      tags: [Dashboard]
+      responses:
+        '200':
+          description: Live incidents data

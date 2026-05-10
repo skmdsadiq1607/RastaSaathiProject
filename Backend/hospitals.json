@@ -1,0 +1,3035 @@
+[
+  {
+    "s_no": 1,
+    "hospital_name": "Apoorva Hospital",
+    "address": "46 / A Santosh Nagar, Mehindipatnam",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500028",
+    "rohini_id": "8900080160033"
+  },
+  {
+    "s_no": 2,
+    "hospital_name": "Bapuji Hospital",
+    "address": "7-44 Bapujinagar, Nacharam",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500076",
+    "rohini_id": "8900080164482"
+  },
+  {
+    "s_no": 3,
+    "hospital_name": "BBR Hospitals",
+    "address": "7-4-194, Ferozguda, Balanagar, Secunderabad",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500011",
+    "rohini_id": "8900080158665"
+  },
+  {
+    "s_no": 4,
+    "hospital_name": "Bristlecone Hospitals",
+    "address": "Plot No. 3-4-136/A, Street No.6, Barkatpura, Hyderabad",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500027",
+    "rohini_id": "8900080159860"
+  },
+  {
+    "s_no": 5,
+    "hospital_name": "Clear Vision Eye Center",
+    "address": "3-6-272, NVK Towers, Himayathnagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500029",
+    "rohini_id": "8900080160255"
+  },
+  {
+    "s_no": 6,
+    "hospital_name": "Eashwar Lakshmi Hospital",
+    "address": "Plot No.9, Gandhi Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500080",
+    "rohini_id": "8900080163508"
+  },
+  {
+    "s_no": 7,
+    "hospital_name": "G.B.R Multispeciality Hospital & Fertility Centre",
+    "address": "Beside Fruit Market Road, Chaitanyapuri, Dilsukh Nagar, Hyderabad",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500060",
+    "rohini_id": "8900080162877"
+  },
+  {
+    "s_no": 8,
+    "hospital_name": "Hope Childrens Hospital",
+    "address": "5-9-24 / 81 Lake Hills Road, Basheerbagh",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500463",
+    "rohini_id": "8900080163515"
+  },
+  {
+    "s_no": 9,
+    "hospital_name": "Janani Hospital",
+    "address": "3-12-58 / 2, Ramanthapur, Ganesh Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500013",
+    "rohini_id": "8900080158825"
+  },
+  {
+    "s_no": 10,
+    "hospital_name": "Konark Hospital",
+    "address": "Plot No : 13 & 14, Beside Sherwood Public School, Pet Basheerabad, Kompally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500055",
+    "rohini_id": "8900080164505"
+  },
+  {
+    "s_no": 11,
+    "hospital_name": "Krishna Hospital",
+    "address": "H.No- 8-147, Gayathrinagar X Roads, Karmanghat",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500079",
+    "rohini_id": "8900080353602"
+  },
+  {
+    "s_no": 12,
+    "hospital_name": "LK Hospital Pvt Ltd",
+    "address": "#4-159 / 4-172, Maruthi Nagar, Malkajgiri",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500047",
+    "rohini_id": "8900080162013"
+  },
+  {
+    "s_no": 13,
+    "hospital_name": "Madhava Nursing Home",
+    "address": "43, Sarojini Devi Road, Secunderabad SD Road",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500003",
+    "rohini_id": "8900080157798"
+  },
+  {
+    "s_no": 14,
+    "hospital_name": "Prathima Hospitals",
+    "address": "Plot No.27, KPHB Main Road, Jal Vayu Vihar, Opp Arjun Theatre, Kukatpally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500072",
+    "rohini_id": "8900080163928"
+  },
+  {
+    "s_no": 15,
+    "hospital_name": "Meena Hospital",
+    "address": "#10-5-682, Sai Ranga Towers, Thukaramgate, North Lallaguda, Secunderabad",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500017",
+    "rohini_id": "8900080159228"
+  },
+  {
+    "s_no": 16,
+    "hospital_name": "Mythri Hospital Chandranagar",
+    "address": "Plot No- 5-4 / 12 To 16, Main Road, Chandanagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500050",
+    "rohini_id": "8900080162204"
+  },
+  {
+    "s_no": 17,
+    "hospital_name": "NeoRetina Eye Hospital",
+    "address": "#5-9-83/B, Chapel Road, Nampally, Opp. Public Gardens",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500001",
+    "rohini_id": "8900080157422"
+  },
+  {
+    "s_no": 18,
+    "hospital_name": "Nest Childrens Hospital",
+    "address": "Plot No. AZ, Vikrampuri Colony, Secunderabad",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500009",
+    "rohini_id": "8900080158528"
+  },
+  {
+    "s_no": 19,
+    "hospital_name": "Nightingale Hospital",
+    "address": "#17-1-383 / N.S / 3 &4, Opp Amber Biscuit Factory, Nagarjuna Sagar Rd, Santosh Nagar Xroads",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500059",
+    "rohini_id": "8900080162716"
+  },
+  {
+    "s_no": 20,
+    "hospital_name": "Omega Hospital",
+    "address": "#8-2-293/82/L/276A, MLA Colony Road, No 12 Banjara Hills",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500034",
+    "rohini_id": "8900080160941"
+  },
+  {
+    "s_no": 21,
+    "hospital_name": "Omni Hospital",
+    "address": "#11-9-46, Opp. Private Market, Kottapet X Roads, Dilsukhnagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500036",
+    "rohini_id": "8900080161153"
+  },
+  {
+    "s_no": 22,
+    "hospital_name": "Poojitha Hospital",
+    "address": "7-2-1799 / 4A / 2, Sanathnagar, Czech Colony",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500018",
+    "rohini_id": "8900080159310"
+  },
+  {
+    "s_no": 23,
+    "hospital_name": "Pragna Hospital",
+    "address": "6-3-347 / 22 / B / 1, Dwarakapuri Colony, Near Sai Baba Temple, Panjagutta",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500016",
+    "rohini_id": "8900080164864"
+  },
+  {
+    "s_no": 24,
+    "hospital_name": "Pranaam Hospital",
+    "address": "1st Floor, Megha Hills Complex, Miyapur",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500050",
+    "rohini_id": "8900080157439"
+  },
+  {
+    "s_no": 25,
+    "hospital_name": "Prasad Hospital",
+    "address": "MIG-204, Road No 1, Kukatpally, Opp. Grand Sitara Hotel, KPHB Colony",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500072",
+    "rohini_id": "8900080163973"
+  },
+  {
+    "s_no": 26,
+    "hospital_name": "Aster Prime Hospitals",
+    "address": "Plot No - 2 & 4, Opp. Passport Seva Kendra, Beside Blue Fox Hotel, Satyam Theatre Road, Ameerpet",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500038",
+    "rohini_id": "8900080161542"
+  },
+  {
+    "s_no": 27,
+    "hospital_name": "Prime Hospital Kukatpally",
+    "address": "MIG 113 & 114, Road No-1, KPHB Colony, Kukatpally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500072",
+    "rohini_id": "8900080164000"
+  },
+  {
+    "s_no": 28,
+    "hospital_name": "Ram Hospital",
+    "address": "Shapurnagar, IDA, Jeedimetla",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500055",
+    "rohini_id": "8900080161412"
+  },
+  {
+    "s_no": 29,
+    "hospital_name": "Ravi Helious Hospital",
+    "address": "175, R.K. Matt Road, Opp: Indirapark",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500029",
+    "rohini_id": "8900080160415"
+  },
+  {
+    "s_no": 30,
+    "hospital_name": "Satya Kidney Hospital",
+    "address": "3-6-4, Street No 4, Himayath Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500029",
+    "rohini_id": "8900080160446"
+  },
+  {
+    "s_no": 31,
+    "hospital_name": "Shreshta Orange Hospital",
+    "address": "3-8-264/1, Chandrapuri Colony, Opp: Vijaya Laxmi Theater, R.R. Dist",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500070",
+    "rohini_id": "8900080164369"
+  },
+  {
+    "s_no": 32,
+    "hospital_name": "Shreya Hospital",
+    "address": "Plot No:286 & 289, Srinivasa Nagar Colony, Dr. A.S. Rao Nagar, ECIL",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500062",
+    "rohini_id": "8900080326170"
+  },
+  {
+    "s_no": 33,
+    "hospital_name": "Sigma Hospital - Jeedimetla",
+    "address": "#22-4/1, APIIC Colony, IDA Jeedimetla, Shapur",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500055",
+    "rohini_id": "8900080162532"
+  },
+  {
+    "s_no": 34,
+    "hospital_name": "Soorya Hospitals",
+    "address": "1-7-226, Opp. Round Building, Kamala Nagar, ECIL",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500062",
+    "rohini_id": "8900080411029"
+  },
+  {
+    "s_no": 35,
+    "hospital_name": "Sri Srinivasa Hospital (Unit of Marthala)",
+    "address": "#17-1-380 / E / 28 & 32, C.E Colony, Saidabad Santosh Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500059",
+    "rohini_id": "8900080347045"
+  },
+  {
+    "s_no": 36,
+    "hospital_name": "Srinivas Hospital",
+    "address": "Plot No:- 256, Sainikpuri, Hasthanapuri Colony",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500094",
+    "rohini_id": "8900080165090"
+  },
+  {
+    "s_no": 37,
+    "hospital_name": "Sunshine Hospital",
+    "address": "#1-7-186-189, 201 To 205, Prenderghast Road, Secunderabad",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500003",
+    "rohini_id": "8900080157897"
+  },
+  {
+    "s_no": 38,
+    "hospital_name": "SV Multispeciality Hospital",
+    "address": "H.No. 6-156, SLNS Colony, Balapur X Roads, Hyderabad R.R Dist",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500035",
+    "rohini_id": "8900080164567"
+  },
+  {
+    "s_no": 39,
+    "hospital_name": "Swarup Eye Centre",
+    "address": "#5-9-163, Chapel Road, Near Stanley College, Abids",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500001",
+    "rohini_id": "8900080157514"
+  },
+  {
+    "s_no": 40,
+    "hospital_name": "Tanvi Eye Center",
+    "address": "Plot No- 23 & 24, Sanjeev Housing Colony, East Marredpally, Secunderabad",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500026",
+    "rohini_id": "8900080159815"
+  },
+  {
+    "s_no": 41,
+    "hospital_name": "The Deccan Hospitals",
+    "address": "6-3-903/A & B, Somajiguda, Opp Yashoda Cancer Institute",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500082",
+    "rohini_id": "8900080164840"
+  },
+  {
+    "s_no": 42,
+    "hospital_name": "Unity Centre for Orthopaedic & Trauma",
+    "address": "3-5-170 / GS, Narayanguda",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500029",
+    "rohini_id": "8900080331570"
+  },
+  {
+    "s_no": 43,
+    "hospital_name": "Vijaya Hospital",
+    "address": "Plot No 128, New Gayathri Nagar, Karmanghat",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500079",
+    "rohini_id": "8900080164581"
+  },
+  {
+    "s_no": 44,
+    "hospital_name": "Vitae Medical Centre",
+    "address": "Jubilee Hills Road No-36, Plot No 237",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500033",
+    "rohini_id": "8900080160804"
+  },
+  {
+    "s_no": 45,
+    "hospital_name": "Yashoda Hospitals-Malakpet",
+    "address": "Nalgonda X Road, Malakpet",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500036",
+    "rohini_id": "8900080161399"
+  },
+  {
+    "s_no": 46,
+    "hospital_name": "Yashoda Hospitals-Secunderabad",
+    "address": "SP Road, Beside Hari Hara Kalabhavan",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500003",
+    "rohini_id": "8900080157941"
+  },
+  {
+    "s_no": 47,
+    "hospital_name": "Yashoda Hospitals-Somajiguda",
+    "address": "Raj Bhavan Road, Somajiguda",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500036",
+    "rohini_id": "8900080164932"
+  },
+  {
+    "s_no": 48,
+    "hospital_name": "Aditya Hospital",
+    "address": "#4-1-16, Boggulakunta, Tilak Road, Abids",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500001",
+    "rohini_id": "8900080157231"
+  },
+  {
+    "s_no": 49,
+    "hospital_name": "SVK Hospital",
+    "address": "Plot #78, Opp. Ranga Theatre, Shapurnagar, Jeedimetla",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500055",
+    "rohini_id": "8900080162501"
+  },
+  {
+    "s_no": 50,
+    "hospital_name": "Usha Mallupudi Cardiac Hospital",
+    "address": "Gajularamaram, Jeedimetla, Quthbullapur Municipality",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500055",
+    "rohini_id": "8900080162570"
+  },
+  {
+    "s_no": 51,
+    "hospital_name": "Olive Hospital",
+    "address": "#12-2-718/3 To 5, Nanalnagar X Roads, Mehdipatnam",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500028",
+    "rohini_id": "8900080160163"
+  },
+  {
+    "s_no": 52,
+    "hospital_name": "Premier Hospital",
+    "address": "#12-2-718, Nanal Nagar X Roads, Mehdipatnam",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500028",
+    "rohini_id": "8900080160118"
+  },
+  {
+    "s_no": 53,
+    "hospital_name": "Sree Nethraya Eye Hospital",
+    "address": "#11-9-1, Vimal Complex, Kothapet",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500035",
+    "rohini_id": "8900080161184"
+  },
+  {
+    "s_no": 54,
+    "hospital_name": "Care Hospital - Banjara Hills",
+    "address": "Road No 1, Banjara Hills",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500034",
+    "rohini_id": "8900080160842"
+  },
+  {
+    "s_no": 55,
+    "hospital_name": "Care Hospital - Musheerabad",
+    "address": "Opp Raja Deluxe, Bakaram, Musheerabad",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500020",
+    "rohini_id": "8900080159549"
+  },
+  {
+    "s_no": 56,
+    "hospital_name": "Care Hospital - Nampally",
+    "address": "5-4-199, Exhibition Road, Nampally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500001",
+    "rohini_id": "8900080348318"
+  },
+  {
+    "s_no": 57,
+    "hospital_name": "Nirmala Maternity Orthopaedic and General Hospital",
+    "address": "#2/3RT, Opp Post Office, Vijayanagar Colony",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500057",
+    "rohini_id": "8900080147805"
+  },
+  {
+    "s_no": 58,
+    "hospital_name": "Seha Hospital",
+    "address": "Lakdikapul",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500016",
+    "rohini_id": "8900080158153"
+  },
+  {
+    "s_no": 59,
+    "hospital_name": "Sowmya Hospital",
+    "address": "#1-9-49/B/1, Ram Nagar, Musheerabad",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500020",
+    "rohini_id": "8900080159518"
+  },
+  {
+    "s_no": 60,
+    "hospital_name": "Majestic Hospital",
+    "address": "#9-2-504 & 504/B, Lungerhouse",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500008",
+    "rohini_id": "8900080158399"
+  },
+  {
+    "s_no": 61,
+    "hospital_name": "RR Hospital",
+    "address": "C4, C5, Ganga Enclave, Opp. Excellency Garden, Pet Basheerbagh, Medchal Road",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500055",
+    "rohini_id": "8900080162495"
+  },
+  {
+    "s_no": 62,
+    "hospital_name": "Asha Hospital",
+    "address": "#19-66/11, Prashanth Nagar, Kapra Phase-2",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500062",
+    "rohini_id": "8900080163263"
+  },
+  {
+    "s_no": 63,
+    "hospital_name": "BSR ENT Nursing Home",
+    "address": "#1-2-17/23, S.D Road, Karan Center",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500026",
+    "rohini_id": "8900080157729"
+  },
+  {
+    "s_no": 64,
+    "hospital_name": "Care Hospitals-Secunderabad",
+    "address": "Near Clock Tower, Market Street, Secunderabad",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500003",
+    "rohini_id": "8900080157682"
+  },
+  {
+    "s_no": 65,
+    "hospital_name": "Dr. Akbar's Eye Hospital Phaco & Laser Centre",
+    "address": "#12-2-831/87, Saisuchi Towers, Mehdipatnam",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500028",
+    "rohini_id": "8900080160064"
+  },
+  {
+    "s_no": 66,
+    "hospital_name": "Femina Women's Hospital",
+    "address": "8-2-686/B/611, Rd Number 12, NBT Nagar, Banjara Hills",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500034",
+    "rohini_id": "8900080160873"
+  },
+  {
+    "s_no": 67,
+    "hospital_name": "Global Eye & Laser Hospital Pvt Ltd",
+    "address": "Plot No:197, Road No:1, KPHB Colony, Kukatpally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500072",
+    "rohini_id": "8900080061446"
+  },
+  {
+    "s_no": 68,
+    "hospital_name": "Krishna Institute Of Medical Sciences Ltd.",
+    "address": "#1-8-31/1, Minister Road, Secunderabad",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500003",
+    "rohini_id": "8900080157767"
+  },
+  {
+    "s_no": 69,
+    "hospital_name": "Nova ENT Hospital",
+    "address": "6-3-652, 1st Floor, Kautilya Block, Adj to Medinova, Somajiguda",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500082",
+    "rohini_id": "8900080164987"
+  },
+  {
+    "s_no": 70,
+    "hospital_name": "Remedy Hospital - Kukatpally",
+    "address": "Road No-4, KPHB Colony, Kukatpally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500072",
+    "rohini_id": "8900080164031"
+  },
+  {
+    "s_no": 71,
+    "hospital_name": "S.S Multispeciality Hospital",
+    "address": "#7-4-25/S/N, Beside IOC Petrol Pump, Sagar Road, Omkar Nagar, R.R Dist",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500074",
+    "rohini_id": "8900080164420"
+  },
+  {
+    "s_no": 72,
+    "hospital_name": "Sankhya Hospitals",
+    "address": "Opp SBT Bank, Plot No C-15, KPHB Road No-1",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500072",
+    "rohini_id": "8900080158788"
+  },
+  {
+    "s_no": 73,
+    "hospital_name": "Sunrise Super Speciality Childrens Hospital",
+    "address": "#3-5-1105, Opp IPM Blood Bank, Beside Bata Show Room, Narayanaguda",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500029",
+    "rohini_id": "8900080160514"
+  },
+  {
+    "s_no": 74,
+    "hospital_name": "Xenia Hospital",
+    "address": "Plot No-43, EC Extension, ECIL X Roads",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500062",
+    "rohini_id": "8900080333857"
+  },
+  {
+    "s_no": 75,
+    "hospital_name": "Harsha Hospitals",
+    "address": "1-76/1/B/4, Ganga Enclave, Medchal Road, Petbasheerabad, Quthbullapur",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500055",
+    "rohini_id": "8900080162440"
+  },
+  {
+    "s_no": 76,
+    "hospital_name": "Mahalakshmi Nursing Home",
+    "address": "#3-2-320, S.S Street, Behind Manju Theatre, Near Pochamma Temple",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500003",
+    "rohini_id": "8900080157804"
+  },
+  {
+    "s_no": 77,
+    "hospital_name": "Challa Eye Care Center",
+    "address": "Road No:2, Banjara Hills Lane, Beside Harley Davidson Showroom, Sagar Society Main Road",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500034",
+    "rohini_id": "8900080160859"
+  },
+  {
+    "s_no": 78,
+    "hospital_name": "Matrika Hospital",
+    "address": "6-3-1100/2, T. Nagar, Somajiguda",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500082",
+    "rohini_id": "8900080164819"
+  },
+  {
+    "s_no": 79,
+    "hospital_name": "Pushpagiri Vitreo Retina Institute",
+    "address": "Plot No-241, Umaplaza, Door No-10-2-342, Road No 9, West Marredpally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500026",
+    "rohini_id": "8900080159761"
+  },
+  {
+    "s_no": 80,
+    "hospital_name": "Sri Maha Laxmi Eye Hospital",
+    "address": "Plot 3, 5-5-148/1, Vanasthali Hills Colony, Vanasthalipuram",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500070",
+    "rohini_id": "8900080163690"
+  },
+  {
+    "s_no": 81,
+    "hospital_name": "Apollo Hospital - Hyderguda",
+    "address": "Hyderguda",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500029",
+    "rohini_id": "8900080160231"
+  },
+  {
+    "s_no": 82,
+    "hospital_name": "Apollo Hospitals - Jubilee Hills",
+    "address": "Jubilee Hills",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500033",
+    "rohini_id": "8900080328488"
+  },
+  {
+    "s_no": 83,
+    "hospital_name": "GLENEAGLES GLOBAL HOSPITALS",
+    "address": "6-1-1040/1 to 4, Lakdi-ka-pul",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500004",
+    "rohini_id": "8900080158047"
+  },
+  {
+    "s_no": 84,
+    "hospital_name": "Sree Srinivasa ENT Care Research Institute",
+    "address": "#6-3-663/7/5, Jaffer Ali Bagh, Somajiguda",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500082",
+    "rohini_id": "8900080164888"
+  },
+  {
+    "s_no": 85,
+    "hospital_name": "Ikon Hospital",
+    "address": "16-11-741/C/1/15, Behind TMC, Adj to Reliance Fresh, Dilsuknagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500060",
+    "rohini_id": "8900080162914"
+  },
+  {
+    "s_no": 86,
+    "hospital_name": "Ravi Hospital",
+    "address": "LIG-564/565, Road No 3, Behind RS Brothers, KPHB Colony",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500072",
+    "rohini_id": "8900080164024"
+  },
+  {
+    "s_no": 87,
+    "hospital_name": "Apollo Hospital - Secunderabad",
+    "address": "Next to Keys High School, St. John Road",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500003",
+    "rohini_id": "8900080157651"
+  },
+  {
+    "s_no": 88,
+    "hospital_name": "Lakshmi Maternity and Nursing Home",
+    "address": "#3-6-191/1/182, Urdu Hall Lane, Hyderguda",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500029",
+    "rohini_id": "8900080160361"
+  },
+  {
+    "s_no": 89,
+    "hospital_name": "Little Stars Childrens Hospital",
+    "address": "#8-2-248/1/7/30 & 30A, Plot No:30, Nagarjuna Hills, Panjagutta",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500011",
+    "rohini_id": "8900080164796"
+  },
+  {
+    "s_no": 90,
+    "hospital_name": "Maxivision Laser Center Pvt Ltd - Begumpet",
+    "address": "#1-11-252/1A To 1D, Alladin Mansion, Street No 3, Begumpet",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500016",
+    "rohini_id": "8900080162952"
+  },
+  {
+    "s_no": 91,
+    "hospital_name": "Maxivision Laser Center Pvt Ltd - Somajiguda",
+    "address": "6-3-903/A/1-1, Raj Bhavan Road, Somajiguda",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500082",
+    "rohini_id": "8900080164826"
+  },
+  {
+    "s_no": 92,
+    "hospital_name": "Neo BBC New Born Childrens Hospital",
+    "address": "#1-9-1088/1, Second Floor, S.K. Mall, Vidya Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500044",
+    "rohini_id": "8900080161900"
+  },
+  {
+    "s_no": 93,
+    "hospital_name": "Matrix Hospital",
+    "address": "Plot No. 4,5,14 & 15 Pragathi Nagar, Ramanthapur Main Road",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500013",
+    "rohini_id": "8900080158849"
+  },
+  {
+    "s_no": 94,
+    "hospital_name": "Dharani Hospital",
+    "address": "#12-2-417/46/8/G1, Hari Hara Teja Apts, Shiv Bagh, Near Gudimalkapur X Roads",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500049",
+    "rohini_id": "8900080160279"
+  },
+  {
+    "s_no": 95,
+    "hospital_name": "Goodwill Kidney & Surgical Centre",
+    "address": "#10-5-13/2/A, Masab Tank, Opp Khaja Mansion, Road No.1, Banjara Hills",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500028",
+    "rohini_id": "8900080160088"
+  },
+  {
+    "s_no": 96,
+    "hospital_name": "Lions Patny Hospital",
+    "address": "Street No:4, Road No:7, New Municipal Park, West Marredpally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500026",
+    "rohini_id": "8900080157385"
+  },
+  {
+    "s_no": 97,
+    "hospital_name": "Maxivision Laser Center Pvt Ltd - Dilsukhnagar",
+    "address": "16-11-741/D/66, Moosarambagh, Lane Beside TMC & Tipsy Topsy, Dilsukhnagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500036",
+    "rohini_id": "8900080161405"
+  },
+  {
+    "s_no": 98,
+    "hospital_name": "Maxivision Laser Center Pvt Ltd - Kukatpally",
+    "address": "MIG-160, Road No:1, KPHB Colony, Kukatpally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500072",
+    "rohini_id": "8900080164307"
+  },
+  {
+    "s_no": 99,
+    "hospital_name": "Maxivision Laser Center Pvt Ltd - Madhapur",
+    "address": "D.No-1-111/24, Plot No:24, Survey No:64, Hitech City, Madhapur",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500034",
+    "rohini_id": "8900080164673"
+  },
+  {
+    "s_no": 100,
+    "hospital_name": "Raja Hospital",
+    "address": "#204, Mythrinagar, Miyapur",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500049",
+    "rohini_id": "8900080334403"
+  },
+  {
+    "s_no": 101,
+    "hospital_name": "Sai Sanjeevini Hospitals",
+    "address": "Plot No:7, Narsimhapuri Colony, Saroor Nagar, Beside TNR Port, Kothapet",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500060",
+    "rohini_id": "8900080190849"
+  },
+  {
+    "s_no": 102,
+    "hospital_name": "Trident Hospital",
+    "address": "NH 7, Main Road, Madhura Nagar, Shamshabad, RR Dist",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500001",
+    "rohini_id": "8900080165168"
+  },
+  {
+    "s_no": 103,
+    "hospital_name": "ADR Hospitals",
+    "address": "H.No. 4-112/1, Anand Bagh, Malkajgiri",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500017",
+    "rohini_id": "8900080161993"
+  },
+  {
+    "s_no": 104,
+    "hospital_name": "New Life Line Multi Specialty Hospital",
+    "address": "1-1-2/1, Sai Priya Colony, Beside Old Kapra Municipal Office, Kapra ECIL Post",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500062",
+    "rohini_id": "8900080163331"
+  },
+  {
+    "s_no": 105,
+    "hospital_name": "Raagini Childrens Hospitals",
+    "address": "Opp Adarsh Bank, Beside Sagar Hotel, Main Road, Shapur Nagar, Jeedimetla",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500055",
+    "rohini_id": "8900080339644"
+  },
+  {
+    "s_no": 106,
+    "hospital_name": "Ramdev Rao Memorial General Hospital",
+    "address": "1-6, Opp Vivekananda Nagar Colony Junction, Kukatpally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500072",
+    "rohini_id": "8900080164017"
+  },
+  {
+    "s_no": 107,
+    "hospital_name": "Kadimi Nursing Home",
+    "address": "H.No: 6-94/6/C, Chandanagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500050",
+    "rohini_id": "8900080162174"
+  },
+  {
+    "s_no": 108,
+    "hospital_name": "Hyderabad Eye Centre",
+    "address": "#3-6-217/1, Street No:15, Near Vasavi Public School, Himayathnagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500029",
+    "rohini_id": "8900080160323"
+  },
+  {
+    "s_no": 109,
+    "hospital_name": "Kamineni Hospital - King Koti",
+    "address": "D. No. 4-1-1227, King Koti Road, Abids",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500001",
+    "rohini_id": "8900080157361"
+  },
+  {
+    "s_no": 110,
+    "hospital_name": "Kamineni Hospital - LB Nagar",
+    "address": "Survey No. 68, LB Nagar, Ranga Reddy",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500068",
+    "rohini_id": "8900080163607"
+  },
+  {
+    "s_no": 111,
+    "hospital_name": "Krishnaveni Multi Speciality Hospital",
+    "address": "4-9-437/1/NR, RTC Colony, HayathNagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "501505",
+    "rohini_id": "8900080165205"
+  },
+  {
+    "s_no": 112,
+    "hospital_name": "Sowmya Childrens Hospital",
+    "address": "Lane No:23, Behind Axis Bank, SR Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500016",
+    "rohini_id": "8900080161597"
+  },
+  {
+    "s_no": 113,
+    "hospital_name": "Prema Eyecare Centre",
+    "address": "205, Bhanu Enclave, A.S. Rao Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500062",
+    "rohini_id": "8900080163355"
+  },
+  {
+    "s_no": 114,
+    "hospital_name": "Vijay Marie Hospital",
+    "address": "Saifabad, Hyderabad",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500004",
+    "rohini_id": "8900080335608"
+  },
+  {
+    "s_no": 115,
+    "hospital_name": "Saisiva Childrens Hospital and Polyclinic",
+    "address": "Opp Sri Venkateswara Swamy Temple, Chanda Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500050",
+    "rohini_id": "8900080162242"
+  },
+  {
+    "s_no": 116,
+    "hospital_name": "Spark Hospital",
+    "address": "Plot No:2 & 3, Beside Axis Bank, Peerzadiguda, Near Uppal",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500039",
+    "rohini_id": "8900080161733"
+  },
+  {
+    "s_no": 117,
+    "hospital_name": "Sriven Hospital",
+    "address": "HIG-9, 6th Phase, KPHB Colony, Kukatpally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500072",
+    "rohini_id": "8900080164079"
+  },
+  {
+    "s_no": 118,
+    "hospital_name": "Sunrise Hospitals",
+    "address": "4-9-321, Plot No:4 & 7, NH-9",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "501506",
+    "rohini_id": "8900080165236"
+  },
+  {
+    "s_no": 119,
+    "hospital_name": "Vanaja Hospital",
+    "address": "Plot:7, H.No:30-2065/39/7, Pragathi Nagar, Malkajgiri, Dr. A.S. Rao Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500062",
+    "rohini_id": "8900080163423"
+  },
+  {
+    "s_no": 120,
+    "hospital_name": "AWARE GLENEAGLES GLOBAL HOSPITALS",
+    "address": "08-16-01, Sowbhagya Nagar, Sagar Road, Lingojiguda, Saroor Nagar, LB Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500035",
+    "rohini_id": "8900080161078"
+  },
+  {
+    "s_no": 121,
+    "hospital_name": "Icon Hospitals",
+    "address": "540/1&2, JNTU – Hitech City Road, 6th Phase, Kukatpally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500072",
+    "rohini_id": "8900080163867"
+  },
+  {
+    "s_no": 122,
+    "hospital_name": "Lions Club of Hyderabad Sadhuram Eye Hospital",
+    "address": "1-2-8, Gaganmahal Road, Domalguda",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500029",
+    "rohini_id": "8900080160378"
+  },
+  {
+    "s_no": 123,
+    "hospital_name": "Sai Venkateshwara Hospital",
+    "address": "10-1-80/1/2, Near Karmanghat X Roads, Sagar Main Road, Karmanghat",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500079",
+    "rohini_id": "8900080015500"
+  },
+  {
+    "s_no": 124,
+    "hospital_name": "Drishti Eye Centre",
+    "address": "Plot No-114A, 8-3-1110/6/114A, Lane Opp SBI, Srinagar Colony Main Road",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500073",
+    "rohini_id": "8900080164321"
+  },
+  {
+    "s_no": 125,
+    "hospital_name": "Vasan Eye Care Hospital - Begumpet",
+    "address": "1/10/-44/1, Begumpet Main Road, Begumpet",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500060",
+    "rohini_id": "8900080366640"
+  },
+  {
+    "s_no": 126,
+    "hospital_name": "Vasan Eye Care Hospital - Dilsukhnagar",
+    "address": "No.60/11, N.no741/10, Flat-G-1, Moosarambagh Dilsukhnagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500060",
+    "rohini_id": "8900080366794"
+  },
+  {
+    "s_no": 127,
+    "hospital_name": "Vasan Eye Care Hospital - Himayathnagar",
+    "address": "No3-6-611, Himayath Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500029",
+    "rohini_id": "8900080160538"
+  },
+  {
+    "s_no": 128,
+    "hospital_name": "Vasan Eye Care Hospital - Jubilee Hills",
+    "address": "No.8-2-293/82/A/1132/4 No.36, Jubilee Hills",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500033",
+    "rohini_id": "8900080157910"
+  },
+  {
+    "s_no": 129,
+    "hospital_name": "Vasan Eye Care Hospital - Kukatpally",
+    "address": "Plot MIG-12, Dharma Reddy Colony Phase-I, Kukatpally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500072",
+    "rohini_id": "8900080164178"
+  },
+  {
+    "s_no": 130,
+    "hospital_name": "Sri Sai Ram Hospital",
+    "address": "Langer House",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500008",
+    "rohini_id": "8900080158443"
+  },
+  {
+    "s_no": 131,
+    "hospital_name": "Swaroopa Multi Speciality Hospital",
+    "address": "6-32/A, Nirmala Residency, Vennelagadda, Qutbullapur Road, Suchitra",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500055",
+    "rohini_id": "8900080162556"
+  },
+  {
+    "s_no": 132,
+    "hospital_name": "ADRM Multispeciality Hospital",
+    "address": "9-2, Plot No:3, Ramanthapur",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500013",
+    "rohini_id": "8900080158795"
+  },
+  {
+    "s_no": 133,
+    "hospital_name": "Kakatiya Hospital",
+    "address": "12-52, Road No:2, P&T Colony, Near Uppal Depot, Medipally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500039",
+    "rohini_id": "8900080343269"
+  },
+  {
+    "s_no": 134,
+    "hospital_name": "Usha Mohan Hospital",
+    "address": "Hyderguda Rajendernagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500055",
+    "rohini_id": "8900080162068"
+  },
+  {
+    "s_no": 135,
+    "hospital_name": "Liv Life Hospital",
+    "address": "Plot No 729, Road No 36, Jubilee Hills",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500033",
+    "rohini_id": "8900080340961"
+  },
+  {
+    "s_no": 136,
+    "hospital_name": "Dr Agarwal's Eye Hospital Dilsukhnagar",
+    "address": "Chaitanyapuri X Road, Dilsukhnagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500036",
+    "rohini_id": "8900080162860"
+  },
+  {
+    "s_no": 137,
+    "hospital_name": "Dr Agarwal's Eye Hospital Kukatpally",
+    "address": "Vijay Jai Tower, Kukatpally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500072",
+    "rohini_id": "8900080163812"
+  },
+  {
+    "s_no": 138,
+    "hospital_name": "Dr Agarwal's Eye Hospital Panjgutta",
+    "address": "Dalta Pride, Panjagutta Colony",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500040",
+    "rohini_id": "8900080164949"
+  },
+  {
+    "s_no": 139,
+    "hospital_name": "Dr Agarwal's Eye Hospital Secunderabad",
+    "address": "Mantri Sensation, RP Road, Secunderabad",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500003",
+    "rohini_id": "8900080157705"
+  },
+  {
+    "s_no": 140,
+    "hospital_name": "Balaji Hospital",
+    "address": "Plot No. 34,34A, NCL South, Opp BYR Raju Foundation, Petbasheerbagh",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500055",
+    "rohini_id": "8900080162402"
+  },
+  {
+    "s_no": 141,
+    "hospital_name": "Sri Sai Srinivasa Speciality Hospital",
+    "address": "#3-5-1082/A, Jaiswal Lane, Narayanguda",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500029",
+    "rohini_id": "8900080160477"
+  },
+  {
+    "s_no": 142,
+    "hospital_name": "INDO US Super Speciality Hospital",
+    "address": "7-1-57/B&C Shyam Karan Road, Anand Bagh, Ameerpet",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500016",
+    "rohini_id": "8900080159051"
+  },
+  {
+    "s_no": 143,
+    "hospital_name": "Durgabai Deshmukh Hospital & Research Centre",
+    "address": "Vidya Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500044",
+    "rohini_id": "8900080161887"
+  },
+  {
+    "s_no": 144,
+    "hospital_name": "Continental Hospital",
+    "address": "Plot No 3, Road No 2, IT & Financial District, Nanakramguda, Gachibowli",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500008",
+    "rohini_id": "8900080345331"
+  },
+  {
+    "s_no": 145,
+    "hospital_name": "Star Hospital",
+    "address": "#8-2-596/5, Road No-10, Banjara Hills",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500034",
+    "rohini_id": "8900080160972"
+  },
+  {
+    "s_no": 146,
+    "hospital_name": "Srikara Hospitals",
+    "address": "10-3-188, Opp Railway Reservation Counter Lane, Beside Hotel Ramakrishna, Secunderabad",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500025",
+    "rohini_id": "8900080159709"
+  },
+  {
+    "s_no": 147,
+    "hospital_name": "Aditya Hospital - Uppal",
+    "address": "Opp Bharat Petrol Pump, Shanti Nagar, Uppal",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500039",
+    "rohini_id": "8900080161788"
+  },
+  {
+    "s_no": 148,
+    "hospital_name": "Centre For Sight - Banjara Hills",
+    "address": "Ashoka Capital, Banjara Hills Road No.-2",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500034",
+    "rohini_id": "8900080161016"
+  },
+  {
+    "s_no": 149,
+    "hospital_name": "Asian Institute Of Nephrology and Urology",
+    "address": "6-3-562/A, Erramanzil Colony",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500082",
+    "rohini_id": "8900080164994"
+  },
+  {
+    "s_no": 150,
+    "hospital_name": "Vasan Eye Care Hospital - Mehdipatnam",
+    "address": "No.10-3-13, Samous Plaza, Mehdipatnam",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500028",
+    "rohini_id": "8900080160200"
+  },
+  {
+    "s_no": 151,
+    "hospital_name": "Vasan Eye Care Hospital - AS Rao Nagar",
+    "address": "1-1-256/7, Srinivas Nagar Colony, Keesaramandal, A.S. Rao Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500062",
+    "rohini_id": "8900080163430"
+  },
+  {
+    "s_no": 152,
+    "hospital_name": "Vasan Eye Care Hospital - Santoshnagar",
+    "address": "17-1-382/R/15 Sri Maanvitha Mansion, APSRTC Officers Colony, Santosh Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500059",
+    "rohini_id": "8900080164284"
+  },
+  {
+    "s_no": 153,
+    "hospital_name": "Vasan Eye Care Hospital - Secunderabad",
+    "address": "No.8-1-5/7, Janak Plaza, Opp Clock Tower, SD Road, Secunderabad",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500003",
+    "rohini_id": "8900080157903"
+  },
+  {
+    "s_no": 154,
+    "hospital_name": "Vasan Eye Care Hospital - Chanda Nagar",
+    "address": "Plot No 86, Chanda Nagar, Serilingampally, Ranga Reddy Dist",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500050",
+    "rohini_id": "8900080162327"
+  },
+  {
+    "s_no": 155,
+    "hospital_name": "Pace Hospital",
+    "address": "1-11-254/11/A/3/1,2,3, Motilal Nehru Nagar, SP Road, Begumpet",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500016",
+    "rohini_id": "8900080159075"
+  },
+  {
+    "s_no": 156,
+    "hospital_name": "Hyderabad Nursing Home Pvt Ltd",
+    "address": "#5-9-29/40, Basheerbagh",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500063",
+    "rohini_id": "8900080160330"
+  },
+  {
+    "s_no": 157,
+    "hospital_name": "Saivani Superspeciality Hospital",
+    "address": "#1-2-365/36/6&7, Ramakrishna Math Road, Indira Park, Domalguda",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500029",
+    "rohini_id": "8900080160439"
+  },
+  {
+    "s_no": 158,
+    "hospital_name": "Mahavir Hospital & Research Centre",
+    "address": "10-1-1, Bhagwan Mahavir Marg, A.C Guards",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500004",
+    "rohini_id": "8900080158108"
+  },
+  {
+    "s_no": 159,
+    "hospital_name": "Aravind Eye Hospital Private Limited",
+    "address": "#12-2-824, Mehdipatnam, Santosh Nagar Colony",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500028",
+    "rohini_id": "8900080160040"
+  },
+  {
+    "s_no": 160,
+    "hospital_name": "Woodlands Hospitals",
+    "address": "3-4-852, Barkatpura",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500027",
+    "rohini_id": "8900080159969"
+  },
+  {
+    "s_no": 161,
+    "hospital_name": "Citizen Hospital",
+    "address": "1-100/1/CCH, Nallagandla Village, Serilingampally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500019",
+    "rohini_id": "8900080159419"
+  },
+  {
+    "s_no": 162,
+    "hospital_name": "Max Cure Hospitals",
+    "address": "Behind Cyber Towers, Lane of IBIS Hotel, Hitech City, Madhapur",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500081",
+    "rohini_id": "8900080330535"
+  },
+  {
+    "s_no": 163,
+    "hospital_name": "Basavatarakam Indo American Cancer Hospital and Research Institute",
+    "address": "Road No 14, Banjara Hills",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500034",
+    "rohini_id": "8900080348912"
+  },
+  {
+    "s_no": 164,
+    "hospital_name": "Ozone Hospital",
+    "address": "Besides Khila Maisamma Temple, Kothapet",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500060",
+    "rohini_id": "8900080163157"
+  },
+  {
+    "s_no": 165,
+    "hospital_name": "Srikara Hospitals Ortho and Multi Speciality",
+    "address": "222 & 223 Mythri Nagar, Phase II, Madinaguda, Miyapur",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500049",
+    "rohini_id": "8900080337220"
+  },
+  {
+    "s_no": 166,
+    "hospital_name": "Apollo Cradle - Jubilee Hills",
+    "address": "Dharani Devi Building, Plot No.565, Road No.92, Jubilee Hills",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500034",
+    "rohini_id": "8900080160934"
+  },
+  {
+    "s_no": 167,
+    "hospital_name": "Win Vision",
+    "address": "D.No 2-34/2, GV Classic, Kothaguda X Road, Kondapur, Serilingampally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500084",
+    "rohini_id": "8900080338470"
+  },
+  {
+    "s_no": 168,
+    "hospital_name": "Apollo Cradle Hospitals",
+    "address": "Door No 2-34/2, Gramakautam, Kothaguda Village, Serilingampally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500084",
+    "rohini_id": "8900080254053"
+  },
+  {
+    "s_no": 169,
+    "hospital_name": "Care Hospitals Hitech Branch",
+    "address": "Old Mumbai Highway Road, Near Cyberabad Commissioner Office, Hitech City",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500032",
+    "rohini_id": "8900080348196"
+  },
+  {
+    "s_no": 170,
+    "hospital_name": "Malla Reddy Narayana Multispeciality Hospitals",
+    "address": "#1-1-216, Survey No.14, Suraram X Roads, Jeedimetla",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500016",
+    "rohini_id": "8900080162464"
+  },
+  {
+    "s_no": 171,
+    "hospital_name": "Navodaya Hospital For Women And Children",
+    "address": "Paradise Circle, PG Road, Secunderabad",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500003",
+    "rohini_id": "8900080345515"
+  },
+  {
+    "s_no": 172,
+    "hospital_name": "Shalini Hospital",
+    "address": "#3-4-140, Barkathpura Chaman",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500027",
+    "rohini_id": "8900080159921"
+  },
+  {
+    "s_no": 173,
+    "hospital_name": "Neo Vision Eye Care",
+    "address": "7-102/7, Habsiguda, 1st Floor, Sai Enclave",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500016",
+    "rohini_id": "8900080330252"
+  },
+  {
+    "s_no": 174,
+    "hospital_name": "Rainbow Childrens Hospital",
+    "address": "Plot No:403, Road No:2, Banjara Hills",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500034",
+    "rohini_id": "8900080160965"
+  },
+  {
+    "s_no": 175,
+    "hospital_name": "Rainbow Hospital",
+    "address": "Plot No.32 & 33, Survey No.12, Kondapur",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500081",
+    "rohini_id": "8900080345423"
+  },
+  {
+    "s_no": 176,
+    "hospital_name": "Rainbow Childrens Hospital",
+    "address": "Plot No - C17, Vikrampuri Colony",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500026",
+    "rohini_id": "8900080158542"
+  },
+  {
+    "s_no": 177,
+    "hospital_name": "RAINBOW CHILDRENS MEDICARE PVT LTD",
+    "address": "1-2-20, Survey No:141, Hydernagar, Kukatpally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500071",
+    "rohini_id": "8900080351790"
+  },
+  {
+    "s_no": 178,
+    "hospital_name": "Sri Aurobindo Nethralaya",
+    "address": "Plot No- HIG-210, Phase I & II, KPHB Colony, Kukatpally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500072",
+    "rohini_id": "8900080164314"
+  },
+  {
+    "s_no": 179,
+    "hospital_name": "Dr. Rao's ENT Super Speciality International Hospital",
+    "address": "Plot No 29, Road No 4, KPHB 3rd Phase",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500072",
+    "rohini_id": "8900080121263"
+  },
+  {
+    "s_no": 180,
+    "hospital_name": "Siddharth Eye Centre",
+    "address": "#3-5-782/H/21, Opp King Kothi Govt Hospital",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500029",
+    "rohini_id": "8900080135833"
+  },
+  {
+    "s_no": 181,
+    "hospital_name": "Eye Care Hospital",
+    "address": "#6-8-932/A, Safa Plaza, Malakpet",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500036",
+    "rohini_id": "8900080329508"
+  },
+  {
+    "s_no": 182,
+    "hospital_name": "Netra Eye Hospital",
+    "address": "Sudharshan Reddy Nagar, Chintal",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500055",
+    "rohini_id": "8900080335615"
+  },
+  {
+    "s_no": 183,
+    "hospital_name": "Rama Eye Hospital",
+    "address": "#5-8-105/A, Behind Kamath Hotel, Nampally Station Road",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500001",
+    "rohini_id": "NA"
+  },
+  {
+    "s_no": 184,
+    "hospital_name": "Sujatha Eye Hospital",
+    "address": "12-10-590/54/A/1, Warasiguda",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500061",
+    "rohini_id": "8900080367739"
+  },
+  {
+    "s_no": 185,
+    "hospital_name": "Saijyothi Eye Institute",
+    "address": "Plot No.185, Road No.1, West Marredpally, Secunderabad",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500026",
+    "rohini_id": "8900080159778"
+  },
+  {
+    "s_no": 186,
+    "hospital_name": "Virinchi Hospitals",
+    "address": "6-3-2, 6-3-3, 6-3-3/1 Road, 1&12 Junction, Virinchi Circle, Banjara Hills",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500034",
+    "rohini_id": "8900080334717"
+  },
+  {
+    "s_no": 187,
+    "hospital_name": "Dr. Rajashekar Reddy Laparoscopy Hospital",
+    "address": "Plot No.01, Chitra Layout, LB Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500074",
+    "rohini_id": "8900080329669"
+  },
+  {
+    "s_no": 188,
+    "hospital_name": "Russh Super Speciality Hospital",
+    "address": "Alwal Rd, Ramraj Nagar, Jeedimetla, Secunderabad",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500015",
+    "rohini_id": "8900080352599"
+  },
+  {
+    "s_no": 189,
+    "hospital_name": "Anupama Hospital",
+    "address": "Eenadu Colony, VV Nagar Colony, Main Road, Kukatpally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500072",
+    "rohini_id": "8900080383913"
+  },
+  {
+    "s_no": 190,
+    "hospital_name": "Paramitha Children's Hospital",
+    "address": "Chaitanyapuri X Roads, Dilsukhnagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500060",
+    "rohini_id": "8900080163003"
+  },
+  {
+    "s_no": 191,
+    "hospital_name": "Tulasi Hospitals",
+    "address": "A-12, Electronic Complex, Beside SBH, Kushaiguda, ECIL X Roads",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500062",
+    "rohini_id": "8900080163416"
+  },
+  {
+    "s_no": 192,
+    "hospital_name": "CENTURY SUPER SPECIALITY HOSPITAL",
+    "address": "Road No 12, Banjara Hills, Beside Elbit Diagnostics",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500034",
+    "rohini_id": "8900080349964"
+  },
+  {
+    "s_no": 193,
+    "hospital_name": "Sai Nursing Home",
+    "address": "Beside Saidabad Bus Stop Main Road, Saidabad",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500059",
+    "rohini_id": "8900080162730"
+  },
+  {
+    "s_no": 194,
+    "hospital_name": "Supraja Hospitals",
+    "address": "Nagole X Roads, Nagole",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500068",
+    "rohini_id": "8900080161801"
+  },
+  {
+    "s_no": 195,
+    "hospital_name": "Spark Eye Care Hospital",
+    "address": "16-2-705/9/12/A-F, Opp Reliance Trends, New Malakpet Ganj",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500036",
+    "rohini_id": "8900080160613"
+  },
+  {
+    "s_no": 196,
+    "hospital_name": "SVS Institute of Neurosciences",
+    "address": "Old Manjeera Hotel, Chappal Bazar, Kachiguda",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500027",
+    "rohini_id": "8900080339521"
+  },
+  {
+    "s_no": 197,
+    "hospital_name": "Mayflower Hospital For Women and Children",
+    "address": "1-19-80/42, P-42, Dr A S Rao Nagar Rd, Sainikpuri",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500062",
+    "rohini_id": "8900080007529"
+  },
+  {
+    "s_no": 198,
+    "hospital_name": "Prasad Hospitals",
+    "address": "Mallapur Rd, Baba Nagar, Nacharam",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500076",
+    "rohini_id": "8900080032729"
+  },
+  {
+    "s_no": 199,
+    "hospital_name": "Dr.Kiran's Eye Hospitals Pvt Ltd",
+    "address": "88, Rd Number 1, MIG 1, KPHB Phase 1, Kukatpally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500072",
+    "rohini_id": "8900080356573"
+  },
+  {
+    "s_no": 200,
+    "hospital_name": "Medisys Hospitals",
+    "address": "Plot No 1 to 5, Chinthalakunta Check Post, LB Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500074",
+    "rohini_id": "8900080333529"
+  },
+  {
+    "s_no": 201,
+    "hospital_name": "Asian Institute Of Gastroenterology",
+    "address": "H.No.6-3-661, Somajiguda",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500082",
+    "rohini_id": "8900080164741"
+  },
+  {
+    "s_no": 202,
+    "hospital_name": "CYGNUS INSTITUTE OF GASTROENTEROLOGY",
+    "address": "#34 & 35, Sardar Patel Nagar, Nizampet X Road",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500018",
+    "rohini_id": "8900080333154"
+  },
+  {
+    "s_no": 203,
+    "hospital_name": "Ratna Maternity & Nursing Home",
+    "address": "17-1-388/C/19, Santosh Nagar X Roads, Vinay Nagar Colony",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500059",
+    "rohini_id": "8900080162723"
+  },
+  {
+    "s_no": 204,
+    "hospital_name": "Aruna Hospital",
+    "address": "Plot No.69 & 70, Road No.4, Chandrapuri Colony, LB Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500074",
+    "rohini_id": "8900080334151"
+  },
+  {
+    "s_no": 205,
+    "hospital_name": "Neelima Hospital",
+    "address": "7-2-1735/A, Opp Voltas Company Pvt Ltd, Sanathnagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500018",
+    "rohini_id": "8900080339002"
+  },
+  {
+    "s_no": 206,
+    "hospital_name": "Abhaya BBC Childrens Hospital",
+    "address": "#2-1-569, Vidyanagar, Hindi Mahavidyalaya Complex",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500044",
+    "rohini_id": "8900080161863"
+  },
+  {
+    "s_no": 207,
+    "hospital_name": "ARCHANA HOSPITAL PVT LTD",
+    "address": "Plot No Sy 99/A, Madinaguda, Beside Laxmi Hyundai Showroom",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500049",
+    "rohini_id": "8900080162129"
+  },
+  {
+    "s_no": 208,
+    "hospital_name": "Udai Omni Hospital",
+    "address": "No. 5-9-94, Chapel Road, Opp Red Rose Function Hall",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500001",
+    "rohini_id": "8900080157521"
+  },
+  {
+    "s_no": 209,
+    "hospital_name": "OMNI HOSPITALS - KUKATPALLY",
+    "address": "Plot No:20-24, Balaji Nagar, Kukatpally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500072",
+    "rohini_id": "8900080328105"
+  },
+  {
+    "s_no": 210,
+    "hospital_name": "Medivision Eye And Healthcare Centre",
+    "address": "10-3-304/F/1 To 4, Indira Sadan, Near PMDC, Masab Tank",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500028",
+    "rohini_id": "8900080344549"
+  },
+  {
+    "s_no": 211,
+    "hospital_name": "Susheela Hospital",
+    "address": "E Seva Rd, Ramanthapur, Gaddiannaram",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500013",
+    "rohini_id": "8900080158917"
+  },
+  {
+    "s_no": 212,
+    "hospital_name": "Apex Hospitals",
+    "address": "Plot No. 50, 51, Uppal Depot, Warangal Highway, Medipally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500098",
+    "rohini_id": "8900080330726"
+  },
+  {
+    "s_no": 213,
+    "hospital_name": "Kosaraju Hospitals Private Limited",
+    "address": "9-1-43/23, Bapunagar X Road, Prashanth Nagar, Langar Houz",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500008",
+    "rohini_id": "8900080158382"
+  },
+  {
+    "s_no": 214,
+    "hospital_name": "Sai Siddhartha Chest and Diabetes Centre",
+    "address": "Behind MJS Gardens, Shapurnagar, Jeedimetla",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500055",
+    "rohini_id": "8900080351943"
+  },
+  {
+    "s_no": 215,
+    "hospital_name": "JUBILEE HOSPITAL",
+    "address": "Opp Rythu Bazaar, Alwal, Secunderabad",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500010",
+    "rohini_id": "8900080336520"
+  },
+  {
+    "s_no": 216,
+    "hospital_name": "KIMS Hospital Enterprises Private Limited",
+    "address": "1-112/86, Survey No:55/Ee, Kondapur, Serilingampally Mandal",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500084",
+    "rohini_id": "8900080367074"
+  },
+  {
+    "s_no": 217,
+    "hospital_name": "Rainbow Childrens Hospital",
+    "address": "Plot No 73/C & 73/D, Saraswathi Nagar Colony, Mansoorabad Village, LB Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500074",
+    "rohini_id": "8900080351806"
+  },
+  {
+    "s_no": 218,
+    "hospital_name": "Leela Hospital",
+    "address": "Rd Number 2, Madhavi Estate, Moti Nagar, Erragadda",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500018",
+    "rohini_id": "8900080159273"
+  },
+  {
+    "s_no": 219,
+    "hospital_name": "MaxCure Suyosha",
+    "address": "Behind Cyber Towers, Hitech City, Madhapur",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500081",
+    "rohini_id": "8900080330535"
+  },
+  {
+    "s_no": 220,
+    "hospital_name": "Rise Childrens Hospital",
+    "address": "Pillar No.92, Moghal-Ka-Nala, Attapur, Mehdipatnam",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500028",
+    "rohini_id": "8900080331891"
+  },
+  {
+    "s_no": 221,
+    "hospital_name": "The Birthplace",
+    "address": "Road No. 2, Banjara Hills",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500034",
+    "rohini_id": "8900080359352"
+  },
+  {
+    "s_no": 222,
+    "hospital_name": "Thumbay Hospital New Life",
+    "address": "16-6-104 to 109, Old Kamal Theater Complex, Chaderghat",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500024",
+    "rohini_id": "8900080159617"
+  },
+  {
+    "s_no": 223,
+    "hospital_name": "Pace Hospital",
+    "address": "Madhapur, HUDA Techno Enclave, HITEC City",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500081",
+    "rohini_id": "8900080341593"
+  },
+  {
+    "s_no": 224,
+    "hospital_name": "MEDS Hospital",
+    "address": "21-4-736, Koka Bazaar, Puranapul, Hussaini Alam",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500064",
+    "rohini_id": "8900080163577"
+  },
+  {
+    "s_no": 225,
+    "hospital_name": "PRATHIMA HOSPITALS",
+    "address": "#3/4/3 Station Road, Kachiguda",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500027",
+    "rohini_id": "8900080329843"
+  },
+  {
+    "s_no": 226,
+    "hospital_name": "Shri Adithya Hospitals",
+    "address": "8-50/11, Saket Road, Near ECIL, Damaiguda X Road",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500083",
+    "rohini_id": "8900080338401"
+  },
+  {
+    "s_no": 227,
+    "hospital_name": "Siva Eye Hospital",
+    "address": "4-85/3, Vikas Nagar, Rajadhani Theatre Lane, Dilsukhnagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500060",
+    "rohini_id": "8900080163065"
+  },
+  {
+    "s_no": 228,
+    "hospital_name": "MCS Neuro Hospital",
+    "address": "KPHB Phase I, Dharma Reddy Colony, Road Number 4, Kukatpally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500072",
+    "rohini_id": "8900080343368"
+  },
+  {
+    "s_no": 229,
+    "hospital_name": "Shyam Hospital",
+    "address": "Panchayati Raj Teachers Colony, BN Reddy Nagar, Saroornagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500079",
+    "rohini_id": "8900080334236"
+  },
+  {
+    "s_no": 230,
+    "hospital_name": "Orient Eye Hospital",
+    "address": "#12-2-727/1/A, Inner Ring Road, Opp Pillar No.46, Rethi Bowli",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500028",
+    "rohini_id": "8900080353572"
+  },
+  {
+    "s_no": 231,
+    "hospital_name": "Sunita Childrens Hospital",
+    "address": "Shop No.82, Opp Rose Gardens, Sagar Road, Santosh Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500059",
+    "rohini_id": "8900080350601"
+  },
+  {
+    "s_no": 232,
+    "hospital_name": "Bhavika Nursing Home",
+    "address": "Shop No.7-1-212/5, Shiv Bagh, MVR Colony, Ameerpet",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500016",
+    "rohini_id": "8900080159013"
+  },
+  {
+    "s_no": 233,
+    "hospital_name": "Sri Radhika Multi Speciality Hospital",
+    "address": "P-82, Subedar Malla Reddy Marg, Dhatu Nagar, Kanchan Bagh",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500097",
+    "rohini_id": "8900080331044"
+  },
+  {
+    "s_no": 234,
+    "hospital_name": "Navjeevan Hospitals",
+    "address": "Plot No.90, P&T Colony, Vikrampuri, Karkhana Road",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500009",
+    "rohini_id": "8900080338432"
+  },
+  {
+    "s_no": 235,
+    "hospital_name": "Sharada Eye Care",
+    "address": "Plot No 100, Vanasthalipuram, Near MJM Function Hall",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500074",
+    "rohini_id": "8900080333895"
+  },
+  {
+    "s_no": 236,
+    "hospital_name": "ENT Care Hospital",
+    "address": "Plot Number 336, Calvary Temple Road, Matrusri Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500049",
+    "rohini_id": "8900080062719"
+  },
+  {
+    "s_no": 237,
+    "hospital_name": "IRIS Eye Hospital",
+    "address": "Ambience Fort Road, Attapur",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500048",
+    "rohini_id": "8900080378667"
+  },
+  {
+    "s_no": 238,
+    "hospital_name": "KIMS Bibi Hospital & Cancer Centre",
+    "address": "16-3-991/C, Government Printing Press Road, Malakpet",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500024",
+    "rohini_id": "8900080159587"
+  },
+  {
+    "s_no": 239,
+    "hospital_name": "Landmark Hospitals",
+    "address": "MCK Block 2, Near JNTU Metro Station, Hydernagar Main Road",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500085",
+    "rohini_id": "8900080332973"
+  },
+  {
+    "s_no": 240,
+    "hospital_name": "MANJUSUDHA MULTISPECIALITY HOSPITAL",
+    "address": "H-No.4-20/A, Vikas Nagar, Chaitanyapuri, Dilsukhnagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500060",
+    "rohini_id": "8900080162945"
+  },
+  {
+    "s_no": 241,
+    "hospital_name": "Dr. Shantabai Nursing Home",
+    "address": "House No.5-8-535, Beside Santosh Sapna Theatre, Abids Road",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500001",
+    "rohini_id": "8900080334069"
+  },
+  {
+    "s_no": 242,
+    "hospital_name": "Hyderabad Eye Hospital",
+    "address": "3-4-875, Barkatpura Circle, Narayanguda",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500027",
+    "rohini_id": "8900080159891"
+  },
+  {
+    "s_no": 243,
+    "hospital_name": "Bhavan's Sarada Devi Hospital",
+    "address": "Dr A S Rao Nagar Rd, Officers Colony, Dr AS Rao Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500062",
+    "rohini_id": "8900080165069"
+  },
+  {
+    "s_no": 244,
+    "hospital_name": "Disha Children's Hospital",
+    "address": "3-11-142/N, DVN Complex, RTC Colony, LB Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500074",
+    "rohini_id": "8900080163805"
+  },
+  {
+    "s_no": 245,
+    "hospital_name": "Evya Hospitals and Diabetic Research Center",
+    "address": "Mansoorabad Road, Vanasthalipuram",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500070",
+    "rohini_id": "8900080115606"
+  },
+  {
+    "s_no": 246,
+    "hospital_name": "Magnas V ENT Hospitals",
+    "address": "#18-79, Manikanta Crown Complex, Chaitanyapuri, Dilsukhnagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500060",
+    "rohini_id": "8900080163140"
+  },
+  {
+    "s_no": 247,
+    "hospital_name": "Baabaji Nethralaya",
+    "address": "MIG-304, 4th Rd, KPHB Phase 1, Kukatpally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500085",
+    "rohini_id": "8900080336575"
+  },
+  {
+    "s_no": 248,
+    "hospital_name": "Manas Eye Hospital",
+    "address": "13-1-204/G1, Balaji Swapnapuri Colony, Moti Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500018",
+    "rohini_id": "8900080159280"
+  },
+  {
+    "s_no": 249,
+    "hospital_name": "Himabindu Superspecialty Hospital",
+    "address": "Survey No.44-48, Inner Ring Road, Bairamalguda, LB Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500074",
+    "rohini_id": "8900080373686"
+  },
+  {
+    "s_no": 250,
+    "hospital_name": "Vasavi Medical Research Center",
+    "address": "#6-1-91, Lakdikapul, Khairatabad",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500004",
+    "rohini_id": "8900080327900"
+  },
+  {
+    "s_no": 251,
+    "hospital_name": "Shine Children's Hospital",
+    "address": "273, LB Nagar-Uppal Rd, RTC Colony, LB Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500004",
+    "rohini_id": "8900080364066"
+  },
+  {
+    "s_no": 252,
+    "hospital_name": "Sunlife's Hospital",
+    "address": "Nagaram Rd, Keesara, Dammaiguda",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500083",
+    "rohini_id": "8900080331648"
+  },
+  {
+    "s_no": 253,
+    "hospital_name": "SBR Pulse Hospitals",
+    "address": "Plot No.34, Krishnaveni Nagar, Kothapet",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500035",
+    "rohini_id": "8900080333468"
+  },
+  {
+    "s_no": 254,
+    "hospital_name": "MicroCare ENT Super Speciality Hospital",
+    "address": "MIG 244 & 245, Road Number 4, KPHB Colony, Kukatpally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500072",
+    "rohini_id": "8900080163959"
+  },
+  {
+    "s_no": 255,
+    "hospital_name": "Nakshatra Hospitals",
+    "address": "Alkapuri X Roads, LB Nagar-Uppal Rd",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500035",
+    "rohini_id": "8900080329263"
+  },
+  {
+    "s_no": 256,
+    "hospital_name": "Raja Hospital",
+    "address": "Yousufguda Main Rd, Sai Sarathi Nagar, Yousufguda",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500073",
+    "rohini_id": "8900080331471"
+  },
+  {
+    "s_no": 257,
+    "hospital_name": "Srihitha Hospitals",
+    "address": "17-74/5, Road Number 4, Kamala Nagar, Dilsukhnagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500060",
+    "rohini_id": "8900080367722"
+  },
+  {
+    "s_no": 258,
+    "hospital_name": "Shree Pooja Hospital",
+    "address": "1-29, Nacharam Mallapur Rd, Tarnaka",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500076",
+    "rohini_id": "8900080353831"
+  },
+  {
+    "s_no": 259,
+    "hospital_name": "Safe Childrens Hospital",
+    "address": "16-2-741/D/5, Moosarambag X Road, Malakpet",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500036",
+    "rohini_id": "8900080354913"
+  },
+  {
+    "s_no": 260,
+    "hospital_name": "Fatima Hospital",
+    "address": "9-2-24/20/7/6, New Idgah Road, Jahannuma",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500053",
+    "rohini_id": "8900080045712"
+  },
+  {
+    "s_no": 261,
+    "hospital_name": "Poulomi Hospital",
+    "address": "Plot No.A-2 & B-17, Rukminipuri Colony, Dr. A.S. Rao Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500062",
+    "rohini_id": "8900080163348"
+  },
+  {
+    "s_no": 262,
+    "hospital_name": "Surekha Hospital",
+    "address": "Kompally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500100",
+    "rohini_id": "8900080350106"
+  },
+  {
+    "s_no": 263,
+    "hospital_name": "Soumya Hospital For Women & Children",
+    "address": "12-2-709/C/15, Khadar Bagh Road, Mehdipatnam",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500028",
+    "rohini_id": "8900080381575"
+  },
+  {
+    "s_no": 264,
+    "hospital_name": "New Life Line Medicure Hospital",
+    "address": "1-13-21, Lothkunta Signal, Alwal",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500010",
+    "rohini_id": "8900080355798"
+  },
+  {
+    "s_no": 265,
+    "hospital_name": "ANKURA HOSPITALS",
+    "address": "Plot 55 & 56, JNTU Hitech City Road, Kukatpally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500072",
+    "rohini_id": "8900080163768"
+  },
+  {
+    "s_no": 266,
+    "hospital_name": "ANKURA HOSPITALS",
+    "address": "#8-2-686/B, Rd Number 12, NBT Nagar, Banjara Hills",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500016",
+    "rohini_id": "8900080329898"
+  },
+  {
+    "s_no": 267,
+    "hospital_name": "ANKURA HOSPITALS",
+    "address": "Beside ICICI Bank, Sainikpuri, A S Rao Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500062",
+    "rohini_id": "8900080329867"
+  },
+  {
+    "s_no": 268,
+    "hospital_name": "ANKURA HOSPITALS",
+    "address": "Beside ICICI Bank Main Road, Peerzadiguda, Boduppal",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500039",
+    "rohini_id": "8900080329874"
+  },
+  {
+    "s_no": 269,
+    "hospital_name": "ANKURA HOSPITALS",
+    "address": "Beside Bharat Petrol, Deepthisri Nagar, Madinaguda, Hafeezpet",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500050",
+    "rohini_id": "8900080329836"
+  },
+  {
+    "s_no": 270,
+    "hospital_name": "Srikara Hospitals",
+    "address": "Street Number 7, Sri Durga Enclave, SBH Colony, LB Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500074",
+    "rohini_id": "8900080340237"
+  },
+  {
+    "s_no": 271,
+    "hospital_name": "Vijaya Hospital",
+    "address": "9-12, S.V Nagar, Nagaram Main Road, Near Bus Stop, ECIL",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500083",
+    "rohini_id": "8900080341678"
+  },
+  {
+    "s_no": 272,
+    "hospital_name": "SUDHA HOSPITAL",
+    "address": "30-1587/1, Chandragiri Colony, Old Safilguda, Malkajgiri",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500047",
+    "rohini_id": "8900080389311"
+  },
+  {
+    "s_no": 273,
+    "hospital_name": "Raman Hospital",
+    "address": "6-151/1, Behind Chintal Bus Stop, Chintal",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500054",
+    "rohini_id": "8900080162396"
+  },
+  {
+    "s_no": 274,
+    "hospital_name": "Sreshta Sri Kamala Hospitals",
+    "address": "#11-11-739/1&2, Gaddianaram, Dilsukhnagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500060",
+    "rohini_id": "8900080163881"
+  },
+  {
+    "s_no": 275,
+    "hospital_name": "Sri Narmada Hospital",
+    "address": "Door No 1-1-770/A, Gandhi Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500020",
+    "rohini_id": "8900080164635"
+  },
+  {
+    "s_no": 276,
+    "hospital_name": "RISHAB EYE CENTRE",
+    "address": "35-60/1, G.K Colony, Sainikpuri",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500094",
+    "rohini_id": "8900080165083"
+  },
+  {
+    "s_no": 277,
+    "hospital_name": "Arunodaya Multi Speciality Hospital",
+    "address": "Sharada Arcade, Bachupally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500090",
+    "rohini_id": "8900080364905"
+  },
+  {
+    "s_no": 278,
+    "hospital_name": "Vijaya Hospital",
+    "address": "1-58/7/3, Beside St. Ann's School Arch, Madinaguda",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500049",
+    "rohini_id": "8900080327818"
+  },
+  {
+    "s_no": 279,
+    "hospital_name": "B.V.K. Reddy Hospital",
+    "address": "12-11-1256, Boudha Nagar Road, Secunderabad",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500061",
+    "rohini_id": "8900080329737"
+  },
+  {
+    "s_no": 280,
+    "hospital_name": "Shashi Hospital",
+    "address": "Beside Andhra Bank ATM, Dilsukhnagar, Gaddiannaram",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500036",
+    "rohini_id": "8900080161344"
+  },
+  {
+    "s_no": 281,
+    "hospital_name": "Suraksha Women & Childrens Hospital",
+    "address": "Kompally Road, Opp Balaji Hospital, Pet Basheerabad",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500055",
+    "rohini_id": "8900080339156"
+  },
+  {
+    "s_no": 282,
+    "hospital_name": "Suraksha Childrens Hospital",
+    "address": "12-13-43, Beside Tarnaka Flyover, Tarnaka",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500017",
+    "rohini_id": "8900080159235"
+  },
+  {
+    "s_no": 283,
+    "hospital_name": "Sridevi Maternity and Nursing Home",
+    "address": "12-11-253, Mylargada Road, Warasiguda",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500061",
+    "rohini_id": "8900080163249"
+  },
+  {
+    "s_no": 284,
+    "hospital_name": "KS Multispecialty Hospital",
+    "address": "Plot No.3, Bapuji Nagar, Bowenpally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500011",
+    "rohini_id": "8900080377998"
+  },
+  {
+    "s_no": 285,
+    "hospital_name": "Safe Kids",
+    "address": "Pillar No 108, Inner Ring Rd, Moghal Nagar, Karwan",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500006",
+    "rohini_id": "8900080367104"
+  },
+  {
+    "s_no": 286,
+    "hospital_name": "Mana Hospitals",
+    "address": "498, Rd Number 2, Chaitanya Nagar, Kukatpally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500072",
+    "rohini_id": "8900080376199"
+  },
+  {
+    "s_no": 287,
+    "hospital_name": "Hyderabad MultiSpeciality Hospital",
+    "address": "16-2-674/11, Judges Colony, New Malakpet",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500059",
+    "rohini_id": "8900080346338"
+  },
+  {
+    "s_no": 288,
+    "hospital_name": "Vinn Hospital",
+    "address": "7-1-21, Railway Station Road, Uma Nagar, Begumpet",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500016",
+    "rohini_id": "8900080382947"
+  },
+  {
+    "s_no": 289,
+    "hospital_name": "R K Multi Speciality Hospital",
+    "address": "Manda Mallama X Road, Karmanghat",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500079",
+    "rohini_id": "8900080162822"
+  },
+  {
+    "s_no": 290,
+    "hospital_name": "Bristlecone Hospitals",
+    "address": "Thorruur X Road, Hayathnagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "501505",
+    "rohini_id": "8900080329911"
+  },
+  {
+    "s_no": 291,
+    "hospital_name": "Sri Siddeshwara Hospital",
+    "address": "Sagar Road, Champapet",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500079",
+    "rohini_id": "8900080356917"
+  },
+  {
+    "s_no": 292,
+    "hospital_name": "Nandini Hospitals",
+    "address": "Plot No 156, Netaji Nagar X Roads, Sainikpuri",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500094",
+    "rohini_id": "8900080368590"
+  },
+  {
+    "s_no": 293,
+    "hospital_name": "Sri Sai Balaji Hospital",
+    "address": "Rock Town Residents Colony, Chanakyapuri",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500068",
+    "rohini_id": "8900080162358"
+  },
+  {
+    "s_no": 294,
+    "hospital_name": "MAA ENT HOSPITALS",
+    "address": "Road No.36, Jubilee Hills",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500033",
+    "rohini_id": "8900080369788"
+  },
+  {
+    "s_no": 295,
+    "hospital_name": "Germanten Hospital",
+    "address": "#4-8-138/1/B, Opp Pillar No 150, Attapur",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500048",
+    "rohini_id": "8900080389588"
+  },
+  {
+    "s_no": 296,
+    "hospital_name": "Zoi Hospital",
+    "address": "#6-3-1106/1/A, RajBhavan Road, Somajiguda",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500082",
+    "rohini_id": "8900080164956"
+  },
+  {
+    "s_no": 297,
+    "hospital_name": "Zoi Hospital",
+    "address": "Pillar Number 147, Attapur",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500048",
+    "rohini_id": "8900080380721"
+  },
+  {
+    "s_no": 298,
+    "hospital_name": "Jeevan Hospital",
+    "address": "8-4-21-5, Pavan Puri Colony, Karmanghat, Sagar Road",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500079",
+    "rohini_id": "8900080164598"
+  },
+  {
+    "s_no": 299,
+    "hospital_name": "Preeti Urology and Kidney Hospital",
+    "address": "307, Road No.4, MIG 1, Kukatpally Housing Board Colony",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500072",
+    "rohini_id": "8900080348707"
+  },
+  {
+    "s_no": 300,
+    "hospital_name": "SOLIS EYE CARE HOSPITALS PVT LTD",
+    "address": "Plot No 13, SVK Towers, Kushaiguda Main Road, ECIL X Road",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500062",
+    "rohini_id": "8900080386907"
+  },
+  {
+    "s_no": 301,
+    "hospital_name": "Sundari Maternity & General Hospital",
+    "address": "Rajiv Nagar, Alwal, Secunderabad",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500010",
+    "rohini_id": "8900080158641"
+  },
+  {
+    "s_no": 302,
+    "hospital_name": "Srishti Eye Centre",
+    "address": "Nukkula Arcade, Vijayanagar Colony Main Road",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500057",
+    "rohini_id": "8900080391178"
+  },
+  {
+    "s_no": 303,
+    "hospital_name": "MAAX LIFE HOSPITALS",
+    "address": "8-8-407/1/A/529, Champapet Rd, Karmanghat",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500079",
+    "rohini_id": "8900080385047"
+  },
+  {
+    "s_no": 304,
+    "hospital_name": "Amrita ENT Head & Neck Hospital",
+    "address": "HIG 450, JNTU-HITEC City Road, KPHB Phase VI, Kukatpally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500072",
+    "rohini_id": "8900080197626"
+  },
+  {
+    "s_no": 305,
+    "hospital_name": "Vascular Care Centre",
+    "address": "6-3-649, Somajiguda, Near Maheswari Chambers",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500082",
+    "rohini_id": "8900080332768"
+  },
+  {
+    "s_no": 306,
+    "hospital_name": "Kruthi Hospital Advanced Eye & Dental Care",
+    "address": "Plot No.27 & 28, Hasmathpet Road, Bowenpally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500011",
+    "rohini_id": "8900080390379"
+  },
+  {
+    "s_no": 307,
+    "hospital_name": "Geeta Multi Speciality Hospital",
+    "address": "1-7-90, Chaitanyapuri Cross Road, Dilsukhnagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500060",
+    "rohini_id": "8900080162884"
+  },
+  {
+    "s_no": 308,
+    "hospital_name": "Pulse Hospital",
+    "address": "IDPL, Jeedimetla Main Road, Chandra Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500037",
+    "rohini_id": "8900080162372"
+  },
+  {
+    "s_no": 309,
+    "hospital_name": "Nethra Eye Institute",
+    "address": "Door No.8-3-215, Opp ICICI Bank, SR Nagar Branch",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500038",
+    "rohini_id": "8900080326668"
+  },
+  {
+    "s_no": 310,
+    "hospital_name": "Smart Vision Eye Hospitals",
+    "address": "Plot No.143, Sagar Society, Srinagar Colony",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500073",
+    "rohini_id": "8900080391338"
+  },
+  {
+    "s_no": 311,
+    "hospital_name": "Metro Cure Hospitals",
+    "address": "16-2-661/EFGH, Judges Colony, Malakpet",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500036",
+    "rohini_id": "8900080161382"
+  },
+  {
+    "s_no": 312,
+    "hospital_name": "Prerana Hospital",
+    "address": "Sri Ramnagar Colony, Puppalaguda-Manikonda Main Road",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500089",
+    "rohini_id": "8900080391758"
+  },
+  {
+    "s_no": 313,
+    "hospital_name": "Rohan Hospital",
+    "address": "Vijay Nagar Colony, Mehdipatnam",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500028",
+    "rohini_id": "8900080162624"
+  },
+  {
+    "s_no": 314,
+    "hospital_name": "RAMESH LASIK AND LASER CENTRE",
+    "address": "3-6-273/274, Himayath Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500029",
+    "rohini_id": "8900080381551"
+  },
+  {
+    "s_no": 315,
+    "hospital_name": "Dr. Laxman's Children Hospital",
+    "address": "Plot No.3 And 4, Main Road, Shapur Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500055",
+    "rohini_id": "8900080162433"
+  },
+  {
+    "s_no": 316,
+    "hospital_name": "Apollo Institute of Medical Science & Research",
+    "address": "Apollo Health City Campus, Jubilee Hills",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500096",
+    "rohini_id": "8900080376472"
+  },
+  {
+    "s_no": 317,
+    "hospital_name": "Sunshine Hospitals",
+    "address": "7-56/19, Dargah Road, Rai Durg",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500008",
+    "rohini_id": "8900080384873"
+  },
+  {
+    "s_no": 318,
+    "hospital_name": "L.V. Prasad Eye Institute",
+    "address": "Kallam Anji Reddy Campus, LV Prasad Marg, Banjara Hills",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500034",
+    "rohini_id": "8900080160903"
+  },
+  {
+    "s_no": 319,
+    "hospital_name": "Lotus Cure Hospital",
+    "address": "3-16-668/A, All Saints Road, Trimulgherry",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500015",
+    "rohini_id": "8900080386242"
+  },
+  {
+    "s_no": 320,
+    "hospital_name": "Lotus Hospitals for Women & Children",
+    "address": "6-2-29, Lakdikapul Road",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500004",
+    "rohini_id": "8900080018617"
+  },
+  {
+    "s_no": 321,
+    "hospital_name": "Lotus Hospitals for Women & Children",
+    "address": "15, JNTU - Hitech City Road, BHEL HIG Phase 2, Kukatpally Housing Board Colony, Kukatpally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500072",
+    "rohini_id": "8900080026865"
+  },
+  {
+    "s_no": 322,
+    "hospital_name": "Naidu Eye Hospital",
+    "address": "Plot No. 26-27-29, Naidu Eye Hospital Complex, Near Vijetha Super Market, Madinaguda",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500049",
+    "rohini_id": "8900080390829"
+  },
+  {
+    "s_no": 323,
+    "hospital_name": "Avani Laser Eye Hospital",
+    "address": "Plot No. 14, Alkapuri Main Road, Near Sai Baba Temple, Alkapuri Saroor Nagar Mandal",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500035",
+    "rohini_id": "8900080161061"
+  },
+  {
+    "s_no": 324,
+    "hospital_name": "M.S.REDDY LIONS EYE HOSPITAL",
+    "address": "APHB Colony, Moulali",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500040",
+    "rohini_id": "8900080161832"
+  },
+  {
+    "s_no": 325,
+    "hospital_name": "Calcium Hospital",
+    "address": "Behind ICICI Bank ATM, Opp Akshara School, Nizampet Rd, A.S.R.Raju Nagar",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500072",
+    "rohini_id": "8900080389397"
+  },
+  {
+    "s_no": 326,
+    "hospital_name": "Swarup Eye Centre",
+    "address": "Plot No.145, Dwarakapuri, Punjagutta",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500082",
+    "rohini_id": "8900080164895"
+  },
+  {
+    "s_no": 327,
+    "hospital_name": "Sri Sri Holistic Hospitals",
+    "address": "#1-2-49/13B, Nizampet Road, Hydernagar, Kukatpally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500072",
+    "rohini_id": "8900080352124"
+  },
+  {
+    "s_no": 328,
+    "hospital_name": "CITI NEURO CENTRE",
+    "address": "MLA Colony, Road No.12, Banjara Hills",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500034",
+    "rohini_id": "8900080371033"
+  },
+  {
+    "s_no": 329,
+    "hospital_name": "Refracto Eye Hospital",
+    "address": "1st Floor QZ Plaza, Kondapur",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500084",
+    "rohini_id": "8900080381742"
+  },
+  {
+    "s_no": 330,
+    "hospital_name": "Refracto Eye Hospital",
+    "address": "Above TMC, Green Park Avenue, Near Suchitra Circle",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500084",
+    "rohini_id": "8900080391932"
+  },
+  {
+    "s_no": 331,
+    "hospital_name": "Avis Hospitals",
+    "address": "Plot No 99, Road No 1, Jubilee Hills, Next to Chiranjeevi Blood Bank",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500033",
+    "rohini_id": "8900080336940"
+  },
+  {
+    "s_no": 332,
+    "hospital_name": "Geetha Multi Speciality Hospital",
+    "address": "Road No. 4, West Marredpally, Opposite SBI, Secunderabad",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500026",
+    "rohini_id": "8900080337190"
+  },
+  {
+    "s_no": 333,
+    "hospital_name": "Srikara Hospitals",
+    "address": "Main Road, NH-7, Near Cine Planet, Kompally",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500074",
+    "rohini_id": "8900080405929"
+  },
+  {
+    "s_no": 334,
+    "hospital_name": "Raghavendra Srikara Hospitals",
+    "address": "1-7-100, Opp Shivalayam, Kamala Nagar, A.S. Rao Nagar, ECIL Cross Road",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500072",
+    "rohini_id": "8900080163362"
+  },
+  {
+    "s_no": 335,
+    "hospital_name": "MYTHRI HOSPITAL",
+    "address": "Opp Pillar No.81, PVNR Express Highway, Mehdipatnam",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500008",
+    "rohini_id": "8900080158405"
+  },
+  {
+    "s_no": 336,
+    "hospital_name": "NephroPlus Dialysis Center",
+    "address": "3rd Floor, Vintage Plaza, Road No:10, Banjara Hills",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500034",
+    "rohini_id": "8900080160927"
+  },
+  {
+    "s_no": 337,
+    "hospital_name": "NephroPlus Dialysis Center",
+    "address": "1st & 2nd Floor, Gude’s Plaza, Above ICICI Bank",
+    "state": "Telangana",
+    "city": "Hyderabad",
+    "pin": "500082",
+    "rohini_id": "NA"
+  }
+]

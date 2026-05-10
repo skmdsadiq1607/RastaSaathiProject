@@ -1,0 +1,8 @@
+{
+  "errors.UNAUTHORIZED": "Unauthorized",
+  "errors.FORBIDDEN": "Forbidden",
+  "errors.NOT_FOUND": "Not found",
+  "alerts.SOS_TITLE": "Emergency SOS",
+  "alerts.SOS_BODY": "Accident reported. Immediate assistance needed.",
+  "sms.SOS": "SOS|{lat},{lng}|{severity}|{hospital}|{eta}"
+}

@@ -1,0 +1,8 @@
+{
+  "errors.UNAUTHORIZED": "அனுமதி இல்லை",
+  "errors.FORBIDDEN": "தடைசெய்யப்பட்டது",
+  "errors.NOT_FOUND": "கண்டுபிடிக்கவில்லை",
+  "alerts.SOS_TITLE": "அவசர SOS",
+  "alerts.SOS_BODY": "விபத்து ஏற்பட்டுள்ளது. உடனடி உதவி தேவை.",
+  "sms.SOS": "SOS|{lat},{lng}|{severity}|{hospital}|{eta}"
+}
