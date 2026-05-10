@@ -19,11 +19,12 @@ const PublicChat = () => {
     scrollToBottom();
   }, [messages]);
 
-  const handleSend = () => {
-    if (!input.trim()) return;
+  const handleSend = (overrideInput = null) => {
+    const textToSend = overrideInput || input;
+    if (!textToSend.trim()) return;
 
-    const userMsg = input.toLowerCase();
-    const newMessages = [...messages, { text: input, isBot: false, data: null }];
+    const userMsg = textToSend.toLowerCase();
+    const newMessages = [...messages, { text: textToSend, isBot: false, data: null }];
     setMessages(newMessages);
     setInput('');
 
@@ -41,7 +42,7 @@ const PublicChat = () => {
         }]);
       } else {
         setMessages(prev => [...prev, { 
-          text: "I understand this is an emergency. Please type words like 'Bleeding', 'Burn', 'Choking', or 'Fracture'. Always call 108 immediately.", 
+          text: "I understand this is an emergency. Please pick from the list or type words like 'Bleeding' or 'Burn'. Always call 108 immediately.", 
           isBot: true, 
           data: null 
         }]);
@@ -120,19 +121,36 @@ const PublicChat = () => {
               <div ref={chatEndRef} />
             </div>
 
-            {/* Input */}
-            <div style={{ padding: '15px', borderTop: '1px solid rgba(255,255,255,0.1)', display: 'flex', gap: '10px', background: 'rgba(0,0,0,0.2)' }}>
-              <input 
-                type="text" 
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                placeholder="Describe situation..."
-                style={{ flex: 1, background: 'rgba(255,255,255,0.05)', border: 'none', borderRadius: '8px', padding: '12px', color: 'white', fontSize: '0.9rem' }}
-              />
-              <button onClick={handleSend} style={{ background: '#ef4444', border: 'none', borderRadius: '8px', padding: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Send size={18} color="white" />
-              </button>
+            {/* Input & Dropdown */}
+            <div style={{ padding: '15px', borderTop: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.2)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <select 
+                onChange={(e) => {
+                  if(e.target.value) {
+                    setInput(e.target.value);
+                    setTimeout(() => handleSend(e.target.value), 100);
+                  }
+                }}
+                style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '10px', color: 'white', fontSize: '0.85rem', cursor: 'pointer' }}
+              >
+                <option value="">-- Select Emergency Type --</option>
+                {EMERGENCIES.map(e => (
+                  <option key={e.id} value={e.title} style={{ background: '#020617' }}>{e.title}</option>
+                ))}
+              </select>
+              
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <input 
+                  type="text" 
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+                  placeholder="Or describe situation..."
+                  style={{ flex: 1, background: 'rgba(255,255,255,0.05)', border: 'none', borderRadius: '8px', padding: '12px', color: 'white', fontSize: '0.9rem' }}
+                />
+                <button onClick={() => handleSend()} style={{ background: '#ef4444', border: 'none', borderRadius: '8px', padding: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Send size={18} color="white" />
+                </button>
+              </div>
             </div>
           </motion.div>
         )}
