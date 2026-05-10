@@ -42,17 +42,20 @@ async function callGeminiWithRetry({ system, user, retries = 1 }) {
     const key = geminiKeyManager.getCurrentKey();
     if (!key) throw new Error('No Gemini API key available');
 
-    const genAI = new GoogleGenerativeAI(key);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash", systemInstruction: system });
-
     try {
-      const result = await model.generateContent(user);
+      const genAI = new GoogleGenerativeAI(key);
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      
+      const result = await model.generateContent([
+        { text: `SYSTEM: ${system}` },
+        { text: `USER: ${user}` }
+      ]);
+      
       const text = result.response.text();
       return { text, raw: result, provider: 'gemini' };
     } catch (error) {
-      // Basic check for 429 in google gen-ai sdk
-      if (error.message?.includes('429') || error.message?.includes('403') || error.status === 429) {
-        logger.warn(`[Gemini API] Hit Rate Limit or Auth Error. Rotating Key...`);
+      logger.error(`[Gemini API Error] Key: ${key.slice(0, 8)}... | Error: ${error.message}`);
+      if (error.message?.includes('429') || error.message?.includes('403')) {
         geminiKeyManager.rotateKey();
         attempt++;
       } else {
