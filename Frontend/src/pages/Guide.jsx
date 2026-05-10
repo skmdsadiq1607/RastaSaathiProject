@@ -47,7 +47,7 @@ const Guide = () => {
           </div>
           <div style={{ background: 'rgba(255,255,255,0.03)', padding: '24px', borderRadius: '12px' }}>
             <div style={{ fontWeight: '700', marginBottom: '10px' }}>2. Send Join Code</div>
-            <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Send the WhatsApp message <b>join <span style={{color:'#10b981'}}>glass-simple</span></b> to that number.</div>
+            <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Send the WhatsApp message <b>join <span style={{color:'#10b981'}}>do-hit</span></b> to that number.</div>
           </div>
           <div style={{ background: 'rgba(255,255,255,0.03)', padding: '24px', borderRadius: '12px' }}>
             <div style={{ fontWeight: '700', marginBottom: '10px' }}>3. Add Your Phone</div>
