@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
+import Contact from './pages/Contact';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('roadsos_token'));
@@ -51,13 +52,13 @@ function App() {
             </Link>
             
             <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+              <Link to="/about" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: '500', fontSize: '0.8rem' }}>About</Link>
+              <Link to="/contact" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: '500', fontSize: '0.8rem' }}>Contact</Link>
+              
               {isLoggedIn && (
                 <>
                   <Link to="/dashboard" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.8rem' }}>
                     <LayoutDashboard size={16} /> Dash
-                  </Link>
-                  <Link to="/profile" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.8rem' }}>
-                    <User size={16} /> Prof
                   </Link>
                 </>
               )}
@@ -77,6 +78,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/dashboard" element={<Dashboard />} />

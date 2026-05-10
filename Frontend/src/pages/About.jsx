@@ -1,59 +1,61 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Brain, Zap, Map as MapIcon } from 'lucide-react';
+import { Target, Eye, Users, ShieldCheck } from 'lucide-react';
 
 const About = () => {
   return (
     <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
       className="container"
-      style={{ paddingTop: '80px', paddingBottom: '80px' }}
+      style={{ paddingTop: '60px', paddingBottom: '100px' }}
     >
-      <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto 60px' }}>
-        <h1 style={{ fontSize: '3.5rem', marginBottom: '24px' }}>
-          About <span className="text-gradient">RastaSaathi</span>
+      <div style={{ textAlign: 'center', marginBottom: '80px' }}>
+        <h1 style={{ fontSize: '3.5rem', fontWeight: '800', marginBottom: '20px' }}>
+          About <span style={{ color: '#ef4444' }}>RastaSaathi</span>
         </h1>
-        <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)' }}>
-          Built for the IIT Madras Road Safety Hackathon 2026. Our mission is to eliminate the 'Golden Hour' delay in road accident response using Artificial Intelligence and automated dispatch systems.
+        <p style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', maxWidth: '800px', margin: '0 auto' }}>
+          Revolutionizing road safety through AI-powered emergency response and real-time trauma care orchestration.
         </p>
       </div>
 
-      <div className="glass-panel" style={{ padding: '40px', marginBottom: '40px' }}>
-        <h2 style={{ marginBottom: '24px', fontSize: '2rem' }}>The Architecture</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '32px' }}>
-          
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
-              <Brain color="#a855f7" size={28} />
-              <h3 style={{ fontSize: '1.25rem' }}>AI Triage Engine</h3>
-            </div>
-            <p style={{ color: 'var(--text-secondary)' }}>
-              Dual-model fallback architecture utilizing Anthropic Claude 3.5 Sonnet and Google Gemini 1.5 Flash to instantly predict injury severity and provide interactive first-aid guidance.
-            </p>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px', marginBottom: '100px' }}>
+        <div className="glass-panel" style={{ padding: '40px' }}>
+          <div style={{ background: 'rgba(239, 68, 68, 0.1)', width: '60px', height: '60px', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px' }}>
+            <Target color="#ef4444" size={32} />
           </div>
+          <h3 style={{ fontSize: '1.5rem', marginBottom: '16px' }}>Our Mission</h3>
+          <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7' }}>
+            To minimize the "Golden Hour" response time by connecting accident victims with the nearest specialized trauma centers instantly using AI and real-time geofencing.
+          </p>
+        </div>
 
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
-              <MapIcon color="#3b82f6" size={28} />
-              <h3 style={{ fontSize: '1.25rem' }}>Geospatial Routing</h3>
-            </div>
-            <p style={{ color: 'var(--text-secondary)' }}>
-              Powered by MongoDB `$near` queries and Google Maps API. We don't just find the closest hospital, we find the closest hospital equipped for your specific medical severity.
-            </p>
+        <div className="glass-panel" style={{ padding: '40px' }}>
+          <div style={{ background: 'rgba(59, 130, 246, 0.1)', width: '60px', height: '60px', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px' }}>
+            <Eye color="#3b82f6" size={32} />
           </div>
+          <h3 style={{ fontSize: '1.5rem', marginBottom: '16px' }}>Our Vision</h3>
+          <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7' }}>
+            A future where no road accident fatality occurs due to delay in medical assistance or lack of first-aid knowledge. We aim to be the digital backbone of India's road safety infrastructure.
+          </p>
+        </div>
+      </div>
 
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
-              <Zap color="#f59e0b" size={28} />
-              <h3 style={{ fontSize: '1.25rem' }}>Instant Dispatch</h3>
-            </div>
-            <p style={{ color: 'var(--text-secondary)' }}>
-              Integrated directly with Twilio's WhatsApp API to bypass traditional SMS delays, blasting live locations and ETAs to emergency contacts in milliseconds.
-            </p>
+      <div className="glass-panel" style={{ padding: '60px', textAlign: 'center' }}>
+        <h2 style={{ marginBottom: '40px' }}>Built for the IIT Madras Road Safety Hackathon</h2>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '60px', flexWrap: 'wrap' }}>
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#ef4444' }}>370+</div>
+            <div style={{ color: 'var(--text-secondary)' }}>Hospitals Integrated</div>
           </div>
-
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#3b82f6' }}>AI</div>
+            <div style={{ color: 'var(--text-secondary)' }}>Medical Assistant</div>
+          </div>
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#10b981' }}>Live</div>
+            <div style={{ color: 'var(--text-secondary)' }}>Emergency Alerts</div>
+          </div>
         </div>
       </div>
     </motion.div>
