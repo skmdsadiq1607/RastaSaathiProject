@@ -81,6 +81,44 @@ const About = () => {
 
         </div>
       </div>
+
+      {/* Team & Mission Narrative */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '80px', alignItems: 'center', marginTop: '100px' }}>
+        <motion.div
+          initial={{ x: -50, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <h2 style={{ fontSize: '2.8rem', fontWeight: '900', marginBottom: '24px' }}>
+            Built by <span style={{ color: '#ef4444' }}>Visionaries</span>
+          </h2>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.8', marginBottom: '24px' }}>
+            RastaSaathi was born out of the IIT Madras Road Safety Hackathon with a single, unwavering goal: to ensure that technology serves as a bridge to life. Our team combines expertise in AI, geospatial engineering, and emergency medicine.
+          </p>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.8' }}>
+            We believe that road safety is not just about rules, but about the reliability of the safety net when those rules fail. Every line of code in RastaSaathi is written to protect, guide, and rescue.
+          </p>
+        </motion.div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+          {[
+            { label: 'Latency', val: '<2s' },
+            { label: 'Uptime', val: '99.9%' },
+            { label: 'Coverage', val: 'Global' },
+            { label: 'AI Models', val: 'SOTA' }
+          ].map((stat, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ scale: 1.05 }}
+              className="glass-panel"
+              style={{ padding: '30px', textAlign: 'center' }}
+            >
+              <div style={{ fontSize: '1.8rem', fontWeight: '900', color: '#ef4444', marginBottom: '8px' }}>{stat.val}</div>
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px' }}>{stat.label}</div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
     </motion.div>
   );
 };

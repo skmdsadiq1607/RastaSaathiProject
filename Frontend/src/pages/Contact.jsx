@@ -76,6 +76,35 @@ const Contact = () => {
           </div>
         </div>
       </div>
+      </div>
+
+      {/* Global Support Narrative */}
+      <div style={{ marginTop: '120px', textAlign: 'center' }}>
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <h2 style={{ fontSize: '2.5rem', fontWeight: '900', marginBottom: '24px' }}>
+            Supporting the <span style={{ color: '#ef4444' }}>Global Community</span>
+          </h2>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.8', maxWidth: '800px', margin: '0 auto' }}>
+            RastaSaathi is more than a regional tool; it is a blueprint for global road safety. We are actively seeking partnerships with municipal authorities, hospital networks, and tech innovators to expand our digital safety net worldwide.
+          </p>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '40px', marginTop: '60px', flexWrap: 'wrap' }}>
+            {[
+              { label: 'Partnerships', val: 'Active' },
+              { label: 'Response Time', val: 'Minimal' },
+              { label: 'AI Accuracy', val: '99%' }
+            ].map((stat, i) => (
+              <div key={i} style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '2rem', fontWeight: '900', color: 'white' }}>{stat.val}</div>
+                <div style={{ fontSize: '0.75rem', color: '#ef4444', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
     </motion.div>
   );
 };

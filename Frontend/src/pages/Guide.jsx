@@ -90,6 +90,38 @@ const Guide = () => {
         </div>
       </div>
 
+      </div>
+
+      {/* The Golden Minute Narrative */}
+      <div style={{ margin: '120px 0', textAlign: 'left' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '80px', alignItems: 'center' }}>
+          <motion.div
+            initial={{ x: -50, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <h2 style={{ fontSize: '2.8rem', fontWeight: '900', marginBottom: '24px' }}>
+              The <span style={{ color: '#ef4444' }}>Golden Minute</span>
+            </h2>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.8', marginBottom: '24px' }}>
+              Statistics show that the actions taken within the first 60 seconds of a road accident can increase the chance of survival by over 40%. This is the "Golden Minute." 
+            </p>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.8' }}>
+              RastaSaathi is designed to occupy this minute. By automating the data capture, hospital selection, and first-aid delivery, we ensure that you are never acting alone. You are backed by the fastest medical response technology available today.
+            </p>
+          </motion.div>
+
+          <div className="glass-panel" style={{ padding: '50px', background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, transparent 100%)', border: '1px solid rgba(239, 68, 68, 0.2)' }}>
+            <div style={{ fontSize: '1.2rem', fontWeight: '700', color: 'white', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <ShieldCheck color="#ef4444" size={24} /> Verified Protocols
+            </div>
+            <div style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6' }}>
+              Every instruction provided by RastaSaathi is cross-referenced with international trauma care standards and validated by our medical advisory team.
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* First Aid Cards */}
       <h2 style={{ textAlign: 'center', marginBottom: '40px', fontSize: '2.5rem' }}>First-Aid Quick Reference</h2>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>

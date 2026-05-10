@@ -87,43 +87,45 @@ const Home = () => {
           </motion.div>
         </div>
 
-        {/* Narrational Content Section */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '60px', alignItems: 'center', marginBottom: '140px' }}>
+        {/* The Rescue Journey Section */}
+        <div style={{ marginBottom: '140px' }}>
           <motion.div
-            initial={{ x: -50, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
+            initial={{ y: 30, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
+            style={{ textAlign: 'center', marginBottom: '80px' }}
           >
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '24px', fontWeight: '800' }}>
-              Mastering the <span style={{ color: '#ef4444' }}>Golden Hour</span>
+            <h2 style={{ fontSize: '3rem', fontWeight: '900', marginBottom: '20px' }}>
+              3 Steps to <span style={{ color: '#ef4444' }}>Safety</span>
             </h2>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.8', marginBottom: '24px' }}>
-              In a road emergency, every second isn't just time—it's a chance at life. RastaSaathi is engineered to eliminate the friction in emergency response. We don't just send an alert; we orchestrate an entire rescue ecosystem.
-            </p>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.8' }}>
-              By combining real-time geospatial intelligence with AI-powered medical triage, we ensure that the right information reaches the right hands at the exact moment it's needed most. From identifying the nearest specialized trauma center to providing instant first-aid guidance, RastaSaathi is your digital guardian on the road.
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', maxWidth: '700px', margin: '0 auto' }}>
+              A precision-engineered orchestration of technology and medical expertise.
             </p>
           </motion.div>
-          
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            className="glass-panel"
-            style={{ padding: '50px', position: 'relative', overflow: 'hidden', minHeight: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-          >
-            <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '150px', height: '150px', background: 'rgba(239, 68, 68, 0.1)', borderRadius: '50%', filter: 'blur(40px)' }}></div>
-            <div style={{ position: 'absolute', bottom: '-20px', left: '-20px', width: '150px', height: '150px', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '50%', filter: 'blur(40px)' }}></div>
-            <div style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
-              <Logo size={120} />
-              <div style={{ marginTop: '20px', fontWeight: '800', fontSize: '1.5rem', letterSpacing: '2px', color: 'white' }}>
-                RASTA<span style={{ color: '#ef4444' }}>SAATHI</span>
-              </div>
-              <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', marginTop: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>
-                Emergency Tech Protocol v2.0
-              </div>
-            </div>
-          </motion.div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px' }}>
+            {[
+              { num: '01', title: 'Trigger SOS', desc: 'Tap the emergency button to start the protocol. We capture precise GPS coordinates and network triage data.' },
+              { num: '02', title: 'AI Assessment', desc: 'Our medical engine identifies injury severity and hospital needs using real-time inputs.' },
+              { num: '03', title: 'Rescue Commences', desc: 'The nearest hospital is alerted, emergency contacts are notified via WhatsApp, and navigation starts instantly.' }
+            ].map((step, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ y: 50, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.2 }}
+                className="glass-panel"
+                style={{ padding: '50px', position: 'relative' }}
+              >
+                <div style={{ position: 'absolute', top: '20px', left: '20px', fontSize: '4rem', fontWeight: '900', color: 'rgba(239, 68, 68, 0.05)', lineHeight: 1 }}>
+                  {step.num}
+                </div>
+                <h3 style={{ fontSize: '1.5rem', marginBottom: '16px', position: 'relative', zIndex: 1 }}>{step.title}</h3>
+                <p style={{ color: 'var(--text-secondary)', lineHeight: '1.8', position: 'relative', zIndex: 1 }}>{step.desc}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         {/* Features Grid */}
