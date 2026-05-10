@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ShieldCheck, Activity, Smartphone, MapPin, Bell, BookOpen } from 'lucide-react';
+import { ShieldCheck, Activity } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 const Guide = () => {
@@ -31,7 +31,7 @@ const Guide = () => {
           <GuideSection 
             icon={<Activity size={32} color="#ef4444" />}
             title={t('immediate_action')}
-            desc="Upon triggering the SOS, follow the visualized medical prompts on your dashboard immediately while help is in transit."
+            desc={t('immediate_action_desc')}
           />
         </div>
 
@@ -41,16 +41,16 @@ const Guide = () => {
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '40px' }}>
             <ProtocolItem 
-              title="Bleeding Control"
-              steps={["Apply direct pressure", "Keep limb elevated", "Use clean dressing"]}
+              title={t('protocol_bleeding')}
+              steps={[t('step_pressure'), t('step_elevate'), t('step_dressing')]}
             />
             <ProtocolItem 
-              title="Fracture Support"
-              steps={["Do not move limb", "Apply cold compress", "Support with splint"]}
+              title={t('protocol_fracture')}
+              steps={[t('step_nomove'), t('step_cold'), t('step_splint')]}
             />
             <ProtocolItem 
-              title="Shock Management"
-              steps={["Lay person flat", "Keep them warm", "Loosen tight clothing"]}
+              title={t('protocol_shock')}
+              steps={[t('step_flat'), t('step_warm'), t('step_loose')]}
             />
           </div>
         </div>

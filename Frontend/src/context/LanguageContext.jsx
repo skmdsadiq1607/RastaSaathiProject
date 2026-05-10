@@ -63,7 +63,20 @@ export const TRANSLATIONS = {
     global_title: "Supporting the Global Community",
     global_sub: "RastaSaathi is more than a regional tool; it is a blueprint for scalable municipal emergency response. We are partnering with cities to integrate AI directly into the local medical grid.",
     tech_title: "Technical Backbone",
-    tech_sub: "Our system runs on a high-availability infrastructure designed for <2s latency in mission-critical environments."
+    tech_sub: "Our system runs on a high-availability infrastructure designed for <2s latency in mission-critical environments.",
+    immediate_action_desc: "Upon triggering the SOS, follow the visualized medical prompts on your dashboard immediately while help is in transit.",
+    protocol_bleeding: "Bleeding Control",
+    protocol_fracture: "Fracture Support",
+    protocol_shock: "Shock Management",
+    step_pressure: "Apply direct pressure",
+    step_elevate: "Keep limb elevated",
+    step_dressing: "Use clean dressing",
+    step_nomove: "Do not move limb",
+    step_cold: "Apply cold compress",
+    step_splint: "Support with splint",
+    step_flat: "Lay person flat",
+    step_warm: "Keep them warm",
+    step_loose: "Loosen tight clothing"
   },
   hi: {
     home: "होम",
@@ -125,7 +138,20 @@ export const TRANSLATIONS = {
     global_title: "वैश्विक समुदाय का समर्थन",
     global_sub: "रास्तासाथी एक क्षेत्रीय उपकरण से कहीं अधिक है; यह स्केलेबल नगरपालिका आपातकालीन प्रतिक्रिया के लिए एक खाका है।",
     tech_title: "तकनीकी आधार",
-    tech_sub: "हमारा सिस्टम मिशन-महत्वपूर्ण वातावरण में <2s विलंबता के लिए डिज़ाइन किए गए उच्च-उपलब्धता बुनियादी ढांचे पर चलता है।"
+    tech_sub: "हमारा सिस्टम मिशन-महत्वपूर्ण वातावरण में <2s विलंबता के लिए डिज़ाइन किए गए उच्च-उपलब्धता बुनियादी ढांचे पर चलता है।",
+    immediate_action_desc: "SOS शुरू करने पर, सहायता आने तक अपने डैशबोर्ड पर विज़ुअलाइज्ड मेडिकल प्रॉम्प्ट्स का तुरंत पालन करें।",
+    protocol_bleeding: "रक्तस्राव नियंत्रण",
+    protocol_fracture: "फ्रैक्चर सहायता",
+    protocol_shock: "शॉक प्रबंधन",
+    step_pressure: "सीधा दबाव डालें",
+    step_elevate: "अंग को ऊपर रखें",
+    step_dressing: "साफ पट्टी का प्रयोग करें",
+    step_nomove: "अंग को न हिलाएं",
+    step_cold: "ठंडी पट्टी लगाएं",
+    step_splint: "खपच्ची के साथ सहारा दें",
+    step_flat: "व्यक्ति को सीधा लेटाएं",
+    step_warm: "उन्हें गर्म रखें",
+    step_loose: "तंग कपड़े ढीले करें"
   },
   te: {
     home: "హోమ్",
@@ -249,7 +275,20 @@ export const TRANSLATIONS = {
     global_title: "உலகளாவிய சமூகத்திற்கு ஆதரவு",
     global_sub: "ராஸ்தாசாதி ஒரு பிராந்திய கருவியை விட மேலானது; இது அளவிடக்கூடிய நகராட்சி அவசரகால பதிலளிப்புக்கான ஒரு வரைபடமாகும். உள்ளூர் மருத்துவ கட்டமைப்பிற்குள் AI-ஐ நேரடியாக ஒருங்கிணைக்க நாங்கள் நகரங்களுடன் கூட்டு சேர்ந்துள்ளோம்.",
     tech_title: "தொழில்நுட்ப முதுகெலும்பு",
-    tech_sub: "எங்கள் சிஸ்டம் மிக முக்கியமான சூழல்களில் <2s தாமதத்திற்காக வடிவமைக்கப்பட்ட உயர்-கிடைப்பு உள்கட்டமைப்பில் இயங்குகிறது."
+    tech_sub: "எங்கள் சிஸ்டம் மிக முக்கியமான சூழல்களில் <2s தாமதத்திற்காக வடிவமைக்கப்பட்ட உயர்-கிடைப்பு உள்கட்டமைப்பில் இயங்குகிறது.",
+    immediate_action_desc: "SOS ஐத் தூண்டியவுடன், உதவி வரும் வரை உங்கள் டாஷ்போர்டில் உள்ள மருத்துவக் குறிப்புகளை உடனடியாகப் பின்பற்றவும்.",
+    protocol_bleeding: "இரத்தப்போக்கு கட்டுப்பாடு",
+    protocol_fracture: "எலும்பு முறிவு ஆதரவு",
+    protocol_shock: "அதிர்ச்சி மேலாண்மை",
+    step_pressure: "நேரடி அழுத்தத்தைப் பயன்படுத்துங்கள்",
+    step_elevate: "அங்கத்தை உயர்த்தி வைக்கவும்",
+    step_dressing: "சுத்தமான துணியைப் பயன்படுத்தவும்",
+    step_nomove: "அங்கத்தை நகர்த்த வேண்டாம்",
+    step_cold: "குளிர் அழுத்தத்தைப் பயன்படுத்துங்கள்",
+    step_splint: "ஸ்பிளிண்ட் மூலம் ஆதரவு கொடுங்கள்",
+    step_flat: "நபரை தட்டையாக படுக்க வைக்கவும்",
+    step_warm: "அவர்களை சூடாக வைக்கவும்",
+    step_loose: "இறுக்கமான ஆடைகளைத் தளர்த்தவும்"
   },
   ur: {
     home: "ہوم",
@@ -311,7 +350,20 @@ export const TRANSLATIONS = {
     global_title: "عالمی برادری کی حمایت",
     global_sub: "راستہ ساتھی ایک علاقائی آلے سے کہیں زیادہ ہے؛ یہ توسیع پذیر میونسپل ہنگامی ردعمل کے لیے ایک خاکہ ہے۔ ہم شہروں کے ساتھ شراکت داری کر رہے ہیں تاکہ AI کو براہ راست مقامی میڈیکل گرڈ میں ضم کیا جا سکے۔",
     tech_title: "تکنیکی ریڑھ کی ہڈی",
-    tech_sub: "ہمارا سسٹم مشن کے لحاظ سے اہم ماحول میں <2s لیٹینسی کے لیے ڈیزائن کیا گیا ہے۔"
+    tech_sub: "ہمارا سسٹم مشن کے لحاظ سے اہم ماحول میں <2s لیٹینسی کے لیے ڈیزائن کیا گیا ہے۔",
+    immediate_action_desc: "SOS متحرک کرنے کے بعد، امداد آنے تک اپنے ڈیش بورڈ پر دی گئی طبی ہدایات پر فوری عمل کریں۔",
+    protocol_bleeding: "خون بہنے کا کنٹرول",
+    protocol_fracture: "فریکچر سپورٹ",
+    protocol_shock: "صدمے کا انتظام",
+    step_pressure: "براہ راست دباؤ ڈالیں",
+    step_elevate: "عضو کو اوپر رکھیں",
+    step_dressing: "صاف پٹی استعمال کریں",
+    step_nomove: "عضو کو حرکت نہ دیں",
+    step_cold: "ٹھنڈی پٹی لگائیں",
+    step_splint: "سپلنٹ سے سہارا دیں",
+    step_flat: "شخص کو سیدھا لٹائیں",
+    step_warm: "انہیں گرم رکھیں",
+    step_loose: "تنگ کپڑے ڈھیلے کریں"
   }
 };
 
