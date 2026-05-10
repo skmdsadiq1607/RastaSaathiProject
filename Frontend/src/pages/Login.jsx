@@ -91,11 +91,28 @@ const Login = () => {
             type="button" 
             onClick={() => loginWithGoogle()}
             disabled={loading}
-            className="btn btn-outline" 
-            style={{ width: '100%', display: 'flex', justifyContent: 'center', gap: '12px', opacity: loading ? 0.7 : 1 }}
+            style={{ 
+              width: '100%', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center', 
+              gap: '12px', 
+              background: 'white', 
+              color: '#1f2937', 
+              padding: '12px', 
+              borderRadius: '8px', 
+              border: 'none', 
+              fontWeight: '600', 
+              cursor: 'pointer',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+              transition: 'all 0.2s',
+              opacity: loading ? 0.7 : 1
+            }}
+            onMouseOver={(e) => e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)'}
+            onMouseOut={(e) => e.currentTarget.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)'}
           >
             <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" width="20" />
-            {loading ? 'Authenticating...' : 'Continue with Google'}
+            {loading ? 'Connecting...' : 'Sign in with Google'}
           </button>
         </form>
 
