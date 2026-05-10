@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Shield, MapPin, Smartphone, BookOpen, Activity, Globe, Heart } from 'lucide-react';
+import { Shield, MapPin, Smartphone, BookOpen, Activity, Globe, Heart, Zap, CheckCircle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import Logo from '../components/Logo';
 
@@ -87,40 +87,42 @@ const Home = () => {
           </motion.div>
         </div>
 
-        {/* Impact Section */}
-        <div style={{ marginBottom: '140px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '60px', alignItems: 'center' }}>
-          <motion.div
-             initial={{ x: -50, opacity: 0 }}
-             whileInView={{ x: 0, opacity: 1 }}
-             viewport={{ once: true }}
-          >
-            <h2 style={{ fontSize: '2.5rem', fontWeight: '900', marginBottom: '20px' }}>{t('impact_title')}</h2>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.8', marginBottom: '30px' }}>
-              {t('impact_sub')}
-            </p>
-            <div style={{ display: 'flex', gap: '30px' }}>
-              <div>
-                <div style={{ fontSize: '2rem', fontWeight: '900', color: '#ef4444' }}>85%</div>
-                <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>FASTER RESPONSE</div>
+        {/* Impact Section - DRAMATICALLY IMPROVED */}
+        <div style={{ marginBottom: '160px' }}>
+           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '80px', alignItems: 'center' }}>
+            <motion.div
+               initial={{ x: -50, opacity: 0 }}
+               whileInView={{ x: 0, opacity: 1 }}
+               viewport={{ once: true }}
+            >
+              <div style={{ color: '#ef4444', fontWeight: '800', letterSpacing: '2px', marginBottom: '15px' }}>EMPOWERMENT</div>
+              <h2 style={{ fontSize: '3.5rem', fontWeight: '900', marginBottom: '25px', lineHeight: '1.1' }}>{t('impact_title')}</h2>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', lineHeight: '1.8', marginBottom: '40px' }}>
+                {t('impact_sub')}
+              </p>
+              
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px' }}>
+                <ImpactMetric value="85%" label="FASTER RESPONSE" />
+                <ImpactMetric value="10k+" label="LIVES IMPACTED" />
               </div>
-              <div style={{ width: '1px', background: 'rgba(255,255,255,0.1)' }}></div>
-              <div>
-                <div style={{ fontSize: '2rem', fontWeight: '900', color: '#ef4444' }}>10k+</div>
-                <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>LIVES IMPACTED</div>
-              </div>
-            </div>
-          </motion.div>
-          <motion.div 
-            initial={{ scale: 0.8, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            className="glass-panel" 
-            style={{ height: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}
-          >
-            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(45deg, rgba(239, 68, 68, 0.1), transparent)', zIndex: 0 }}></div>
-            <Activity size={120} color="#ef4444" style={{ opacity: 0.2 }} />
-            <Heart size={40} color="#ef4444" className="sos-pulse" style={{ position: 'absolute' }} />
-          </motion.div>
+            </motion.div>
+
+            <motion.div 
+              initial={{ x: 50, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              className="glass-panel" 
+              style={{ padding: '50px', background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, transparent 100%)', border: '1px solid rgba(255,255,255,0.05)' }}
+            >
+              <h3 style={{ fontSize: '1.5rem', marginBottom: '30px', fontWeight: '800' }}>Core Capabilities</h3>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                <CapabilityItem icon={<Zap size={18} />} text={t('impact_feature1')} />
+                <CapabilityItem icon={<Activity size={18} />} text={t('impact_feature2')} />
+                <CapabilityItem icon={<Shield size={18} />} text={t('impact_feature3')} />
+                <CapabilityItem icon={<MapPin size={18} />} text="Geospatial Precision" />
+              </ul>
+            </motion.div>
+          </div>
         </div>
 
         {/* The Rescue Journey Section */}
@@ -165,7 +167,7 @@ const Home = () => {
         </div>
 
         {/* Ecosystem Section */}
-        <div className="glass-panel" style={{ padding: '80px', marginBottom: '140px', textAlign: 'center' }}>
+        <div className="glass-panel" style={{ padding: '80px', marginBottom: '140px', textAlign: 'center', background: 'radial-gradient(circle at center, rgba(59, 130, 246, 0.05), transparent)' }}>
           <Globe size={48} color="#3b82f6" style={{ marginBottom: '30px' }} />
           <h2 style={{ fontSize: '2.5rem', fontWeight: '900', marginBottom: '20px' }}>{t('eco_title')}</h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', maxWidth: '800px', margin: '0 auto', lineHeight: '1.8' }}>
@@ -196,6 +198,20 @@ const Home = () => {
     </div>
   );
 };
+
+const ImpactMetric = ({ value, label }) => (
+  <div>
+    <div style={{ fontSize: '2.5rem', fontWeight: '900', color: '#ef4444', marginBottom: '5px' }}>{value}</div>
+    <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', fontWeight: '700', letterSpacing: '1px' }}>{label}</div>
+  </div>
+);
+
+const CapabilityItem = ({ icon, text }) => (
+  <li style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '20px', color: 'rgba(255,255,255,0.8)' }}>
+    <div style={{ color: '#ef4444' }}>{icon}</div>
+    <span style={{ fontSize: '1.1rem', fontWeight: '600' }}>{text}</span>
+  </li>
+);
 
 const FeatureCard = ({ icon, title, desc }) => (
   <motion.div 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ShieldCheck, Activity, Smartphone, Info, AlertTriangle, Book } from 'lucide-react';
+import { ShieldCheck, Activity, Smartphone, Info, AlertTriangle, Book, UserPlus, Users, Zap } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 const Guide = () => {
@@ -22,7 +22,31 @@ const Guide = () => {
           </p>
         </div>
 
-        {/* Core Sections */}
+        {/* HOW TO USE SECTION - RESTORED & IMPROVED */}
+        <div style={{ marginBottom: '100px' }}>
+          <h2 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '50px', textAlign: 'center' }}>
+            {t('guide_usage_title')}
+          </h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
+            <UsageStep 
+              icon={<UserPlus size={28} color="#ef4444" />}
+              title={t('guide_use_step1_title')}
+              desc={t('guide_use_step1_desc')}
+            />
+            <UsageStep 
+              icon={<Users size={28} color="#3b82f6" />}
+              title={t('guide_use_step2_title')}
+              desc={t('guide_use_step2_desc')}
+            />
+            <UsageStep 
+              icon={<Zap size={28} color="#10b981" />}
+              title={t('guide_use_step3_title')}
+              desc={t('guide_use_step3_desc')}
+            />
+          </div>
+        </div>
+
+        {/* Core Medical Sections */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px', marginBottom: '80px' }}>
           <GuideSection 
             icon={<ShieldCheck size={32} color="#10b981" />}
@@ -80,6 +104,16 @@ const Guide = () => {
     </div>
   );
 };
+
+const UsageStep = ({ icon, title, desc }) => (
+  <div className="glass-panel" style={{ padding: '30px' }}>
+    <div style={{ marginBottom: '20px', background: 'rgba(255,255,255,0.03)', width: '50px', height: '50px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      {icon}
+    </div>
+    <h3 style={{ fontSize: '1.3rem', marginBottom: '12px' }}>{title}</h3>
+    <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6' }}>{desc}</p>
+  </div>
+);
 
 const GuideSection = ({ icon, title, desc }) => (
   <div className="glass-panel" style={{ padding: '40px' }}>
