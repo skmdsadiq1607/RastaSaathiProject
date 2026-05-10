@@ -53,9 +53,7 @@ function App() {
         <nav className="glass-nav" style={{ position: 'sticky', top: 0, zIndex: 1000 }}>
           <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '80px', padding: '0 20px' }}>
             <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex', alignItems: 'center' }}>
-              <span style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', fontWeight: '900', letterSpacing: '-0.8px', color: 'white' }}>
-                Rasta<span style={{ color: '#ef4444' }}>Saathi</span>
-              </span>
+              <Logo size={32} />
             </Link>
             
             {/* Desktop Menu */}

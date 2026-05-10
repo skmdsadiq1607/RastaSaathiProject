@@ -21,6 +21,7 @@ const Home = () => {
             animate={{ opacity: 1, scale: 1 }}
             style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '10px 24px', background: 'rgba(255, 255, 255, 0.03)', borderRadius: '100px', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem', marginBottom: '40px' }}
           >
+            <Logo size={18} />
             <span style={{ letterSpacing: '1px', fontWeight: '600' }}>PRECISION EMERGENCY RESPONSE</span>
           </motion.div>
           
