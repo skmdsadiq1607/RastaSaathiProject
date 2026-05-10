@@ -5,71 +5,63 @@ const Logo = ({ size = 32 }) => {
   
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <svg width={240 * scale} height={size} viewBox="0 0 240 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        {/* Glow Filter for the Heartbeat */}
+      <svg width={260 * scale} height={size} viewBox="0 0 260 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* Surgical Glow Filter */}
         <defs>
-          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="1.5" result="blur" />
+          <filter id="neon" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="1" result="blur" />
             <feComposite in="SourceGraphic" in2="blur" operator="over" />
           </filter>
         </defs>
 
-        {/* Hyper-Pulse ECG Line - Weaving through the text */}
+        {/* The Vital Heartbeat - Refined Path */}
         <path 
-          d="M0 20 H15 L18 10 L22 30 L26 20 H70 L75 5 L82 28 L88 15 L94 20 H150 L155 8 L162 30 L168 18 L174 20 H240" 
+          d="M0 20 H30 L35 12 L42 28 L48 20 H90 L95 5 L102 30 L108 15 L114 20 H180 L185 10 L192 28 L198 20 H260" 
           stroke="#ef4444" 
-          strokeWidth="2.5" 
+          strokeWidth="2" 
           strokeLinecap="round" 
           strokeLinejoin="round" 
-          filter="url(#glow)"
+          filter="url(#neon)"
+          style={{ opacity: 0.9 }}
         />
         
-        {/* Rasta - White Heavy Weight */}
+        {/* Rasta - Ultra Bold White */}
         <text 
-          x="12" 
+          x="35" 
           y="24" 
           fill="white" 
           style={{ 
-            fontFamily: 'Inter, system-ui, sans-serif', 
+            fontFamily: 'Outfit, Inter, system-ui, sans-serif', 
             fontSize: '26px', 
             fontWeight: '900', 
             letterSpacing: '-1.5px',
-            textShadow: '0 0 10px rgba(0,0,0,0.5)'
           }}
         >
           Rasta
         </text>
         
-        {/* Saathi - Red Bold with Glow */}
+        {/* Saathi - Ultra Bold Red */}
         <text 
-          x="82" 
+          x="108" 
           y="24" 
           fill="#ef4444" 
           style={{ 
-            fontFamily: 'Inter, system-ui, sans-serif', 
+            fontFamily: 'Outfit, Inter, system-ui, sans-serif', 
             fontSize: '26px', 
             fontWeight: '900', 
-            letterSpacing: '-1px',
-            textShadow: '0 0 15px rgba(239, 68, 68, 0.4)'
+            letterSpacing: '-1.2px',
           }}
         >
           Saathi
         </text>
 
-        {/* Foreground Pulse Accents (Crossing in front of letters) */}
+        {/* High-Contrast Spike Highlights */}
         <path 
-          d="M18 10 L22 30 L26 20" 
+          d="M95 5 L102 30 L108 15" 
           stroke="white" 
-          strokeWidth="1.5" 
+          strokeWidth="1" 
           strokeLinecap="round" 
-          opacity="0.3"
-        />
-        <path 
-          d="M75 5 L82 28 L88 15" 
-          stroke="white" 
-          strokeWidth="1.5" 
-          strokeLinecap="round" 
-          opacity="0.3"
+          opacity="0.4"
         />
       </svg>
     </div>
