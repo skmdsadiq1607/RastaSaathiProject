@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { ShieldAlert, Activity, Navigation, MessageCircle, Send, MapPin } from 'lucide-react';
 import axios from 'axios';
 import GoogleMapReact from 'google-map-react';
@@ -39,6 +40,15 @@ const Dashboard = () => {
   const [selectedHospitalName, setSelectedHospitalName] = useState('');
 
   const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('roadsos_token');
+    if (!token) {
+      navigate('/login');
+    }
+  }, [navigate]);
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
