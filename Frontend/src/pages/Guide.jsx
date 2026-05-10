@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ShieldAlert, Heart, Activity, Map, Phone, AlertTriangle } from 'lucide-react';
+import { ShieldAlert, Heart, Activity, Map, Phone, AlertTriangle, Stethoscope, MessageSquare } from 'lucide-react';
 
 const Guide = () => {
   return (
@@ -28,7 +28,41 @@ const Guide = () => {
           <Step num="1" title="Ensure Safety" desc="Stop your vehicle safely and turn on hazard lights. Check for oncoming traffic." />
           <Step num="2" title="Trigger SOS" desc="Open RastaSaathi and tap the SOS button to alert emergency services and family." />
           <Step num="3" title="Assess Victim" desc="Check if the person is conscious and breathing. Do not move them unless there is fire." />
-          <Step num="4" title="Use AI Medic" desc="Keep the AI Medic chat open for specific first-aid instructions based on injuries." />
+          <Step num="4" title="Consult Medic" desc="Use the floating RastaSaathi Medic for specific first-aid instructions based on the injury." />
+        </div>
+      </div>
+
+      {/* RastaSaathi Medic Section */}
+      <div className="glass-panel" style={{ padding: '60px', marginBottom: '60px', borderLeft: '8px solid #3b82f6', background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, transparent 100%)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '40px' }}>
+          <div style={{ flex: '1', minWidth: '300px' }}>
+            <h2 style={{ marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '15px' }}>
+              <Stethoscope color="#3b82f6" size={32} /> RastaSaathi Medic Assistant
+            </h2>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.6', marginBottom: '25px' }}>
+              Our interactive medical responder is built for high-speed assistance. In a crisis, you don't need to type long descriptions—just pick your situation from our smart database.
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+              <div style={{ display: 'flex', gap: '12px' }}>
+                <div style={{ color: '#3b82f6', fontWeight: '800' }}>✓</div>
+                <div style={{ fontSize: '0.95rem' }}><b>50+ Protocols:</b> Comprehensive guide for every accident scenario.</div>
+              </div>
+              <div style={{ display: 'flex', gap: '12px' }}>
+                <div style={{ color: '#3b82f6', fontWeight: '800' }}>✓</div>
+                <div style={{ fontSize: '0.95rem' }}><b>Quick Dropdown Selection:</b> Zero typing needed for the fastest info.</div>
+              </div>
+              <div style={{ display: 'flex', gap: '12px' }}>
+                <div style={{ color: '#3b82f6', fontWeight: '800' }}>✓</div>
+                <div style={{ fontSize: '0.95rem' }}><b>Multi-Language:</b> Available in Hindi, Telugu, Tamil, Urdu, and English.</div>
+              </div>
+            </div>
+          </div>
+          <div style={{ background: 'rgba(255,255,255,0.03)', padding: '30px', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.05)', textAlign: 'center', flex: '0.4', minWidth: '250px' }}>
+             <div className="sos-pulse" style={{ width: '80px', height: '80px', borderRadius: '50%', background: '#3b82f6', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px' }}>
+               <MessageSquare color="white" size={32} />
+             </div>
+             <div style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.6)' }}>Click the floating stethoscope icon on any page to launch the Medic.</div>
+          </div>
         </div>
       </div>
 
