@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Shield, Zap, Heart, Bell, ChevronRight, Activity, MapPin, Smartphone, BookOpen } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import Logo from '../components/Logo';
 
 const Home = () => {
   const { t } = useLanguage();
@@ -20,7 +21,7 @@ const Home = () => {
             animate={{ opacity: 1, scale: 1 }}
             style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '10px 24px', background: 'rgba(255, 255, 255, 0.03)', borderRadius: '100px', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem', marginBottom: '40px' }}
           >
-            <Activity size={16} color="#ef4444" />
+            <Logo size={16} />
             <span style={{ letterSpacing: '1px', fontWeight: '600' }}>PRECISION EMERGENCY RESPONSE</span>
           </motion.div>
           
@@ -86,34 +87,35 @@ const Home = () => {
           </motion.div>
         </div>
 
-        {/* Feature Showroom */}
-        <div style={{ marginBottom: '140px' }}>
-          <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-            <h2 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '16px' }}>The Core Infrastructure</h2>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>Built on a foundation of speed, intelligence, and reliability.</p>
-          </div>
+        {/* Stats Section */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '40px', marginBottom: '140px' }}>
+          <StatCard number="2,400+" label={t('stats_responders')} />
+          <StatCard number="50+" label={t('stats_protocols')} />
+          <StatCard number="370+" label={t('stats_hospitals')} />
+          <StatCard number="98%" label="SLA Success" />
+        </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
-            <FeatureCard 
-              icon={<Zap color="#ef4444" size={32} />} 
-              title="Instant SOS" 
-              desc="A single tap triggers a chain reaction: your live location is captured, and alerts are dispatched via WhatsApp/SMS to all emergency contacts in under 1 second." 
-            />
-            <FeatureCard 
-              icon={<Shield color="#3b82f6" size={32} />} 
-              title="AI Medic Assistant" 
-              desc="Get life-saving first-aid guidance instantly. Our AI models analyze the situation and provide step-by-step instructions while help is on the way." 
-            />
-            <FeatureCard 
-              icon={<Bell color="#10b981" size={32} />} 
-              title="Trauma Center Routing" 
-              desc="We've mapped 370+ hospitals. The system automatically finds the nearest facility that is actually equipped for your specific medical needs." 
-            />
-          </div>
+        {/* Features Grid */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px', marginBottom: '140px' }}>
+          <FeatureCard 
+            icon={<Logo size={32} />}
+            title={t('feature_ai_title')}
+            desc={t('feature_ai_desc')}
+          />
+          <FeatureCard 
+            icon={<MapPin size={32} color="#3b82f6" />}
+            title={t('feature_route_title')}
+            desc={t('feature_route_desc')}
+          />
+          <FeatureCard 
+            icon={<Smartphone size={32} color="#10b981" />}
+            title={t('feature_alert_title')}
+            desc={t('feature_alert_desc')}
+          />
         </div>
 
         {/* How It Works */}
-        <div className="glass-panel" style={{ padding: '80px 40px', textAlign: 'center', marginBottom: '100px' }}>
+        <div className="glass-panel" style={{ padding: '80px 40px', textAlign: 'center' }}>
           <h2 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '60px' }}>3 Steps to Safety</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '40px' }}>
             <div>
@@ -152,17 +154,17 @@ const FeatureCard = ({ icon, title, desc }) => (
   </motion.div>
 );
 
-const StatCard = ({ icon, title, label }) => (
+const StatCard = ({ number, label }) => (
   <motion.div 
-    whileHover={{ y: -10, scale: 1.02 }}
-    className="glass-panel" 
-    style={{ padding: '50px 40px', textAlign: 'center', border: '1px solid rgba(255,255,255,0.05)', marginBottom: '100px' }}
+    whileHover={{ y: -5 }}
+    style={{ textAlign: 'center' }}
   >
-    <div style={{ marginBottom: '24px', background: 'rgba(255,255,255,0.03)', width: '70px', height: '70px', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px' }}>
-      {icon}
+    <div style={{ fontSize: '3.5rem', fontWeight: '900', marginBottom: '8px', background: 'linear-gradient(135deg, #fff 0%, #64748b 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+      {number}
     </div>
-    <div style={{ fontSize: '2.5rem', fontWeight: '900', marginBottom: '8px', fontFamily: 'var(--font-heading)' }}>{title}</div>
-    <div style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', fontWeight: '600', letterSpacing: '1px', textTransform: 'uppercase' }}>{label}</div>
+    <div style={{ color: 'var(--text-secondary)', fontWeight: '600', letterSpacing: '1px', textTransform: 'uppercase', fontSize: '0.8rem' }}>
+      {label}
+    </div>
   </motion.div>
 );
 

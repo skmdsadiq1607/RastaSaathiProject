@@ -1,14 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, X, Send, Stethoscope, ShieldAlert } from 'lucide-react';
+import { MessageSquare, X, Send, ShieldAlert } from 'lucide-react';
 import EMERGENCIES from '../data/emergencies.json';
 import { useLanguage } from '../context/LanguageContext';
+import Logo from './Logo';
 
 const PublicChat = () => {
   const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { text: "Emergency? Type your situation (e.g., 'bleeding', 'fracture') for instant first-aid.", isBot: true, data: null }
+    { text: t('medic_welcome'), isBot: true, data: null }
   ]);
   const [input, setInput] = useState('');
   const chatEndRef = useRef(null);
@@ -66,7 +67,7 @@ const PublicChat = () => {
             {/* Header */}
             <div style={{ background: 'rgba(239, 68, 68, 0.1)', padding: '15px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <Stethoscope size={20} color="#ef4444" className="sos-pulse-small" />
+                <Logo size={20} />
                 <span style={{ fontWeight: '700', letterSpacing: '1px' }}>{t('medic_title')}</span>
               </div>
               <X size={20} onClick={() => setIsOpen(false)} style={{ cursor: 'pointer' }} />
@@ -95,19 +96,19 @@ const PublicChat = () => {
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
                         <ShieldAlert size={16} color={m.data.severity === 'Critical' ? '#ef4444' : '#f59e0b'} />
                         <span style={{ fontSize: '0.75rem', fontWeight: '800', color: m.data.severity === 'Critical' ? '#ef4444' : '#f59e0b', textTransform: 'uppercase' }}>
-                          {m.data.severity} SEVERITY
+                          {m.data.severity} {t('severity_label')}
                         </span>
                       </div>
 
                       <div style={{ marginBottom: '12px' }}>
-                        <div style={{ fontSize: '0.85rem', fontWeight: '700', color: '#10b981', marginBottom: '5px' }}>✅ FIRST AID:</div>
+                        <div style={{ fontSize: '0.85rem', fontWeight: '700', color: '#10b981', marginBottom: '5px' }}>✅ {t('first_aid_label')}:</div>
                         {m.data.firstAid.map((step, si) => (
                           <div key={si} style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.8)', marginBottom: '3px' }}>• {step}</div>
                         ))}
                       </div>
 
                       <div>
-                        <div style={{ fontSize: '0.85rem', fontWeight: '700', color: '#ef4444', marginBottom: '5px' }}>❌ AVOID:</div>
+                        <div style={{ fontSize: '0.85rem', fontWeight: '700', color: '#ef4444', marginBottom: '5px' }}>❌ {t('avoid_label')}:</div>
                         {m.data.avoid.map((step, si) => (
                           <div key={si} style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.8)', marginBottom: '3px' }}>• {step}</div>
                         ))}
@@ -134,7 +135,7 @@ const PublicChat = () => {
                 }}
                 style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '10px', color: 'white', fontSize: '0.85rem', cursor: 'pointer' }}
               >
-                <option value="">-- Select Emergency Type --</option>
+                <option value="">{t('select_emergency')}</option>
                 {EMERGENCIES.map(e => (
                   <option key={e.id} value={e.title} style={{ background: '#020617' }}>{e.title}</option>
                 ))}
@@ -146,7 +147,7 @@ const PublicChat = () => {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                  placeholder="Or describe situation..."
+                  placeholder={t('describe_situation')}
                   style={{ flex: 1, background: 'rgba(255,255,255,0.05)', border: 'none', borderRadius: '8px', padding: '12px', color: 'white', fontSize: '0.9rem' }}
                 />
                 <button onClick={() => handleSend()} style={{ background: '#ef4444', border: 'none', borderRadius: '8px', padding: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
