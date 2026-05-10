@@ -5,7 +5,7 @@ const { claudeKeyManager, geminiKeyManager } = require('../utils/apiKeyManager')
 const { AppError } = require('../utils/AppError');
 const { logger } = require('../utils/logger');
 
-async function callClaudeWithRetry({ system, user, maxTokens = 600, retries = 2 }) {
+async function callClaudeWithRetry({ system, user, maxTokens = 600, retries = 1 }) {
   let attempt = 0;
   while (attempt <= retries) {
     const key = claudeKeyManager.getCurrentKey();
@@ -36,7 +36,7 @@ async function callClaudeWithRetry({ system, user, maxTokens = 600, retries = 2 
   throw new Error('Exhausted all Claude API retries');
 }
 
-async function callGeminiWithRetry({ system, user, retries = 2 }) {
+async function callGeminiWithRetry({ system, user, retries = 1 }) {
   let attempt = 0;
   while (attempt <= retries) {
     const key = geminiKeyManager.getCurrentKey();
