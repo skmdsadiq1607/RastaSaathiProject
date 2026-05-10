@@ -33,7 +33,7 @@ const Contact = () => {
             </div>
             <div>
               <div style={{ fontWeight: '700' }}>Call Us</div>
-              <div style={{ color: 'var(--text-secondary)' }}>+91 93925 62340</div>
+              <div style={{ color: 'var(--text-secondary)' }}>+91 94419 21812</div>
             </div>
           </div>
 
