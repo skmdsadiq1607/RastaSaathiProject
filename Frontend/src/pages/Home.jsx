@@ -87,14 +87,6 @@ const Home = () => {
           </motion.div>
         </div>
 
-        {/* Stats Section */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '40px', marginBottom: '140px' }}>
-          <StatCard number="2,400+" label={t('stats_responders')} />
-          <StatCard number="50+" label={t('stats_protocols')} />
-          <StatCard number="370+" label={t('stats_hospitals')} />
-          <StatCard number="98%" label="SLA Success" />
-        </div>
-
         {/* Features Grid */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px', marginBottom: '140px' }}>
           <FeatureCard 
@@ -151,20 +143,6 @@ const FeatureCard = ({ icon, title, desc }) => (
     </div>
     <h3 style={{ fontSize: '1.5rem', marginBottom: '16px' }}>{title}</h3>
     <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6' }}>{desc}</p>
-  </motion.div>
-);
-
-const StatCard = ({ number, label }) => (
-  <motion.div 
-    whileHover={{ y: -5 }}
-    style={{ textAlign: 'center' }}
-  >
-    <div style={{ fontSize: '3.5rem', fontWeight: '900', marginBottom: '8px', background: 'linear-gradient(135deg, #fff 0%, #64748b 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-      {number}
-    </div>
-    <div style={{ color: 'var(--text-secondary)', fontWeight: '600', letterSpacing: '1px', textTransform: 'uppercase', fontSize: '0.8rem' }}>
-      {label}
-    </div>
   </motion.div>
 );
 
