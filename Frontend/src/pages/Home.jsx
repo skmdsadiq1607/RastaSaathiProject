@@ -28,10 +28,10 @@ const Home = () => {
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2 }}
-            style={{ fontSize: 'clamp(3rem, 10vw, 5.5rem)', fontWeight: '900', lineHeight: '0.95', marginBottom: '32px', letterSpacing: '-2px' }}
+            style={{ fontSize: 'clamp(3.5rem, 10vw, 5.5rem)', fontWeight: '900', lineHeight: '1.1', marginBottom: '32px', letterSpacing: '-2px' }}
           >
-            {t('hero_title').split('.')[0]}<br />
-            <span className="text-gradient-red" style={{ filter: 'drop-shadow(0 0 20px rgba(239, 68, 68, 0.3))' }}>{t('hero_title').split('.')[1] || '.'}</span>
+            {t('hero_title').replace('.', '')}
+            <span style={{ color: '#ef4444' }}>.</span>
           </motion.h1>
           
           <motion.p 
@@ -49,10 +49,31 @@ const Home = () => {
             transition={{ delay: 0.6 }}
             style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}
           >
-            <Link to="/guide" className="premium-button sos-pulse" style={{ padding: '20px 50px', fontSize: '1.2rem', display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <Link to="/guide" className="premium-button sos-pulse" style={{ 
+              padding: '20px 40px', 
+              fontSize: '1.2rem', 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '12px',
+              textDecoration: 'none',
+              background: 'linear-gradient(135deg, #ef4444 0%, #991b1b 100%)',
+              color: 'white',
+              borderRadius: '12px',
+              fontWeight: '700',
+              boxShadow: '0 10px 20px rgba(239, 68, 68, 0.3)'
+            }}>
               <BookOpen size={20} /> {t('view_guide')}
             </Link>
-            <Link to="/about" className="btn btn-outline" style={{ padding: '20px 50px', fontSize: '1.2rem', border: '1px solid rgba(255,255,255,0.1)', color: 'white', textDecoration: 'none' }}>
+            <Link to="/about" className="btn btn-outline" style={{ 
+              padding: '20px 40px', 
+              fontSize: '1.2rem', 
+              border: '1px solid rgba(255,255,255,0.1)', 
+              color: 'white', 
+              textDecoration: 'none',
+              borderRadius: '12px',
+              background: 'rgba(255,255,255,0.03)',
+              fontWeight: '600'
+            }}>
               {t('vision')}
             </Link>
           </motion.div>
