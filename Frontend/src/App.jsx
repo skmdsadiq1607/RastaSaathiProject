@@ -141,11 +141,8 @@ function App() {
         <footer style={{ borderTop: '1px solid var(--border-glass)', padding: '60px 0', marginTop: 'auto', background: 'rgba(2, 6, 23, 0.5)', textAlign: 'center' }}>
           <div className="container">
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <Shield color="#ef4444" size={24} />
-                <span style={{ fontFamily: 'var(--font-heading)', fontWeight: '700', fontSize: '1.2rem', color: 'white' }}>
-                  Rasta<span style={{ color: '#ef4444' }}>Saathi</span>
-                </span>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Logo size={24} />
               </div>
               
               <div style={{ maxWidth: '600px' }}>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Shield } from 'lucide-react';
 
 const Logo = ({ size = 28 }) => {
   return (
@@ -7,6 +8,7 @@ const Logo = ({ size = 28 }) => {
       style={{ 
         display: 'flex', 
         alignItems: 'center', 
+        gap: '10px',
         fontFamily: 'var(--font-heading)',
         fontSize: `${size}px`,
         fontWeight: '900',
@@ -14,7 +16,10 @@ const Logo = ({ size = 28 }) => {
         userSelect: 'none'
       }}
     >
-      <span style={{ color: 'white' }}>Rasta</span><span style={{ color: '#ef4444' }}>Saathi</span>
+      <Shield color="#ef4444" size={size * 0.85} strokeWidth={2.5} />
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <span style={{ color: 'white' }}>Rasta</span><span style={{ color: '#ef4444' }}>Saathi</span>
+      </div>
     </div>
   );
 };
