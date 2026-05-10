@@ -1,3 +1,6 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Shield, Zap, Heart, Bell, ChevronRight, Activity, MapPin, Smartphone, BookOpen } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 

@@ -1,3 +1,6 @@
+import React, { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MessageSquare, X, Send, Stethoscope, ShieldAlert } from 'lucide-react';
 import EMERGENCIES from '../data/emergencies.json';
 import { useLanguage } from '../context/LanguageContext';
 
