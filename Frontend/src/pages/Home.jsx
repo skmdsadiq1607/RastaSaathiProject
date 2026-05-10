@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Shield, Zap, Heart, Bell, ChevronRight, Activity, MapPin, Smartphone } from 'lucide-react';
+import { Shield, Zap, Heart, Bell, ChevronRight, Activity, MapPin, Smartphone, BookOpen } from 'lucide-react';
 
 const Home = () => {
   return (
@@ -47,8 +47,8 @@ const Home = () => {
             transition={{ delay: 0.6 }}
             style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}
           >
-            <Link to="/dashboard" className="premium-button sos-pulse" style={{ padding: '20px 50px', fontSize: '1.2rem', display: 'flex', alignItems: 'center', gap: '12px' }}>
-              Launch SOS Demo <ChevronRight size={20} />
+            <Link to="/guide" className="premium-button sos-pulse" style={{ padding: '20px 50px', fontSize: '1.2rem', display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <BookOpen size={20} /> View Emergency Guide
             </Link>
             <Link to="/about" className="btn btn-outline" style={{ padding: '20px 50px', fontSize: '1.2rem', border: '1px solid rgba(255,255,255,0.1)', color: 'white', textDecoration: 'none' }}>
               Our Vision
