@@ -13,6 +13,7 @@ import Profile from './pages/Profile';
 import Contact from './pages/Contact';
 import Guide from './pages/Guide';
 import PublicChat from './components/PublicChat';
+import LanguageSwitcher from './components/LanguageSwitcher';
 import { useLanguage } from './context/LanguageContext';
 
 function App() {
@@ -68,17 +69,7 @@ function App() {
                 <Link to="/dashboard" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '600' }}>{t('dashboard')}</Link>
               )}
 
-              <select 
-                value={lang} 
-                onChange={(e) => setLang(e.target.value)}
-                style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'white', borderRadius: '5px', padding: '5px' }}
-              >
-                <option value="en" style={{background:'#020617'}}>English</option>
-                <option value="hi" style={{background:'#020617'}}>हिन्दी</option>
-                <option value="te" style={{background:'#020617'}}>తెలుగు</option>
-                <option value="ta" style={{background:'#020617'}}>தமிழ்</option>
-                <option value="ur" style={{background:'#020617'}}>اردو</option>
-              </select>
+              <LanguageSwitcher />
               
               {!isLoggedIn ? (
                 <Link to="/login" className="btn btn-primary" style={{ padding: '8px 20px' }}>{t('login')}</Link>
