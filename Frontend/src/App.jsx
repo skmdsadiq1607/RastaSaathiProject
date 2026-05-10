@@ -90,13 +90,27 @@ function App() {
           </AnimatePresence>
         </main>
         
-        <footer style={{ borderTop: '1px solid var(--border-glass)', padding: '40px 0', marginTop: 'auto', background: 'var(--bg-primary)' }}>
-          <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <Shield color="#ef4444" size={24} />
-              <span style={{ fontFamily: 'var(--font-heading)', fontWeight: '700' }}>RastaSaathi</span>
+        <footer style={{ borderTop: '1px solid var(--border-glass)', padding: '60px 0', marginTop: 'auto', background: 'rgba(2, 6, 23, 0.5)', textAlign: 'center' }}>
+          <div className="container">
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <Shield color="#ef4444" size={24} />
+                <span style={{ fontFamily: 'var(--font-heading)', fontWeight: '700', fontSize: '1.2rem' }}>RastaSaathi</span>
+              </div>
+              
+              <div style={{ maxWidth: '600px' }}>
+                <p style={{ color: 'var(--text-primary)', fontWeight: '600', marginBottom: '8px', fontSize: '1.1rem' }}>
+                  Made with ❤️ by Team-RastaSaathi
+                </p>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.6', letterSpacing: '0.5px' }}>
+                  Dr.Lakshmi | Sadiq | Krishna | Chakravarthi | Hasini
+                </p>
+              </div>
+
+              <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.75rem', marginTop: '20px' }}>
+                © 2026 RastaSaathi. IIT Madras Road Safety Hackathon Project.
+              </p>
             </div>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem' }}>© 2026 RastaSaathi. IIT Madras Road Safety Hackathon.</p>
           </div>
         </footer>
       </div>
