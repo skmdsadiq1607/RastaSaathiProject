@@ -1,15 +1,25 @@
 import React from 'react';
 
-const Logo = ({ size = 32, showText = true }) => {
-  // Size multiplier to keep everything proportional
+const Logo = ({ size = 32 }) => {
+  // Size multiplier for scaling
   const scale = size / 32;
   
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <svg width={showText ? 180 * scale : size} height={size} viewBox={showText ? "0 0 180 32" : "0 0 32 32"} fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width={220 * scale} height={size} viewBox="0 0 220 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* Continuous ECG Pulse Line travelling through the text */}
+        <path 
+          d="M0 20H20L24 14L28 26L32 20H75L79 10L85 30L91 20H150L154 12L160 28L164 20H220" 
+          stroke="#ef4444" 
+          strokeWidth="1.5" 
+          strokeLinecap="round" 
+          strokeLinejoin="round" 
+          style={{ opacity: 0.6 }}
+        />
+        
         {/* Rasta - White Bold */}
         <text 
-          x="0" 
+          x="10" 
           y="24" 
           fill="white" 
           style={{ 
@@ -22,29 +32,28 @@ const Logo = ({ size = 32, showText = true }) => {
           Rasta
         </text>
         
-        {/* Saathi - Red Medium */}
+        {/* Saathi - Red Bold */}
         <text 
-          x="68" 
+          x="78" 
           y="24" 
           fill="#ef4444" 
           style={{ 
             fontFamily: 'Inter, system-ui, sans-serif', 
             fontSize: '24px', 
-            fontWeight: '500', 
+            fontWeight: '900', 
             letterSpacing: '-0.5px' 
           }}
         >
           Saathi
         </text>
-        
-        {/* Subtle Heart Pulse Accent flowing from the 'i' */}
+
+        {/* Highlight Pulse Spikes (Brighter Red for the spikes themselves) */}
         <path 
-          d="M152 18H160L163 10L167 26L170 18H180" 
+          d="M79 10L85 30L91 20" 
           stroke="#ef4444" 
           strokeWidth="2.5" 
           strokeLinecap="round" 
           strokeLinejoin="round" 
-          style={{ opacity: 0.8 }}
         />
       </svg>
     </div>
