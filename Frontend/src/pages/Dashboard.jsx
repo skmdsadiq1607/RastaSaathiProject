@@ -77,7 +77,9 @@ const Dashboard = () => {
           headers: { Authorization: `Bearer ${token}` }
         });
 
-        const nearest = hospRes.data?.data?.ranked?.[0];
+        const nearestResult = hospRes.data?.data?.ranked?.[0];
+        const nearest = nearestResult?.hospital;
+        
         if (nearest) {
           const hLoc = { 
             lat: nearest.location.coordinates[1], 
