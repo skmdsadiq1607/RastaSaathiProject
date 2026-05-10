@@ -1,23 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, X, Send, LifeBuoy } from 'lucide-react';
-
-const KNOWLEDGE_BASE = {
-  bleeding: "Apply firm, direct pressure with a clean cloth. Do not remove the cloth. Elevate the wound.",
-  burn: "Run cool (not cold) water over the burn for 10-20 minutes. Do not use ice or butter. Cover loosely.",
-  choking: "Perform the Heimlich maneuver: Stand behind them, wrap arms around waist, and give quick upward thrusts.",
-  fracture: "Immobilize the area. Do not try to realign the bone. Apply a cold pack to reduce swelling.",
-  fainting: "Lay the person on their back and elevate their legs about 12 inches. Loosen tight clothing.",
-  snake: "Keep the person still and calm. Keep the bite area below heart level. Do not use a tourniquet.",
-  poison: "Identify the substance if possible. Do not induce vomiting unless told by a professional. Call emergency services.",
-  seizure: "Clear the area of hard or sharp objects. Do not restrain the person. Turn them onto their side after it ends.",
-  default: "I understand this is an emergency. Please type 'Bleeding', 'Burn', 'Choking', 'Snake bite', or 'Fracture' for specific steps, or tap the SOS button for immediate help."
-};
+import EMERGENCIES from '../data/emergencies.json';
 
 const PublicChat = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { text: "Emergency? Type your situation (e.g., 'bleeding', 'burn') for instant first-aid.", isBot: true }
+    { text: "Emergency? Type your situation (e.g., 'bleeding', 'fracture') for instant first-aid.", isBot: true, data: null }
   ]);
   const [input, setInput] = useState('');
   const chatEndRef = useRef(null);
@@ -34,20 +20,29 @@ const PublicChat = () => {
     if (!input.trim()) return;
 
     const userMsg = input.toLowerCase();
-    const newMessages = [...messages, { text: input, isBot: false }];
+    const newMessages = [...messages, { text: input, isBot: false, data: null }];
     setMessages(newMessages);
     setInput('');
 
-    // Logic for Keyword Matching
     setTimeout(() => {
-      let response = KNOWLEDGE_BASE.default;
-      for (const key in KNOWLEDGE_BASE) {
-        if (userMsg.includes(key)) {
-          response = KNOWLEDGE_BASE[key];
-          break;
-        }
+      let matched = EMERGENCIES.find(e => 
+        e.title.toLowerCase().includes(userMsg) || 
+        e.keywords.some(k => userMsg.includes(k))
+      );
+
+      if (matched) {
+        setMessages(prev => [...prev, { 
+          text: `Protocol for ${matched.title}:`, 
+          isBot: true, 
+          data: matched 
+        }]);
+      } else {
+        setMessages(prev => [...prev, { 
+          text: "I understand this is an emergency. Please type words like 'Bleeding', 'Burn', 'Choking', or 'Fracture'. Always call 108 immediately.", 
+          isBot: true, 
+          data: null 
+        }]);
       }
-      setMessages(prev => [...prev, { text: response, isBot: true }]);
     }, 500);
   };
 
@@ -60,13 +55,13 @@ const PublicChat = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
             className="glass-panel"
-            style={{ width: '350px', height: '450px', marginBottom: '20px', display: 'flex', flexDirection: 'column', overflow: 'hidden', border: '1px solid rgba(239, 68, 68, 0.3)' }}
+            style={{ width: '380px', height: '550px', marginBottom: '20px', display: 'flex', flexDirection: 'column', overflow: 'hidden', border: '1px solid rgba(239, 68, 68, 0.3)', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}
           >
             {/* Header */}
             <div style={{ background: 'rgba(239, 68, 68, 0.1)', padding: '15px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <LifeBuoy size={20} color="#ef4444" />
-                <span style={{ fontWeight: '700' }}>Instant Aid</span>
+                <LifeBuoy size={20} color="#ef4444" className="sos-pulse-small" />
+                <span style={{ fontWeight: '700', letterSpacing: '1px' }}>INSTANT AID RESPONDER</span>
               </div>
               <X size={20} onClick={() => setIsOpen(false)} style={{ cursor: 'pointer' }} />
             </div>
@@ -74,32 +69,65 @@ const PublicChat = () => {
             {/* Messages */}
             <div style={{ flex: 1, padding: '20px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '15px' }}>
               {messages.map((m, i) => (
-                <div key={i} style={{ 
-                  alignSelf: m.isBot ? 'flex-start' : 'flex-end',
-                  background: m.isBot ? 'rgba(255,255,255,0.05)' : '#ef4444',
-                  padding: '12px 16px',
-                  borderRadius: m.isBot ? '0 15px 15px 15px' : '15px 0 15px 15px',
-                  maxWidth: '85%',
-                  fontSize: '0.9rem',
-                  lineHeight: '1.4'
-                }}>
-                  {m.text}
+                <div key={i} style={{ alignSelf: m.isBot ? 'flex-start' : 'flex-end', maxWidth: '90%' }}>
+                  <div style={{ 
+                    background: m.isBot ? 'rgba(255,255,255,0.05)' : '#ef4444',
+                    padding: '12px 16px',
+                    borderRadius: m.isBot ? '0 15px 15px 15px' : '15px 0 15px 15px',
+                    fontSize: '0.9rem',
+                    lineHeight: '1.4'
+                  }}>
+                    {m.text}
+                  </div>
+                  
+                  {m.data && (
+                    <motion.div 
+                      initial={{ opacity: 0, x: -10 }} 
+                      animate={{ opacity: 1, x: 0 }}
+                      style={{ marginTop: '10px', background: 'rgba(0,0,0,0.2)', padding: '15px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
+                        <ShieldAlert size={16} color={m.data.severity === 'Critical' ? '#ef4444' : '#f59e0b'} />
+                        <span style={{ fontSize: '0.75rem', fontWeight: '800', color: m.data.severity === 'Critical' ? '#ef4444' : '#f59e0b', textTransform: 'uppercase' }}>
+                          {m.data.severity} SEVERITY
+                        </span>
+                      </div>
+
+                      <div style={{ marginBottom: '12px' }}>
+                        <div style={{ fontSize: '0.85rem', fontWeight: '700', color: '#10b981', marginBottom: '5px' }}>✅ FIRST AID:</div>
+                        {m.data.firstAid.map((step, si) => (
+                          <div key={si} style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.8)', marginBottom: '3px' }}>• {step}</div>
+                        ))}
+                      </div>
+
+                      <div>
+                        <div style={{ fontSize: '0.85rem', fontWeight: '700', color: '#ef4444', marginBottom: '5px' }}>❌ AVOID:</div>
+                        {m.data.avoid.map((step, si) => (
+                          <div key={si} style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.8)', marginBottom: '3px' }}>• {step}</div>
+                        ))}
+                      </div>
+
+                      <div style={{ marginTop: '15px', paddingTop: '10px', borderTop: '1px solid rgba(255,255,255,0.1)', textAlign: 'center' }}>
+                        <a href="tel:108" style={{ color: '#ef4444', textDecoration: 'none', fontWeight: '800', fontSize: '1rem' }}>📞 CALL 108 NOW</a>
+                      </div>
+                    </motion.div>
+                  )}
                 </div>
               ))}
               <div ref={chatEndRef} />
             </div>
 
             {/* Input */}
-            <div style={{ padding: '15px', borderTop: '1px solid rgba(255,255,255,0.1)', display: 'flex', gap: '10px' }}>
+            <div style={{ padding: '15px', borderTop: '1px solid rgba(255,255,255,0.1)', display: 'flex', gap: '10px', background: 'rgba(0,0,0,0.2)' }}>
               <input 
                 type="text" 
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                placeholder="Type 'bleeding', 'snake'..."
-                style={{ flex: 1, background: 'rgba(255,255,255,0.05)', border: 'none', borderRadius: '8px', padding: '10px', color: 'white', fontSize: '0.9rem' }}
+                placeholder="Describe situation..."
+                style={{ flex: 1, background: 'rgba(255,255,255,0.05)', border: 'none', borderRadius: '8px', padding: '12px', color: 'white', fontSize: '0.9rem' }}
               />
-              <button onClick={handleSend} style={{ background: '#ef4444', border: 'none', borderRadius: '8px', padding: '10px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <button onClick={handleSend} style={{ background: '#ef4444', border: 'none', borderRadius: '8px', padding: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Send size={18} color="white" />
               </button>
             </div>
@@ -112,8 +140,8 @@ const PublicChat = () => {
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(!isOpen)}
         style={{ 
-          width: '60px', 
-          height: '60px', 
+          width: '65px', 
+          height: '65px', 
           borderRadius: '50%', 
           background: '#ef4444', 
           display: 'flex', 
@@ -121,10 +149,14 @@ const PublicChat = () => {
           justifyContent: 'center', 
           cursor: 'pointer',
           boxShadow: '0 8px 24px rgba(239, 68, 68, 0.4)',
-          margin: '0 auto'
+          margin: '0 auto',
+          position: 'relative'
         }}
       >
         {isOpen ? <X color="white" /> : <MessageSquare color="white" />}
+        {!isOpen && (
+           <div style={{ position: 'absolute', top: '-5px', right: '-5px', background: 'white', color: '#ef4444', width: '24px', height: '24px', borderRadius: '50%', fontSize: '0.7rem', fontWeight: '900', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 5px rgba(0,0,0,0.2)' }}>AID</div>
+        )}
       </motion.div>
     </div>
   );
