@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Shield, Zap, Heart, Bell, ChevronRight, Activity, MapPin, Smartphone, BookOpen } from 'lucide-react';
+import { Shield, MapPin, Smartphone, BookOpen } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import Logo from '../components/Logo';
 
@@ -96,18 +96,18 @@ const Home = () => {
             style={{ textAlign: 'center', marginBottom: '80px' }}
           >
             <h2 style={{ fontSize: '3rem', fontWeight: '900', marginBottom: '20px' }}>
-              3 Steps to <span style={{ color: '#ef4444' }}>Safety</span>
+              {t('journey_title')}
             </h2>
             <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', maxWidth: '700px', margin: '0 auto' }}>
-              A precision-engineered orchestration of technology and medical expertise.
+              {t('journey_sub')}
             </p>
           </motion.div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px' }}>
             {[
-              { num: '01', title: 'Trigger SOS', desc: 'Tap the emergency button to start the protocol. We capture precise GPS coordinates and network triage data.' },
-              { num: '02', title: 'AI Assessment', desc: 'Our medical engine identifies injury severity and hospital needs using real-time inputs.' },
-              { num: '03', title: 'Rescue Commences', desc: 'The nearest hospital is alerted, emergency contacts are notified via WhatsApp, and navigation starts instantly.' }
+              { num: '01', title: t('step1_title'), desc: t('step1_desc') },
+              { num: '02', title: t('step2_title'), desc: t('step2_desc') },
+              { num: '03', title: t('step3_title'), desc: t('step3_desc') }
             ].map((step, idx) => (
               <motion.div
                 key={idx}
