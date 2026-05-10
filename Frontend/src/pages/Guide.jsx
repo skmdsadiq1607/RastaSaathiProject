@@ -32,6 +32,30 @@ const Guide = () => {
         </div>
       </div>
 
+      {/* Setup Demo Alerts */}
+      <div className="glass-panel" style={{ padding: '60px', marginBottom: '60px', borderLeft: '8px solid #10b981' }}>
+        <h2 style={{ marginBottom: '40px', display: 'flex', alignItems: 'center', gap: '15px' }}>
+          <Phone color="#10b981" size={32} /> Setup Demo Alerts (Crucial for Judges)
+        </h2>
+        <p style={{ color: 'var(--text-secondary)', marginBottom: '30px' }}>
+          To receive real-time SOS alerts on your phone during the demonstration, follow these 3 steps:
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '30px' }}>
+          <div style={{ background: 'rgba(255,255,255,0.03)', padding: '24px', borderRadius: '12px' }}>
+            <div style={{ fontWeight: '700', marginBottom: '10px' }}>1. Save Number</div>
+            <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Save <b>+1 415 523 8886</b> to your contacts as "RastaSaathi Alerts".</div>
+          </div>
+          <div style={{ background: 'rgba(255,255,255,0.03)', padding: '24px', borderRadius: '12px' }}>
+            <div style={{ fontWeight: '700', marginBottom: '10px' }}>2. Send Join Code</div>
+            <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Send the WhatsApp message <b>join <span style={{color:'#10b981'}}>glass-simple</span></b> to that number.</div>
+          </div>
+          <div style={{ background: 'rgba(255,255,255,0.03)', padding: '24px', borderRadius: '12px' }}>
+            <div style={{ fontWeight: '700', marginBottom: '10px' }}>3. Add Your Phone</div>
+            <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>In the App, go to <b>Profile</b> and add your phone number with country code.</div>
+          </div>
+        </div>
+      </div>
+
       {/* First Aid Cards */}
       <h2 style={{ textAlign: 'center', marginBottom: '40px', fontSize: '2.5rem' }}>First-Aid Quick Reference</h2>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
