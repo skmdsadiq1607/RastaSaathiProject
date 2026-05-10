@@ -11,6 +11,7 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import Contact from './pages/Contact';
+import Guide from './pages/Guide';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('roadsos_token'));
@@ -57,6 +58,7 @@ function App() {
             <div className="desktop-menu" style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
               <Link to="/" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: '500' }}>Home</Link>
               <Link to="/about" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: '500' }}>About</Link>
+              <Link to="/guide" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: '500' }}>Guide</Link>
               <Link to="/contact" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: '500' }}>Contact</Link>
               
               {isLoggedIn && (
@@ -92,6 +94,7 @@ function App() {
                 <div style={{ display: 'flex', flexDirection: 'column', padding: '20px', gap: '20px', textAlign: 'center' }}>
                   <Link to="/" onClick={() => setIsMenuOpen(false)} style={{ color: 'white', textDecoration: 'none', fontSize: '1.2rem' }}>Home</Link>
                   <Link to="/about" onClick={() => setIsMenuOpen(false)} style={{ color: 'white', textDecoration: 'none', fontSize: '1.2rem' }}>About</Link>
+                  <Link to="/guide" onClick={() => setIsMenuOpen(false)} style={{ color: 'white', textDecoration: 'none', fontSize: '1.2rem' }}>Guide</Link>
                   <Link to="/contact" onClick={() => setIsMenuOpen(false)} style={{ color: 'white', textDecoration: 'none', fontSize: '1.2rem' }}>Contact</Link>
                   {isLoggedIn ? (
                     <>
@@ -119,6 +122,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
+              <Route path="/guide" element={<Guide />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
