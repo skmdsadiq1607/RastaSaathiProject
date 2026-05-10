@@ -149,9 +149,24 @@ const Dashboard = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="container"
-      style={{ paddingTop: '40px', paddingBottom: '80px' }}
+      style={{ paddingTop: '20px', paddingBottom: '40px' }}
     >
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 400px', gap: '30px' }}>
+      <div className="dashboard-grid">
+        <style>{`
+          .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 20px;
+          }
+          @media (max-width: 1024px) {
+            .dashboard-grid {
+              grid-template-columns: 1fr;
+            }
+            .sidebar-chat {
+              height: 500px !important;
+            }
+          }
+        `}</style>
         
         <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
           
@@ -223,7 +238,7 @@ const Dashboard = () => {
         </div>
 
         {/* Sidebar / AI Chatbot */}
-        <div className="glass-panel" style={{ padding: '24px', display: 'flex', flexDirection: 'column', height: '600px' }}>
+        <div className="glass-panel sidebar-chat" style={{ padding: '24px', display: 'flex', flexDirection: 'column', height: '600px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', borderBottom: '1px solid var(--border-glass)', paddingBottom: '16px', marginBottom: '16px' }}>
             <div style={{ background: 'rgba(16, 185, 129, 0.2)', padding: '8px', borderRadius: '50%' }}>
               <MessageCircle color="#10b981" />

@@ -42,36 +42,31 @@ function App() {
         <div className="ambient-glow glow-blue"></div>
         
         <nav className="glass-nav">
-          <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '80px' }}>
+          <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '80px', flexWrap: 'wrap', padding: '10px 20px' }}>
             <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex', alignItems: 'center', gap: '10px' }}>
               <Shield color="#ef4444" size={32} />
-              <span style={{ fontFamily: 'var(--font-heading)', fontSize: '1.5rem', fontWeight: '800', letterSpacing: '-0.5px' }}>
+              <span style={{ fontFamily: 'var(--font-heading)', fontSize: '1.2rem', fontWeight: '800', letterSpacing: '-0.5px' }}>
                 Rasta<span style={{ color: '#ef4444' }}>Saathi</span>
               </span>
             </Link>
             
-            <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-              <Link to="/" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: '500' }}>Home</Link>
-              <Link to="/about" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: '500' }}>About</Link>
-              <div style={{ width: '1px', height: '24px', background: 'var(--border-glass)', margin: '0 10px' }}></div>
-              
+            <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+              {isLoggedIn && (
+                <>
+                  <Link to="/dashboard" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.8rem' }}>
+                    <LayoutDashboard size={16} /> Dash
+                  </Link>
+                  <Link to="/profile" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.8rem' }}>
+                    <User size={16} /> Prof
+                  </Link>
+                </>
+              )}
               {!isLoggedIn ? (
-                <>
-                  <Link to="/login" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '600' }}>Sign In</Link>
-                  <Link to="/register" className="btn btn-primary" style={{ padding: '8px 16px', fontSize: '0.9rem' }}>Get Started</Link>
-                </>
+                <Link to="/login" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '600' }}>Login</Link>
               ) : (
-                <>
-                  <Link to="/dashboard" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <LayoutDashboard size={18} /> Dashboard
-                  </Link>
-                  <Link to="/profile" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <User size={18} /> Profile
-                  </Link>
-                  <button onClick={handleLogout} className="btn btn-outline" style={{ padding: '6px 12px', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '6px', border: '1px solid #ef4444', color: '#ef4444' }}>
-                    <LogOut size={16} /> Logout
-                  </button>
-                </>
+                <button onClick={handleLogout} className="btn btn-outline" style={{ padding: '4px 8px', fontSize: '0.7rem', border: '1px solid #ef4444', color: '#ef4444' }}>
+                  Out
+                </button>
               )}
             </div>
           </div>
