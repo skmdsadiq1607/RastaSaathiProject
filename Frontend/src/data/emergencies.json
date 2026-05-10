@@ -1,52 +1,546 @@
 [
-  { "id": 1, "title": "Severe Bleeding", "keywords": ["bleed", "blood", "cut"], "severity": "Critical", "firstAid": ["Apply direct pressure using clean cloth", "Keep injured area elevated if possible", "Call ambulance immediately", "Keep victim calm"], "avoid": ["Do not remove embedded objects", "Do not delay medical help"] },
-  { "id": 2, "title": "Unconscious Person", "keywords": ["unconscious", "passed out", "fainted", "responsive"], "severity": "Critical", "firstAid": ["Check breathing and pulse", "Place in recovery position if breathing", "Start CPR if not breathing", "Call emergency services"], "avoid": ["Do not shake the victim", "Do not give food or water"] },
-  { "id": 3, "title": "Cardiac Arrest", "keywords": ["heart", "cardiac", "pulse", "collapse"], "severity": "Critical", "firstAid": ["Start CPR immediately", "Call ambulance", "Use AED if available"], "avoid": ["Do not wait for recovery without CPR"] },
-  { "id": 4, "title": "Breathing Difficulty", "keywords": ["breath", "suffocate", "choke", "air"], "severity": "High", "firstAid": ["Keep airway clear", "Loosen tight clothing", "Help victim sit upright", "Call ambulance"], "avoid": ["Do not force victim to lie flat"] },
-  { "id": 5, "title": "Head Injury", "keywords": ["head", "brain", "skull", "concussion"], "severity": "High", "firstAid": ["Keep victim still", "Support head and neck", "Monitor breathing", "Seek emergency care"], "avoid": ["Do not move head unnecessarily", "Do not allow victim to sleep immediately"] },
-  { "id": 6, "title": "Spinal Injury", "keywords": ["spine", "back", "neck", "paralysis"], "severity": "Critical", "firstAid": ["Keep victim completely still", "Stabilize neck", "Wait for professionals"], "avoid": ["Do not move victim", "Do not bend neck or spine"] },
-  { "id": 7, "title": "Bone Fracture", "keywords": ["fracture", "bone", "break", "limb"], "severity": "High", "firstAid": ["Immobilize injured area", "Use splint if available", "Apply ice pack"], "avoid": ["Do not force movement", "Do not try to straighten bone"] },
-  { "id": 8, "title": "Burn Injury", "keywords": ["burn", "fire", "scald", "heat"], "severity": "High", "firstAid": ["Cool burn with clean water", "Cover with sterile cloth", "Seek medical help"], "avoid": ["Do not apply ice", "Do not burst blisters"] },
-  { "id": 9, "title": "Internal Bleeding", "keywords": ["internal", "stomach", "abdomen", "pale"], "severity": "Critical", "firstAid": ["Lay victim flat", "Keep victim warm", "Call ambulance immediately"], "avoid": ["Do not give food or water"] },
-  { "id": 10, "title": "Shock", "keywords": ["shock", "cold", "confusion"], "severity": "High", "firstAid": ["Lay victim down", "Raise legs slightly", "Keep warm"], "avoid": ["Do not leave victim alone"] },
-  { "id": 11, "title": "Concussion", "keywords": ["concussion", "dizzy", "nausea"], "severity": "Medium", "firstAid": ["Allow rest", "Monitor symptoms", "Visit hospital"], "avoid": ["Do not ignore repeated vomiting"] },
-  { "id": 12, "title": "Chest Injury", "keywords": ["chest", "ribs", "coughing blood"], "severity": "Critical", "firstAid": ["Keep victim upright", "Call emergency services", "Monitor breathing"], "avoid": ["Do not apply pressure to chest"] },
-  { "id": 13, "title": "Eye Injury", "keywords": ["eye", "vision", "blind"], "severity": "Medium", "firstAid": ["Cover eye lightly", "Seek medical help"], "avoid": ["Do not rub the eye"] },
-  { "id": 14, "title": "Panic Attack", "keywords": ["panic", "fear", "anxiety", "shaking"], "severity": "Medium", "firstAid": ["Calm the person", "Encourage slow breathing", "Move to safe place"], "avoid": ["Do not panic around victim"] },
-  { "id": 15, "title": "Airway Blockage", "keywords": ["choke", "blockage", "strangle"], "severity": "Critical", "firstAid": ["Perform Heimlich maneuver if trained", "Start CPR if unconscious", "Call ambulance"], "avoid": ["Do not give water immediately"] },
-  { "id": 16, "title": "Collapsed Lung", "keywords": ["collapsed", "lung", "pneumothorax", "sharp chest"], "severity": "Critical", "firstAid": ["Keep victim calm", "Help victim sit upright", "Call ambulance immediately"], "avoid": ["Do not force deep breathing"] },
-  { "id": 17, "title": "Crush Injury", "keywords": ["crush", "trapped", "stuck"], "severity": "Critical", "firstAid": ["Call emergency services", "Control bleeding", "Keep victim calm"], "avoid": ["Do not pull trapped limb forcefully"] },
-  { "id": 18, "title": "Amputation", "keywords": ["amputation", "severed", "lost limb"], "severity": "Critical", "firstAid": ["Apply pressure to stop bleeding", "Wrap detached part in clean cloth", "Keep detached part cool", "Call ambulance"], "avoid": ["Do not place detached part directly on ice"] },
-  { "id": 19, "title": "Whiplash Injury", "keywords": ["whiplash", "stiff neck", "jerk"], "severity": "Medium", "firstAid": ["Support neck", "Apply ice pack", "Seek medical evaluation"], "avoid": ["Do not force neck movement"] },
-  { "id": 20, "title": "Seizures", "keywords": ["seizure", "shaking", "foaming", "epilepsy"], "severity": "High", "firstAid": ["Clear surrounding objects", "Turn victim to side carefully", "Monitor breathing"], "avoid": ["Do not restrain victim", "Do not place objects in mouth"] },
-  { "id": 21, "title": "Hypothermia", "keywords": ["cold", "hypothermia", "freezing", "shivering"], "severity": "Medium", "firstAid": ["Cover with warm blankets", "Remove wet clothing", "Provide warmth slowly"], "avoid": ["Do not use extremely hot water"] },
-  { "id": 22, "title": "Heat Stroke", "keywords": ["heat stroke", "sunstroke", "hot skin"], "severity": "High", "firstAid": ["Move victim to shade", "Cool body with wet cloth", "Give water if conscious"], "avoid": ["Do not leave victim in hot environment"] },
-  { "id": 23, "title": "Facial Fracture", "keywords": ["facial", "face", "jaw", "nose break"], "severity": "High", "firstAid": ["Apply cold compress", "Keep victim calm", "Seek medical attention"], "avoid": ["Do not press fractured area"] },
-  { "id": 24, "title": "Deep Laceration", "keywords": ["cut", "laceration", "gash"], "severity": "High", "firstAid": ["Clean wound carefully", "Apply sterile dressing", "Apply pressure to control bleeding"], "avoid": ["Do not touch wound with dirty hands"] },
-  { "id": 25, "title": "Pelvic Fracture", "keywords": ["pelvis", "hip", "groin pain"], "severity": "Critical", "firstAid": ["Keep victim still", "Call ambulance immediately", "Monitor breathing"], "avoid": ["Do not move victim unnecessarily"] },
-  { "id": 26, "title": "Rib Fracture", "keywords": ["rib", "chest pain", "tender ribs"], "severity": "High", "firstAid": ["Support chest gently", "Apply ice pack", "Seek medical care"], "avoid": ["Do not tightly wrap chest"] },
-  { "id": 27, "title": "Nose Bleeding", "keywords": ["nosebleed", "nose bleed"], "severity": "Low", "firstAid": ["Tilt head slightly forward", "Pinch nose gently", "Apply cold compress"], "avoid": ["Do not tilt head backward"] },
-  { "id": 28, "title": "Vomiting After Injury", "keywords": ["vomit", "puke", "nausea injury"], "severity": "Medium", "firstAid": ["Turn victim sideways", "Monitor consciousness", "Seek medical attention"], "avoid": ["Do not ignore repeated vomiting"] },
-  { "id": 29, "title": "Dehydration", "keywords": ["dehydrated", "thirsty", "dry mouth"], "severity": "Low", "firstAid": ["Provide clean water slowly", "Move to cool area"], "avoid": ["Do not give excessive water quickly"] },
-  { "id": 30, "title": "Psychological Trauma", "keywords": ["scared", "trauma", "shocked", "emotional"], "severity": "Medium", "firstAid": ["Provide emotional reassurance", "Keep victim calm", "Move to safe environment"], "avoid": ["Do not shout or panic around victim"] },
-  { "id": 31, "title": "Arterial Bleeding", "keywords": ["arterial", "spurt", "bright red blood"], "severity": "Critical", "firstAid": ["Apply firm direct pressure", "Use tourniquet if trained", "Call ambulance immediately"], "avoid": ["Do not delay emergency response"] },
-  { "id": 32, "title": "Bruising", "keywords": ["bruise", "soft tissue", "swelling", "discoloration"], "severity": "Low", "firstAid": ["Apply ice pack", "Rest injured area", "Elevate if possible"], "avoid": ["Do not massage immediately"] },
-  { "id": 33, "title": "Dislocated Shoulder", "keywords": ["shoulder dislocation", "shoulder deformity"], "severity": "High", "firstAid": ["Immobilize arm", "Apply ice pack", "Seek emergency care"], "avoid": ["Do not try to reposition shoulder"] },
-  { "id": 34, "title": "Dislocated Knee", "keywords": ["knee dislocation", "knee deformity"], "severity": "High", "firstAid": ["Keep leg still", "Apply cold compress", "Get medical help"], "avoid": ["Do not force movement"] },
-  { "id": 35, "title": "Hand Injury", "keywords": ["hand", "fingers", "wrist"], "severity": "Medium", "firstAid": ["Clean wounds", "Bandage hand", "Apply ice if swollen"], "avoid": ["Do not lift heavy objects"] },
-  { "id": 36, "title": "Foot Injury", "keywords": ["foot", "toes", "ankle"], "severity": "Medium", "firstAid": ["Rest foot", "Apply ice pack", "Elevate foot"], "avoid": ["Do not continue walking"] },
-  { "id": 37, "title": "Tendon Injury", "keywords": ["tendon", "sharp pain", "weak movement"], "severity": "High", "firstAid": ["Immobilize area", "Apply ice", "Seek orthopedic care"], "avoid": ["Do not strain injured area"] },
-  { "id": 38, "title": "Ligament Tear", "keywords": ["ligament", "tear", "joint instability"], "severity": "High", "firstAid": ["Rest injured joint", "Apply compression bandage", "Use ice pack"], "avoid": ["Do not continue physical activity"] },
-  { "id": 39, "title": "Jaw Injury", "keywords": ["jaw", "mouth pain", "difficulty speaking"], "severity": "High", "firstAid": ["Support jaw gently", "Apply cold compress", "Seek emergency care"], "avoid": ["Do not force jaw movement"] },
-  { "id": 40, "title": "Tooth Damage", "keywords": ["tooth", "teeth", "dentist", "gum bleed"], "severity": "Medium", "firstAid": ["Rinse mouth gently", "Store broken tooth safely", "Visit dentist immediately"], "avoid": ["Do not touch tooth root"] },
-  { "id": 41, "title": "Smoke Inhalation", "keywords": ["smoke", "fire air", "soot", "coughing"], "severity": "Critical", "firstAid": ["Move victim to fresh air", "Monitor breathing", "Call emergency services"], "avoid": ["Do not leave victim in smoke area"] },
-  { "id": 42, "title": "Vehicle Fire Burns", "keywords": ["vehicle fire", "car fire", "burn"], "severity": "Critical", "firstAid": ["Cool burns with water", "Cover with sterile cloth", "Seek immediate medical help"], "avoid": ["Do not apply oil or toothpaste"] },
-  { "id": 43, "title": "Chemical Burns", "keywords": ["chemical", "acid", "alkali"], "severity": "High", "firstAid": ["Flush with clean water", "Remove contaminated clothing", "Seek medical care"], "avoid": ["Do not touch chemicals directly"] },
-  { "id": 44, "title": "Fainting", "keywords": ["faint", "passed out", "collapse"], "severity": "Medium", "firstAid": ["Lay person flat", "Raise legs slightly", "Check breathing"], "avoid": ["Do not force standing immediately"] },
-  { "id": 45, "title": "Anxiety Attack", "keywords": ["anxiety", "panic", "fast heartbeat"], "severity": "Medium", "firstAid": ["Help victim breathe slowly", "Provide reassurance", "Move to calm area"], "avoid": ["Do not panic around victim"] },
-  { "id": 46, "title": "Near Drowning", "keywords": ["drowning", "water", "flooded", "coughing water"], "severity": "Critical", "firstAid": ["Move victim to safe area", "Check breathing", "Start CPR if necessary", "Call ambulance"], "avoid": ["Do not leave victim alone"] },
-  { "id": 47, "title": "Allergic Reaction", "keywords": ["allergy", "rash", "swelling face"], "severity": "High", "firstAid": ["Help victim stay calm", "Use allergy medication if available", "Seek medical care"], "avoid": ["Do not ignore breathing issues"] },
-  { "id": 48, "title": "Airbag Impact", "keywords": ["airbag", "impact", "crash impact"], "severity": "Medium", "firstAid": ["Apply cold compress", "Monitor breathing", "Seek medical evaluation"], "avoid": ["Do not ignore chest pain"] },
-  { "id": 49, "title": "Glass Fragment", "keywords": ["glass", "shards", "fragments"], "severity": "High", "firstAid": ["Apply pressure around wound", "Cover wound carefully", "Seek medical help"], "avoid": ["Do not remove deeply embedded glass"] },
-  { "id": 50, "title": "Road Rash", "keywords": ["road rash", "scraping", "gravel", "skin scrape"], "severity": "Medium", "firstAid": ["Clean wound gently", "Apply antiseptic", "Cover with sterile dressing"], "avoid": ["Do not leave wound uncovered in dirt"] }
+  { 
+    "id": 1, "title": "Severe Bleeding", "keywords": ["bleed", "blood", "cut", "artery", "hemorrhage"], "severity": "Critical", 
+    "firstAid": [
+      "Apply direct, firm pressure using the cleanest cloth available or sterile gauze.",
+      "If blood soaks through, do NOT remove the first cloth; add another layer on top and keep pressing.",
+      "Maintain pressure for at least 10-15 minutes without lifting to check.",
+      "Keep the injured limb elevated above heart level to reduce blood flow.",
+      "If the bleeding is from a limb and does not stop, consider a tourniquet 2-3 inches above the wound (if trained).",
+      "Call emergency services (108) immediately and provide exact GPS coordinates.",
+      "Monitor for signs of shock (pale skin, rapid pulse, confusion)."
+    ], 
+    "avoid": ["Do not remove embedded objects (glass, metal) as they may be acting as a plug.", "Do not use dirty or fuzzy materials like cotton wool which stick to the wound.", "Do not remove dressings once applied."] 
+  },
+  { 
+    "id": 2, "title": "Unconscious Person", "keywords": ["unconscious", "passed out", "fainted", "responsive", "coma"], "severity": "Critical", 
+    "firstAid": [
+      "Check the scene for safety, then check for a response (Shout and Tap).",
+      "Check for breathing (look, listen, feel) for no more than 10 seconds.",
+      "If breathing: Place them in the RECOVERY POSITION (on their side with head tilted back).",
+      "If NOT breathing: Start CPR immediately (30 chest compressions, 2 rescue breaths).",
+      "Clear the mouth of any obstructions or vomit.",
+      "Loosen tight clothing around the neck and waist.",
+      "Call for an ambulance and stay with the victim until help arrives."
+    ], 
+    "avoid": ["Do not leave the person alone.", "Do not give any food, water, or medicine by mouth.", "Do not place a pillow under their head as it may block the airway."] 
+  },
+  { 
+    "id": 3, "title": "Cardiac Arrest", "keywords": ["heart", "cardiac", "pulse", "collapse", "stopped breathing"], "severity": "Critical", 
+    "firstAid": [
+      "Confirm unconsciousness and lack of pulse/breathing.",
+      "Call emergency services immediately and request an AED (Automated External Defibrillator).",
+      "Start CPR: Push hard and fast in the center of the chest (100-120 compressions per minute).",
+      "Allow the chest to recoil completely between compressions.",
+      "If an AED arrives, follow the voice prompts immediately—it can reset the heart rhythm.",
+      "Switch with another person every 2 minutes to maintain high-quality compressions."
+    ], 
+    "avoid": ["Do not stop CPR until paramedics arrive or the victim shows signs of life.", "Do not hesitate to use an AED—it will not shock unless necessary."] 
+  },
+  { 
+    "id": 4, "title": "Breathing Difficulty", "keywords": ["breath", "suffocate", "choke", "air", "asthma", "wheezing"], "severity": "High", 
+    "firstAid": [
+      "Help the person sit upright in a comfortable position (tripod position).",
+      "Loosen clothing around the neck, chest, and waist.",
+      "If the person has prescribed medication (like an inhaler), help them use it.",
+      "Keep the person calm to reduce oxygen demand.",
+      "Monitor for bluish tint on lips or fingernails (cyanosis).",
+      "Call 108 if symptoms persist or worsen.",
+      "Be prepared to start CPR if they stop breathing."
+    ], 
+    "avoid": ["Do not force the victim to lie flat as it makes breathing harder.", "Do not give them water or food if they are struggling for air."] 
+  },
+  { 
+    "id": 5, "title": "Head Injury", "keywords": ["head", "brain", "skull", "concussion", "bleeding head"], "severity": "High", 
+    "firstAid": [
+      "Keep the person completely still and minimize neck movement.",
+      "Apply light pressure to any scalp bleeding with a clean cloth, unless a skull fracture is suspected.",
+      "If fluid is leaking from ears or nose, do NOT try to stop it—cover it lightly.",
+      "Monitor for 'Red Flags': Pupil inequality, seizures, repeated vomiting, or loss of memory.",
+      "Keep the victim awake and talk to them to assess consciousness levels.",
+      "Seek immediate neuro-emergency care."
+    ], 
+    "avoid": ["Do not move the head or neck.", "Do not apply direct pressure if the skull feels 'mushy' or indented (possible fracture).", "Do not give pain medication like Aspirin as it can increase brain bleeding."] 
+  },
+  { 
+    "id": 6, "title": "Spinal Injury", "keywords": ["spine", "back", "neck", "paralysis", "numbness", "tingling"], "severity": "Critical", 
+    "firstAid": [
+      "Assume a spinal injury if there was a high-speed crash or fall.",
+      "Tell the victim: 'DO NOT MOVE. Keep your head and body perfectly still.'",
+      "Place heavy items (like bags or folded jackets) on both sides of the neck to prevent turning.",
+      "Do NOT attempt to move the victim unless they are in immediate danger (e.g., car fire).",
+      "If they must be moved, use the 'Log Roll' technique with at least 3 people.",
+      "Monitor breathing and pulse continuously."
+    ], 
+    "avoid": ["Do not bend the neck, back, or spine.", "Do not remove a helmet (e.g., motorcycle) unless it is blocking the airway.", "Do not try to sit the person up."] 
+  },
+  { 
+    "id": 7, "title": "Bone Fracture", "keywords": ["fracture", "bone", "break", "limb", "deformed", "snap"], "severity": "High", 
+    "firstAid": [
+      "Control any bleeding first using sterile dressings.",
+      "Immobilize the area: Use a splint (cardboard, wood, or the body itself) to stop movement.",
+      "Apply the splint ABOVE and BELOW the joint nearest the fracture.",
+      "Apply a cold pack wrapped in cloth for 20 minutes to reduce swelling.",
+      "Check for 'Pulse, Sensation, and Color' below the injury to ensure circulation.",
+      "Elevate the limb if possible to reduce pain and swelling."
+    ], 
+    "avoid": ["Do not try to 'push' the bone back in or straighten it.", "Do not test the injury by trying to walk on it.", "Do not apply ice directly to the skin."] 
+  },
+  { 
+    "id": 8, "title": "Burn Injury", "keywords": ["burn", "fire", "scald", "heat", "steam"], "severity": "High", 
+    "firstAid": [
+      "Stop the burning process: Remove from heat or douse flames.",
+      "Cool the burn: Run cool (not cold) tap water over the area for at least 20 minutes.",
+      "Remove jewelry or tight clothing from the area before it starts to swell.",
+      "Cover the burn loosely with sterile non-stick gauze or clean plastic wrap.",
+      "For severe burns, treat for shock (lay flat, elevate legs slightly).",
+      "Call emergency services for burns on the face, hands, or large areas."
+    ], 
+    "avoid": ["Do not use ice, butter, ointment, or toothpaste on a burn.", "Do not break blisters as it increases infection risk.", "Do not remove clothing that is stuck to the burn."] 
+  },
+  { 
+    "id": 9, "title": "Internal Bleeding", "keywords": ["internal", "stomach", "abdomen", "pale", "bruise", "rigid"], "severity": "Critical", 
+    "firstAid": [
+      "Recognize symptoms: Painful/rigid abdomen, coughing blood, or bruising in the torso.",
+      "Call 108 immediately—this is a surgical emergency.",
+      "Lay the person flat and keep them warm with a blanket.",
+      "Raise their legs 6-12 inches to maintain blood flow to the brain.",
+      "Monitor for loss of consciousness.",
+      "Stay with the person and provide reassurance."
+    ], 
+    "avoid": ["Do not give anything to eat or drink (they may need surgery).", "Do not ignore minor-looking bruises if the impact was severe."] 
+  },
+  { 
+    "id": 10, "title": "Shock", "keywords": ["shock", "cold", "confusion", "dizzy", "rapid pulse"], "severity": "High", 
+    "firstAid": [
+      "Lay the person down and elevate their legs about 12 inches.",
+      "Keep the person warm with a blanket or jacket.",
+      "Loosen any restrictive clothing around the neck and chest.",
+      "Treat any underlying cause (like bleeding or burns) immediately.",
+      "Reassure the person and keep them as calm as possible.",
+      "Monitor breathing and pulse every few minutes."
+    ], 
+    "avoid": ["Do not let the person eat or drink.", "Do not move them if you suspect a spinal injury.", "Do not give them an alcoholic drink."] 
+  },
+  { 
+    "id": 11, "title": "Concussion", "keywords": ["concussion", "dizzy", "nausea", "blackout", "confusion"], "severity": "Medium", 
+    "firstAid": [
+      "Ensure the person stops the activity immediately.",
+      "Apply a cold pack to the site of impact.",
+      "Monitor for 24-48 hours for worsening symptoms.",
+      "Seek IMMEDIATE care if: Seizures, slurred speech, or persistent vomiting occur.",
+      "Ensure the person rests both physically and mentally (no screens)."
+    ], 
+    "avoid": ["Do not allow the person to return to activity/driving.", "Do not give Aspirin as it can worsen potential brain bleeding.", "Do not allow them to sleep for more than 2 hours without checking their responsiveness."] 
+  },
+  { 
+    "id": 12, "title": "Chest Injury", "keywords": ["chest", "ribs", "coughing blood", "difficulty breathing"], "severity": "Critical", 
+    "firstAid": [
+      "Sit the person up and lean them slightly toward the injured side.",
+      "If there is an open wound (sucking chest wound), cover it with a plastic dressing taped on 3 sides.",
+      "Monitor for tension pneumothorax (extreme difficulty breathing).",
+      "Support the chest with a pillow if it helps with pain.",
+      "Call 108 immediately."
+    ], 
+    "avoid": ["Do not tape all 4 sides of an open chest wound (can trap air).", "Do not ignore 'crackling' sounds in the skin."] 
+  },
+  { 
+    "id": 13, "title": "Eye Injury", "keywords": ["eye", "vision", "blind", "object in eye", "chemical in eye"], "severity": "Medium", 
+    "firstAid": [
+      "Chemicals: Flush the eye with clean water for at least 15-20 minutes continuously.",
+      "Foreign Object: Do NOT rub. Try to blink it out or flush with water.",
+      "Puncture: Cover the eye with a rigid shield (like a paper cup) without touching the eye.",
+      "Cover the UNINJURED eye too to stop both eyes from moving.",
+      "Seek emergency ophthalmology care."
+    ], 
+    "avoid": ["Do not rub the eye.", "Do not try to remove an object embedded in the eyeball.", "Do not apply pressure to the eyeball."] 
+  },
+  { 
+    "id": 14, "title": "Panic Attack", "keywords": ["panic", "fear", "anxiety", "shaking", "hyperventilation"], "severity": "Medium", 
+    "firstAid": [
+      "Move the person to a quiet, safe area away from the crash site.",
+      "Encourage 'Box Breathing': Inhale for 4s, Hold for 4s, Exhale for 4s, Hold for 4s.",
+      "Speak in a calm, low, and reassuring voice.",
+      "Acknowledge their feelings without judgment.",
+      "Stay with them until their breathing returns to normal."
+    ], 
+    "avoid": ["Do not tell them to 'calm down' or 'relax'—be specific with breathing cues.", "Do not panic yourself."] 
+  },
+  { 
+    "id": 15, "title": "Airway Blockage (Choking)", "keywords": ["choke", "blockage", "strangle", "cannot speak"], "severity": "Critical", 
+    "firstAid": [
+      "If the person can cough or speak, encourage them to keep coughing.",
+      "If they CANNOT breathe/speak: Perform the Heimlich Maneuver (Abdominal Thrusts).",
+      "Give 5 back blows followed by 5 abdominal thrusts.",
+      "Repeat until the object is expelled or the person becomes unconscious.",
+      "If unconscious: Start CPR and look for the object in the mouth."
+    ], 
+    "avoid": ["Do not perform a 'blind finger sweep' as it may push the object deeper.", "Do not give water until the airway is clear."] 
+  },
+  { 
+    "id": 16, "title": "Collapsed Lung", "keywords": ["collapsed", "lung", "pneumothorax", "sharp chest", "shortness of breath"], "severity": "Critical", 
+    "firstAid": [
+      "Keep the victim in a seated position (makes breathing easier).",
+      "Monitor for signs of oxygen deprivation (cyanosis).",
+      "Call 108 immediately—this requires a chest tube.",
+      "Keep the person calm to minimize respiratory distress."
+    ], 
+    "avoid": ["Do not force the person to lie down.", "Do not allow them to exert themselves."] 
+  },
+  { 
+    "id": 17, "title": "Crush Injury", "keywords": ["crush", "trapped", "stuck", "under vehicle"], "severity": "Critical", 
+    "firstAid": [
+      "Call emergency services immediately and specify it is a crush injury.",
+      "If the object has been on for >15 mins, do NOT remove it without medical supervision (Crush Syndrome).",
+      "If you MUST remove it, apply a tourniquet above the injury site first (if trained).",
+      "Control any external bleeding.",
+      "Provide warmth and reassurance."
+    ], 
+    "avoid": ["Do not release the pressure suddenly if it has been applied for a long time.", "Do not move the trapped limb."] 
+  },
+  { 
+    "id": 18, "title": "Amputation", "keywords": ["amputation", "severed", "lost limb", "finger cut off"], "severity": "Critical", 
+    "firstAid": [
+      "CONTROL BLEEDING: Apply direct pressure and use a tourniquet if needed.",
+      "CARE FOR THE PART: Rinse with saline/clean water (do not scrub).",
+      "Wrap in sterile gauze, place in a sealed plastic bag.",
+      "Place the bag inside another container with ice and water.",
+      "Seek emergency surgery immediately."
+    ], 
+    "avoid": ["Do not place the severed part directly on ice (causes tissue damage).", "Do not use dry ice."] 
+  },
+  { 
+    "id": 19, "title": "Whiplash Injury", "keywords": ["whiplash", "stiff neck", "jerk", "neck pain"], "severity": "Medium", 
+    "firstAid": [
+      "Support the neck with a soft collar or folded towel.",
+      "Apply ice for the first 24 hours to reduce inflammation.",
+      "Rest the neck and avoid sudden movements.",
+      "Seek medical evaluation to rule out fractures."
+    ], 
+    "avoid": ["Do not force movement to 'stretch' the neck.", "Do not ignore numbness in fingers."] 
+  },
+  { 
+    "id": 20, "title": "Seizures", "keywords": ["seizure", "shaking", "foaming", "epilepsy", "convulsion"], "severity": "High", 
+    "firstAid": [
+      "Protect from injury: Move objects away from the victim.",
+      "Place something soft (like a jacket) under their head.",
+      "Time the seizure. If it lasts >5 mins, call 108.",
+      "Once shaking stops, turn them to the recovery position.",
+      "Loosen clothing around the neck."
+    ], 
+    "avoid": ["Do not restrain the person.", "Do not put ANYTHING in their mouth.", "Do not give water until they are fully awake."] 
+  },
+  { 
+    "id": 21, "title": "Hypothermia", "keywords": ["cold", "hypothermia", "freezing", "shivering", "low body temp"], "severity": "Medium", 
+    "firstAid": [
+      "Move the person out of the cold/wet environment.",
+      "Remove wet clothing and replace with warm, dry layers.",
+      "Cover their head and neck.",
+      "Give warm, non-alcoholic, non-caffeinated drinks if they can swallow.",
+      "Monitor for slowed breathing."
+    ], 
+    "avoid": ["Do not use direct heat like hot water bottles on skin.", "Do not rub their limbs (can cause cardiac arrest)."] 
+  },
+  { 
+    "id": 22, "title": "Heat Stroke", "keywords": ["heat stroke", "sunstroke", "hot skin", "no sweating", "fever"], "severity": "High", 
+    "firstAid": [
+      "Move the person to a cool, shaded area.",
+      "Cool the body rapidly: Use cold water, ice packs on armpits/groin, or fans.",
+      "If conscious, give small sips of water.",
+      "Monitor temperature and consciousness.",
+      "Call 108 immediately—this is life-threatening."
+    ], 
+    "avoid": ["Do not give Aspirin or Paracetamol.", "Do not give caffeinated or alcoholic drinks."] 
+  },
+  { 
+    "id": 23, "title": "Facial Fracture", "keywords": ["facial", "face", "jaw", "nose break", "swollen face"], "severity": "High", 
+    "firstAid": [
+      "Apply a cold pack to reduce swelling.",
+      "If bleeding from the mouth, sit them forward to prevent choking.",
+      "Protect any loose teeth.",
+      "Seek emergency Maxillofacial care."
+    ], 
+    "avoid": ["Do not blow the nose.", "Do not try to 'snap' the nose back in place."] 
+  },
+  { 
+    "id": 24, "title": "Deep Laceration", "keywords": ["cut", "laceration", "gash", "stitches"], "severity": "High", 
+    "firstAid": [
+      "Clean with running water (if not bleeding severely).",
+      "Apply firm pressure with a sterile pad.",
+      "Bandage tightly enough to hold pressure but not stop circulation.",
+      "Seek medical help for stitches within 6 hours."
+    ], 
+    "avoid": ["Do not use hydrogen peroxide or alcohol on deep wounds.", "Do not leave the wound open to the air."] 
+  },
+  { 
+    "id": 25, "title": "Pelvic Fracture", "keywords": ["pelvis", "hip", "groin pain", "cannot walk"], "severity": "Critical", 
+    "firstAid": [
+      "Treat as a spinal injury: DO NOT MOVE.",
+      "Support the hips with folded blankets on both sides.",
+      "Treat for shock (keep warm).",
+      "Monitor for internal bleeding signs.",
+      "Call 108 immediately."
+    ], 
+    "avoid": ["Do not try to walk.", "Do not move their legs."] 
+  },
+  { 
+    "id": 26, "title": "Rib Fracture", "keywords": ["rib", "chest pain", "tender ribs", "pain when breathing"], "severity": "High", 
+    "firstAid": [
+      "Help the person find a comfortable sitting position.",
+      "Encourage the person to take regular, shallow breaths to avoid lung collapse.",
+      "Apply ice to the area for 20 minutes.",
+      "Provide a pillow for them to hug against their chest during coughing.",
+      "Seek medical evaluation to check for lung puncture."
+    ], 
+    "avoid": ["Do not wrap the chest tightly with bandages.", "Do not encourage heavy physical activity."] 
+  },
+  { 
+    "id": 27, "title": "Nose Bleeding", "keywords": ["nosebleed", "nose bleed", "epistaxis"], "severity": "Low", 
+    "firstAid": [
+      "Sit the person down and tilt their head SLIGHTLY FORWARD.",
+      "Pinch the soft part of the nose for 10-15 minutes without letting go.",
+      "Apply a cold pack to the bridge of the nose.",
+      "Instruct them to breathe through their mouth.",
+      "Seek help if it doesn't stop after 30 minutes."
+    ], 
+    "avoid": ["Do not tilt the head backward (causes blood to enter the throat).", "Do not blow the nose for several hours."] 
+  },
+  { 
+    "id": 28, "title": "Vomiting After Injury", "keywords": ["vomit", "puke", "nausea injury", "head strike vomit"], "severity": "Medium", 
+    "firstAid": [
+      "Turn the person on their side immediately (Recovery Position) to prevent choking.",
+      "Clear the mouth of any vomit.",
+      "Monitor for signs of worsening concussion or internal head pressure.",
+      "Call for medical evaluation if vomiting is repeated."
+    ], 
+    "avoid": ["Do not give anti-nausea medication without a doctor's order.", "Do not let them lie flat on their back."] 
+  },
+  { 
+    "id": 29, "title": "Dehydration", "keywords": ["dehydrated", "thirsty", "dry mouth", "dark urine"], "severity": "Low", 
+    "firstAid": [
+      "Provide water or oral rehydration salts (ORS) in small, frequent sips.",
+      "Move to a shaded or air-conditioned area.",
+      "Remove excess clothing.",
+      "Apply a cool, damp cloth to the skin."
+    ], 
+    "avoid": ["Do not give large amounts of water at once (can cause vomiting).", "Do not give drinks with high caffeine or sugar."] 
+  },
+  { 
+    "id": 30, "title": "Psychological Trauma", "keywords": ["scared", "trauma", "shocked", "emotional", "crying"], "severity": "Medium", 
+    "firstAid": [
+      "Validate their feelings: 'It's okay to feel this way, you are safe now.'",
+      "Use 'Grounding Techniques': Ask them to name 5 things they see, 4 they hear, etc.",
+      "Keep them away from the visual scene of the accident.",
+      "Encourage professional counseling after the immediate emergency."
+    ], 
+    "avoid": ["Do not minimize their experience by saying 'it could have been worse'.", "Do not leave them alone."] 
+  },
+  { 
+    "id": 31, "title": "Arterial Bleeding", "keywords": ["arterial", "spurt", "bright red blood", "pulsing blood"], "severity": "Critical", 
+    "firstAid": [
+      "This is a high-speed leak: Apply HEAVY direct pressure immediately.",
+      "If a limb is involved, apply a tourniquet immediately 2-3 inches above the wound.",
+      "Do NOT wait for help to arrive before applying pressure.",
+      "Treat for shock (lay flat, elevate legs).",
+      "Call 108 immediately."
+    ], 
+    "avoid": ["Do not try to 'wash' the wound first.", "Do not use weak pressure."] 
+  },
+  { 
+    "id": 32, "title": "Bruising", "keywords": ["bruise", "soft tissue", "swelling", "discoloration", "contusion"], "severity": "Low", 
+    "firstAid": [
+      "Use the R.I.C.E protocol: Rest, Ice, Compression, Elevation.",
+      "Apply ice for 15-20 minutes every 2 hours.",
+      "If the bruise is on a limb, wrap it with an elastic bandage.",
+      "Seek help if the bruise is extremely large or painful."
+    ], 
+    "avoid": ["Do not apply heat for the first 48 hours.", "Do not try to 'drain' the bruise."] 
+  },
+  { 
+    "id": 33, "title": "Dislocated Shoulder", "keywords": ["shoulder dislocation", "shoulder deformity", "shoulder pop"], "severity": "High", 
+    "firstAid": [
+      "Immobilize the shoulder in its current position using a sling or towel.",
+      "Apply ice to the joint to reduce pain.",
+      "Monitor for numbness or tingling in the arm/fingers.",
+      "Seek emergency orthopedic care."
+    ], 
+    "avoid": ["Do not try to 'pop' the shoulder back into the socket.", "Do not allow the arm to hang unsupported."] 
+  },
+  { 
+    "id": 34, "title": "Dislocated Knee", "keywords": ["knee dislocation", "knee deformity", "leg pop"], "severity": "High", 
+    "firstAid": [
+      "This is a medical emergency as it can damage arteries.",
+      "Check for a pulse at the ankle.",
+      "Immobilize the entire leg in its current position.",
+      "Call 108 immediately."
+    ], 
+    "avoid": ["Do not try to straighten the leg.", "Do not apply heavy pressure to the knee."] 
+  },
+  { 
+    "id": 35, "title": "Hand Injury", "keywords": ["hand", "fingers", "wrist", "crushed fingers"], "severity": "Medium", 
+    "firstAid": [
+      "Remove rings or watches before swelling starts.",
+      "Clean minor cuts with water.",
+      "Immobilize the wrist or fingers if a fracture is suspected.",
+      "Elevate the hand above the heart level."
+    ], 
+    "avoid": ["Do not delay removing rings—they can cut off circulation."] 
+  },
+  { 
+    "id": 36, "title": "Foot Injury", "keywords": ["foot", "toes", "ankle", "crushed foot"], "severity": "Medium", 
+    "firstAid": [
+      "Remove shoes and socks to inspect the injury.",
+      "Elevate the foot and apply ice.",
+      "If a toe is broken, buddy-tape it to the neighboring toe.",
+      "Seek evaluation for potential small bone fractures."
+    ], 
+    "avoid": ["Do not continue to walk or stand on the injured foot."] 
+  },
+  { 
+    "id": 37, "title": "Tendon Injury", "keywords": ["tendon", "sharp pain", "weak movement", "achilles"], "severity": "High", 
+    "firstAid": [
+      "Immobilize the joint in a neutral position.",
+      "Apply ice and compression.",
+      "Avoid all weight-bearing on the affected limb.",
+      "Seek orthopedic evaluation."
+    ], 
+    "avoid": ["Do not try to 'walk it off'."] 
+  },
+  { 
+    "id": 38, "title": "Ligament Tear", "keywords": ["ligament", "tear", "joint instability", "sprain"], "severity": "High", 
+    "firstAid": [
+      "Follow the R.I.C.E protocol.",
+      "Use a brace or splint to provide stability.",
+      "Check for excessive swelling which may indicate a complete tear.",
+      "Rest is the primary treatment."
+    ], 
+    "avoid": ["Do not return to activity until pain-free and stable."] 
+  },
+  { 
+    "id": 39, "title": "Jaw Injury", "keywords": ["jaw", "mouth pain", "difficulty speaking", "dislocated jaw"], "severity": "High", 
+    "firstAid": [
+      "Support the jaw gently with a bandage wrapped under the chin and over the head.",
+      "Apply a cold pack to the side of the face.",
+      "Ask the person to avoid talking or opening their mouth wide.",
+      "Seek emergency care."
+    ], 
+    "avoid": ["Do not try to force the jaw shut."] 
+  },
+  { 
+    "id": 40, "title": "Tooth Damage", "keywords": ["tooth", "teeth", "dentist", "gum bleed", "knocked out tooth"], "severity": "Medium", 
+    "firstAid": [
+      "Handle the tooth by the CROWN (top), never the root.",
+      "If dirty, rinse with milk or water (do not scrub).",
+      "Try to put the tooth back in the socket and have them bite down.",
+      "If not possible, keep it in a small container of milk.",
+      "Visit a dentist within 30-60 minutes."
+    ], 
+    "avoid": ["Do not let the tooth dry out.", "Do not touch the root."] 
+  },
+  { 
+    "id": 41, "title": "Smoke Inhalation", "keywords": ["smoke", "fire air", "soot", "coughing", "burn throat"], "severity": "Critical", 
+    "firstAid": [
+      "Get the victim to fresh air immediately.",
+      "Loosen clothing around the neck and chest.",
+      "If the victim is unconscious, start CPR if needed.",
+      "Oxygen therapy is usually required—call 108.",
+      "Watch for swelling of the throat/airway."
+    ], 
+    "avoid": ["Do not stay in the smoke area to help unless you have breathing apparatus."] 
+  },
+  { 
+    "id": 42, "title": "Vehicle Fire Burns", "keywords": ["vehicle fire", "car fire", "burn", "fuel burn"], "severity": "Critical", 
+    "firstAid": [
+      "Stop, Drop, and Roll if clothing is on fire.",
+      "Douse the person with large amounts of water immediately.",
+      "Remove burned clothing unless it is stuck to the skin.",
+      "Call 108 and treat for shock."
+    ], 
+    "avoid": ["Do not use fire extinguishers directly on people if possible.", "Do not apply ice."] 
+  },
+  { 
+    "id": 43, "title": "Chemical Burns", "keywords": ["chemical", "acid", "alkali", "fuel spill"], "severity": "High", 
+    "firstAid": [
+      "Brush off dry chemicals first (using gloves).",
+      "Flush the skin with running water for at least 20 minutes.",
+      "Remove all contaminated clothing and jewelry.",
+      "Cover with a sterile dressing.",
+      "Identify the chemical if possible for medical staff."
+    ], 
+    "avoid": ["Do not use a high-pressure hose.", "Do not try to neutralize the chemical with another substance (creates heat)."] 
+  },
+  { 
+    "id": 44, "title": "Fainting", "keywords": ["faint", "passed out", "collapse", "syncope"], "severity": "Medium", 
+    "firstAid": [
+      "Lay the person flat on their back.",
+      "Elevate the feet about 12 inches.",
+      "Loosen restrictive clothing.",
+      "Check for any injuries sustained during the fall.",
+      "Provide fresh air."
+    ], 
+    "avoid": ["Do not let them stand up too quickly.", "Do not pour water on their face."] 
+  },
+  { 
+    "id": 45, "title": "Anxiety Attack", "keywords": ["anxiety", "panic", "fast heartbeat", "trembling"], "severity": "Medium", 
+    "firstAid": [
+      "Help the victim focus on their breathing.",
+      "Acknowledge that it feels like a physical emergency but reassure them they are safe.",
+      "Provide a quiet space away from the crash scene.",
+      "Encourage them to breathe into their belly, not chest."
+    ], 
+    "avoid": ["Do not tell them they are 'overreacting'."] 
+  },
+  { 
+    "id": 46, "title": "Near Drowning", "keywords": ["drowning", "water", "flooded", "coughing water", "submersion"], "severity": "Critical", 
+    "firstAid": [
+      "Remove the victim from the water safely.",
+      "Check for breathing and pulse.",
+      "If not breathing: Start CPR immediately.",
+      "Keep them warm to prevent hypothermia.",
+      "Even if they recover, they MUST go to the hospital (Secondary Drowning risk)."
+    ], 
+    "avoid": ["Do not try to 'drain' water from the lungs—focus on CPR."] 
+  },
+  { 
+    "id": 47, "title": "Allergic Reaction (Anaphylaxis)", "keywords": ["allergy", "rash", "swelling face", "hives", "throat closing"], "severity": "High", 
+    "firstAid": [
+      "Help the person use their EpiPen if they have one.",
+      "Call 108 immediately.",
+      "Lay them flat with legs raised.",
+      "Keep the airway clear.",
+      "Monitor for a second wave of reaction."
+    ], 
+    "avoid": ["Do not wait to see if symptoms get better.", "Do not give oral allergy medicine if they can't swallow."] 
+  },
+  { 
+    "id": 48, "title": "Airbag Impact", "keywords": ["airbag", "impact", "crash impact", "airbag burn", "chest hit"], "severity": "Medium", 
+    "firstAid": [
+      "Rinse any 'chemical burns' from the airbag powder with water.",
+      "Monitor for internal chest injuries or rib fractures.",
+      "Check vision if the airbag hit the face.",
+      "Seek medical evaluation for internal trauma."
+    ], 
+    "avoid": ["Do not ignore chest pain even if no bruising is visible."] 
+  },
+  { 
+    "id": 49, "title": "Glass Fragment", "keywords": ["glass", "shards", "fragments", "windshield"], "severity": "High", 
+    "firstAid": [
+      "If the glass is small/shallow, wash and remove with tweezers.",
+      "If LARGE or DEEP: DO NOT REMOVE.",
+      "Pad around the glass with bulky dressings to stop it from moving.",
+      "Seek surgical removal."
+    ], 
+    "avoid": ["Do not press directly on the glass."] 
+  },
+  { 
+    "id": 50, "title": "Road Rash", "keywords": ["road rash", "scraping", "gravel", "skin scrape", "abrasion"], "severity": "Medium", 
+    "firstAid": [
+      "Wash with clean water and mild soap if possible.",
+      "Gently remove loose gravel/dirt.",
+      "Apply a thin layer of antibiotic ointment.",
+      "Cover with a non-stick bandage.",
+      "Check for signs of infection (pus, redness) daily."
+    ], 
+    "avoid": ["Do not scrub the wound aggressively.", "Do not use harsh chemicals like iodine."] 
+  }
 ]
