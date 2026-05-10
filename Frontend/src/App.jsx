@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { Shield, Activity, PhoneCall, User } from 'lucide-react';
+import { Shield, LayoutDashboard, LogOut } from 'lucide-react';
 import { AnimatePresence } from 'framer-motion';
 
 // Pages
@@ -11,6 +11,29 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('roadsos_token'));
+
+  // Listen for storage changes to update navbar
+  useEffect(() => {
+    const checkAuth = () => {
+      setIsLoggedIn(!!localStorage.getItem('roadsos_token'));
+    };
+    window.addEventListener('storage', checkAuth);
+    // Custom event for same-tab login
+    window.addEventListener('auth-change', checkAuth);
+    return () => {
+      window.removeEventListener('storage', checkAuth);
+      window.removeEventListener('auth-change', checkAuth);
+    };
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('roadsos_token');
+    localStorage.removeItem('roadsos_user');
+    setIsLoggedIn(false);
+    window.location.href = '/';
+  };
+
   return (
     <Router>
       <div className="page-wrapper">
@@ -30,8 +53,22 @@ function App() {
               <Link to="/" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: '500' }}>Home</Link>
               <Link to="/about" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: '500' }}>About</Link>
               <div style={{ width: '1px', height: '24px', background: 'var(--border-glass)', margin: '0 10px' }}></div>
-              <Link to="/login" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '600' }}>Sign In</Link>
-              <Link to="/register" className="btn btn-primary" style={{ padding: '8px 16px', fontSize: '0.9rem' }}>Get Started</Link>
+              
+              {!isLoggedIn ? (
+                <>
+                  <Link to="/login" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '600' }}>Sign In</Link>
+                  <Link to="/register" className="btn btn-primary" style={{ padding: '8px 16px', fontSize: '0.9rem' }}>Get Started</Link>
+                </>
+              ) : (
+                <>
+                  <Link to="/dashboard" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <LayoutDashboard size={18} /> Dashboard
+                  </Link>
+                  <button onClick={handleLogout} className="btn btn-outline" style={{ padding: '6px 12px', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '6px', border: '1px solid #ef4444', color: '#ef4444' }}>
+                    <LogOut size={16} /> Logout
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </nav>

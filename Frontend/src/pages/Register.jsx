@@ -24,8 +24,11 @@ const Register = () => {
         });
 
         // 2. Save the returned JWT from our own backend
-        localStorage.setItem('roadsos_token', res.data.token);
-        localStorage.setItem('roadsos_user', JSON.stringify(res.data.user));
+        localStorage.setItem('roadsos_token', res.data.data.accessToken);
+        localStorage.setItem('roadsos_user', JSON.stringify(res.data.data.user));
+        
+        // Notify Navbar
+        window.dispatchEvent(new Event('auth-change'));
 
         // 3. Redirect to the SOS Dashboard
         navigate('/dashboard');
