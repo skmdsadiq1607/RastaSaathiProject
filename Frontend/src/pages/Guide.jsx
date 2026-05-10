@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ShieldCheck, Activity, Smartphone, Info, AlertTriangle, Book, UserPlus, Users, Zap, MessageCircle } from 'lucide-react';
+import { ShieldCheck, Activity, Smartphone, Info, AlertTriangle, UserPlus, Users, Zap, MessageCircle, MapPin } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 const Guide = () => {
@@ -71,7 +71,7 @@ const Guide = () => {
           </div>
         </div>
 
-        {/* WHATSAPP INTEGRATION - RESTORED */}
+        {/* WHATSAPP INTEGRATION */}
         <div className="glass-panel" style={{ padding: '60px', marginBottom: '100px', border: '1px solid rgba(16, 185, 129, 0.3)', background: 'rgba(16, 185, 129, 0.02)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '30px' }}>
             <MessageCircle size={40} color="#10b981" />
@@ -95,25 +95,6 @@ const Guide = () => {
               Open WhatsApp
             </a>
           </div>
-        </div>
-
-        {/* Core Medical Sections */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px', marginBottom: '80px' }}>
-          <GuideSection 
-            icon={<ShieldCheck size={32} color="#10b981" />}
-            title={t('verified_protocols_title')}
-            desc={t('verified_protocols_sub')}
-          />
-          <GuideSection 
-            icon={<Activity size={32} color="#ef4444" />}
-            title={t('immediate_action')}
-            desc={t('immediate_action_desc')}
-          />
-          <GuideSection 
-            icon={<Info size={32} color="#3b82f6" />}
-            title={t('guide_triage_title')}
-            desc={t('guide_triage_desc')}
-          />
         </div>
 
         {/* Precision Orchestration Section */}
@@ -151,7 +132,7 @@ const Guide = () => {
 
             <motion.div whileHover={{ y: -10 }} className="glass-panel" style={{ padding: '50px', background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, transparent 100%)' }}>
               <div style={{ marginBottom: '24px', background: 'rgba(16, 185, 129, 0.1)', width: '60px', height: '60px', borderRadius: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Shield size={30} color="#10b981" />
+                <ShieldCheck size={30} color="#10b981" />
               </div>
               <h3 style={{ fontSize: '1.6rem', marginBottom: '20px', fontWeight: '800' }}>{t('orch_feature3_title')}</h3>
               <p style={{ color: 'var(--text-secondary)', lineHeight: '1.8', fontSize: '1.1rem' }}>{t('orch_feature3_desc')}</p>
@@ -176,36 +157,5 @@ const Guide = () => {
     </div>
   );
 };
-
-const UsageStep = ({ icon, title, desc }) => (
-  <div className="glass-panel" style={{ padding: '30px' }}>
-    <div style={{ marginBottom: '20px', background: 'rgba(255,255,255,0.03)', width: '50px', height: '50px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      {icon}
-    </div>
-    <h3 style={{ fontSize: '1.3rem', marginBottom: '12px' }}>{title}</h3>
-    <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6' }}>{desc}</p>
-  </div>
-);
-
-const GuideSection = ({ icon, title, desc }) => (
-  <div className="glass-panel" style={{ padding: '40px' }}>
-    <div style={{ marginBottom: '20px' }}>{icon}</div>
-    <h3 style={{ fontSize: '1.5rem', marginBottom: '16px' }}>{title}</h3>
-    <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7' }}>{desc}</p>
-  </div>
-);
-
-const ProtocolItem = ({ title, steps }) => (
-  <div>
-    <h4 style={{ color: '#ef4444', marginBottom: '15px', fontSize: '1.1rem', fontWeight: '700' }}>{title}</h4>
-    <ul style={{ padding: 0, listStyle: 'none' }}>
-      {steps.map((step, i) => (
-        <li key={i} style={{ marginBottom: '10px', color: 'var(--text-secondary)', fontSize: '0.95rem', display: 'flex', gap: '8px' }}>
-          <div style={{ color: '#ef4444' }}>•</div> {step}
-        </li>
-      ))}
-    </ul>
-  </div>
-);
 
 export default Guide;
