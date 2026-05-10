@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ShieldCheck, Activity, Smartphone, Info, AlertTriangle, Book, UserPlus, Users, Zap } from 'lucide-react';
+import { ShieldCheck, Activity, Smartphone, Info, AlertTriangle, Book, UserPlus, Users, Zap, MessageCircle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 const Guide = () => {
@@ -22,7 +22,7 @@ const Guide = () => {
           </p>
         </div>
 
-        {/* HOW TO USE SECTION - RESTORED & IMPROVED */}
+        {/* HOW TO USE SECTION */}
         <div style={{ marginBottom: '100px' }}>
           <h2 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '50px', textAlign: 'center' }}>
             {t('guide_usage_title')}
@@ -43,6 +43,32 @@ const Guide = () => {
               title={t('guide_use_step3_title')}
               desc={t('guide_use_step3_desc')}
             />
+          </div>
+        </div>
+
+        {/* WHATSAPP INTEGRATION - RESTORED */}
+        <div className="glass-panel" style={{ padding: '60px', marginBottom: '100px', border: '1px solid rgba(16, 185, 129, 0.3)', background: 'rgba(16, 185, 129, 0.02)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '30px' }}>
+            <MessageCircle size={40} color="#10b981" />
+            <h2 style={{ fontSize: '2.5rem', fontWeight: '900' }}>{t('whatsapp_title')}</h2>
+          </div>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', lineHeight: '1.8', marginBottom: '40px' }}>
+            {t('whatsapp_desc')}
+          </p>
+          
+          <div style={{ display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap' }}>
+            <div style={{ padding: '20px 40px', background: 'rgba(255,255,255,0.05)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.1)', fontSize: '1.5rem', fontWeight: '800', color: '#10b981' }}>
+              {t('whatsapp_number')}
+            </div>
+            <a 
+              href={`https://wa.me/14155238886?text=join%20${encodeURIComponent('<keyword>')}`} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="premium-button"
+              style={{ textDecoration: 'none', background: '#10b981', padding: '15px 30px', borderRadius: '8px', fontWeight: '700' }}
+            >
+              Open WhatsApp
+            </a>
           </div>
         </div>
 
