@@ -18,25 +18,19 @@ const Logo = ({ size = 32 }) => {
             fontWeight: '900', 
             letterSpacing: '-1.2px',
           }}
-        >
-          Rasta
-        </text>
-        
-        {/* Saathi - Red Bold */}
-        <text 
-          x="66" 
-          y="24" 
-          fill="#ef4444" 
-          style={{ 
-            fontFamily: 'Outfit, Inter, system-ui, sans-serif', 
-            fontSize: '24px', 
-            fontWeight: '900', 
-            letterSpacing: '-0.8px',
-          }}
-        >
-          Saathi
-        </text>
-      </svg>
+    <div 
+      className="logo-container" 
+      style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        fontFamily: 'var(--font-heading)',
+        fontSize: `${size}px`,
+        fontWeight: '900',
+        letterSpacing: '-1.5px',
+        userSelect: 'none'
+      }}
+    >
+      <span style={{ color: 'white' }}>Rasta</span><span style={{ color: '#ef4444' }}>Saathi</span>
     </div>
   );
 };

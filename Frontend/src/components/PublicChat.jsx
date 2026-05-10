@@ -66,7 +66,7 @@ const PublicChat = () => {
           >
             {/* Header */}
             <div style={{ background: 'rgba(239, 68, 68, 0.1)', padding: '15px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
                 <span style={{ fontWeight: '700', letterSpacing: '0.5px', color: 'white' }}>Rasta</span>
                 <span style={{ fontWeight: '700', letterSpacing: '0.5px', color: '#ef4444' }}>Saathi</span>
                 <span style={{ fontWeight: '700', letterSpacing: '0.5px', color: 'white', marginLeft: '5px' }}>Medic</span>
