@@ -76,7 +76,6 @@ const Contact = () => {
           </div>
         </div>
       </div>
-      </div>
 
       {/* Global Support Narrative */}
       <div style={{ marginTop: '120px', textAlign: 'center' }}>

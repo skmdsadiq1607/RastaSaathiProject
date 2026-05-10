@@ -88,9 +88,7 @@ const Guide = () => {
             <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>In the App, go to <b>Profile</b> and add your phone number with country code.</div>
           </div>
         </div>
-      </div>
 
-      </div>
 
       {/* The Golden Minute Narrative */}
       <div style={{ margin: '120px 0', textAlign: 'left' }}>
