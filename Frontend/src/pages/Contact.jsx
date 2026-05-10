@@ -54,7 +54,23 @@ const Contact = () => {
             <input type="text" className="form-input" placeholder="Your Name" />
             <input type="email" className="form-input" placeholder="Your Email" />
             <textarea className="form-input" rows="4" placeholder="How can we help?" style={{ resize: 'none' }}></textarea>
-            <button className="premium-button" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
+            <button 
+              className="premium-button" 
+              style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center', 
+                gap: '10px',
+                background: 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)',
+                border: 'none',
+                padding: '14px',
+                borderRadius: '12px',
+                color: 'white',
+                fontWeight: '700',
+                cursor: 'pointer',
+                boxShadow: '0 4px 15px rgba(239, 68, 68, 0.3)'
+              }}
+            >
               <Send size={18} /> Send Message
             </button>
           </div>
