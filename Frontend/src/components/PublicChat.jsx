@@ -66,13 +66,10 @@ const PublicChat = () => {
           >
             {/* Header */}
             <div style={{ background: 'rgba(239, 68, 68, 0.1)', padding: '15px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Shield color="#ef4444" size={20} strokeWidth={2.5} />
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <span style={{ fontWeight: '700', letterSpacing: '0.5px', color: 'white' }}>Rasta</span>
-                  <span style={{ fontWeight: '700', letterSpacing: '0.5px', color: '#ef4444' }}>Saathi</span>
-                  <span style={{ fontWeight: '700', letterSpacing: '0.5px', color: 'white', marginLeft: '5px' }}>Medic</span>
-                </div>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <span style={{ fontWeight: '700', letterSpacing: '0.5px', color: 'white' }}>Rasta</span>
+                <span style={{ fontWeight: '700', letterSpacing: '0.5px', color: '#ef4444' }}>Saathi</span>
+                <span style={{ fontWeight: '700', letterSpacing: '0.5px', color: 'white', marginLeft: '5px' }}>Medic</span>
               </div>
               <X size={20} onClick={() => setIsOpen(false)} style={{ cursor: 'pointer' }} />
             </div>
