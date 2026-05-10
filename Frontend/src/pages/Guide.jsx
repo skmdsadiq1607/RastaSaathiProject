@@ -61,7 +61,7 @@ const Guide = () => {
               {t('whatsapp_number')}
             </div>
             <a 
-              href={`https://wa.me/14155238886?text=join%20${encodeURIComponent('<keyword>')}`} 
+              href={`https://wa.me/14155238886?text=join%20do-hit`} 
               target="_blank" 
               rel="noopener noreferrer"
               className="premium-button"
