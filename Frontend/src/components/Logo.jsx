@@ -1,59 +1,75 @@
 import React from 'react';
 
 const Logo = ({ size = 32 }) => {
-  // Size multiplier for scaling
   const scale = size / 32;
   
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <svg width={220 * scale} height={size} viewBox="0 0 220 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        {/* Continuous ECG Pulse Line travelling through the text */}
+      <svg width={240 * scale} height={size} viewBox="0 0 240 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* Glow Filter for the Heartbeat */}
+        <defs>
+          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="1.5" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+        </defs>
+
+        {/* Hyper-Pulse ECG Line - Weaving through the text */}
         <path 
-          d="M0 20H20L24 14L28 26L32 20H75L79 10L85 30L91 20H150L154 12L160 28L164 20H220" 
+          d="M0 20 H15 L18 10 L22 30 L26 20 H70 L75 5 L82 28 L88 15 L94 20 H150 L155 8 L162 30 L168 18 L174 20 H240" 
           stroke="#ef4444" 
-          strokeWidth="1.5" 
+          strokeWidth="2.5" 
           strokeLinecap="round" 
           strokeLinejoin="round" 
-          style={{ opacity: 0.6 }}
+          filter="url(#glow)"
         />
         
-        {/* Rasta - White Bold */}
+        {/* Rasta - White Heavy Weight */}
         <text 
-          x="10" 
+          x="12" 
           y="24" 
           fill="white" 
           style={{ 
             fontFamily: 'Inter, system-ui, sans-serif', 
-            fontSize: '24px', 
+            fontSize: '26px', 
             fontWeight: '900', 
-            letterSpacing: '-1px' 
+            letterSpacing: '-1.5px',
+            textShadow: '0 0 10px rgba(0,0,0,0.5)'
           }}
         >
           Rasta
         </text>
         
-        {/* Saathi - Red Bold */}
+        {/* Saathi - Red Bold with Glow */}
         <text 
-          x="78" 
+          x="82" 
           y="24" 
           fill="#ef4444" 
           style={{ 
             fontFamily: 'Inter, system-ui, sans-serif', 
-            fontSize: '24px', 
+            fontSize: '26px', 
             fontWeight: '900', 
-            letterSpacing: '-0.5px' 
+            letterSpacing: '-1px',
+            textShadow: '0 0 15px rgba(239, 68, 68, 0.4)'
           }}
         >
           Saathi
         </text>
 
-        {/* Highlight Pulse Spikes (Brighter Red for the spikes themselves) */}
+        {/* Foreground Pulse Accents (Crossing in front of letters) */}
         <path 
-          d="M79 10L85 30L91 20" 
-          stroke="#ef4444" 
-          strokeWidth="2.5" 
+          d="M18 10 L22 30 L26 20" 
+          stroke="white" 
+          strokeWidth="1.5" 
           strokeLinecap="round" 
-          strokeLinejoin="round" 
+          opacity="0.3"
+        />
+        <path 
+          d="M75 5 L82 28 L88 15" 
+          stroke="white" 
+          strokeWidth="1.5" 
+          strokeLinecap="round" 
+          opacity="0.3"
         />
       </svg>
     </div>
