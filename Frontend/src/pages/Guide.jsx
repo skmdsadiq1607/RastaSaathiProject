@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ShieldCheck, Activity } from 'lucide-react';
+import { ShieldCheck, Activity, Smartphone, Info, AlertTriangle, Book } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 const Guide = () => {
@@ -22,7 +22,8 @@ const Guide = () => {
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(450px, 1fr))', gap: '40px', marginBottom: '80px' }}>
+        {/* Core Sections */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px', marginBottom: '80px' }}>
           <GuideSection 
             icon={<ShieldCheck size={32} color="#10b981" />}
             title={t('verified_protocols_title')}
@@ -33,11 +34,18 @@ const Guide = () => {
             title={t('immediate_action')}
             desc={t('immediate_action_desc')}
           />
+          <GuideSection 
+            icon={<Info size={32} color="#3b82f6" />}
+            title={t('guide_triage_title')}
+            desc={t('guide_triage_desc')}
+          />
         </div>
 
-        {/* Detailed Grid */}
-        <div className="glass-panel" style={{ padding: '60px' }}>
-          <h2 style={{ fontSize: '2rem', fontWeight: '800', marginBottom: '40px', textAlign: 'center' }}>{t('first_aid_title')}</h2>
+        {/* Detailed First Aid Protocol */}
+        <div className="glass-panel" style={{ padding: '60px', marginBottom: '80px' }}>
+          <h2 style={{ fontSize: '2rem', fontWeight: '800', marginBottom: '40px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '15px' }}>
+            <Book size={28} color="#ef4444" /> {t('first_aid_title')}
+          </h2>
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '40px' }}>
             <ProtocolItem 
@@ -52,6 +60,20 @@ const Guide = () => {
               title={t('protocol_shock')}
               steps={[t('step_flat'), t('step_warm'), t('step_loose')]}
             />
+          </div>
+        </div>
+
+        {/* Critical Warnings */}
+        <div className="glass-panel" style={{ padding: '60px', border: '1px solid rgba(239, 68, 68, 0.3)', background: 'rgba(239, 68, 68, 0.02)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '30px' }}>
+            <AlertTriangle size={40} color="#ef4444" />
+            <h2 style={{ fontSize: '2rem', fontWeight: '900' }}>{t('guide_evac_title')}</h2>
+          </div>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', lineHeight: '1.8', marginBottom: '30px' }}>
+            {t('guide_evac_desc')}
+          </p>
+          <div style={{ padding: '20px', background: 'rgba(239, 68, 68, 0.1)', borderRadius: '12px', border: '1px solid rgba(239, 68, 68, 0.2)', color: '#ef4444', fontWeight: '700' }}>
+            ⚠️ CRITICAL: Always prioritize your own safety before attempting to rescue others.
           </div>
         </div>
       </motion.div>

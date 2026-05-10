@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
-import { Mail, Phone, MapPin, Globe } from 'lucide-react';
+import { Mail, Phone, MapPin, Globe, MessageSquare } from 'lucide-react';
 
 const Contact = () => {
   const { t } = useLanguage();
@@ -22,24 +22,36 @@ const Contact = () => {
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px', marginBottom: '80px' }}>
           <div className="glass-panel" style={{ padding: '40px', textAlign: 'center' }}>
             <Mail size={32} color="#ef4444" style={{ marginBottom: '20px' }} />
             <h3>Strategic Partnerships</h3>
-            <p style={{ color: 'var(--text-secondary)' }}>partners@rastasaathi.in</p>
+            <p style={{ color: 'var(--text-secondary)', marginTop: '10px' }}>{t('contact_email')}</p>
           </div>
           
           <div className="glass-panel" style={{ padding: '40px', textAlign: 'center' }}>
             <Phone size={32} color="#3b82f6" style={{ marginBottom: '20px' }} />
-            <h3>Government Liaison</h3>
-            <p style={{ color: 'var(--text-secondary)' }}>+91 1800-RASTA-SOS</p>
+            <h3>Emergency Liaison</h3>
+            <p style={{ color: 'var(--text-secondary)', marginTop: '10px' }}>{t('contact_phone')}</p>
           </div>
 
           <div className="glass-panel" style={{ padding: '40px', textAlign: 'center' }}>
             <Globe size={32} color="#10b981" style={{ marginBottom: '20px' }} />
             <h3>Headquarters</h3>
-            <p style={{ color: 'var(--text-secondary)' }}>IIT Madras Research Park, Chennai</p>
+            <p style={{ color: 'var(--text-secondary)', marginTop: '10px' }}>{t('contact_address')}</p>
           </div>
+        </div>
+
+        {/* Reach out form placeholder / direct message */}
+        <div className="glass-panel" style={{ padding: '60px', textAlign: 'center', background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, transparent 100%)' }}>
+          <MessageSquare size={40} color="#ef4444" style={{ marginBottom: '20px' }} />
+          <h2 style={{ fontSize: '2rem', marginBottom: '20px' }}>Direct Support</h2>
+          <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto 30px' }}>
+            If you are a medical professional or emergency responder looking to integrate with our grid, please reach out directly via email.
+          </p>
+          <a href={`mailto:${t('contact_email')}`} className="premium-button" style={{ textDecoration: 'none', display: 'inline-block', padding: '15px 30px', background: '#ef4444', color: 'white', borderRadius: '8px', fontWeight: '700' }}>
+            Contact Us Now
+          </a>
         </div>
       </motion.div>
     </div>
