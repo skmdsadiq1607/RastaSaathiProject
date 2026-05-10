@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ShieldAlert, Heart, Activity, Map, Phone, AlertTriangle, Stethoscope, MessageSquare } from 'lucide-react';
+import { ShieldAlert, Heart, Activity, Map, Phone, AlertTriangle, Stethoscope, MessageSquare, ShieldCheck } from 'lucide-react';
 
 const Guide = () => {
   return (

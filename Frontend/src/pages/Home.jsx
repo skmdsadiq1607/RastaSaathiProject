@@ -147,27 +147,6 @@ const Home = () => {
           />
         </div>
 
-        {/* How It Works */}
-        <div className="glass-panel" style={{ padding: '80px 40px', textAlign: 'center' }}>
-          <h2 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '60px' }}>3 Steps to Safety</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '40px' }}>
-            <div>
-              <div style={{ fontSize: '3rem', fontWeight: '900', color: 'rgba(239, 68, 68, 0.2)', marginBottom: '-30px' }}>01</div>
-              <h3 style={{ fontSize: '1.4rem', marginBottom: '12px' }}>Trigger SOS</h3>
-              <p style={{ color: 'var(--text-secondary)' }}>Tap the emergency button to start the protocol.</p>
-            </div>
-            <div>
-              <div style={{ fontSize: '3rem', fontWeight: '900', color: 'rgba(59, 130, 246, 0.2)', marginBottom: '-30px' }}>02</div>
-              <h3 style={{ fontSize: '1.4rem', marginBottom: '12px' }}>AI Assessment</h3>
-              <p style={{ color: 'var(--text-secondary)' }}>AI identifies injury severity and hospital needs.</p>
-            </div>
-            <div>
-              <div style={{ fontSize: '3rem', fontWeight: '900', color: 'rgba(16, 185, 129, 0.2)', marginBottom: '-30px' }}>03</div>
-              <h3 style={{ fontSize: '1.4rem', marginBottom: '12px' }}>Rescue Commences</h3>
-              <p style={{ color: 'var(--text-secondary)' }}>Contacts alerted and navigation starts instantly.</p>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
