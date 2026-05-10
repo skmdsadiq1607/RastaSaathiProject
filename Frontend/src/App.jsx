@@ -12,6 +12,7 @@ import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import Contact from './pages/Contact';
 import Guide from './pages/Guide';
+import PublicChat from './components/PublicChat';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('roadsos_token'));
@@ -131,6 +132,8 @@ function App() {
             </Routes>
           </AnimatePresence>
         </main>
+
+        <PublicChat />
         
         <footer style={{ borderTop: '1px solid var(--border-glass)', padding: '60px 0', marginTop: 'auto', background: 'rgba(2, 6, 23, 0.5)', textAlign: 'center' }}>
           <div className="container">
