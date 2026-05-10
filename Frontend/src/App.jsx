@@ -73,11 +73,11 @@ function App() {
                 onChange={(e) => setLang(e.target.value)}
                 style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'white', borderRadius: '5px', padding: '5px' }}
               >
-                <option value="en" style={{background:'#020617'}}>EN</option>
-                <option value="hi" style={{background:'#020617'}}>HI</option>
-                <option value="te" style={{background:'#020617'}}>TE</option>
-                <option value="ta" style={{background:'#020617'}}>TA</option>
-                <option value="ur" style={{background:'#020617'}}>UR</option>
+                <option value="en" style={{background:'#020617'}}>English</option>
+                <option value="hi" style={{background:'#020617'}}>हिन्दी</option>
+                <option value="te" style={{background:'#020617'}}>తెలుగు</option>
+                <option value="ta" style={{background:'#020617'}}>தமிழ்</option>
+                <option value="ur" style={{background:'#020617'}}>اردو</option>
               </select>
               
               {!isLoggedIn ? (
