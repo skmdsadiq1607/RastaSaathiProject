@@ -20,21 +20,20 @@ async function sendSms({ to, body }) {
   try {
     const client = getClient();
     
-    // Determine if we should send a WhatsApp message or standard SMS
-    // If the provided Twilio number is the Sandbox (+14155238886) or specifically formatted as WhatsApp, we send WhatsApp.
-    // Otherwise, we send standard SMS.
-    
-    const isWhatsApp = env.TWILIO_WHATSAPP_NUMBER && env.TWILIO_WHATSAPP_NUMBER.includes('whatsapp:');
+    // Smart detection: If it's the sandbox number or contains 'whatsapp:', use WhatsApp mode
+    const sandboxNumber = '+14155238886';
+    const rawFrom = env.TWILIO_WHATSAPP_NUMBER || '';
+    const isWhatsApp = rawFrom.includes('whatsapp:') || rawFrom.includes(sandboxNumber);
     
     let fromFormatted, toFormatted;
     
     if (isWhatsApp) {
-      fromFormatted = env.TWILIO_WHATSAPP_NUMBER;
+      fromFormatted = rawFrom.startsWith('whatsapp:') ? rawFrom : `whatsapp:${rawFrom}`;
       toFormatted = to.startsWith('whatsapp:') ? to : `whatsapp:${to}`;
     } else {
-      if (!env.TWILIO_PHONE_NUMBER) throw new AppError('Twilio Phone Number not configured for standard SMS', 500, 'CONFIG_ERROR');
+      if (!env.TWILIO_PHONE_NUMBER) throw new AppError('Twilio Phone Number not configured', 500);
       fromFormatted = env.TWILIO_PHONE_NUMBER;
-      toFormatted = to.startsWith('whatsapp:') ? to.replace('whatsapp:', '') : to; // Ensure clean SMS number
+      toFormatted = to.replace('whatsapp:', '');
     }
 
     const msg = await client.messages.create({
