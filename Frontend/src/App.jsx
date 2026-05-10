@@ -29,6 +29,8 @@ function App() {
     };
   }, []);
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const handleLogout = () => {
     localStorage.removeItem('roadsos_token');
     localStorage.removeItem('roadsos_user');
@@ -42,35 +44,74 @@ function App() {
         <div className="ambient-glow glow-red"></div>
         <div className="ambient-glow glow-blue"></div>
         
-        <nav className="glass-nav">
-          <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '80px', flexWrap: 'wrap', padding: '10px 20px' }}>
+        <nav className="glass-nav" style={{ position: 'sticky', top: 0, zIndex: 1000 }}>
+          <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '80px', padding: '0 20px' }}>
             <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex', alignItems: 'center', gap: '10px' }}>
               <Shield color="#ef4444" size={32} />
-              <span style={{ fontFamily: 'var(--font-heading)', fontSize: '1.2rem', fontWeight: '800', letterSpacing: '-0.5px' }}>
+              <span style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', fontWeight: '800', letterSpacing: '-0.5px' }}>
                 Rasta<span style={{ color: '#ef4444' }}>Saathi</span>
               </span>
             </Link>
             
-            <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-              <Link to="/about" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: '500', fontSize: '0.8rem' }}>About</Link>
-              <Link to="/contact" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: '500', fontSize: '0.8rem' }}>Contact</Link>
+            {/* Desktop Menu */}
+            <div className="desktop-menu" style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+              <Link to="/" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: '500' }}>Home</Link>
+              <Link to="/about" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: '500' }}>About</Link>
+              <Link to="/contact" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontWeight: '500' }}>Contact</Link>
               
               {isLoggedIn && (
-                <>
-                  <Link to="/dashboard" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.8rem' }}>
-                    <LayoutDashboard size={16} /> Dash
-                  </Link>
-                </>
+                <Link to="/dashboard" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '600' }}>Dashboard</Link>
               )}
+              
               {!isLoggedIn ? (
-                <Link to="/login" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '600' }}>Login</Link>
+                <Link to="/login" className="btn btn-primary" style={{ padding: '8px 20px' }}>Login</Link>
               ) : (
-                <button onClick={handleLogout} className="btn btn-outline" style={{ padding: '4px 8px', fontSize: '0.7rem', border: '1px solid #ef4444', color: '#ef4444' }}>
-                  Out
-                </button>
+                <button onClick={handleLogout} className="btn btn-outline" style={{ border: '1px solid #ef4444', color: '#ef4444' }}>Logout</button>
               )}
             </div>
+
+            {/* Mobile Toggle */}
+            <button className="mobile-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)} style={{ display: 'none', background: 'none', border: 'none', color: 'white', cursor: 'pointer' }}>
+              {isMenuOpen ? <LogOut size={28} /> : <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                <div style={{ width: '25px', height: '3px', background: 'white' }}></div>
+                <div style={{ width: '25px', height: '3px', background: 'white' }}></div>
+                <div style={{ width: '25px', height: '3px', background: 'white' }}></div>
+              </div>}
+            </button>
           </div>
+
+          {/* Mobile Dropdown */}
+          <AnimatePresence>
+            {isMenuOpen && (
+              <motion.div 
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                style={{ background: 'rgba(2, 6, 23, 0.95)', borderTop: '1px solid var(--border-glass)', overflow: 'hidden' }}
+              >
+                <div style={{ display: 'flex', flexDirection: 'column', padding: '20px', gap: '20px', textAlign: 'center' }}>
+                  <Link to="/" onClick={() => setIsMenuOpen(false)} style={{ color: 'white', textDecoration: 'none', fontSize: '1.2rem' }}>Home</Link>
+                  <Link to="/about" onClick={() => setIsMenuOpen(false)} style={{ color: 'white', textDecoration: 'none', fontSize: '1.2rem' }}>About</Link>
+                  <Link to="/contact" onClick={() => setIsMenuOpen(false)} style={{ color: 'white', textDecoration: 'none', fontSize: '1.2rem' }}>Contact</Link>
+                  {isLoggedIn ? (
+                    <>
+                      <Link to="/dashboard" onClick={() => setIsMenuOpen(false)} style={{ color: 'white', textDecoration: 'none', fontSize: '1.2rem' }}>Dashboard</Link>
+                      <button onClick={handleLogout} className="premium-button">Logout</button>
+                    </>
+                  ) : (
+                    <Link to="/login" onClick={() => setIsMenuOpen(false)} className="premium-button">Login</Link>
+                  )}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <style>{`
+            @media (max-width: 1024px) {
+              .desktop-menu { display: none !important; }
+              .mobile-toggle { display: block !important; }
+            }
+          `}</style>
         </nav>
 
         <main>
