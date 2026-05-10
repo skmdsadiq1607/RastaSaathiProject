@@ -99,12 +99,15 @@ const seedHospitals = async () => {
 
     await Hospital.insertMany(formattedHospitals);
     console.log(`Successfully seeded all ${formattedHospitals.length} hospitals into the database!`);
-
-    process.exit();
+    return formattedHospitals.length;
   } catch (err) {
     console.error(err);
-    process.exit(1);
+    throw err;
   }
 };
 
-seedHospitals();
+if (require.main === module) {
+  seedHospitals().then(() => process.exit(0)).catch(() => process.exit(1));
+}
+
+module.exports = { seedHospitals };
