@@ -51,7 +51,7 @@ const About = () => {
           
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-              <Logo size={28} />
+
               <h3 style={{ fontSize: '1.4rem' }}>Unified SOS Protocol</h3>
             </div>
             <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7' }}>

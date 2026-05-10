@@ -21,7 +21,6 @@ const Home = () => {
             animate={{ opacity: 1, scale: 1 }}
             style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '10px 24px', background: 'rgba(255, 255, 255, 0.03)', borderRadius: '100px', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem', marginBottom: '40px' }}
           >
-            <Logo size={16} />
             <span style={{ letterSpacing: '1px', fontWeight: '600' }}>PRECISION EMERGENCY RESPONSE</span>
           </motion.div>
           
@@ -131,7 +130,7 @@ const Home = () => {
         {/* Features Grid */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px', marginBottom: '140px' }}>
           <FeatureCard 
-            icon={<Logo size={32} />}
+            icon={<Shield size={32} color="#ef4444" />}
             title={t('feature_ai_title')}
             desc={t('feature_ai_desc')}
           />
