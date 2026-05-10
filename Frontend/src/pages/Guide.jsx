@@ -22,27 +22,52 @@ const Guide = () => {
           </p>
         </div>
 
-        {/* HOW TO USE SECTION */}
-        <div style={{ marginBottom: '100px' }}>
-          <h2 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '50px', textAlign: 'center' }}>
-            {t('guide_usage_title')}
-          </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
-            <UsageStep 
-              icon={<UserPlus size={28} color="#ef4444" />}
-              title={t('guide_use_step1_title')}
-              desc={t('guide_use_step1_desc')}
-            />
-            <UsageStep 
-              icon={<Users size={28} color="#3b82f6" />}
-              title={t('guide_use_step2_title')}
-              desc={t('guide_use_step2_desc')}
-            />
-            <UsageStep 
-              icon={<Zap size={28} color="#10b981" />}
-              title={t('guide_use_step3_title')}
-              desc={t('guide_use_step3_desc')}
-            />
+        {/* Step-by-Step Usage */}
+        <div style={{ marginBottom: '140px' }}>
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            style={{ textAlign: 'center', marginBottom: '80px' }}
+          >
+            <h2 style={{ fontSize: '3rem', fontWeight: '900', marginBottom: '20px' }}>
+              {t('guide_usage_title')}
+            </h2>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', maxWidth: '800px', margin: '0 auto' }}>
+              From initial authentication to AI-powered rescue—here is exactly how RastaSaathi works for you.
+            </p>
+          </motion.div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '40px' }}>
+            {[
+              { num: '01', title: t('guide_use_step1_title'), desc: t('guide_use_step1_desc'), color: '#3b82f6' },
+              { num: '02', title: t('guide_use_step2_title'), desc: t('guide_use_step2_desc'), color: '#8b5cf6' },
+              { num: '03', title: t('guide_use_step3_title'), desc: t('guide_use_step3_desc'), color: '#10b981' },
+              { num: '04', title: t('guide_use_step4_title'), desc: t('guide_use_step4_desc'), color: '#ef4444' },
+              { num: '05', title: t('guide_use_step5_title'), desc: t('guide_use_step5_desc'), color: '#f59e0b' },
+              { num: '06', title: t('guide_use_step6_title'), desc: t('guide_use_step6_desc'), color: '#06b6d4' }
+            ].map((step, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ y: 50, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="glass-panel"
+                style={{ 
+                  padding: '50px', 
+                  position: 'relative', 
+                  borderTop: `4px solid ${step.color}`,
+                  background: `linear-gradient(135deg, ${step.color}05 0%, transparent 100%)` 
+                }}
+              >
+                <div style={{ position: 'absolute', top: '20px', right: '20px', fontSize: '3rem', fontWeight: '900', color: `${step.color}20`, lineHeight: 1 }}>
+                  {step.num}
+                </div>
+                <h3 style={{ fontSize: '1.6rem', marginBottom: '16px', fontWeight: '800' }}>{step.title}</h3>
+                <p style={{ color: 'var(--text-secondary)', lineHeight: '1.8', fontSize: '1.1rem' }}>{step.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
 
