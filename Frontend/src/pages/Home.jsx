@@ -194,6 +194,53 @@ const Home = () => {
           />
         </div>
 
+        {/* JOIN THE MISSION SECTION - RESTORED */}
+        <motion.div 
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          className="glass-panel" 
+          style={{ 
+            padding: '80px', 
+            textAlign: 'center', 
+            background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(2, 6, 23, 0.8) 100%)',
+            border: '1px solid rgba(239, 68, 68, 0.2)',
+            borderRadius: '24px'
+          }}
+        >
+          <h2 style={{ fontSize: '3rem', fontWeight: '900', marginBottom: '20px' }}>Join the Mission</h2>
+          <p style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 40px', lineHeight: '1.7' }}>
+            RastaSaathi is more than a platform—it's a community of responders. Join us in making the roads safer for everyone.
+          </p>
+          
+          <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '40px' }}>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Link to="/register" className="premium-button" style={{ 
+                padding: '15px 40px', 
+                textDecoration: 'none', 
+                background: '#ef4444', 
+                color: 'white', 
+                borderRadius: '8px', 
+                fontWeight: '700',
+                fontSize: '1.1rem'
+              }}>
+                Become a Responder
+              </Link>
+            </motion.div>
+          </div>
+
+          <div style={{ display: 'flex', gap: '40px', justifyContent: 'center', flexWrap: 'wrap', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '40px' }}>
+             <div style={{ textAlign: 'left' }}>
+                <div style={{ color: '#ef4444', fontSize: '0.8rem', fontWeight: '800', marginBottom: '5px' }}>EMAIL US</div>
+                <div style={{ fontSize: '1.1rem', fontWeight: '600' }}>rastasaathi@gmail.com</div>
+             </div>
+             <div style={{ textAlign: 'left' }}>
+                <div style={{ color: '#ef4444', fontSize: '0.8rem', fontWeight: '800', marginBottom: '5px' }}>CALL US</div>
+                <div style={{ fontSize: '1.1rem', fontWeight: '600' }}>+91 9441921812</div>
+             </div>
+          </div>
+        </motion.div>
+
       </div>
     </div>
   );

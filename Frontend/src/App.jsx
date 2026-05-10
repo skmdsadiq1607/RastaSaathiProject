@@ -157,6 +157,15 @@ function App() {
                 </p>
               </div>
 
+              <div style={{ display: 'flex', gap: '30px', flexWrap: 'wrap', justifyContent: 'center', marginTop: '10px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'white', fontWeight: '600' }}>
+                  <span style={{ color: '#ef4444' }}>📧</span> rastasaathi@gmail.com
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'white', fontWeight: '600' }}>
+                  <span style={{ color: '#ef4444' }}>📞</span> +91 9441921812
+                </div>
+              </div>
+
               <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.75rem', marginTop: '20px' }}>
                 © 2026 RastaSaathi. IIT Madras Road Safety Hackathon Project.
               </p>
