@@ -67,7 +67,7 @@ const PublicChat = () => {
             {/* Header */}
             <div style={{ background: 'rgba(239, 68, 68, 0.1)', padding: '15px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <span style={{ fontWeight: '700', letterSpacing: '1px' }}>{t('medic_title')}</span>
+                <span style={{ fontWeight: '700', letterSpacing: '1px' }}>Medic</span>
               </div>
               <X size={20} onClick={() => setIsOpen(false)} style={{ cursor: 'pointer' }} />
             </div>
