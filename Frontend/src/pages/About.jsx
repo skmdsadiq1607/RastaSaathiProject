@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Target, Eye, Users, ShieldCheck } from 'lucide-react';
+import { Target, Eye, Users, Shield, ShieldCheck } from 'lucide-react';
 
 const About = () => {
   return (
@@ -10,6 +10,7 @@ const About = () => {
       className="container"
       style={{ paddingTop: '60px', paddingBottom: '100px' }}
     >
+      {/* Header */}
       <div style={{ textAlign: 'center', marginBottom: '80px' }}>
         <h1 style={{ fontSize: '3.5rem', fontWeight: '800', marginBottom: '20px' }}>
           About <span style={{ color: '#ef4444' }}>RastaSaathi</span>
@@ -19,6 +20,7 @@ const About = () => {
         </p>
       </div>
 
+      {/* Vision & Mission */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px', marginBottom: '100px' }}>
         <div className="glass-panel" style={{ padding: '40px' }}>
           <div style={{ background: 'rgba(239, 68, 68, 0.1)', width: '60px', height: '60px', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px' }}>
@@ -41,6 +43,7 @@ const About = () => {
         </div>
       </div>
 
+      {/* Technical Backbone */}
       <div className="glass-panel" style={{ padding: '60px', marginBottom: '60px' }}>
         <h2 style={{ marginBottom: '40px', fontSize: '2.5rem', textAlign: 'center' }}>The Digital Backbone</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px' }}>
