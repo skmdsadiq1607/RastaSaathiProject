@@ -68,18 +68,18 @@ const Dashboard = () => {
       try {
         const token = localStorage.getItem('roadsos_token');
         
-        // 2. Find Nearest Hospital
-        const hospRes = await axios.post(`${API_BASE_URL}/hospital/select`, {
+        // 2. Unified SOS Trigger (Handles Hospital, AI, and WhatsApp Alerts)
+        const sosRes = await axios.post(`${API_BASE_URL}/sos/trigger`, {
           lat: latitude,
           lng: longitude,
-          severityLevel: 'HIGH'
+          injuryType: 'Traffic collision trauma'
         }, {
           headers: { Authorization: `Bearer ${token}` }
         });
 
-        const nearestResult = hospRes.data?.data?.ranked?.[0];
-        const nearest = nearestResult?.hospital;
-        
+        const { hospitalSelection, aiGuidance } = sosRes.data.data;
+        const nearest = hospitalSelection?.[0]?.hospital;
+
         if (nearest) {
           const hLoc = { 
             lat: nearest.location.coordinates[1], 
@@ -87,26 +87,15 @@ const Dashboard = () => {
           };
           setHospitalLocation(hLoc);
           setSelectedHospitalName(nearest.name);
-          
-          // Center map between them
           setMapCenter({
             lat: (latitude + hLoc.lat) / 2,
             lng: (longitude + hLoc.lng) / 2
           });
         }
 
-        // 3. Initialize AI Session
-        const aiRes = await axios.post(`${API_BASE_URL}/firstaid/guide`, {
-          injuryType: 'Traffic collision trauma',
-          severityLevel: 'HIGH',
-          language: 'en'
-        }, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-
-        if (aiRes.data?.data?.sessionId) {
-          setSessionId(aiRes.data.data.sessionId);
-          setMessages(prev => [...prev, { role: 'bot', text: `Hospital Found: ${nearest?.name || 'Nearest Center'}. \n\n${aiRes.data.data.guidance}` }]);
+        if (aiGuidance) {
+          setSessionId(aiGuidance.sessionId);
+          setMessages(prev => [...prev, { role: 'bot', text: `Hospital Found: ${nearest?.name || 'Nearest Center'}. \n\n${aiGuidance.guidance?.answer || 'Follow the instructions below.'}` }]);
         }
       } catch (err) {
         console.error('SOS Logic Error:', err);
