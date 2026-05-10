@@ -14,8 +14,9 @@ async function callClaudeWithRetry({ system, user, maxTokens = 600, retries = 2 
     const client = new Anthropic({ apiKey: key });
 
     try {
+      const modelName = 'claude-3-5-sonnet-latest';
       const msg = await client.messages.create({
-        model: 'claude-3-5-sonnet-20240620', // Updated to valid Anthropic model identifier
+        model: modelName, 
         max_tokens: maxTokens,
         system,
         messages: [{ role: 'user', content: user }]
