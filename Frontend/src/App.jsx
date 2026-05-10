@@ -52,7 +52,10 @@ function App() {
         <nav className="glass-nav" style={{ position: 'sticky', top: 0, zIndex: 1000 }}>
           <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '80px', padding: '0 20px' }}>
             <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <Shield color="#ef4444" size={32} />
+              <svg width="32" height="32" viewBox="0 0 100 100" style={{ filter: 'drop-shadow(0 0 8px rgba(239, 68, 68, 0.4))' }}>
+                <path d="M50 85c-20-15-40-30-40-50 0-10 8-18 18-18 7 0 13 4 17 10 4-6 10-10 17-10 10 0 18 8 18 18 0 20-20 35-40 50z" fill="#ef4444"/>
+                <path d="M20 40h15l5-10 10 25 5-15h15" fill="none" stroke="white" stroke-width="4" stroke-linecap="round"/>
+              </svg>
               <span style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', fontWeight: '800', letterSpacing: '-0.5px' }}>
                 Rasta<span style={{ color: '#ef4444' }}>Saathi</span>
               </span>
