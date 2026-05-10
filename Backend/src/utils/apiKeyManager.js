@@ -4,7 +4,7 @@ const { logger } = require('./logger');
 class ApiKeyManager {
   constructor(keysString, serviceName) {
     this.serviceName = serviceName;
-    this.keys = (keysString || '').split(',').map(k => k.trim()).filter(Boolean);
+    this.keys = (keysString || '').split(/[\s,]+/).map(k => k.trim()).filter(Boolean);
     this.currentIndex = 0;
   }
 
