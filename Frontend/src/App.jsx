@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { Shield, LayoutDashboard, LogOut } from 'lucide-react';
+import { Shield, LayoutDashboard, LogOut, User } from 'lucide-react';
 import { AnimatePresence } from 'framer-motion';
 
 // Pages
@@ -9,6 +9,7 @@ import About from './pages/About';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
+import Profile from './pages/Profile';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('roadsos_token'));
@@ -64,6 +65,9 @@ function App() {
                   <Link to="/dashboard" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <LayoutDashboard size={18} /> Dashboard
                   </Link>
+                  <Link to="/profile" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <User size={18} /> Profile
+                  </Link>
                   <button onClick={handleLogout} className="btn btn-outline" style={{ padding: '6px 12px', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '6px', border: '1px solid #ef4444', color: '#ef4444' }}>
                     <LogOut size={16} /> Logout
                   </button>
@@ -81,6 +85,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/profile" element={<Profile />} />
             </Routes>
           </AnimatePresence>
         </main>
