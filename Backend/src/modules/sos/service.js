@@ -17,6 +17,13 @@ async function enforceSosRateLimit({ redis, userId }) {
 async function triggerSos({ io, redis, queues, lat, lng, userId, injuryType, vehicleType }) {
   await enforceSosRateLimit({ redis, userId });
 
+  const { User } = require('../auth/model');
+  const { selectHospital } = require('../hospital/service');
+  const { dispatchAlerts } = require('../alerts/service');
+  const { startSession } = require('../firstaid/service');
+  const { predictSeverityRuleBased } = require('../../utils/severityScorer');
+
+  const victimUser = userId ? await User.findById(userId).lean() : null;
   const incident = await createIncident({ userId, lat, lng, injuryType, vehicleType });
   const sos = await SOS.create({
     userId: userId || undefined,
@@ -26,25 +33,41 @@ async function triggerSos({ io, redis, queues, lat, lng, userId, injuryType, veh
     vehicleType
   });
 
-  let hospitalSelection = [];
-  let aiGuidance = null;
+  // 1. Determine Severity
+  const severity = predictSeverityRuleBased({ injuryType, vehicleType });
 
-  // If queues exist, use them. Otherwise, run workflow synchronously for Free Tiers (Render)
-  if (queues && queues.sos) {
-    await queues.sos.add('trigger', {
-      incidentId: String(incident._id),
-      sosId: String(sos._id),
-      lat, lng, userId, injuryType
+  // 2. Select Nearest Hospital
+  const hospitalSelection = await selectHospital({ 
+    lat, lng, 
+    severityLevel: severity.level, 
+    injuryType 
+  });
+  const nearest = hospitalSelection?.[0]?.hospital;
+
+  // 3. Dispatch Alerts (WhatsApp/SMS/FCM)
+  await dispatchAlerts({
+    io,
+    incident,
+    victimUser,
+    severityLevel: severity.level,
+    hospitalName: nearest?.name,
+    etaSeconds: hospitalSelection?.[0]?.etaSeconds,
+    lang: victimUser?.language || 'en'
+  });
+
+  // 4. Start AI First Aid Session
+  let aiGuidance = null;
+  try {
+    aiGuidance = await startSession({
+      incidentId: incident._id,
+      userId,
+      injuryType,
+      severityLevel: severity.level,
+      language: victimUser?.language || 'en'
     });
-  } else {
-    // SYNC FALLBACK: Run the core workflow logic directly
-    const { processSosWorkflow } = require('../workflow/service');
-    const result = await processSosWorkflow({
-      incidentId: String(incident._id),
-      lat, lng, userId, injuryType
-    });
-    hospitalSelection = result.hospitalSelection;
-    aiGuidance = result.aiGuidance;
+  } catch (e) {
+    // Fallback if AI fails
+    aiGuidance = { sessionId: null, guidance: { answer: "Stay calm. Apply pressure to any wounds. Help is on the way." } };
   }
 
   // Realtime broadcast
