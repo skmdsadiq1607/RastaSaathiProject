@@ -149,8 +149,11 @@ function App() {
                 <p style={{ color: 'var(--text-primary)', fontWeight: '600', marginBottom: '8px', fontSize: '1.1rem' }}>
                   Made with ❤️ by Team-<span style={{ color: 'white' }}>Rasta</span><span style={{ color: '#ef4444' }}>Saathi</span>
                 </p>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.6', letterSpacing: '0.5px' }}>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.6', letterSpacing: '0.5px', marginBottom: '20px' }}>
                   Dr.Lakshmi | Sadiq | Krishna | Chakravarthi | Hasini
+                </p>
+                <p style={{ color: 'white', fontStyle: 'italic', fontSize: '1.1rem', fontWeight: '500', opacity: 0.8 }}>
+                  "{t('footer_tagline')}"
                 </p>
               </div>
 
