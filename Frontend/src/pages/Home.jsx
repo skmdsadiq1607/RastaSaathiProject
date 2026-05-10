@@ -1,9 +1,8 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { Shield, Zap, Heart, Bell, ChevronRight, Activity, MapPin, Smartphone, BookOpen } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const Home = () => {
+  const { t } = useLanguage();
   return (
     <div style={{ overflow: 'hidden', position: 'relative' }}>
       {/* Background Ambient Glows */}
@@ -28,8 +27,8 @@ const Home = () => {
             transition={{ delay: 0.2 }}
             style={{ fontSize: 'clamp(3rem, 10vw, 5.5rem)', fontWeight: '900', lineHeight: '0.95', marginBottom: '32px', letterSpacing: '-2px' }}
           >
-            Seconds Save <br />
-            <span className="text-gradient-red" style={{ filter: 'drop-shadow(0 0 20px rgba(239, 68, 68, 0.3))' }}>Lives.</span>
+            {t('hero_title').split('.')[0]}<br />
+            <span className="text-gradient-red" style={{ filter: 'drop-shadow(0 0 20px rgba(239, 68, 68, 0.3))' }}>{t('hero_title').split('.')[1] || '.'}</span>
           </motion.h1>
           
           <motion.p 
@@ -38,7 +37,7 @@ const Home = () => {
             transition={{ delay: 0.4 }}
             style={{ fontSize: '1.4rem', color: 'var(--text-secondary)', maxWidth: '800px', margin: '0 auto 50px', lineHeight: '1.5' }}
           >
-            RastaSaathi orchestrates AI, geospatial data, and real-time alerts to bridge the gap between accident and life-saving care.
+            {t('hero_sub')}
           </motion.p>
 
           <motion.div 
@@ -48,10 +47,10 @@ const Home = () => {
             style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}
           >
             <Link to="/guide" className="premium-button sos-pulse" style={{ padding: '20px 50px', fontSize: '1.2rem', display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <BookOpen size={20} /> View Emergency Guide
+              <BookOpen size={20} /> {t('view_guide')}
             </Link>
             <Link to="/about" className="btn btn-outline" style={{ padding: '20px 50px', fontSize: '1.2rem', border: '1px solid rgba(255,255,255,0.1)', color: 'white', textDecoration: 'none' }}>
-              Our Vision
+              {t('vision')}
             </Link>
           </motion.div>
         </div>

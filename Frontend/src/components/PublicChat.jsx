@@ -1,9 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, X, Send, Stethoscope, ShieldAlert } from 'lucide-react';
 import EMERGENCIES from '../data/emergencies.json';
+import { useLanguage } from '../context/LanguageContext';
 
 const PublicChat = () => {
+  const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
     { text: "Emergency? Type your situation (e.g., 'bleeding', 'fracture') for instant first-aid.", isBot: true, data: null }
@@ -65,7 +64,7 @@ const PublicChat = () => {
             <div style={{ background: 'rgba(239, 68, 68, 0.1)', padding: '15px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <Stethoscope size={20} color="#ef4444" className="sos-pulse-small" />
-                <span style={{ fontWeight: '700', letterSpacing: '1px' }}>RASTASAATHI MEDIC</span>
+                <span style={{ fontWeight: '700', letterSpacing: '1px' }}>{t('medic_title')}</span>
               </div>
               <X size={20} onClick={() => setIsOpen(false)} style={{ cursor: 'pointer' }} />
             </div>
@@ -112,7 +111,7 @@ const PublicChat = () => {
                       </div>
 
                       <div style={{ marginTop: '15px', paddingTop: '10px', borderTop: '1px solid rgba(255,255,255,0.1)', textAlign: 'center' }}>
-                        <a href="tel:108" style={{ color: '#ef4444', textDecoration: 'none', fontWeight: '800', fontSize: '1rem' }}>📞 CALL 108 NOW</a>
+                        <a href="tel:108" style={{ color: '#ef4444', textDecoration: 'none', fontWeight: '800', fontSize: '1rem' }}>📞 {t('call_108')}</a>
                       </div>
                     </motion.div>
                   )}
