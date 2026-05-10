@@ -8,15 +8,6 @@ const Home = () => {
     <div className="container" style={{ paddingTop: '80px', paddingBottom: '100px' }}>
       {/* Hero Section */}
       <div style={{ textAlign: 'center', marginBottom: '120px' }}>
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          style={{ display: 'inline-flex', padding: '8px 20px', background: 'rgba(239, 68, 68, 0.1)', borderRadius: '30px', color: '#ef4444', fontWeight: '700', marginBottom: '30px', border: '1px solid rgba(239, 68, 68, 0.2)' }}
-        >
-          🚀 IIT Madras Road Safety Hackathon 2026
-        </motion.div>
-        
         <motion.h1 
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
