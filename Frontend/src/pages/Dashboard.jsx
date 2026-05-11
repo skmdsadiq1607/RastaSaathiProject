@@ -192,7 +192,7 @@ const Dashboard = () => {
                     display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
                   }}
                 >
-                  <Logo size={22} />
+                  <Logo size={22} light />
                   <span style={{ fontSize: '1.6rem', fontWeight: '900', marginTop: '4px' }}>SOS</span>
                 </motion.button>
               </div>
