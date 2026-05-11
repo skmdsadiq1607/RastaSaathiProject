@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const DeliverySchema = new mongoose.Schema(
   {
-    channel: { type: String, enum: ['FCM', 'SMS', 'SOCKET'], required: true, index: true },
+    channel: { type: String, enum: ['FCM', 'SMS', 'SOCKET', 'WHATSAPP'], required: true, index: true },
     to: { type: String },
     status: { type: String, enum: ['PENDING', 'SENT', 'FAILED'], default: 'PENDING', index: true },
     providerMessageId: { type: String },
