@@ -54,7 +54,7 @@ const PublicChat = () => {
   };
 
   return (
-    <div style={{ position: 'fixed', bottom: '30px', right: '30px', zIndex: 1000 }}>
+    <div style={{ position: 'fixed', bottom: '20px', right: '20px', zIndex: 1000, display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -62,13 +62,24 @@ const PublicChat = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
             className="glass-panel"
-            style={{ width: '380px', height: '550px', marginBottom: '20px', display: 'flex', flexDirection: 'column', overflow: 'hidden', border: '1px solid rgba(239, 68, 68, 0.3)', boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}
+            style={{ 
+              width: 'min(380px, 90vw)', 
+              height: 'min(550px, 70vh)', 
+              marginBottom: '20px', 
+              display: 'flex', 
+              flexDirection: 'column', 
+              overflow: 'hidden', 
+              border: '1px solid rgba(239, 68, 68, 0.3)', 
+              boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
+              position: 'absolute',
+              bottom: '80px',
+              right: '0'
+            }}
           >
             {/* Header */}
             <div style={{ background: 'rgba(239, 68, 68, 0.1)', padding: '15px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
               <div style={{ display: 'flex', alignItems: 'center' }}>
-                <span style={{ fontWeight: '700', letterSpacing: '0.5px', color: 'white' }}>Rasta</span>
-                <span style={{ fontWeight: '700', letterSpacing: '0.5px', color: '#ef4444' }}>Saathi</span>
+                <span style={{ fontWeight: '700', letterSpacing: '0.5px', color: 'white' }}>Rasta</span><span style={{ fontWeight: '700', letterSpacing: '0.5px', color: '#ef4444' }}>Saathi</span>
                 <span style={{ fontWeight: '700', letterSpacing: '0.5px', color: 'white', marginLeft: '5px' }}>Medic</span>
               </div>
               <X size={20} onClick={() => setIsOpen(false)} style={{ cursor: 'pointer' }} />

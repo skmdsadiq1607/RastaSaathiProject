@@ -22,9 +22,9 @@ const Login = () => {
         const res = await axios.post(`${API_BASE_URL}/auth/google`, {
           token: tokenResponse.access_token
         });
-        localStorage.setItem('roadsos_token', res.data.data.accessToken);
-        localStorage.setItem('roadsos_user', JSON.stringify(res.data.data.user));
-        window.dispatchEvent(new Event('auth-change'));
+        localStorage.setItem('token', res.data.data.accessToken);
+        localStorage.setItem('user', JSON.stringify(res.data.data.user));
+        window.dispatchEvent(new Event('storage'));
         navigate('/dashboard');
       } catch (err) {
         console.error("Google Auth Error:", err);
@@ -42,45 +42,45 @@ const Login = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="container"
-      style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '80vh' }}
+      style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 'calc(100vh - 80px)', paddingTop: '40px', paddingBottom: '40px' }}
     >
       <motion.div 
         initial={{ scale: 0.95, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         className="glass-panel" 
-        style={{ width: '100%', maxWidth: '450px', padding: '40px' }}
+        style={{ width: '100%', maxWidth: '480px', padding: 'clamp(24px, 8vw, 50px)' }}
       >
-        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-          <div style={{ marginBottom: '16px', display: 'flex', justifyContent: 'center' }}>
+        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+          <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'center' }}>
             <Logo size={48} />
           </div>
-          <h1 style={{ fontSize: '2.5rem', marginBottom: '8px' }}>{t('login_title')}</h1>
-          <p style={{ color: 'var(--text-secondary)' }}>{t('login_sub')}</p>
+          <h1 style={{ fontSize: 'clamp(2rem, 5vw, 2.8rem)', fontWeight: '900', marginBottom: '12px', letterSpacing: '-1px' }}>{t('login_title')}</h1>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>{t('login_sub')}</p>
         </div>
 
         {error && (
-          <div style={{ background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', padding: '12px', borderRadius: '8px', marginBottom: '20px', border: '1px solid rgba(239,68,68,0.2)', textAlign: 'center' }}>
+          <div style={{ background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', padding: '16px', borderRadius: '12px', marginBottom: '24px', border: '1px solid rgba(239,68,68,0.2)', textAlign: 'center', fontSize: '0.9rem', fontWeight: '600' }}>
             {error}
           </div>
         )}
 
         <form>
-          <div className="form-group">
-            <label className="form-label">{t('email_label')}</label>
+          <div style={{ marginBottom: '24px' }}>
+            <label style={{ display: 'block', marginBottom: '12px', fontSize: '0.85rem', fontWeight: '800', color: 'var(--text-secondary)', letterSpacing: '1.5px', textTransform: 'uppercase' }}>{t('email_label')}</label>
             <input type="email" className="form-input" placeholder="you@example.com" />
           </div>
-          <div className="form-group" style={{ marginBottom: '32px' }}>
-            <label className="form-label">{t('password_label')}</label>
+          <div style={{ marginBottom: '40px' }}>
+            <label style={{ display: 'block', marginBottom: '12px', fontSize: '0.85rem', fontWeight: '800', color: 'var(--text-secondary)', letterSpacing: '1.5px', textTransform: 'uppercase' }}>{t('password_label')}</label>
             <input type="password" className="form-input" placeholder="••••••••" />
           </div>
           
-          <button type="button" className="btn btn-primary" style={{ width: '100%', marginBottom: '16px', padding: '14px' }}>
+          <button type="button" className="premium-button" style={{ width: '100%', marginBottom: '20px', padding: '18px', border: 'none', cursor: 'pointer' }}>
             {t('signin_btn')}
           </button>
           
-          <div style={{ position: 'relative', textAlign: 'center', margin: '24px 0' }}>
+          <div style={{ position: 'relative', textAlign: 'center', margin: '32px 0' }}>
             <div style={{ position: 'absolute', top: '50%', left: 0, right: 0, height: '1px', background: 'var(--border-glass)' }}></div>
-            <span style={{ position: 'relative', background: 'var(--bg-primary)', padding: '0 16px', color: 'var(--text-secondary)', fontSize: '0.875rem' }}>or</span>
+            <span style={{ position: 'relative', background: 'var(--bg-primary)', padding: '0 16px', color: 'var(--text-secondary)', fontSize: '0.875rem', fontWeight: '600' }}>or continue with</span>
           </div>
 
           <button 
@@ -95,13 +95,13 @@ const Login = () => {
               gap: '12px', 
               background: 'white', 
               color: '#1f2937', 
-              padding: '12px', 
-              borderRadius: '8px', 
+              padding: '16px', 
+              borderRadius: '12px', 
               border: 'none', 
-              fontWeight: '600', 
+              fontWeight: '700', 
               cursor: 'pointer',
-              boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-              transition: 'all 0.2s',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+              transition: 'all 0.3s',
               opacity: loading ? 0.7 : 1
             }}
           >
@@ -111,12 +111,12 @@ const Login = () => {
               <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
               <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 12-4.53z" fill="#EA4335"/>
             </svg>
-            {loading ? 'Connecting...' : t('google_btn')}
+            {loading ? 'Authenticating...' : t('google_btn')}
           </button>
         </form>
 
-        <p style={{ textAlign: 'center', marginTop: '32px', color: 'var(--text-secondary)', fontSize: '0.875rem' }}>
-          {t('no_account')} <Link to="/register" style={{ color: 'var(--accent-blue)', textDecoration: 'none', fontWeight: '600' }}>Register here</Link>
+        <p style={{ textAlign: 'center', marginTop: '40px', color: 'var(--text-secondary)', fontSize: '1rem' }}>
+          {t('no_account')} <Link to="/register" style={{ color: 'var(--accent-red)', textDecoration: 'none', fontWeight: '700' }}>Register here</Link>
         </p>
       </motion.div>
     </motion.div>

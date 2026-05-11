@@ -6,7 +6,7 @@ import axios from 'axios';
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Profile = () => {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('roadsos_user') || '{}'));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user') || '{}'));
   const [name, setName] = useState(user.name || '');
   const [language, setLanguage] = useState(user.language || 'en');
   const [contacts, setContacts] = useState(user.emergencyContacts || []);
@@ -32,7 +32,7 @@ const Profile = () => {
     setLoading(true);
     setMessage({ type: '', text: '' });
     try {
-      const token = localStorage.getItem('roadsos_token');
+      const token = localStorage.getItem('token');
       const res = await axios.put(`${API_BASE_URL}/auth/profile`, {
         name,
         language,
@@ -42,7 +42,7 @@ const Profile = () => {
       });
 
       const updatedUser = res.data.data;
-      localStorage.setItem('roadsos_user', JSON.stringify(updatedUser));
+      localStorage.setItem('user', JSON.stringify(updatedUser));
       setUser(updatedUser);
       setMessage({ type: 'success', text: 'Profile updated successfully!' });
     } catch (err) {

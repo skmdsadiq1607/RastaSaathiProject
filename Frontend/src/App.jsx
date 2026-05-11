@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, NavLink, Link, useNavigate } from 'react-router-dom';
-import { LogOut } from 'lucide-react';
+import { Routes, Route, NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
+import { LogOut, Menu, X, ChevronRight, Globe as GlobeIcon, Heart, User } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useLanguage } from './context/LanguageContext';
 
@@ -21,10 +21,16 @@ import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 
 function App() {
-  const { t } = useLanguage();
+  const { t, lang, setLang } = useLanguage();
   const navigate = useNavigate();
+  const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -41,92 +47,198 @@ function App() {
     navigate('/login');
   };
 
+  const navLinks = [
+    { to: '/', label: t('home') },
+    { to: '/about', label: t('about') },
+    { to: '/mission', label: t('vision_mission') },
+    { to: '/guide', label: t('guide') },
+    { to: '/contact', label: t('contact') },
+  ];
+
+  const languages = [
+    { code: 'en', label: 'English' },
+    { code: 'hi', label: 'हिन्दी' },
+    { code: 'te', label: 'తెలుగు' },
+    { code: 'ta', label: 'தமிழ்' },
+    { code: 'ur', label: 'اردو' }
+  ];
+
   return (
-    <div className="page-wrapper">
-      <div className="ambient-glow glow-red"></div>
-      <div className="ambient-glow glow-blue"></div>
+    <div className="page-wrapper" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       
-      <nav className="glass-nav" style={{ position: 'sticky', top: 0, zIndex: 1000 }}>
-        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '80px', padding: '0 20px' }}>
-          <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex', alignItems: 'center' }}>
+      <nav className="glass-nav">
+        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+          <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex', alignItems: 'center', zIndex: 1100 }}>
             <Logo size={32} />
           </Link>
           
-          <div className="desktop-menu" style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-            <NavLink to="/" style={({ isActive }) => ({ color: isActive ? 'var(--accent-red)' : 'var(--text-secondary)', textDecoration: 'none', fontWeight: '500' })}>{t('home')}</NavLink>
-            <NavLink to="/about" style={({ isActive }) => ({ color: isActive ? 'var(--accent-red)' : 'var(--text-secondary)', textDecoration: 'none', fontWeight: '500' })}>{t('about')}</NavLink>
-            <NavLink to="/mission" style={({ isActive }) => ({ color: isActive ? 'var(--accent-red)' : 'var(--text-secondary)', textDecoration: 'none', fontWeight: '500' })}>{t('vision_mission')}</NavLink>
-            <NavLink to="/guide" style={({ isActive }) => ({ color: isActive ? 'var(--accent-red)' : 'var(--text-secondary)', textDecoration: 'none', fontWeight: '500' })}>{t('guide')}</NavLink>
-            <NavLink to="/contact" style={({ isActive }) => ({ color: isActive ? 'var(--accent-red)' : 'var(--text-secondary)', textDecoration: 'none', fontWeight: '500' })}>{t('contact')}</NavLink>
+          {/* Desktop Menu */}
+          <div className="desktop-menu" style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
+            {navLinks.map(link => (
+              <NavLink 
+                key={link.to}
+                to={link.to} 
+                style={({ isActive }) => ({ 
+                  color: isActive ? 'var(--brand-red)' : 'var(--text-secondary)', 
+                  textDecoration: 'none', 
+                  fontWeight: '700',
+                  fontSize: '0.95rem',
+                  letterSpacing: '0.5px',
+                  transition: 'color 0.3s ease'
+                })}
+              >
+                {link.label}
+              </NavLink>
+            ))}
+            
+            <div style={{ height: '24px', width: '1px', background: 'var(--border-glass)', margin: '0 8px' }}></div>
             
             <LanguageSwitcher />
 
             {!isLoggedIn ? (
-              <>
-                <NavLink to="/login" style={({ isActive }) => ({ color: isActive ? 'var(--accent-red)' : 'var(--text-secondary)', textDecoration: 'none', fontWeight: '500' })}>{t('login')}</NavLink>
-                <Link to="/register" className="btn btn-primary" style={{ padding: '8px 20px' }}>Register</Link>
-              </>
+              <div style={{ display: 'flex', gap: '20px', alignItems: 'center', marginLeft: '12px' }}>
+                <Link to="/login" style={{ color: 'white', textDecoration: 'none', fontWeight: '700', fontSize: '0.9rem' }}>{t('login')}</Link>
+                <Link to="/register" className="btn btn-primary" style={{ padding: '10px 24px', fontSize: '0.85rem' }}>{t('register_btn')}</Link>
+              </div>
             ) : (
-              <>
-                <NavLink to="/dashboard" style={({ isActive }) => ({ color: isActive ? 'var(--accent-red)' : 'var(--text-primary)', textDecoration: 'none', fontWeight: '600' })}>{t('dashboard')}</NavLink>
-                <button onClick={handleLogout} className="btn btn-outline" style={{ border: '1px solid #ef4444', color: '#ef4444', padding: '8px 15px' }}>Logout</button>
-              </>
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginLeft: '12px' }}>
+                <Link to="/dashboard" className="btn btn-glass" style={{ padding: '8px 20px', fontSize: '0.85rem' }}>
+                   {t('dashboard')}
+                </Link>
+                <button onClick={handleLogout} className="btn" style={{ background: 'transparent', border: '1px solid rgba(239, 68, 68, 0.3)', color: '#ef4444', padding: '8px 16px', fontSize: '0.8rem' }}>
+                  {t('logout')}
+                </button>
+              </div>
             )}
           </div>
 
-          <button className="mobile-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)} style={{ display: 'none', background: 'none', border: 'none', color: 'white', cursor: 'pointer' }}>
-            {isMenuOpen ? <LogOut size={28} /> : <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-              <div style={{ width: '25px', height: '3px', background: 'white' }}></div>
-              <div style={{ width: '25px', height: '3px', background: 'white' }}></div>
-              <div style={{ width: '25px', height: '3px', background: 'white' }}></div>
-            </div>}
+          {/* Mobile Toggle */}
+          <button 
+            className="mobile-toggle" 
+            onClick={() => setIsMenuOpen(!isMenuOpen)} 
+            style={{ 
+              zIndex: 1100,
+              background: 'rgba(255,255,255,0.05)', 
+              border: '1px solid rgba(255,255,255,0.1)', 
+              color: 'white', 
+              cursor: 'pointer',
+              width: '48px',
+              height: '48px',
+              borderRadius: '14px',
+              display: 'none',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div 
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              style={{ background: 'rgba(2, 6, 23, 0.95)', borderTop: '1px solid var(--border-glass)', overflow: 'hidden' }}
-            >
-              <div style={{ display: 'flex', flexDirection: 'column', padding: '20px', gap: '15px', textAlign: 'center' }}>
-                <NavLink to="/" onClick={() => setIsMenuOpen(false)} style={({ isActive }) => ({ color: isActive ? 'var(--accent-red)' : 'white', textDecoration: 'none', fontSize: '1.1rem' })}>{t('home')}</NavLink>
-                <NavLink to="/about" onClick={() => setIsMenuOpen(false)} style={({ isActive }) => ({ color: isActive ? 'var(--accent-red)' : 'white', textDecoration: 'none', fontSize: '1.1rem' })}>{t('about')}</NavLink>
-                <NavLink to="/mission" onClick={() => setIsMenuOpen(false)} style={({ isActive }) => ({ color: isActive ? 'var(--accent-red)' : 'white', textDecoration: 'none', fontSize: '1.1rem' })}>{t('vision_mission')}</NavLink>
-                <NavLink to="/guide" onClick={() => setIsMenuOpen(false)} style={({ isActive }) => ({ color: isActive ? 'var(--accent-red)' : 'white', textDecoration: 'none', fontSize: '1.1rem' })}>{t('guide')}</NavLink>
-                <NavLink to="/contact" onClick={() => setIsMenuOpen(false)} style={({ isActive }) => ({ color: isActive ? 'var(--accent-red)' : 'white', textDecoration: 'none', fontSize: '1.1rem' })}>{t('contact')}</NavLink>
-                
-                <div style={{ padding: '10px 0', borderTop: '1px solid rgba(255,255,255,0.1)', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-                  <LanguageSwitcher />
-                </div>
-
-                {!isLoggedIn ? (
-                  <>
-                    <NavLink to="/login" onClick={() => setIsMenuOpen(false)} style={({ isActive }) => ({ color: isActive ? 'var(--accent-red)' : 'white', textDecoration: 'none', fontSize: '1.1rem' })}>{t('login')}</NavLink>
-                    <Link to="/register" onClick={() => setIsMenuOpen(false)} className="btn btn-primary">Register</Link>
-                  </>
-                ) : (
-                  <>
-                    <NavLink to="/dashboard" onClick={() => setIsMenuOpen(false)} style={({ isActive }) => ({ color: isActive ? 'var(--accent-red)' : 'white', textDecoration: 'none', fontSize: '1.1rem', fontWeight: '700' })}>{t('dashboard')}</NavLink>
-                    <button onClick={() => { handleLogout(); setIsMenuOpen(false); }} className="btn btn-danger">Logout</button>
-                  </>
-                )}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
         <style>{`
-          @media (max-width: 1024px) {
+          @media (max-width: 1100px) {
             .desktop-menu { display: none !important; }
-            .mobile-toggle { display: block !important; }
+            .mobile-toggle { display: flex !important; }
+            .glass-nav { background: #020617 !important; border-bottom: 1px solid rgba(255,255,255,0.1); }
           }
         `}</style>
       </nav>
 
-      <main>
+      {/* Mobile Menu Overlay - MOVED OUTSIDE NAV */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <div style={{ position: 'fixed', inset: 0, zIndex: 2000 }}>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMenuOpen(false)}
+              style={{ position: 'absolute', inset: 0, background: '#020617' }}
+            />
+            <motion.div 
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+              style={{ 
+                position: 'absolute', top: 0, right: 0, bottom: 0, width: '100%',
+                background: '#020617', 
+                display: 'flex', flexDirection: 'column', padding: '80px 24px 40px',
+                overflowY: 'auto'
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
+                <Logo size={28} />
+                <button onClick={() => setIsMenuOpen(false)} style={{ background: 'rgba(255,255,255,0.05)', border: 'none', color: 'white', padding: '10px', borderRadius: '12px' }}>
+                  <X size={24} />
+                </button>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <p style={{ fontSize: '0.75rem', fontWeight: '900', color: 'var(--brand-red)', letterSpacing: '2px', marginBottom: '16px' }}>Navigation</p>
+                {navLinks.map(link => (
+                  <NavLink 
+                    key={link.to}
+                    to={link.to} 
+                    style={({ isActive }) => ({ 
+                      color: isActive ? 'var(--brand-red)' : 'white', 
+                      textDecoration: 'none', 
+                      fontSize: '1.25rem',
+                      fontWeight: '800',
+                      padding: '16px 20px',
+                      background: isActive ? 'rgba(239, 68, 68, 0.1)' : 'transparent',
+                      borderRadius: '16px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between'
+                    })}
+                  >
+                    {link.label}
+                    <ChevronRight size={20} opacity={0.3} />
+                  </NavLink>
+                ))}
+              </div>
+              
+              <div style={{ marginTop: 'auto' }}>
+                <div style={{ padding: '32px 0', borderTop: '1px solid rgba(255,255,255,0.1)', marginBottom: '32px' }}>
+                  <p style={{ fontSize: '0.75rem', fontWeight: '900', color: 'var(--text-secondary)', letterSpacing: '2px', marginBottom: '24px' }}>Select Language</p>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
+                    {languages.map(l => {
+                      const isActive = lang === l.code;
+                      return (
+                        <button 
+                          key={l.code}
+                          onClick={() => setLang(l.code)}
+                          style={{
+                            padding: '12px', borderRadius: '12px', border: isActive ? '1px solid #ef4444' : '1px solid rgba(255,255,255,0.1)',
+                            background: isActive ? 'rgba(239, 68, 68, 0.1)' : 'rgba(255,255,255,0.05)',
+                            color: isActive ? '#ef4444' : 'white', fontWeight: '700', fontSize: '0.85rem'
+                          }}
+                        >
+                          {l.label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {!isLoggedIn ? (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                    <Link to="/login" className="btn btn-glass" style={{ width: '100%' }}>{t('login')}</Link>
+                    <Link to="/register" className="btn btn-primary" style={{ width: '100%' }}>{t('register_btn')}</Link>
+                  </div>
+                ) : (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                    <Link to="/dashboard" className="btn btn-primary" style={{ width: '100%' }}>{t('dashboard')}</Link>
+                    <button onClick={handleLogout} className="btn" style={{ width: '100%', border: '1px solid #ef4444', color: '#ef4444', background: 'transparent' }}>{t('logout')}</button>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      <main style={{ flex: 1, paddingTop: 'var(--nav-height)' }}>
         <AnimatePresence mode="wait">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -142,17 +254,47 @@ function App() {
         </AnimatePresence>
       </main>
 
-      <footer style={{ borderTop: '1px solid var(--border-glass)', padding: '60px 0', marginTop: 'auto', background: 'rgba(2, 6, 23, 0.5)', textAlign: 'center' }}>
+      <footer style={{ borderTop: '1px solid var(--border-glass)', padding: '100px 0 60px', marginTop: '120px', background: 'rgba(2, 6, 23, 0.8)', position: 'relative' }}>
         <div className="container">
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Logo size={24} />
+          <div className="responsive-grid" style={{ marginBottom: '80px' }}>
+             <div>
+                <Logo size={28} />
+                <p style={{ color: 'var(--text-secondary)', marginTop: '24px', fontSize: '1rem', lineHeight: '1.8', maxWidth: '300px' }}>
+                  {t('footer_tagline')}
+                </p>
+             </div>
+             <div>
+                <h4 style={{ color: 'white', marginBottom: '28px', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '2px' }}>{t('navigation')}</h4>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                   {navLinks.map(l => (
+                     <Link key={l.to} to={l.to} style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.95rem', fontWeight: '500' }}>{l.label}</Link>
+                   ))}
+                </div>
+             </div>
+             <div>
+                <h4 style={{ color: 'white', marginBottom: '28px', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '2px' }}>{t('contact')}</h4>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: '1rem' }}>{t('contact_email')}</p>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: '1rem' }}>{t('contact_phone')}</p>
+                </div>
+             </div>
+          </div>
+          
+          <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '40px', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '30px' }}>
+            <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.9rem', fontWeight: '600' }}>
+              © 2026 RASTASAATHI. {t('hackathon_tag')}
             </div>
-            <div style={{ maxWidth: '600px' }}>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6' }}>{t('footer_tagline')}</p>
-            </div>
-            <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-              © 2026 RastaSaathi. Designed for IIT Madras Road Safety Hackathon.
+            
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '8px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', color: 'rgba(255,255,255,0.6)', fontSize: '0.95rem', fontWeight: '800', letterSpacing: '0px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginRight: '10px' }}>
+                   Made with <Heart size={16} color="#ef4444" fill="#ef4444" />
+                </div>
+                <span>by Team-Rasta<span style={{ color: '#ef4444' }}>Saathi</span></span>
+              </div>
+              <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.75rem', fontWeight: '700', letterSpacing: '0.5px' }}>
+                Dr Lakshmi | Sadiq | Krishna | Chakravarthi | Hasini
+              </div>
             </div>
           </div>
         </div>
