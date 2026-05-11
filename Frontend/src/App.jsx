@@ -102,7 +102,16 @@ function App() {
               </div>
             ) : (
               <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginLeft: '12px' }}>
-                <Link to="/dashboard" className="btn btn-glass" style={{ padding: '8px 20px', fontSize: '0.85rem' }}>
+                <Link to="/profile" className="btn btn-glass" style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '8px',
+                  padding: '8px 16px',
+                  fontSize: '0.85rem'
+                }}>
+                  <User size={16} /> {t('profile')}
+                </Link>
+                <Link to="/dashboard" className="btn btn-primary" style={{ padding: '8px 20px', fontSize: '0.85rem' }}>
                    {t('dashboard')}
                 </Link>
                 <button onClick={handleLogout} className="btn" style={{ background: 'transparent', border: '1px solid rgba(239, 68, 68, 0.3)', color: '#ef4444', padding: '8px 16px', fontSize: '0.8rem' }}>
@@ -112,26 +121,42 @@ function App() {
             )}
           </div>
 
-          {/* Mobile Toggle */}
-          <button 
-            className="mobile-toggle" 
-            onClick={() => setIsMenuOpen(!isMenuOpen)} 
-            style={{ 
-              zIndex: 1100,
-              background: 'rgba(255,255,255,0.05)', 
-              border: '1px solid rgba(255,255,255,0.1)', 
-              color: 'white', 
-              cursor: 'pointer',
-              width: '48px',
-              height: '48px',
-              borderRadius: '14px',
-              display: 'none',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile Toggle & Quick Profile */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', zIndex: 1100 }}>
+            {isLoggedIn && (
+              <Link 
+                to="/profile" 
+                style={{ 
+                  color: location.pathname === '/profile' ? '#ef4444' : 'white',
+                  background: 'rgba(255,255,255,0.05)',
+                  width: '48px', height: '48px', borderRadius: '14px',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  textDecoration: 'none'
+                }}
+              >
+                <User size={22} />
+              </Link>
+            )}
+            <button 
+              className="mobile-toggle" 
+              onClick={() => setIsMenuOpen(!isMenuOpen)} 
+              style={{ 
+                background: 'rgba(255,255,255,0.05)', 
+                border: '1px solid rgba(255,255,255,0.1)', 
+                color: 'white', 
+                cursor: 'pointer',
+                width: '48px',
+                height: '48px',
+                borderRadius: '14px',
+                display: 'none',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         <style>{`
@@ -228,6 +253,13 @@ function App() {
                   </div>
                 ) : (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                    <Link to="/profile" style={{ 
+                      padding: '16px', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.1)',
+                      background: 'rgba(255,255,255,0.05)', color: 'white', fontWeight: '800',
+                      textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px'
+                    }}>
+                      <User size={20} /> {t('profile')}
+                    </Link>
                     <Link to="/dashboard" className="btn btn-primary" style={{ width: '100%' }}>{t('dashboard')}</Link>
                     <button onClick={handleLogout} className="btn" style={{ width: '100%', border: '1px solid #ef4444', color: '#ef4444', background: 'transparent' }}>{t('logout')}</button>
                   </div>

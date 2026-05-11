@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { User, Phone, Globe, Save, Plus, Trash2 } from 'lucide-react';
+import { User, Phone, Globe, Save, Plus, Trash2, Shield, Heart } from 'lucide-react';
 import axios from 'axios';
+import { useLanguage } from '../context/LanguageContext';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Profile = () => {
+  const { t } = useLanguage();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user') || '{}'));
   const [name, setName] = useState(user.name || '');
   const [language, setLanguage] = useState(user.language || 'en');
@@ -47,7 +49,7 @@ const Profile = () => {
       setMessage({ type: 'success', text: 'Profile updated successfully!' });
     } catch (err) {
       console.error(err);
-      setMessage({ type: 'error', text: 'Failed to update profile.' });
+      setMessage({ type: 'error', text: 'Failed to update profile. Please check your network.' });
     } finally {
       setLoading(false);
     }
@@ -58,107 +60,129 @@ const Profile = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className="container"
-      style={{ paddingTop: '40px', paddingBottom: '80px', maxWidth: '800px' }}
+      style={{ paddingTop: '60px', paddingBottom: '100px', maxWidth: '900px' }}
     >
-      <div className="glass-panel" style={{ padding: '40px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '40px' }}>
-          <div style={{ background: 'rgba(59, 130, 246, 0.2)', padding: '15px', borderRadius: '50%' }}>
+      <div className="glass-panel" style={{ padding: '50px', background: 'rgba(2, 6, 23, 0.6)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '30px', marginBottom: '50px', flexWrap: 'wrap' }}>
+          <div style={{ width: '80px', height: '80px', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <User size={40} color="#3b82f6" />
           </div>
           <div>
-            <h1 style={{ fontSize: '2rem' }}>Personal Profile</h1>
-            <p style={{ color: 'var(--text-secondary)' }}>Manage your emergency information and contacts</p>
+            <h1 style={{ fontSize: '2.5rem', fontWeight: '900' }}>{t('profile')}</h1>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>Manage your identity and emergency response grid.</p>
           </div>
         </div>
 
         {message.text && (
-          <div style={{ 
-            background: message.type === 'success' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)', 
-            color: message.type === 'success' ? '#10b981' : '#ef4444', 
-            padding: '12px', borderRadius: '8px', marginBottom: '30px', 
-            border: `1px solid ${message.type === 'success' ? 'rgba(16,185,129,0.2)' : 'rgba(239,68,68,0.2)'}`,
-            textAlign: 'center'
-          }}>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            style={{ 
+              background: message.type === 'success' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)', 
+              color: message.type === 'success' ? '#10b981' : '#ef4444', 
+              padding: '16px 24px', borderRadius: '16px', marginBottom: '40px', 
+              border: `1px solid ${message.type === 'success' ? 'rgba(16,185,129,0.2)' : 'rgba(239,68,68,0.2)'}`,
+              textAlign: 'center', fontWeight: '700'
+            }}
+          >
             {message.text}
-          </div>
+          </motion.div>
         )}
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px', marginBottom: '40px' }}>
-          <div className="form-group">
-            <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px', marginBottom: '50px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.85rem', fontWeight: '900', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px' }}>
               <User size={16} /> Full Name
             </label>
             <input 
               type="text" 
               className="form-input" 
+              placeholder="Your full name"
               value={name} 
               onChange={(e) => setName(e.target.value)} 
             />
           </div>
-          <div className="form-group">
-            <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Globe size={16} /> Preferred Language
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.85rem', fontWeight: '900', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px' }}>
+              <Globe size={16} /> Language Priority
             </label>
             <select 
               className="form-input" 
               value={language} 
               onChange={(e) => setLanguage(e.target.value)}
-              style={{ appearance: 'none' }}
+              style={{ appearance: 'none', background: 'rgba(0,0,0,0.3)' }}
             >
               <option value="en">English</option>
-              <option value="hi">Hindi</option>
-              <option value="te">Telugu</option>
-              <option value="ta">Tamil</option>
-              <option value="kn">Kannada</option>
+              <option value="hi">हिन्दी (Hindi)</option>
+              <option value="te">తెలుగు (Telugu)</option>
+              <option value="ta">தமிழ் (Tamil)</option>
+              <option value="ur">اردو (Urdu)</option>
             </select>
           </div>
         </div>
 
-        <div style={{ borderTop: '1px solid var(--border-glass)', paddingTop: '30px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-            <h2 style={{ fontSize: '1.25rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <Phone size={20} color="#ef4444" /> Emergency Contacts
-            </h2>
-            <button onClick={addContact} className="btn btn-outline" style={{ padding: '6px 12px', fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <Plus size={16} /> Add Contact
+        <div style={{ borderTop: '1px solid var(--border-glass)', paddingTop: '50px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px', flexWrap: 'wrap', gap: '20px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+              <div style={{ width: '48px', height: '48px', background: 'rgba(239, 68, 68, 0.1)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Shield size={24} color="#ef4444" />
+              </div>
+              <div>
+                <h2 style={{ fontSize: '1.5rem', fontWeight: '900' }}>Emergency Contacts</h2>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Recipients of your automated SOS alerts.</p>
+              </div>
+            </div>
+            <button onClick={addContact} className="btn btn-glass" style={{ padding: '12px 24px', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <Plus size={18} /> Add New
             </button>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             {contacts.map((contact, idx) => (
               <motion.div 
                 key={idx}
                 layout
-                initial={{ opacity: 0, x: -10 }}
+                initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 50px', gap: '15px', background: 'rgba(255,255,255,0.03)', padding: '15px', borderRadius: '12px', border: '1px solid var(--border-glass)' }}
+                className="glass-panel"
+                style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 60px', gap: '20px', padding: '24px', background: 'rgba(255,255,255,0.02)', borderRadius: '20px' }}
               >
-                <input 
-                  type="text" 
-                  className="form-input" 
-                  placeholder="Contact Name" 
-                  value={contact.name} 
-                  onChange={(e) => updateContact(idx, 'name', e.target.value)}
-                />
-                <input 
-                  type="text" 
-                  className="form-input" 
-                  placeholder="Phone Number (with +91)" 
-                  value={contact.phone} 
-                  onChange={(e) => updateContact(idx, 'phone', e.target.value)}
-                />
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                   <input 
+                    type="text" 
+                    className="form-input" 
+                    placeholder="Contact Name" 
+                    value={contact.name} 
+                    onChange={(e) => updateContact(idx, 'name', e.target.value)}
+                    style={{ background: 'rgba(0,0,0,0.2)' }}
+                  />
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                   <input 
+                    type="text" 
+                    className="form-input" 
+                    placeholder="Phone (e.g. +91...)" 
+                    value={contact.phone} 
+                    onChange={(e) => updateContact(idx, 'phone', e.target.value)}
+                    style={{ background: 'rgba(0,0,0,0.2)' }}
+                  />
+                </div>
                 <button 
                   onClick={() => removeContact(idx)} 
-                  style={{ background: 'transparent', border: 'none', color: '#ef4444', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                  style={{ background: 'rgba(239, 68, 68, 0.1)', border: 'none', color: '#ef4444', cursor: 'pointer', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.3s' }}
+                  onMouseOver={(e) => e.currentTarget.style.background = 'rgba(239, 68, 68, 0.2)'}
+                  onMouseOut={(e) => e.currentTarget.style.background = 'rgba(239, 68, 68, 0.1)'}
                 >
                   <Trash2 size={20} />
                 </button>
               </motion.div>
             ))}
             {contacts.length === 0 && (
-              <p style={{ textAlign: 'center', color: 'var(--text-secondary)', padding: '20px', border: '1px dashed var(--border-glass)', borderRadius: '12px' }}>
-                No emergency contacts added yet. Please add at least one for the SOS feature.
-              </p>
+              <div style={{ textAlign: 'center', color: 'var(--text-secondary)', padding: '40px', border: '2px dashed var(--border-glass)', borderRadius: '24px', background: 'rgba(255,255,255,0.01)' }}>
+                <AlertTriangle size={32} style={{ marginBottom: '16px', opacity: 0.5 }} />
+                <p style={{ fontWeight: '600' }}>No emergency contacts detected.</p>
+                <p style={{ fontSize: '0.85rem' }}>Add at least one contact to enable WhatsApp SOS alerts.</p>
+              </div>
             )}
           </div>
         </div>
@@ -166,10 +190,10 @@ const Profile = () => {
         <button 
           onClick={handleSave} 
           disabled={loading}
-          className="btn btn-primary" 
-          style={{ width: '100%', marginTop: '40px', padding: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}
+          className="premium-button" 
+          style={{ width: '100%', marginTop: '60px', padding: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', fontSize: '1.2rem' }}
         >
-          {loading ? 'Saving...' : <><Save size={20} /> Save Profile Changes</>}
+          {loading ? 'SYNCHRONIZING...' : <><Save size={24} /> SAVE GRID CHANGES</>}
         </button>
       </div>
     </motion.div>
