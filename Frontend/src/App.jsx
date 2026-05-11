@@ -19,6 +19,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
+import RoadSafety from './pages/RoadSafety';
 
 function App() {
   const { t, lang, setLang } = useLanguage();
@@ -51,6 +52,7 @@ function App() {
     { to: '/', label: t('home') },
     { to: '/about', label: t('about') },
     { to: '/mission', label: t('vision_mission') },
+    { to: '/safety', label: t('road_safety') },
     { to: '/guide', label: t('guide') },
     { to: '/contact', label: t('contact') },
   ];
@@ -276,6 +278,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/mission" element={<Mission />} />
+            <Route path="/safety" element={<RoadSafety />} />
             <Route path="/guide" element={<Guide />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
