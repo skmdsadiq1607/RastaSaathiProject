@@ -16,7 +16,12 @@ function createApp() {
   const app = express();
 
   app.disable('x-powered-by');
-  app.use(helmet());
+  app.use(
+    helmet({
+      crossOriginOpenerPolicy: { policy: 'same-origin-allow-popups' },
+      crossOriginResourcePolicy: { policy: 'cross-origin' }
+    })
+  );
   app.use(
     cors({
       origin: (origin, callback) => {
