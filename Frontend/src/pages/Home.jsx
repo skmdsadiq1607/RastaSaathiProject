@@ -48,10 +48,10 @@ const Home = () => {
           </motion.p>
 
           <motion.div variants={itemVariants} style={{ display: 'flex', gap: '24px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/guide" className="btn btn-primary" style={{ padding: '24px 60px', fontSize: '1.4rem', borderRadius: '24px', minWidth: '320px' }}>
+            <Link to="/guide" className="btn btn-primary hero-btn">
               <BookOpen size={28} /> {t('view_guide')}
             </Link>
-            <Link to="/about" className="btn btn-glass" style={{ padding: '24px 60px', fontSize: '1.4rem', borderRadius: '24px', minWidth: '320px' }}>
+            <Link to="/about" className="btn btn-glass hero-btn">
               {t('vision')}
             </Link>
           </motion.div>
@@ -112,12 +112,7 @@ const Home = () => {
           initial={{ opacity: 0, y: 80 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="glass-panel pulse-sos" 
-          style={{ 
-            marginTop: '200px', padding: '120px 40px', textAlign: 'center', 
-            background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(2, 6, 23, 0.9) 100%)',
-            border: '1px solid rgba(239, 68, 68, 0.3)', borderRadius: '60px'
-          }}
+          className="glass-panel pulse-sos cta-panel" 
         >
           <div style={{ width: '100px', height: '100px', background: 'rgba(239, 68, 68, 0.1)', borderRadius: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 48px' }}>
             <Users size={50} color="#ef4444" />
@@ -127,7 +122,7 @@ const Home = () => {
             RastaSaathi is scaling across major urban corridors. Join our mission to eliminate road fatalities through technology and collective action.
           </p>
           
-          <Link to="/register" className="btn btn-primary" style={{ padding: '28px 80px', fontSize: '1.5rem', borderRadius: '28px' }}>
+          <Link to="/register" className="btn btn-primary cta-btn">
             {t('become_responder')} <ArrowRight size={32} />
           </Link>
         </motion.div>

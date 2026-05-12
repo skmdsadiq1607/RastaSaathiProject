@@ -1,9 +1,32 @@
 const axios = require('axios');
 const Anthropic = require('@anthropic-ai/sdk');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
+const OpenAI = require('openai');
+const { env } = require('../config/env');
 const { claudeKeyManager, geminiKeyManager } = require('../utils/apiKeyManager');
 const { AppError } = require('../utils/AppError');
 const { logger } = require('../utils/logger');
+
+async function callOpenAI({ system, user, maxTokens = 600 }) {
+  if (!env.OPENAI_API_KEY) throw new Error('No OpenAI API key available');
+  const openai = new OpenAI({ apiKey: env.OPENAI_API_KEY });
+  
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o-mini", // Cost-effective and fast for emergency guidance
+      messages: [
+        { role: "system", content: system },
+        { role: "user", content: user }
+      ],
+      max_tokens: maxTokens
+    });
+    const text = response.choices[0].message.content;
+    return { text, raw: response, provider: 'openai' };
+  } catch (error) {
+    logger.error(`[OpenAI API Error] ${error.message}`);
+    throw error;
+  }
+}
 
 async function callClaudeWithRetry({ system, user, maxTokens = 600, retries = 1 }) {
   let attempt = 0;
@@ -36,15 +59,16 @@ async function callClaudeWithRetry({ system, user, maxTokens = 600, retries = 1 
   throw new Error('Exhausted all Claude API retries');
 }
 
-async function callGeminiWithRetry({ system, user, retries = 1 }) {
+async function callGeminiWithRetry({ system, user }) {
+  const maxRetries = geminiKeyManager.keys.length;
   let attempt = 0;
-  while (attempt <= retries) {
+  while (attempt < maxRetries) {
     const key = geminiKeyManager.getCurrentKey();
     if (!key) throw new Error('No Gemini API key available');
 
     try {
       const genAI = new GoogleGenerativeAI(key);
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
       
       const result = await model.generateContent([
         { text: `SYSTEM: ${system}` },
@@ -55,7 +79,7 @@ async function callGeminiWithRetry({ system, user, retries = 1 }) {
       return { text, raw: result, provider: 'gemini' };
     } catch (error) {
       logger.error(`[Gemini API Error] Key: ${key.slice(0, 8)}... | Error: ${error.message}`);
-      if (error.message?.includes('429') || error.message?.includes('403')) {
+      if (error.message?.includes('429') || error.message?.includes('403') || error.message?.includes('404')) {
         geminiKeyManager.rotateKey();
         attempt++;
       } else {
@@ -66,62 +90,32 @@ async function callGeminiWithRetry({ system, user, retries = 1 }) {
   throw new Error('Exhausted all Gemini API retries');
 }
 
-async function getFirstAidGuidance(input) {
-  try {
-    const { text, provider } = await callAiProvider(
-      promptGenerator.firstAid(input.injuryType, input.severityLevel),
-      "You are a professional first-aid medic assistant. Give concise, life-saving steps."
-    );
-    return { answer: text, provider };
-  } catch (error) {
-    logger.error(`[AI Service] All providers failed. Using Local Medical Fallback.`);
-    return { 
-      answer: getLocalMedicalAdvice(input.injuryType), 
-      provider: 'local_safety_medic' 
-    };
-  }
-}
-
-async function getFollowupAnswer(sessionId, question) {
-  try {
-    const { text, provider } = await callAiProvider(
-      `Context: Emergency. Question: ${question}`,
-      "You are a medical assistant. Give a short, helpful answer to the user's question."
-    );
-    return { answer: text, provider };
-  } catch (error) {
-    logger.error(`[AI Service] Followup failed. Using Local Medical Fallback.`);
-    return { 
-      answer: getLocalMedicalAdvice(question), 
-      provider: 'local_safety_medic' 
-    };
-  }
-}
-
-function getLocalMedicalAdvice(query) {
-  const q = query.toLowerCase();
-  if (q.includes('bleed')) return "1. Apply firm, steady pressure with a clean cloth. \n2. Do not remove the cloth if it soaks through; add more on top. \n3. Elevate the limb above the heart if possible.";
-  if (q.includes('break') || q.includes('fracture') || q.includes('leg') || q.includes('bone')) return "1. Keep the limb still. Do not try to realign it. \n2. Apply a cold pack wrapped in cloth to reduce swelling. \n3. Wait for professional medical help to move the person.";
-  if (q.includes('burn')) return "1. Run cool (not cold) water over the burn for 10-20 minutes. \n2. Cover loosely with a sterile bandage or plastic wrap. \n3. Do not apply butter or ointments.";
-  if (q.includes('breath') || q.includes('cpr')) return "1. Check if the person is responsive. \n2. If not breathing, start hands-only CPR: push hard and fast in the center of the chest (100-120 beats per minute).";
-  return "Stay calm and ensure the area is safe. Keep the victim warm and still until the ambulance (which we have dispatched) arrives.";
-}
-
-// Unified AI Caller: Tries Claude -> Fallback to Gemini
+// Unified AI Caller: Tries OpenAI -> Claude -> Gemini
 async function callClaude({ system, user, maxTokens = 600 }) {
+  // 1. Try OpenAI (Primary)
   try {
-    return await callClaudeWithRetry({ system, user, maxTokens });
-  } catch (claudeError) {
-    logger.error(`[AI Service] Claude Failed: ${claudeError.message}`);
+    return await callOpenAI({ system, user, maxTokens });
+  } catch (openAiError) {
+    logger.warn(`[AI Service] OpenAI Failed: ${openAiError.message}. Falling back to Claude...`);
+    
+    // 2. Try Claude (Secondary)
     try {
-      return await callGeminiWithRetry({ system, user });
-    } catch (geminiError) {
-      logger.error(`[AI Service] Gemini Failed: ${geminiError.message}`);
-      // Safety Fallback for Hackathon Demo: Never show an error to the user
-      return { 
-        text: "I'm having a slight connection issue with my advanced brain, but I can still help! For most road emergencies: \n1. Stay calm and ensure the area is safe. \n2. Check for responsiveness and breathing. \n3. If bleeding, apply firm pressure with a clean cloth. \n4. Do not move the person unless there is an immediate danger like fire. \n\nPlease tell me more about the injury so I can give specific steps.",
-        provider: 'fallback'
-      };
+      return await callClaudeWithRetry({ system, user, maxTokens });
+    } catch (claudeError) {
+      logger.error(`[AI Service] Claude Failed: ${claudeError.message}. Falling back to Gemini...`);
+      
+      // 3. Try Gemini (Tertiary)
+      try {
+        return await callGeminiWithRetry({ system, user });
+      } catch (geminiError) {
+        logger.error(`[AI Service] Gemini Failed: ${geminiError.message}`);
+        
+        // Final Safety Fallback
+        return { 
+          text: "I'm having a slight connection issue with my advanced brain, but I can still help! For most road emergencies: \n1. Stay calm and ensure the area is safe. \n2. Check for responsiveness and breathing. \n3. If bleeding, apply firm pressure with a clean cloth. \n4. Do not move the person unless there is an immediate danger like fire. \n\nPlease tell me more about the injury so I can give specific steps.",
+          provider: 'fallback'
+        };
+      }
     }
   }
 }

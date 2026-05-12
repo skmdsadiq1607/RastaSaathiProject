@@ -48,7 +48,7 @@ async function sendSms({ to, body, forceType = null }) {
     return { sid: msg.sid, status: msg.status, type: useWhatsApp ? 'whatsapp' : 'sms' };
   } catch (error) {
     logger.error(`[Twilio ERROR] Failed to send ${forceType || 'auto'} to ${to}: ${error.message}`);
-    return { status: 'failed', error: error.message };
+    throw error; // Rethrow to let the caller handle the failure
   }
 }
 

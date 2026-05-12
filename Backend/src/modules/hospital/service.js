@@ -24,8 +24,23 @@ function normalizeEtaSeconds(etaSeconds) {
 
 async function selectHospital({ lat, lng, severityLevel, injuryType, requiredSpecialty }) {
   const origin = { lat, lng };
-  const hospitals = await Hospital.find({}).lean();
-  if (!hospitals.length) throw new AppError('No hospitals seeded', 500, 'NO_HOSPITALS');
+  // Find top 25 closest hospitals within 50km using geospatial index
+  const hospitals = await Hospital.find({
+    location: {
+      $near: {
+        $geometry: { type: 'Point', coordinates: [lng, lat] },
+        $maxDistance: 50000 // 50km
+      }
+    }
+  }).limit(25).lean();
+
+  if (!hospitals.length) {
+    // If no hospitals within 50km, try a wider search or return error
+    const anyHospitals = await Hospital.find({}).limit(5).lean();
+    if (!anyHospitals.length) throw new AppError('No hospitals found in database', 500, 'NO_HOSPITALS');
+    // Fallback to whatever we found if the near search was too restrictive
+    return anyHospitals.map(h => ({ hospital: h, score: 0.1, etaSeconds: 3600 }));
+  }
 
   let elements = [];
   try {

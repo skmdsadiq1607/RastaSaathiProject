@@ -82,20 +82,24 @@ async function dispatchAlerts({ io, incident, victimUser, severityLevel, hospita
   });
 
   for (const c of contacts) {
+    let whatsappSuccess = false;
     // Try WhatsApp
     try {
       await sendSms({ to: c.phone, body: smsBody, forceType: 'whatsapp' });
       alerts.deliveries.push({ channel: 'WHATSAPP', to: c.phone, status: 'SENT' });
+      whatsappSuccess = true;
     } catch (e) {
       alerts.deliveries.push({ channel: 'WHATSAPP', to: c.phone, status: 'FAILED', error: e.message });
     }
     
-    // Try Standard SMS
-    try {
-      await sendSms({ to: c.phone, body: smsBody, forceType: 'sms' });
-      alerts.deliveries.push({ channel: 'SMS', to: c.phone, status: 'SENT' });
-    } catch (e) {
-      alerts.deliveries.push({ channel: 'SMS', to: c.phone, status: 'FAILED', error: e.message });
+    // Only try Standard SMS if WhatsApp failed
+    if (!whatsappSuccess) {
+      try {
+        await sendSms({ to: c.phone, body: smsBody, forceType: 'sms' });
+        alerts.deliveries.push({ channel: 'SMS', to: c.phone, status: 'SENT' });
+      } catch (e) {
+        alerts.deliveries.push({ channel: 'SMS', to: c.phone, status: 'FAILED', error: e.message });
+      }
     }
   }
 
