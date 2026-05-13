@@ -13,8 +13,8 @@ export const TRANSLATIONS = {
     login: "Login",
     logout: "Logout",
     profile: "Profile",
-    road_safety: "Safety Guidelines",
-    vision_mission: "Vision & Mission",
+    road_safety: "Safety",
+    vision_mission: "Mission",
     language_label: "LANGUAGE",
     navigation: "NAVIGATION",
 

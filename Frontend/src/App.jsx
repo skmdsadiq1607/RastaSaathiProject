@@ -72,12 +72,12 @@ function App() {
       
       <nav className="glass-nav">
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-          <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex', alignItems: 'center', zIndex: 1100, marginRight: '40px' }}>
+          <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex', alignItems: 'center', zIndex: 1100, marginRight: '24px' }}>
             <Logo size={32} />
           </Link>
           
           {/* Desktop Menu */}
-          <div className="desktop-menu" style={{ display: 'flex', gap: '32px', alignItems: 'center', flex: 1 }}>
+          <div className="desktop-menu" style={{ display: 'flex', gap: '20px', alignItems: 'center', flex: 1 }}>
             {navLinks.map(link => (
               <NavLink 
                 key={link.to}
@@ -106,21 +106,21 @@ function App() {
                 <Link to="/register" className="btn btn-primary" style={{ padding: '10px 24px', fontSize: '0.85rem' }}>{t('register_btn')}</Link>
               </div>
             ) : (
-              <div style={{ display: 'flex', gap: '24px', alignItems: 'center', marginLeft: 'auto' }}>
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginLeft: 'auto' }}>
                 <Link to="/profile" className="btn btn-glass" style={{ 
                   display: 'flex', 
                   alignItems: 'center', 
-                  gap: '8px',
-                  padding: '8px 16px',
-                  fontSize: '0.85rem'
+                  gap: '6px',
+                  padding: '8px 12px',
+                  fontSize: '0.8rem'
                 }}>
                   <User size={16} /> {t('profile')}
                 </Link>
-                <Link to="/dashboard" className="btn btn-primary" style={{ padding: '8px 20px', fontSize: '0.85rem' }}>
+                <Link to="/dashboard" className="btn btn-primary" style={{ padding: '8px 16px', fontSize: '0.8rem' }}>
                    {t('dashboard')}
                 </Link>
-                <button onClick={handleLogout} className="btn" style={{ background: 'transparent', border: '1px solid rgba(239, 68, 68, 0.3)', color: '#ef4444', padding: '8px 16px', fontSize: '0.8rem' }}>
-                  {t('logout')}
+                <button onClick={handleLogout} className="btn" style={{ background: 'transparent', border: '1px solid rgba(239, 68, 68, 0.3)', color: '#ef4444', padding: '8px 12px', fontSize: '0.8rem' }}>
+                   {t('logout')}
                 </button>
               </div>
             )}
