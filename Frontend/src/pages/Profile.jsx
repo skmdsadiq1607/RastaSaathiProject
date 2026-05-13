@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { User, Phone, Globe, Save, Plus, Trash2, Shield, Heart } from 'lucide-react';
+import { User, Phone, Globe, Save, Plus, Trash2, Shield, Heart, AlertTriangle } from 'lucide-react';
 import axios from 'axios';
 import { useLanguage } from '../context/LanguageContext';
 
