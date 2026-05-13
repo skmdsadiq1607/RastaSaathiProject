@@ -65,7 +65,7 @@ const Mission = () => {
 
         <div className="glass-panel" style={{ padding: '80px', textAlign: 'center', background: 'radial-gradient(circle at center, rgba(239, 68, 68, 0.05), transparent)', borderRadius: '40px' }}>
           <Heart size={56} color="#ef4444" style={{ marginBottom: '32px' }} />
-          <h2 style={{ fontSize: '2.8rem', fontWeight: '900', marginBottom: '24px' }}>The Human Impact</h2>
+          <h2 style={{ fontSize: '2.8rem', fontWeight: '900', marginBottom: '24px' }}>{t('human_impact')}</h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '1.3rem', maxWidth: '850px', margin: '0 auto', lineHeight: '1.8' }}>
             {t('impact_sub')} {t('hero_sub')}
           </p>

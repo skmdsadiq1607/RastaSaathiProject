@@ -35,7 +35,7 @@ const Home = () => {
               background: 'rgba(239, 68, 68, 0.08)', borderRadius: '100px', border: '1px solid rgba(239, 68, 68, 0.2)', 
               color: '#ef4444', fontSize: '0.9rem', fontWeight: '900', letterSpacing: '2px'
             }}>
-              <Radio size={18} className="pulse-sos" /> NATIONAL ROAD SAFETY INITIATIVE
+              <Radio size={18} className="pulse-sos" /> {t('national_initiative')}
             </span>
           </motion.div>
           
@@ -62,10 +62,10 @@ const Home = () => {
         <div className="section-spacing">
           <div className="responsive-grid-2" style={{ alignItems: 'center', gap: '100px' }}>
             <motion.div initial={{ opacity: 0, x: -60 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <div style={{ color: '#ef4444', fontWeight: '900', letterSpacing: '2px', marginBottom: '24px', fontSize: '0.9rem' }}>PRECISION ENGINEERING</div>
+              <div style={{ color: '#ef4444', fontWeight: '900', letterSpacing: '2px', marginBottom: '24px', fontSize: '0.9rem' }}>{t('precision_eng')}</div>
               <h2 style={{ fontSize: 'clamp(2.5rem, 6vw, 3.5rem)', lineHeight: '1.1', marginBottom: '32px' }}>{t('impact_title')}</h2>
               <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', lineHeight: '1.8', marginBottom: '48px' }}>
-                RastaSaathi isn't just an app—it's a mission-critical infrastructure that bridges the gap between road accidents and high-precision medical care.
+                {t('hero_sub')}
               </p>
               
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px' }}>
@@ -82,7 +82,7 @@ const Home = () => {
               className="glass-panel" 
               style={{ padding: '80px 60px', background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, transparent 100%)' }}
             >
-              <h3 style={{ fontSize: '2.2rem', marginBottom: '48px', fontWeight: 900 }}>Engineered for Results.</h3>
+              <h3 style={{ fontSize: '2.2rem', marginBottom: '48px', fontWeight: 900 }}>{t('results_title')}</h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
                 <Capability icon={<Zap />} text={t('impact_feature1')} />
                 <Capability icon={<Activity />} text={t('impact_feature2')} />

@@ -326,9 +326,9 @@ function App() {
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '8px' }}>
               <div style={{ display: 'flex', alignItems: 'center', color: 'rgba(255,255,255,0.6)', fontSize: '0.95rem', fontWeight: '800', letterSpacing: '0px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginRight: '10px' }}>
-                   Made with <Heart size={16} color="#ef4444" fill="#ef4444" />
+                   {t('made_with')} <Heart size={16} color="#ef4444" fill="#ef4444" />
                 </div>
-                <span>by Team-Rasta<span style={{ color: '#ef4444' }}>Saathi</span></span>
+                <span>{t('by_team')}</span>
               </div>
               <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.75rem', fontWeight: '700', letterSpacing: '0.5px' }}>
                 Dr Lakshmi | Sadiq | Krishna | Chakravarthi | Hasini

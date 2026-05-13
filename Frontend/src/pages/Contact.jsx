@@ -25,19 +25,19 @@ const Contact = () => {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px', marginBottom: '80px' }}>
           <div className="glass-panel" style={{ padding: '40px', textAlign: 'center' }}>
             <Mail size={32} color="#ef4444" style={{ marginBottom: '20px' }} />
-            <h3>Strategic Partnerships</h3>
+            <h3>{t('strategic_partnerships')}</h3>
             <p style={{ color: 'var(--text-secondary)', marginTop: '10px' }}>{t('contact_email')}</p>
           </div>
           
           <div className="glass-panel" style={{ padding: '40px', textAlign: 'center' }}>
             <Phone size={32} color="#3b82f6" style={{ marginBottom: '20px' }} />
-            <h3>Emergency Liaison</h3>
+            <h3>{t('emergency_liaison')}</h3>
             <p style={{ color: 'var(--text-secondary)', marginTop: '10px' }}>{t('contact_phone')}</p>
           </div>
 
           <div className="glass-panel" style={{ padding: '40px', textAlign: 'center' }}>
             <Globe size={32} color="#10b981" style={{ marginBottom: '20px' }} />
-            <h3>Headquarters</h3>
+            <h3>{t('headquarters')}</h3>
             <p style={{ color: 'var(--text-secondary)', marginTop: '10px' }}>{t('contact_address')}</p>
           </div>
         </div>
@@ -45,12 +45,12 @@ const Contact = () => {
         {/* Reach out form placeholder / direct message */}
         <div className="glass-panel" style={{ padding: '60px', textAlign: 'center', background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, transparent 100%)' }}>
           <MessageSquare size={40} color="#ef4444" style={{ marginBottom: '20px' }} />
-          <h2 style={{ fontSize: '2rem', marginBottom: '20px' }}>Direct Support</h2>
+          <h2 style={{ fontSize: '2rem', marginBottom: '20px' }}>{t('direct_support')}</h2>
           <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto 30px' }}>
-            If you are a medical professional or emergency responder looking to integrate with our grid, please reach out directly via email.
+            {t('direct_support_sub')}
           </p>
           <a href={`mailto:${t('contact_email')}`} className="premium-button" style={{ textDecoration: 'none', display: 'inline-block', padding: '15px 30px', background: '#ef4444', color: 'white', borderRadius: '8px', fontWeight: '700' }}>
-            Contact Us Now
+            {t('contact_us_now')}
           </a>
         </div>
       </motion.div>

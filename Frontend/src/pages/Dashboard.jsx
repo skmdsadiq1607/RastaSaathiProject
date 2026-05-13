@@ -36,12 +36,15 @@ const Marker = ({ text, type }) => (
   </div>
 );
 
+import { useLanguage } from '../context/LanguageContext';
+
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Dashboard = () => {
+  const { t } = useLanguage();
   const [sosActive, setSosActive] = useState(false);
   const [messages, setMessages] = useState([
-    { role: 'bot', text: 'RastaSaathi AI Medic activated. I am monitoring your grid. Trigger SOS for immediate medical coordination.' }
+    { role: 'bot', text: t('medic_welcome') }
   ]);
   const [input, setInput] = useState('');
   const [sessionId, setSessionId] = useState(null);
@@ -70,7 +73,7 @@ const Dashboard = () => {
   const triggerSOS = async () => {
     setSosActive(true);
     setApiLoading(true);
-    setMessages(prev => [...prev, { role: 'bot', text: 'INITIATING EMERGENCY PROTOCOL: Acquiring GPS telemetry...' }]);
+    setMessages(prev => [...prev, { role: 'bot', text: t('initiating_protocol') }]);
 
     navigator.geolocation.getCurrentPosition(async (pos) => {
       const { latitude, longitude } = pos.coords;
@@ -78,7 +81,7 @@ const Dashboard = () => {
       setVictimLocation(loc);
       setMapCenter(loc);
 
-      setMessages(prev => [...prev, { role: 'bot', text: `📍 GPS COORDINATES ACQUIRED: [${latitude.toFixed(4)}, ${longitude.toFixed(4)}]\nSynchronizing with national medical grid...` }]);
+      setMessages(prev => [...prev, { role: 'bot', text: `${t('gps_acquired')} [${latitude.toFixed(4)}, ${longitude.toFixed(4)}]\n${t('sync_national')}` }]);
 
       try {
         const token = localStorage.getItem('token');
@@ -102,26 +105,26 @@ const Dashboard = () => {
           
           setMessages(prev => [...prev, { 
             role: 'bot', 
-            text: `✅ SOS DISPATCHED SUCCESSFULLY!\n\n📲 WhatsApp alerts sent to emergency contacts.\n🏥 NEAREST HOSPITAL: ${nearest.name}\n⏳ ETA: ${hospitalSelection[0].etaSeconds ? Math.round(hospitalSelection[0].etaSeconds / 60) + ' min' : 'Calculating...'}` 
+            text: `${t('sos_success')}\n\n${t('contacts_notified')}\n${t('nearest_hospital')} ${nearest.name}\n${t('eta')} ${hospitalSelection[0].etaSeconds ? Math.round(hospitalSelection[0].etaSeconds / 60) + ' min' : t('calculating')}` 
           }]);
         } else {
-          setMessages(prev => [...prev, { role: 'bot', text: '⚠️ ALERT: SOS triggered, but no hospitals found in immediate range. Alerts have still been sent to responders.' }]);
+          setMessages(prev => [...prev, { role: 'bot', text: t('no_hospitals') }]);
         }
 
         if (aiGuidance) {
           setSessionId(aiGuidance.sessionId);
-          setMessages(prev => [...prev, { role: 'bot', text: `👨‍⚕️ AI GUIDANCE ACTIVATED:\n${aiGuidance.guidance?.answer || 'Stay calm. Help is on the way.'}` }]);
+          setMessages(prev => [...prev, { role: 'bot', text: `${t('ai_activated')}\n${aiGuidance.guidance?.answer || 'Stay calm. Help is on the way.'}` }]);
         }
       } catch (err) {
         console.error('SOS Error:', err);
         const errMsg = err.response?.data?.error?.message || 'Network grid unreachable.';
-        setMessages(prev => [...prev, { role: 'bot', text: `❌ CRITICAL ERROR: ${errMsg}\nPlease call 108/112 immediately.` }]);
+        setMessages(prev => [...prev, { role: 'bot', text: `${t('critical_error')} ${errMsg}` }]);
       } finally {
         setApiLoading(false);
       }
     }, (err) => {
       setApiLoading(false);
-      setMessages(prev => [...prev, { role: 'bot', text: '❌ GEOLOCATION DENIED: RastaSaathi requires GPS to route to the nearest hospital. Please enable location services.' }]);
+      setMessages(prev => [...prev, { role: 'bot', text: t('geo_denied') }]);
     });
   };
 
@@ -174,10 +177,10 @@ const Dashboard = () => {
             {!sosActive ? (
               <div style={{ padding: '60px 20px', textAlign: 'center', flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                  <motion.div initial={{ y: 20 }} animate={{ y: 0 }} style={{ marginBottom: '40px' }}>
-                  <div style={{ color: '#ef4444', fontWeight: '900', letterSpacing: '2px', fontSize: '0.7rem', marginBottom: '12px' }}>SECURE EMERGENCY TERMINAL</div>
-                  <h1 style={{ fontSize: '2.8rem', marginBottom: '16px', fontWeight: '900' }}>Ready for Dispatch.</h1>
+                  <div style={{ color: '#ef4444', fontWeight: '900', letterSpacing: '2px', fontSize: '0.7rem', marginBottom: '12px' }}>{t('secure_terminal')}</div>
+                  <h1 style={{ fontSize: '2.8rem', marginBottom: '16px', fontWeight: '900' }}>{t('ready_dispatch')}</h1>
                   <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '450px', margin: '0 auto' }}>
-                    Trigger the SOS for instant geospatial triage and emergency alerts.
+                    {t('trigger_sub')}
                   </p>
                 </motion.div>
 
@@ -221,9 +224,9 @@ const Dashboard = () => {
 
                 <div style={{ position: 'absolute', top: '15px', left: '15px', right: '15px', display: 'flex', justifyContent: 'space-between', pointerEvents: 'none' }}>
                    <div style={{ padding: '10px 20px', background: '#ef4444', color: 'white', borderRadius: '100px', fontSize: '0.8rem', fontWeight: '900', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <Radio size={16} className="pulse-sos" /> SOS ACTIVE
+                      <Radio size={16} className="pulse-sos" /> {t('sos_active')}
                    </div>
-                   <div style={{ padding: '10px 20px', background: 'rgba(15, 23, 42, 0.9)', color: 'white', borderRadius: '100px', fontSize: '0.8rem', fontWeight: '800' }}>Geospatial Grid</div>
+                   <div style={{ padding: '10px 20px', background: 'rgba(15, 23, 42, 0.9)', color: 'white', borderRadius: '100px', fontSize: '0.8rem', fontWeight: '800' }}>{t('geospatial_grid')}</div>
                 </div>
 
                 <div style={{ position: 'absolute', bottom: '15px', left: '15px', right: '15px' }}>
@@ -233,12 +236,12 @@ const Dashboard = () => {
                         {apiLoading ? <Loader2 className="animate-spin" color="#ef4444" /> : <Activity size={24} color="#ef4444" />}
                       </div>
                       <div style={{ flex: 1 }}>
-                        <div style={{ color: 'var(--text-secondary)', fontSize: '0.65rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>System Status</div>
-                        <div style={{ fontSize: '1.2rem', fontWeight: '900' }}>{apiLoading ? 'Synchronizing Grid...' : 'Dispatched Alerts.'}</div>
+                        <div style={{ color: 'var(--text-secondary)', fontSize: '0.65rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('system_status')}</div>
+                        <div style={{ fontSize: '1.2rem', fontWeight: '900' }}>{apiLoading ? t('sync_grid') : t('dispatched_alerts')}</div>
                       </div>
                       <div style={{ textAlign: 'right' }}>
-                        <div style={{ color: 'var(--text-secondary)', fontSize: '0.65rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>Target Center</div>
-                        <div style={{ fontSize: '1.2rem', fontWeight: '900', color: '#3b82f6' }}>{selectedHospitalName || (apiLoading ? 'Calculating...' : 'Manual Mode')}</div>
+                        <div style={{ color: 'var(--text-secondary)', fontSize: '0.65rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('target_center')}</div>
+                        <div style={{ fontSize: '1.2rem', fontWeight: '900', color: '#3b82f6' }}>{selectedHospitalName || (apiLoading ? t('calculating') : 'Manual Mode')}</div>
                       </div>
                     </div>
                   </div>
@@ -253,7 +256,7 @@ const Dashboard = () => {
             <div style={{ width: '42px', height: '42px', background: 'rgba(16, 185, 129, 0.1)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Zap color="#10b981" fill="#10b981" size={20} />
             </div>
-            <h3 style={{ fontSize: '1.2rem', fontWeight: '900' }}>AI Medic</h3>
+            <h3 style={{ fontSize: '1.2rem', fontWeight: '900' }}>{t('ai_medic')}</h3>
           </div>
           
           <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '15px', paddingRight: '8px' }}>
@@ -268,7 +271,7 @@ const Dashboard = () => {
           </div>
           
           <div style={{ marginTop: '20px', display: 'flex', gap: '10px' }}>
-            <input type="text" className="form-input" placeholder="Emergency guidance..." style={{ background: 'rgba(0,0,0,0.4)', flex: 1, padding: '14px 18px', fontSize: '0.95rem' }} value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && sendMessage()} />
+            <input type="text" className="form-input" placeholder={t('emergency_guidance')} style={{ background: 'rgba(0,0,0,0.4)', flex: 1, padding: '14px 18px', fontSize: '0.95rem' }} value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && sendMessage()} />
             <button onClick={sendMessage} className="premium-button" style={{ width: '50px', height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Send size={20} /></button>
           </div>
         </div>
