@@ -77,10 +77,10 @@ const Guide = () => {
                       {step.isHighlight && (
                         <div style={{ marginTop: '20px', display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
                            <div style={{ padding: '10px 20px', background: 'rgba(0,0,0,0.3)', borderRadius: '8px', border: '1px dashed #10b981', color: '#10b981', fontWeight: '700', fontFamily: 'monospace' }}>
-                              Join do-hit
+                              Join soft-peace
                            </div>
                            <a 
-                             href="https://wa.me/14155238886?text=Join%20do-hit" 
+                             href="https://wa.me/14155238886?text=Join%20soft-peace" 
                              target="_blank" 
                              rel="noopener noreferrer"
                              style={{ color: '#10b981', textDecoration: 'none', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '5px' }}
