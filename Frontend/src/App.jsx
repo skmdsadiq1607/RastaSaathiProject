@@ -77,7 +77,7 @@ function App() {
           </Link>
           
           {/* Desktop Menu */}
-          <div className="desktop-menu" style={{ display: 'flex', gap: '40px', alignItems: 'center', flex: 1 }}>
+          <div className="desktop-menu" style={{ display: 'flex', gap: '32px', alignItems: 'center', flex: 1 }}>
             {navLinks.map(link => (
               <NavLink 
                 key={link.to}
@@ -88,6 +88,7 @@ function App() {
                   fontWeight: '700',
                   fontSize: '0.95rem',
                   letterSpacing: '0.5px',
+                  whiteSpace: 'nowrap',
                   transition: 'color 0.3s ease'
                 })}
               >
