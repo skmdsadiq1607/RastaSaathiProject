@@ -60,6 +60,19 @@ h1, h2, h3, h4 {
   transform: translateY(-5px);
 }
 
+.mobile-toggle {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .desktop-menu {
+    display: none !important;
+  }
+  .mobile-toggle {
+    display: block !important;
+  }
+}
+
 .glass-nav {
   position: fixed;
   top: 0;
