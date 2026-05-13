@@ -73,17 +73,19 @@ async function dispatchAlerts({ io, incident, victimUser, severityLevel, hospita
 
   // SMS to emergency contacts
   const contacts = victimUser?.emergencyContacts || [];
-  const smsBody = t(lang, 'sms.SOS', {
-    lat: incident.location.coordinates[1],
-    lng: incident.location.coordinates[0],
-    hLat: hospitalLocation?.coordinates[1],
-    hLng: hospitalLocation?.coordinates[0],
-    severity: severityLevel || 'UNKNOWN',
-    hospital: hospitalName || 'UNKNOWN',
-    eta: typeof etaSeconds === 'number' ? Math.round(etaSeconds / 60) + 'm' : 'NA'
-  });
 
   for (const c of contacts) {
+    const smsBody = t(lang, 'sms.SOS', {
+      name: c.name || 'Emergency Contact',
+      lat: incident.location.coordinates[1],
+      lng: incident.location.coordinates[0],
+      hLat: hospitalLocation?.coordinates[1],
+      hLng: hospitalLocation?.coordinates[0],
+      severity: severityLevel || 'UNKNOWN',
+      hospital: hospitalName || 'UNKNOWN',
+      eta: typeof etaSeconds === 'number' ? Math.round(etaSeconds / 60) + 'm' : 'NA'
+    });
+
     let whatsappSuccess = false;
     // Try WhatsApp
     try {

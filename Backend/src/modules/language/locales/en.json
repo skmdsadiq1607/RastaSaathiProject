@@ -4,5 +4,5 @@
   "errors.NOT_FOUND": "Not found",
   "alerts.SOS_TITLE": "Emergency SOS",
   "alerts.SOS_BODY": "Accident reported. Immediate assistance needed.",
-  "sms.SOS": "🚨 EMERGENCY SOS - Rasta-Saathi 🚨\n\nAn accident has been reported.\n📍 Accident Location: https://www.google.com/maps?q={lat},{lng}\n🏥 Hospital: {hospital}\n⚠️ Severity: {severity}\n⏳ ETA: ~{eta}\n\n🗺️ GET DIRECTIONS (Accident to Hospital):\nhttps://www.google.com/maps/dir/?api=1&origin={lat},{lng}&destination={hLat},{hLng}&travelmode=driving\n\nHelp is on the way. Please stay reachable."
+  "sms.SOS": "Hi {name},\n🚨 EMERGENCY SOS - Rasta-Saathi 🚨\n\nAn accident has been reported.\n📍 Accident Location: https://www.google.com/maps?q={lat},{lng}\n🏥 Hospital: {hospital}\n⚠️ Severity: {severity}\n⏳ ETA: ~{eta}\n\n🗺️ GET DIRECTIONS (Accident to Hospital):\nhttps://www.google.com/maps/dir/?api=1&origin={lat},{lng}&destination={hLat},{hLng}&travelmode=driving\n\nHelp is on the way. Please stay reachable."
 }
