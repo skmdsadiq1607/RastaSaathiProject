@@ -60,6 +60,16 @@ h1, h2, h3, h4 {
   transform: translateY(-5px);
 }
 
+.nav-dropdown:hover .dropdown-content {
+  display: flex !important;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .glass-nav {
   position: fixed;
   top: 0;

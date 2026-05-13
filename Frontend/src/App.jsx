@@ -52,11 +52,14 @@ function App() {
 
   const navLinks = [
     { to: '/', label: t('home') },
+    { to: '/guide', label: t('guide') },
+    { to: '/contact', label: t('contact') },
+  ];
+
+  const aboutDropdown = [
     { to: '/about', label: t('about') },
     { to: '/mission', label: t('vision_mission') },
     { to: '/safety', label: t('road_safety') },
-    { to: '/guide', label: t('guide') },
-    { to: '/contact', label: t('contact') },
   ];
 
   const languages = [
@@ -86,7 +89,7 @@ function App() {
                   color: isActive ? 'var(--brand-red)' : 'var(--text-secondary)', 
                   textDecoration: 'none', 
                   fontWeight: '700',
-                  fontSize: '0.95rem',
+                  fontSize: '0.9rem',
                   letterSpacing: '0.5px',
                   whiteSpace: 'nowrap',
                   transition: 'color 0.3s ease'
@@ -95,6 +98,42 @@ function App() {
                 {link.label}
               </NavLink>
             ))}
+
+            {/* About Dropdown */}
+            <div className="nav-dropdown" style={{ position: 'relative', cursor: 'pointer' }}>
+               <div style={{ color: 'var(--text-secondary)', fontWeight: '700', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                  {t('about')} <ChevronDown size={14} />
+               </div>
+               <div className="dropdown-content" style={{ 
+                 position: 'absolute', top: '100%', left: '0', 
+                 background: 'rgba(15, 23, 42, 0.95)', 
+                 backdropFilter: 'blur(10px)',
+                 border: '1px solid var(--border-glass)',
+                 borderRadius: '12px',
+                 padding: '12px',
+                 minWidth: '220px',
+                 display: 'none',
+                 flexDirection: 'column',
+                 gap: '8px',
+                 boxShadow: '0 10px 25px rgba(0,0,0,0.5)',
+                 marginTop: '10px'
+               }}>
+                  {aboutDropdown.map(link => (
+                    <Link 
+                      key={link.to}
+                      to={link.to} 
+                      style={{ 
+                        color: 'white', textDecoration: 'none', fontSize: '0.9rem', padding: '10px 15px', borderRadius: '8px', transition: 'background 0.2s',
+                        background: location.pathname === link.to ? 'rgba(239, 68, 68, 0.1)' : 'transparent'
+                      }}
+                      onMouseEnter={(e) => e.target.style.background = 'rgba(255,255,255,0.05)'}
+                      onMouseLeave={(e) => e.target.style.background = location.pathname === link.to ? 'rgba(239, 68, 68, 0.1)' : 'transparent'}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+               </div>
+            </div>
             
             <div style={{ height: '24px', width: '1px', background: 'var(--border-glass)', margin: '0 8px' }}></div>
             
