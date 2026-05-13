@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+// Version 1.1.0 - Deployed with Render backend integration
+
 import { Routes, Route, NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
 import { LogOut, Menu, X, ChevronRight, Globe as GlobeIcon, Heart, User } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
