@@ -60,4 +60,21 @@ async function updateProfileController(req, res, next) {
   }
 }
 
-module.exports = { registerController, loginController, logoutController, refreshController, googleLoginController, updateProfileController };
+async function getProfileController(req, res, next) {
+  try {
+    const result = await updateProfile(req.user.sub, {});
+    res.json(ok({ data: result, message: 'Profile fetched' }));
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports = { 
+  registerController, 
+  loginController, 
+  logoutController, 
+  refreshController, 
+  googleLoginController, 
+  updateProfileController,
+  getProfileController
+};

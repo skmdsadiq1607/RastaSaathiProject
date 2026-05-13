@@ -19,6 +19,7 @@ function authRoutes() {
   router.post('/google', googleLoginController); // Google Auth
   router.post('/refresh', validate(refreshSchema), refreshController);
   router.post('/logout', logoutController);
+  router.get('/profile', requireAuth(), getProfileController);
   router.put('/profile', requireAuth(), updateProfileController);
 
   return router;

@@ -15,6 +15,26 @@ const Profile = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
 
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const res = await axios.get(`${API_BASE_URL}/auth/profile`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        const fetchedUser = res.data.data;
+        setUser(fetchedUser);
+        setName(fetchedUser.name || '');
+        setLanguage(fetchedUser.language || 'en');
+        setContacts(fetchedUser.emergencyContacts || []);
+        localStorage.setItem('user', JSON.stringify(fetchedUser));
+      } catch (err) {
+        console.error("Failed to fetch profile:", err);
+      }
+    };
+    fetchProfile();
+  }, []);
+
   const addContact = () => {
     setContacts([...contacts, { name: '', phone: '' }]);
   };
