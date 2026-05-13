@@ -8,7 +8,8 @@ const {
   logoutController,
   refreshController,
   googleLoginController,
-  updateProfileController
+  updateProfileController,
+  getProfileController
 } = require('./controller');
 
 function authRoutes() {
