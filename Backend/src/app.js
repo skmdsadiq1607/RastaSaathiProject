@@ -1,6 +1,5 @@
 const express = require('express');
-// Version 1.1.1 - Triggering Render redeploy
-
+// Version 1.1.2 - Final CORS Fix for Hackathon
 const helmet = require('helmet');
 const cors = require('cors');
 const compression = require('compression');
@@ -24,19 +23,9 @@ function createApp() {
       crossOriginResourcePolicy: { policy: 'cross-origin' }
     })
   );
-  app.use(
-    cors({
-      origin: (origin, callback) => {
-        const allowedOrigins = env.FRONTEND_URL.split(',').map(o => o.trim());
-        if (!origin || allowedOrigins.includes(origin)) {
-          callback(null, true);
-        } else {
-          callback(new Error('Not allowed by CORS'));
-        }
-      },
-      credentials: true
-    })
-  );
+  
+  app.use(cors({ origin: '*', credentials: true }));
+  
   app.use(compression());
   app.use(express.json({ limit: '2mb' }));
   app.use(express.urlencoded({ extended: true, limit: '2mb' }));
@@ -55,4 +44,3 @@ function createApp() {
 }
 
 module.exports = { createApp };
-
