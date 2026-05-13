@@ -144,6 +144,13 @@ export const TRANSLATIONS = {
     scale_desc: "Deployable across any municipal grid.",
     excellence: "Excellence",
     excellence_desc: "Medical accuracy verified by experts.",
+    orch_title: "Precision Medical Orchestration",
+    orch_feature1_title: "Geospatial Synchronization",
+    orch_feature1_desc: "Real-time synchronization between victim coordinates and specialized hospital trauma capabilities.",
+    orch_feature2_title: "AI Triage Dispatch",
+    orch_feature2_desc: "Automated injury severity prediction to bypass traditional dispatch delays and human error.",
+    orch_feature3_title: "Verified Safety Grid",
+    orch_feature3_desc: "A secured network of verified medical responders and facilities ready for instant deployment.",
 
     // Mission
     mission_page_title: "Mission & Purpose",
