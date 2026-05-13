@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// Version 1.1.0 - Deployed with Render backend integration
-
+// Version 1.1.1 - Optimized Alignment and Spacing
 import { Routes, Route, NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
 import { LogOut, Menu, X, ChevronRight, Globe as GlobeIcon, Heart, User } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -38,10 +37,9 @@ const App = () => {
     return () => window.removeEventListener('storage', handleStorageChange);
   }, []);
 
-  // Sync login state on location change (for internal nav)
   useEffect(() => {
     setIsLoggedIn(!!localStorage.getItem('token'));
-    setIsMenuOpen(false); // Close mobile menu on nav
+    setIsMenuOpen(false);
   }, [location]);
 
   const handleLogout = () => {
@@ -64,88 +62,86 @@ const App = () => {
     <div className="page-wrapper" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       
       <nav className="glass-nav">
-        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-          <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex', alignItems: 'center', zIndex: 1100, marginRight: '20px' }}>
+        <div className="container" style={{ display: 'flex', alignItems: 'center', width: '100%', height: '80px' }}>
+          {/* Logo Section */}
+          <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex', alignItems: 'center', marginRight: '30px' }}>
             <Logo size={32} />
           </Link>
           
-          {/* Desktop Menu */}
-          <div className="desktop-menu" style={{ display: 'flex', gap: '15px', alignItems: 'center', flex: 1 }}>
-            {navLinks.map(link => (
-              <NavLink 
-                key={link.to}
-                to={link.to} 
-                style={({ isActive }) => ({ 
-                  color: isActive ? 'var(--brand-red)' : 'var(--text-secondary)', 
-                  textDecoration: 'none', 
-                  fontWeight: '700',
-                  fontSize: '0.85rem',
-                  letterSpacing: '0.3px',
-                  whiteSpace: 'nowrap',
-                  transition: 'color 0.3s ease'
-                })}
-              >
-                {link.label}
-              </NavLink>
-            ))}
+          {/* Desktop Navigation */}
+          <div className="desktop-menu" style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
+            <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+              {navLinks.map(link => (
+                <NavLink 
+                  key={link.to}
+                  to={link.to} 
+                  style={({ isActive }) => ({ 
+                    color: isActive ? 'var(--brand-red)' : 'var(--text-secondary)', 
+                    textDecoration: 'none', 
+                    fontWeight: '700',
+                    fontSize: '0.85rem',
+                    letterSpacing: '0.3px',
+                    whiteSpace: 'nowrap',
+                    transition: 'color 0.3s ease'
+                  })}
+                >
+                  {link.label}
+                </NavLink>
+              ))}
+            </div>
             
-            <div style={{ height: '24px', width: '1px', background: 'var(--border-glass)', margin: '0 5px' }}></div>
+            <div style={{ height: '24px', width: '1px', background: 'var(--border-glass)', margin: '0 20px' }}></div>
             
             <LanguageSwitcher />
 
-            {!isLoggedIn ? (
-              <div style={{ display: 'flex', gap: '15px', alignItems: 'center', marginLeft: '10px' }}>
-                <Link to="/login" style={{ color: 'white', textDecoration: 'none', fontWeight: '700', fontSize: '0.85rem' }}>{t('login')}</Link>
-                <Link to="/register" className="btn btn-primary" style={{ padding: '8px 18px', fontSize: '0.8rem' }}>{t('register_btn')}</Link>
-              </div>
-            ) : (
-              <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginLeft: 'auto' }}>
-                <Link to="/profile" className="btn btn-glass" style={{ 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  gap: '6px',
-                  padding: '6px 12px',
-                  fontSize: '0.8rem'
-                }}>
-                  <User size={16} /> {t('profile')}
-                </Link>
-                <Link to="/dashboard" className="btn btn-primary" style={{ padding: '6px 16px', fontSize: '0.8rem' }}>
-                   {t('dashboard')}
-                </Link>
-                <button onClick={handleLogout} className="btn" style={{ background: 'transparent', border: '1px solid rgba(239, 68, 68, 0.3)', color: '#ef4444', padding: '6px 12px', fontSize: '0.8rem' }}>
-                   {t('logout')}
-                </button>
-              </div>
-            )}
+            {/* Right Side Actions */}
+            <div style={{ marginLeft: 'auto', display: 'flex', gap: '20px', alignItems: 'center' }}>
+              {!isLoggedIn ? (
+                <>
+                  <Link to="/login" style={{ color: 'white', textDecoration: 'none', fontWeight: '700', fontSize: '0.85rem' }}>{t('login')}</Link>
+                  <Link to="/register" className="btn btn-primary" style={{ padding: '10px 24px', fontSize: '0.85rem' }}>{t('register_btn')}</Link>
+                </>
+              ) : (
+                <>
+                  <Link to="/profile" className="btn btn-glass" style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    gap: '8px',
+                    padding: '8px 16px',
+                    fontSize: '0.85rem'
+                  }}>
+                    <User size={16} /> {t('profile')}
+                  </Link>
+                  <Link to="/dashboard" className="btn btn-primary" style={{ padding: '8px 20px', fontSize: '0.85rem' }}>
+                    {t('dashboard')}
+                  </Link>
+                  <button onClick={handleLogout} className="btn" style={{ 
+                    background: 'transparent', 
+                    border: '1px solid rgba(239, 68, 68, 0.3)', 
+                    color: '#ef4444', 
+                    padding: '8px 16px', 
+                    fontSize: '0.85rem' 
+                  }}>
+                    {t('logout')}
+                  </button>
+                </>
+              )}
+            </div>
           </div>
 
-          {/* Mobile Toggle & Quick Profile */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', zIndex: 1100 }}>
+          {/* Mobile UI (Hidden on Desktop via CSS) */}
+          <div className="mobile-only-ui" style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '15px' }}>
             {isLoggedIn && (
-              <Link 
-                to="/profile" 
-                style={{ 
-                  color: location.pathname === '/profile' ? '#ef4444' : 'white',
-                  background: 'rgba(255,255,255,0.05)',
-                  width: '40px', height: '40px', borderRadius: '10px',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  border: '1px solid rgba(255,255,255,0.1)',
-                  textDecoration: 'none'
-                }}
-              >
-                <User size={20} />
+              <Link to="/profile" className="mobile-profile-link" style={{ color: 'white' }}>
+                <User size={24} />
               </Link>
             )}
             <button 
               className="mobile-toggle" 
               onClick={() => setIsMenuOpen(!isMenuOpen)} 
-              style={{ 
-                background: 'rgba(255,255,255,0.05)', 
-                border: '1px solid rgba(255,255,255,0.1)',
-                color: 'white', padding: '10px', borderRadius: '10px', cursor: 'pointer' 
-              }}
+              style={{ background: 'transparent', border: 'none', color: 'white' }}
             >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
@@ -263,7 +259,6 @@ const App = () => {
         </div>
       </footer>
 
-      {/* Public Global Chatbot */}
       <PublicChat />
     </div>
   );
