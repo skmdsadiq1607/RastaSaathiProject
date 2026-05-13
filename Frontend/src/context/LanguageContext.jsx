@@ -20,7 +20,7 @@ export const TRANSLATIONS = {
 
     // Home Page
     hero_title: "Seconds Save Lives.",
-    hero_sub: "RastaSaathi orchestrates AI, geospatial data, and real-time alerts to bridge the gap between accident and life-saving care.",
+    hero_sub: "RastaSaathi isn't just an app—it's a mission-critical infrastructure that bridges the gap between road accidents and high-precision medical care.",
     view_guide: "View Emergency Guide",
     vision: "Our Vision",
     national_initiative: "NATIONAL ROAD SAFETY INITIATIVE",
@@ -117,7 +117,39 @@ export const TRANSLATIONS = {
     scale: "Scale",
     scale_desc: "Deployable across any municipal grid.",
     excellence: "Excellence",
-    excellence_desc: "Medical accuracy verified by experts."
+    excellence_desc: "Medical accuracy verified by experts.",
+
+    // Mission
+    mission_page_title: "Mission & Purpose",
+    mission_page_sub: "Built for the IIT Madras Road Safety Hackathon 2026. Our mission is to eliminate the 'Golden Hour' delay in road accident response using Artificial Intelligence and automated dispatch systems.",
+    mission_v_title: "Our Vision",
+    mission_v_desc: "A future where road accident fatalities are eliminated through immediate, intelligent medical coordination.",
+    mission_m_title: "Our Mission",
+    mission_m_desc: "To leverage AI and geospatial data to provide instant triage and connect victims with the right care in the golden hour.",
+    impact_sub: "Behind every line of code at RastaSaathi is a commitment to saving a life. We believe that in the age of AI, no person should die because an ambulance took too long or a hospital wasn't ready.",
+    mission_manifesto: "THE RASTASAATHI MANIFESTO",
+
+    // About
+    origin_tech: "ORIGIN & TECHNOLOGY",
+    about_vision_title: "The Architecture",
+    about_vision_desc: "Revolutionizing road safety through AI-powered emergency response and real-time trauma care orchestration.",
+    feature_ai_title: "AI Triage Engine",
+    about_tech_desc: "Dual-model fallback architecture utilizing Anthropic Claude 3.5 Sonnet and Google Gemini 1.5 Flash to instantly predict injury severity and provide interactive first-aid guidance.",
+    feature_route_title: "Geospatial Routing",
+    feature_route_desc: "Powered by MongoDB $near queries and Google Maps API. We don't just find the closest hospital, we find the closest hospital equipped for your specific medical severity.",
+    response_gap_title: "The Strategy",
+    response_gap_p1: "By integrating AI directly into the dispatch workflow, we eliminate the 'human-in-the-loop' delay that often costs lives. Our strategy is focused on Zero-Latency response.",
+    response_gap_p2: "We partner with local hospitals to create a real-time 'Medical Grid' where every second is accounted for and every resource is optimized.",
+    verified_protocols: "Verified Protocols",
+    verified_protocols_desc: "Emergency response mapped to national medical standards.",
+    data_security: "Data Security",
+    data_security_desc: "Encryption-first approach to victim telemetry.",
+    citizen_first: "Citizen First",
+    citizen_first_desc: "Designed to be accessible in high-stress situations.",
+    latency: "Latency",
+    stats_hospitals: "Integrated Hospitals",
+    stats_responders: "Responders",
+    project_stage: "Project Stage"
   },
   hi: {
     // Navigation
