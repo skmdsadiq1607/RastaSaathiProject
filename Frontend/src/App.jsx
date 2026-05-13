@@ -72,12 +72,12 @@ function App() {
       
       <nav className="glass-nav">
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-          <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex', alignItems: 'center', zIndex: 1100 }}>
+          <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex', alignItems: 'center', zIndex: 1100, marginRight: '40px' }}>
             <Logo size={32} />
           </Link>
           
           {/* Desktop Menu */}
-          <div className="desktop-menu" style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
+          <div className="desktop-menu" style={{ display: 'flex', gap: '40px', alignItems: 'center', flex: 1 }}>
             {navLinks.map(link => (
               <NavLink 
                 key={link.to}
@@ -105,7 +105,7 @@ function App() {
                 <Link to="/register" className="btn btn-primary" style={{ padding: '10px 24px', fontSize: '0.85rem' }}>{t('register_btn')}</Link>
               </div>
             ) : (
-              <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginLeft: '12px' }}>
+              <div style={{ display: 'flex', gap: '24px', alignItems: 'center', marginLeft: 'auto' }}>
                 <Link to="/profile" className="btn btn-glass" style={{ 
                   display: 'flex', 
                   alignItems: 'center', 
