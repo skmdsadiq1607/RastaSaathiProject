@@ -82,6 +82,7 @@ const Dashboard = () => {
 
       try {
         const token = localStorage.getItem('token');
+        console.log('Dispatching SOS to:', `${API_BASE_URL}/sos/trigger`);
         const sosRes = await axios.post(`${API_BASE_URL}/sos/trigger`, {
           lat: latitude,
           lng: longitude,
