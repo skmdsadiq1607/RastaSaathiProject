@@ -45,7 +45,8 @@ const Login = () => {
       navigate('/dashboard');
     } catch (err) {
       console.error("Login Error:", err);
-      setError(err.response?.data?.message || 'Login failed. Please check your credentials.');
+      const serverMsg = err.response?.data?.error?.message;
+      setError(serverMsg || 'Login failed. Please check your credentials.');
     } finally {
       setLoading(false);
     }

@@ -48,7 +48,14 @@ const Register = () => {
       navigate('/dashboard');
     } catch (err) {
       console.error("Registration Error:", err);
-      setError(err.response?.data?.message || 'Registration failed. Please try again.');
+      const serverMsg = err.response?.data?.error?.message;
+      const issues = err.response?.data?.error?.details?.issues;
+      
+      if (issues && issues.length > 0) {
+        setError(`Validation Error: ${issues.map(i => i.message).join(', ')}`);
+      } else {
+        setError(serverMsg || 'Registration failed. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
