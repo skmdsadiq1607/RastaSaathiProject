@@ -163,7 +163,7 @@ const Dashboard = () => {
   };
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="container" style={{ paddingTop: '100px', paddingBottom: '40px' }}>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="container" style={{ paddingBottom: '40px' }}>
       <div className="dashboard-grid">
         <style>{`
           .dashboard-grid { display: grid; grid-template-columns: 1fr 400px; gap: 30px; }

@@ -20,7 +20,7 @@ const Home = () => {
 
   return (
     <div style={{ overflow: 'hidden' }}>
-      <div className="container" style={{ paddingTop: '120px', paddingBottom: '120px' }}>
+      <div className="container" style={{ paddingBottom: '120px' }}>
         
         {/* HERO SECTION */}
         <motion.div 

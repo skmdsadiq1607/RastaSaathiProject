@@ -97,7 +97,7 @@ const RoadSafety = () => {
       initial={{ opacity: 0 }} 
       animate={{ opacity: 1 }} 
       className="container" 
-      style={{ paddingTop: '120px', paddingBottom: '60px' }}
+      style={{ paddingBottom: '60px' }}
     >
       <div style={{ textAlign: 'center', marginBottom: '60px' }}>
         <h1 style={{ fontSize: '3.5rem', fontWeight: '900', marginBottom: '20px' }}>

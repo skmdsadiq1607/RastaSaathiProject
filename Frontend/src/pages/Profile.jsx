@@ -80,7 +80,7 @@ const Profile = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className="container"
-      style={{ paddingTop: '60px', paddingBottom: '100px', maxWidth: '900px' }}
+      style={{ paddingBottom: '100px', maxWidth: '900px' }}
     >
       <div className="glass-panel" style={{ padding: '50px', background: 'rgba(2, 6, 23, 0.6)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '30px', marginBottom: '50px', flexWrap: 'wrap' }}>

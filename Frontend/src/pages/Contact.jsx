@@ -11,7 +11,7 @@ const Contact = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className="container"
-      style={{ paddingTop: '60px', paddingBottom: '100px' }}
+      style={{ paddingBottom: '100px' }}
     >
       <div style={{ textAlign: 'center', marginBottom: '60px' }}>
         <h1 style={{ fontSize: '3.5rem', fontWeight: '900' }}>

@@ -7,7 +7,7 @@ const About = () => {
   const { t } = useLanguage();
 
   return (
-    <div className="container" style={{ paddingTop: '80px', paddingBottom: '120px' }}>
+    <div className="container" style={{ paddingBottom: '120px' }}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
