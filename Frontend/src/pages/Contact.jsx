@@ -1,60 +1,118 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
-import { Mail, Phone, MapPin, Globe, MessageSquare } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Globe } from 'lucide-react';
 
 const Contact = () => {
   const { t } = useLanguage();
 
   return (
-    <div className="container" style={{ paddingTop: '80px', paddingBottom: '120px' }}>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        style={{ maxWidth: '1000px', margin: '0 auto' }}
-      >
-        <div style={{ textAlign: 'center', marginBottom: '80px' }}>
-          <h1 style={{ fontSize: '3.5rem', fontWeight: '900', marginBottom: '24px' }}>
-            {t('global_title')}
-          </h1>
-          <p style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', maxWidth: '800px', margin: '0 auto', lineHeight: '1.6' }}>
-            {t('global_sub')}
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="container"
+      style={{ paddingTop: '60px', paddingBottom: '100px' }}
+    >
+      <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+        <h1 style={{ fontSize: '3.5rem', fontWeight: '900' }}>
+          {t('contact_us_now')}
+        </h1>
+        <p style={{ color: 'var(--text-secondary)', marginTop: '16px', fontSize: '1.2rem' }}>
+          {t('contact_sub')}
+        </p>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
+          <div className="glass-panel" style={{ padding: '35px', display: 'flex', alignItems: 'center', gap: '20px' }}>
+            <div style={{ background: 'rgba(239, 68, 68, 0.1)', padding: '15px', borderRadius: '15px' }}>
+              <Mail color="#ef4444" size={28} />
+            </div>
+            <div>
+              <div style={{ fontWeight: '800', fontSize: '1.1rem' }}>{t('email_us')}</div>
+              <div style={{ color: 'var(--text-secondary)' }}>{t('contact_email')}</div>
+            </div>
+          </div>
+
+          <div className="glass-panel" style={{ padding: '35px', display: 'flex', alignItems: 'center', gap: '20px' }}>
+            <div style={{ background: 'rgba(59, 130, 246, 0.1)', padding: '15px', borderRadius: '15px' }}>
+              <Phone color="#3b82f6" size={28} />
+            </div>
+            <div>
+              <div style={{ fontWeight: '800', fontSize: '1.1rem' }}>{t('call_us')}</div>
+              <div style={{ color: 'var(--text-secondary)' }}>{t('contact_phone')}</div>
+            </div>
+          </div>
+
+          <div className="glass-panel" style={{ padding: '35px', display: 'flex', alignItems: 'center', gap: '20px' }}>
+            <div style={{ background: 'rgba(16, 185, 129, 0.1)', padding: '15px', borderRadius: '15px' }}>
+              <MapPin color="#10b981" size={28} />
+            </div>
+            <div>
+              <div style={{ fontWeight: '800', fontSize: '1.1rem' }}>{t('location')}</div>
+              <div style={{ color: 'var(--text-secondary)' }}>IIT Madras, Chennai</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="glass-panel" style={{ padding: '50px' }}>
+          <h3 style={{ marginBottom: '32px', fontSize: '1.8rem', fontWeight: '800' }}>Send a Message</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            <input type="text" className="form-input" placeholder="Your Name" />
+            <input type="email" className="form-input" placeholder="Your Email" />
+            <textarea className="form-input" rows="4" placeholder="How can we help?" style={{ resize: 'none' }}></textarea>
+            <button 
+              className="premium-button" 
+              style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center', 
+                gap: '12px',
+                background: 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)',
+                border: 'none',
+                padding: '16px',
+                borderRadius: '12px',
+                color: 'white',
+                fontWeight: '800',
+                cursor: 'pointer',
+                fontSize: '1rem',
+                boxShadow: '0 4px 20px rgba(239, 68, 68, 0.3)'
+              }}
+            >
+              <Send size={20} /> {t('send_message')}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Global Support Narrative */}
+      <div style={{ marginTop: '120px', textAlign: 'center' }}>
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <h2 style={{ fontSize: '3rem', fontWeight: '900', marginBottom: '24px' }}>
+            {t('global_community_title')}
+          </h2>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', lineHeight: '1.8', maxWidth: '850px', margin: '0 auto' }}>
+            {t('global_community_sub')}
           </p>
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px', marginBottom: '80px' }}>
-          <div className="glass-panel" style={{ padding: '40px', textAlign: 'center' }}>
-            <Mail size={32} color="#ef4444" style={{ marginBottom: '20px' }} />
-            <h3>{t('strategic_partnerships')}</h3>
-            <p style={{ color: 'var(--text-secondary)', marginTop: '10px' }}>{t('contact_email')}</p>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '60px', marginTop: '60px', flexWrap: 'wrap' }}>
+            {[
+              { label: t('stat_partnerships'), val: t('stat_active') },
+              { label: t('stat_response'), val: t('stat_minimal') },
+              { label: t('stat_accuracy'), val: t('stat_99') }
+            ].map((stat, i) => (
+              <div key={i} style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '2.5rem', fontWeight: '900', color: 'white' }}>{stat.val}</div>
+                <div style={{ fontSize: '0.8rem', color: '#ef4444', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '2px' }}>{stat.label}</div>
+              </div>
+            ))}
           </div>
-          
-          <div className="glass-panel" style={{ padding: '40px', textAlign: 'center' }}>
-            <Phone size={32} color="#3b82f6" style={{ marginBottom: '20px' }} />
-            <h3>{t('emergency_liaison')}</h3>
-            <p style={{ color: 'var(--text-secondary)', marginTop: '10px' }}>{t('contact_phone')}</p>
-          </div>
-
-          <div className="glass-panel" style={{ padding: '40px', textAlign: 'center' }}>
-            <Globe size={32} color="#10b981" style={{ marginBottom: '20px' }} />
-            <h3>{t('headquarters')}</h3>
-            <p style={{ color: 'var(--text-secondary)', marginTop: '10px' }}>{t('contact_address')}</p>
-          </div>
-        </div>
-
-        {/* Reach out form placeholder / direct message */}
-        <div className="glass-panel" style={{ padding: '60px', textAlign: 'center', background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, transparent 100%)' }}>
-          <MessageSquare size={40} color="#ef4444" style={{ marginBottom: '20px' }} />
-          <h2 style={{ fontSize: '2rem', marginBottom: '20px' }}>{t('direct_support')}</h2>
-          <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto 30px' }}>
-            {t('direct_support_sub')}
-          </p>
-          <a href={`mailto:${t('contact_email')}`} className="premium-button" style={{ textDecoration: 'none', display: 'inline-block', padding: '15px 30px', background: '#ef4444', color: 'white', borderRadius: '8px', fontWeight: '700' }}>
-            {t('contact_us_now')}
-          </a>
-        </div>
-      </motion.div>
-    </div>
+        </motion.div>
+      </div>
+    </motion.div>
   );
 };
 
