@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // Version 1.1.0 - Deployed with Render backend integration
 
 import { Routes, Route, NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
-import { LogOut, Menu, X, ChevronRight, ChevronDown, Globe as GlobeIcon, Heart, User } from 'lucide-react';
+import { LogOut, Menu, X, ChevronRight, Globe as GlobeIcon, Heart, User } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useLanguage } from './context/LanguageContext';
 
@@ -21,19 +21,14 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
-import RoadSafety from './pages/RoadSafety';
+import Safety from './pages/Safety';
 
-function App() {
-  const { t, lang, setLang } = useLanguage();
-  const navigate = useNavigate();
-  const location = useLocation();
+const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
-
-  useEffect(() => {
-    setIsMenuOpen(false);
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -42,6 +37,12 @@ function App() {
     window.addEventListener('storage', handleStorageChange);
     return () => window.removeEventListener('storage', handleStorageChange);
   }, []);
+
+  // Sync login state on location change (for internal nav)
+  useEffect(() => {
+    setIsLoggedIn(!!localStorage.getItem('token'));
+    setIsMenuOpen(false); // Close mobile menu on nav
+  }, [location]);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -52,22 +53,11 @@ function App() {
 
   const navLinks = [
     { to: '/', label: t('home') },
-    { to: '/guide', label: t('guide') },
-    { to: '/contact', label: t('contact') },
-  ];
-
-  const aboutDropdown = [
     { to: '/about', label: t('about') },
     { to: '/mission', label: t('vision_mission') },
     { to: '/safety', label: t('road_safety') },
-  ];
-
-  const languages = [
-    { code: 'en', label: 'English' },
-    { code: 'hi', label: 'हिन्दी' },
-    { code: 'te', label: 'తెలుగు' },
-    { code: 'ta', label: 'தமிழ்' },
-    { code: 'ur', label: 'اردو' }
+    { to: '/guide', label: t('guide') },
+    { to: '/contact', label: t('contact') },
   ];
 
   return (
@@ -75,12 +65,12 @@ function App() {
       
       <nav className="glass-nav">
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-          <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex', alignItems: 'center', zIndex: 1100, marginRight: '24px' }}>
+          <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex', alignItems: 'center', zIndex: 1100, marginRight: '20px' }}>
             <Logo size={32} />
           </Link>
           
           {/* Desktop Menu */}
-          <div className="desktop-menu" style={{ display: 'flex', gap: '20px', alignItems: 'center', flex: 1 }}>
+          <div className="desktop-menu" style={{ display: 'flex', gap: '15px', alignItems: 'center', flex: 1 }}>
             {navLinks.map(link => (
               <NavLink 
                 key={link.to}
@@ -89,8 +79,8 @@ function App() {
                   color: isActive ? 'var(--brand-red)' : 'var(--text-secondary)', 
                   textDecoration: 'none', 
                   fontWeight: '700',
-                  fontSize: '0.9rem',
-                  letterSpacing: '0.5px',
+                  fontSize: '0.85rem',
+                  letterSpacing: '0.3px',
                   whiteSpace: 'nowrap',
                   transition: 'color 0.3s ease'
                 })}
@@ -98,67 +88,31 @@ function App() {
                 {link.label}
               </NavLink>
             ))}
-
-            {/* About Dropdown */}
-            <div className="nav-dropdown" style={{ position: 'relative', cursor: 'pointer' }}>
-               <div style={{ color: 'var(--text-secondary)', fontWeight: '700', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                  {t('about')} <ChevronDown size={14} />
-               </div>
-               <div className="dropdown-content" style={{ 
-                 position: 'absolute', top: '100%', left: '0', 
-                 background: 'rgba(15, 23, 42, 0.95)', 
-                 backdropFilter: 'blur(10px)',
-                 border: '1px solid var(--border-glass)',
-                 borderRadius: '12px',
-                 padding: '12px',
-                 minWidth: '220px',
-                 display: 'none',
-                 flexDirection: 'column',
-                 gap: '8px',
-                 boxShadow: '0 10px 25px rgba(0,0,0,0.5)',
-                 marginTop: '10px'
-               }}>
-                  {aboutDropdown.map(link => (
-                    <Link 
-                      key={link.to}
-                      to={link.to} 
-                      style={{ 
-                        color: 'white', textDecoration: 'none', fontSize: '0.9rem', padding: '10px 15px', borderRadius: '8px', transition: 'background 0.2s',
-                        background: location.pathname === link.to ? 'rgba(239, 68, 68, 0.1)' : 'transparent'
-                      }}
-                      onMouseEnter={(e) => e.target.style.background = 'rgba(255,255,255,0.05)'}
-                      onMouseLeave={(e) => e.target.style.background = location.pathname === link.to ? 'rgba(239, 68, 68, 0.1)' : 'transparent'}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-               </div>
-            </div>
             
-            <div style={{ height: '24px', width: '1px', background: 'var(--border-glass)', margin: '0 8px' }}></div>
+            <div style={{ height: '24px', width: '1px', background: 'var(--border-glass)', margin: '0 5px' }}></div>
             
             <LanguageSwitcher />
 
             {!isLoggedIn ? (
-              <div style={{ display: 'flex', gap: '20px', alignItems: 'center', marginLeft: '12px' }}>
-                <Link to="/login" style={{ color: 'white', textDecoration: 'none', fontWeight: '700', fontSize: '0.9rem' }}>{t('login')}</Link>
-                <Link to="/register" className="btn btn-primary" style={{ padding: '10px 24px', fontSize: '0.85rem' }}>{t('register_btn')}</Link>
+              <div style={{ display: 'flex', gap: '15px', alignItems: 'center', marginLeft: '10px' }}>
+                <Link to="/login" style={{ color: 'white', textDecoration: 'none', fontWeight: '700', fontSize: '0.85rem' }}>{t('login')}</Link>
+                <Link to="/register" className="btn btn-primary" style={{ padding: '8px 18px', fontSize: '0.8rem' }}>{t('register_btn')}</Link>
               </div>
             ) : (
-              <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginLeft: 'auto' }}>
+              <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginLeft: 'auto' }}>
                 <Link to="/profile" className="btn btn-glass" style={{ 
                   display: 'flex', 
                   alignItems: 'center', 
                   gap: '6px',
-                  padding: '8px 12px',
+                  padding: '6px 12px',
                   fontSize: '0.8rem'
                 }}>
                   <User size={16} /> {t('profile')}
                 </Link>
-                <Link to="/dashboard" className="btn btn-primary" style={{ padding: '8px 16px', fontSize: '0.8rem' }}>
+                <Link to="/dashboard" className="btn btn-primary" style={{ padding: '6px 16px', fontSize: '0.8rem' }}>
                    {t('dashboard')}
                 </Link>
-                <button onClick={handleLogout} className="btn" style={{ background: 'transparent', border: '1px solid rgba(239, 68, 68, 0.3)', color: '#ef4444', padding: '8px 12px', fontSize: '0.8rem' }}>
+                <button onClick={handleLogout} className="btn" style={{ background: 'transparent', border: '1px solid rgba(239, 68, 68, 0.3)', color: '#ef4444', padding: '6px 12px', fontSize: '0.8rem' }}>
                    {t('logout')}
                 </button>
               </div>
@@ -173,13 +127,13 @@ function App() {
                 style={{ 
                   color: location.pathname === '/profile' ? '#ef4444' : 'white',
                   background: 'rgba(255,255,255,0.05)',
-                  width: '48px', height: '48px', borderRadius: '14px',
+                  width: '40px', height: '40px', borderRadius: '10px',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   border: '1px solid rgba(255,255,255,0.1)',
                   textDecoration: 'none'
                 }}
               >
-                <User size={22} />
+                <User size={20} />
               </Link>
             )}
             <button 
@@ -187,15 +141,8 @@ function App() {
               onClick={() => setIsMenuOpen(!isMenuOpen)} 
               style={{ 
                 background: 'rgba(255,255,255,0.05)', 
-                border: '1px solid rgba(255,255,255,0.1)', 
-                color: 'white', 
-                cursor: 'pointer',
-                width: '48px',
-                height: '48px',
-                borderRadius: '14px',
-                display: 'none',
-                alignItems: 'center',
-                justifyContent: 'center'
+                border: '1px solid rgba(255,255,255,0.1)',
+                color: 'white', padding: '10px', borderRadius: '10px', cursor: 'pointer' 
               }}
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -203,182 +150,123 @@ function App() {
           </div>
         </div>
 
-        <style>{`
-          @media (max-width: 1100px) {
-            .desktop-menu { display: none !important; }
-            .mobile-toggle { display: flex !important; }
-            .glass-nav { background: #020617 !important; border-bottom: 1px solid rgba(255,255,255,0.1); }
-          }
-        `}</style>
-      </nav>
-
-      {/* Mobile Menu Overlay - MOVED OUTSIDE NAV */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <div style={{ position: 'fixed', inset: 0, zIndex: 2000 }}>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsMenuOpen(false)}
-              style={{ position: 'absolute', inset: 0, background: '#020617' }}
-            />
+        {/* Mobile Menu Overlay */}
+        <AnimatePresence>
+          {isMenuOpen && (
             <motion.div 
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              style={{ 
-                position: 'absolute', top: 0, right: 0, bottom: 0, width: '100%',
-                background: '#020617', 
-                display: 'flex', flexDirection: 'column', padding: '80px 24px 40px',
-                overflowY: 'auto'
+              initial={{ opacity: 0, x: '100%' }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: '100%' }}
+              className="mobile-menu"
+              style={{
+                position: 'fixed', top: 0, right: 0, bottom: 0, width: '100%',
+                background: 'rgba(2, 6, 23, 0.98)', backdropFilter: 'blur(20px)',
+                zIndex: 1050, padding: '100px 40px', display: 'flex', flexDirection: 'column', gap: '30px'
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
-                <Logo size={28} />
-                <button onClick={() => setIsMenuOpen(false)} style={{ background: 'rgba(255,255,255,0.05)', border: 'none', color: 'white', padding: '10px', borderRadius: '12px' }}>
-                  <X size={24} />
-                </button>
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <p style={{ fontSize: '0.75rem', fontWeight: '900', color: 'var(--brand-red)', letterSpacing: '2px', marginBottom: '16px' }}>Navigation</p>
-                {navLinks.map(link => (
-                  <NavLink 
-                    key={link.to}
-                    to={link.to} 
-                    style={({ isActive }) => ({ 
-                      color: isActive ? 'var(--brand-red)' : 'white', 
-                      textDecoration: 'none', 
-                      fontSize: '1.25rem',
-                      fontWeight: '800',
-                      padding: '16px 20px',
-                      background: isActive ? 'rgba(239, 68, 68, 0.1)' : 'transparent',
-                      borderRadius: '16px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between'
-                    })}
-                  >
-                    {link.label}
-                    <ChevronRight size={20} opacity={0.3} />
-                  </NavLink>
-                ))}
-              </div>
-              
+              {navLinks.map(link => (
+                <Link 
+                  key={link.to}
+                  to={link.to} 
+                  style={{ color: 'white', textDecoration: 'none', fontSize: '1.8rem', fontWeight: '800' }}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <div style={{ height: '1px', background: 'rgba(255,255,255,0.1)', margin: '10px 0' }}></div>
+              {!isLoggedIn ? (
+                <>
+                  <Link to="/login" className="btn btn-glass" style={{ textAlign: 'center' }}>{t('login')}</Link>
+                  <Link to="/register" className="btn btn-primary" style={{ textAlign: 'center' }}>{t('register_btn')}</Link>
+                </>
+              ) : (
+                <>
+                  <Link to="/dashboard" className="btn btn-primary" style={{ textAlign: 'center' }}>{t('dashboard')}</Link>
+                  <button onClick={handleLogout} className="btn" style={{ color: '#ef4444' }}>{t('logout')}</button>
+                </>
+              )}
               <div style={{ marginTop: 'auto' }}>
-                <div style={{ padding: '32px 0', borderTop: '1px solid rgba(255,255,255,0.1)', marginBottom: '32px' }}>
-                  <p style={{ fontSize: '0.75rem', fontWeight: '900', color: 'var(--text-secondary)', letterSpacing: '2px', marginBottom: '24px' }}>Select Language</p>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
-                    {languages.map(l => {
-                      const isActive = lang === l.code;
-                      return (
-                        <button 
-                          key={l.code}
-                          onClick={() => setLang(l.code)}
-                          style={{
-                            padding: '12px', borderRadius: '12px', border: isActive ? '1px solid #ef4444' : '1px solid rgba(255,255,255,0.1)',
-                            background: isActive ? 'rgba(239, 68, 68, 0.1)' : 'rgba(255,255,255,0.05)',
-                            color: isActive ? '#ef4444' : 'white', fontWeight: '700', fontSize: '0.85rem'
-                          }}
-                        >
-                          {l.label}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {!isLoggedIn ? (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                    <Link to="/login" className="btn btn-glass" style={{ width: '100%' }}>{t('login')}</Link>
-                    <Link to="/register" className="btn btn-primary" style={{ width: '100%' }}>{t('register_btn')}</Link>
-                  </div>
-                ) : (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                    <Link to="/profile" style={{ 
-                      padding: '16px', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.1)',
-                      background: 'rgba(255,255,255,0.05)', color: 'white', fontWeight: '800',
-                      textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px'
-                    }}>
-                      <User size={20} /> {t('profile')}
-                    </Link>
-                    <Link to="/dashboard" className="btn btn-primary" style={{ width: '100%' }}>{t('dashboard')}</Link>
-                    <button onClick={handleLogout} className="btn" style={{ width: '100%', border: '1px solid #ef4444', color: '#ef4444', background: 'transparent' }}>{t('logout')}</button>
-                  </div>
-                )}
+                <LanguageSwitcher />
               </div>
             </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
-
-      <main style={{ flex: 1, paddingTop: 'var(--nav-height)' }}>
-        <AnimatePresence mode="wait">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/mission" element={<Mission />} />
-            <Route path="/safety" element={<RoadSafety />} />
-            <Route path="/guide" element={<Guide />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/profile" element={<Profile />} />
-          </Routes>
+          )}
         </AnimatePresence>
+      </nav>
+
+      <main style={{ flex: 1 }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/mission" element={<Mission />} />
+          <Route path="/guide" element={<Guide />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/safety" element={<Safety />} />
+        </Routes>
       </main>
 
-      <footer style={{ borderTop: '1px solid var(--border-glass)', padding: '100px 0 60px', marginTop: '120px', background: 'rgba(2, 6, 23, 0.8)', position: 'relative' }}>
+      <footer className="glass-panel" style={{ marginTop: 'auto', borderTop: '1px solid var(--border-glass)', borderRadius: 0, padding: '80px 0 40px' }}>
         <div className="container">
-          <div className="responsive-grid" style={{ marginBottom: '80px' }}>
-             <div>
-                <Logo size={28} />
-                <p style={{ color: 'var(--text-secondary)', marginTop: '24px', fontSize: '1rem', lineHeight: '1.8', maxWidth: '300px' }}>
-                  {t('footer_tagline')}
-                </p>
-             </div>
-             <div>
-                <h4 style={{ color: 'white', marginBottom: '28px', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '2px' }}>{t('navigation')}</h4>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                   {navLinks.map(l => (
-                     <Link key={l.to} to={l.to} style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.95rem', fontWeight: '500' }}>{l.label}</Link>
-                   ))}
-                </div>
-             </div>
-             <div>
-                <h4 style={{ color: 'white', marginBottom: '28px', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '2px' }}>{t('contact')}</h4>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  <p style={{ color: 'var(--text-secondary)', fontSize: '1rem' }}>{t('contact_email')}</p>
-                  <p style={{ color: 'var(--text-secondary)', fontSize: '1rem' }}>{t('contact_phone')}</p>
-                </div>
-             </div>
-          </div>
-          
-          <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '40px', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '30px' }}>
-            <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.9rem', fontWeight: '600' }}>
-              © 2026 RASTASAATHI. {t('hackathon_tag')}
+          <div className="responsive-grid-4" style={{ marginBottom: '60px' }}>
+            <div>
+              <Logo size={40} />
+              <p style={{ color: 'var(--text-secondary)', marginTop: '20px', lineHeight: '1.6' }}>
+                {t('footer_tagline')}
+              </p>
+              <div style={{ marginTop: '24px', fontWeight: '800', color: '#ef4444', letterSpacing: '1px', fontSize: '0.75rem' }}>
+                {t('hackathon_tag')}
+              </div>
             </div>
             
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '8px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', color: 'rgba(255,255,255,0.6)', fontSize: '0.95rem', fontWeight: '800', letterSpacing: '0px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginRight: '10px' }}>
-                   {t('made_with')} <Heart size={16} color="#ef4444" fill="#ef4444" />
+            <div>
+              <h3 style={{ fontSize: '1.2rem', fontWeight: '800', marginBottom: '20px' }}>{t('human_impact')}</h3>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.5' }}>
+                {t('impact_sub')}
+              </p>
+            </div>
+
+            <div>
+              <h3 style={{ fontSize: '1.2rem', fontWeight: '800', marginBottom: '20px' }}>{t('strategic_partnerships')}</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-secondary)' }}>
+                   <GlobeIcon size={16} color="#3b82f6" /> {t('emergency_liaison')}
                 </div>
-                <span>{t('by_team')}</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-secondary)' }}>
+                   <Heart size={16} color="#ef4444" /> {t('headquarters')}
+                </div>
               </div>
-              <div style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.75rem', fontWeight: '700', letterSpacing: '0.5px' }}>
-                Dr Lakshmi | Sadiq | Krishna | Chakravarthi | Hasini
-              </div>
+            </div>
+
+            <div>
+              <h3 style={{ fontSize: '1.2rem', fontWeight: '800', marginBottom: '20px' }}>{t('direct_support')}</h3>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '15px' }}>
+                {t('direct_support_sub')}
+              </p>
+              <a href={`mailto:${t('contact_email')}`} style={{ color: '#ef4444', textDecoration: 'none', fontWeight: '700' }}>
+                {t('contact_us_now')} &rarr;
+              </a>
+            </div>
+          </div>
+          
+          <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '20px' }}>
+            <div style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
+              &copy; 2026 RastaSaathi. All Rights Reserved.
+            </div>
+            <div style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
+              {t('made_with')} ❤️ {t('by_team')}
             </div>
           </div>
         </div>
       </footer>
+
+      {/* Public Global Chatbot */}
       <PublicChat />
     </div>
   );
-}
+};
 
 export default App;
