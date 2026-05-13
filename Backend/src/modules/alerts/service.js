@@ -85,8 +85,13 @@ async function dispatchAlerts({ io, incident, victimUser, severityLevel, hospita
     let whatsappSuccess = false;
     // Try WhatsApp
     try {
-      await sendSms({ to: c.phone, body: smsBody, forceType: 'whatsapp' });
-      alerts.deliveries.push({ channel: 'WHATSAPP', to: c.phone, status: 'SENT' });
+      const res = await sendSms({ to: c.phone, body: smsBody, forceType: 'whatsapp' });
+      alerts.deliveries.push({ 
+        channel: 'WHATSAPP', 
+        to: c.phone, 
+        status: 'SENT', 
+        providerMessageId: res.sid 
+      });
       whatsappSuccess = true;
     } catch (e) {
       alerts.deliveries.push({ channel: 'WHATSAPP', to: c.phone, status: 'FAILED', error: e.message });
@@ -95,8 +100,13 @@ async function dispatchAlerts({ io, incident, victimUser, severityLevel, hospita
     // Only try Standard SMS if WhatsApp failed
     if (!whatsappSuccess) {
       try {
-        await sendSms({ to: c.phone, body: smsBody, forceType: 'sms' });
-        alerts.deliveries.push({ channel: 'SMS', to: c.phone, status: 'SENT' });
+        const res = await sendSms({ to: c.phone, body: smsBody, forceType: 'sms' });
+        alerts.deliveries.push({ 
+          channel: 'SMS', 
+          to: c.phone, 
+          status: 'SENT', 
+          providerMessageId: res.sid 
+        });
       } catch (e) {
         alerts.deliveries.push({ channel: 'SMS', to: c.phone, status: 'FAILED', error: e.message });
       }
