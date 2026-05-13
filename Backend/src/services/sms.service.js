@@ -12,10 +12,25 @@ function getClient() {
   return twilio(env.TWILIO_ACCOUNT_SID, env.TWILIO_AUTH_TOKEN);
 }
 
+function formatPhoneNumber(phone) {
+  if (!phone) return phone;
+  let cleaned = phone.trim();
+  // Ensure it starts with + if it's just numbers
+  if (/^\d+$/.test(cleaned)) {
+    cleaned = '+' + cleaned;
+  } else if (!cleaned.startsWith('+') && !cleaned.startsWith('whatsapp:+')) {
+    // If it starts with numbers but doesn't have a prefix
+    if (/^\d/.test(cleaned)) cleaned = '+' + cleaned;
+  }
+  return cleaned;
+}
+
 async function sendSms({ to, body, forceType = null }) {
   if (!to || !body) {
     throw new AppError('Phone number and body are required', 400);
   }
+
+  const toFormattedRaw = formatPhoneNumber(to);
 
   try {
     const client = getClient();
@@ -32,11 +47,11 @@ async function sendSms({ to, body, forceType = null }) {
     
     if (useWhatsApp) {
       fromFormatted = rawFrom.startsWith('whatsapp:') ? rawFrom : `whatsapp:${rawFrom}`;
-      toFormatted = to.startsWith('whatsapp:') ? to : `whatsapp:${to}`;
+      toFormatted = toFormattedRaw.startsWith('whatsapp:') ? toFormattedRaw : `whatsapp:${toFormattedRaw}`;
     } else {
       if (!env.TWILIO_PHONE_NUMBER) throw new AppError('Twilio Phone Number not configured', 500);
       fromFormatted = env.TWILIO_PHONE_NUMBER;
-      toFormatted = to.replace('whatsapp:', '');
+      toFormatted = toFormattedRaw.replace('whatsapp:', '');
     }
 
     const msg = await client.messages.create({
@@ -45,10 +60,14 @@ async function sendSms({ to, body, forceType = null }) {
       body: body
     });
     
+    logger.info(`[Twilio ${useWhatsApp ? 'WhatsApp' : 'SMS'} SENT] SID: ${msg.sid} | Status: ${msg.status} | To: ${toFormatted}`);
     return { sid: msg.sid, status: msg.status, type: useWhatsApp ? 'whatsapp' : 'sms' };
   } catch (error) {
-    logger.error(`[Twilio ERROR] Failed to send ${forceType || 'auto'} to ${to}: ${error.message}`);
-    throw error; // Rethrow to let the caller handle the failure
+    logger.error(`[Twilio ERROR] Failed to send ${forceType || 'auto'} to ${to}: ${error.message}`, {
+      code: error.code,
+      moreInfo: error.moreInfo
+    });
+    throw error;
   }
 }
 

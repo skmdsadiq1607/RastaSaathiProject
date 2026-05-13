@@ -14,6 +14,43 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  // Form State
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    if (!formData.email || !formData.password) {
+      setError('Please fill in all fields.');
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError('');
+      const res = await axios.post(`${API_BASE_URL}/auth/login`, {
+        phone: formData.email, // Backend uses 'phone' field for identity
+        password: formData.password
+      });
+      
+      localStorage.setItem('token', res.data.data.accessToken);
+      localStorage.setItem('user', JSON.stringify(res.data.data.user));
+      window.dispatchEvent(new Event('storage'));
+      navigate('/dashboard');
+    } catch (err) {
+      console.error("Login Error:", err);
+      setError(err.response?.data?.message || 'Login failed. Please check your credentials.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const loginWithGoogle = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
       try {
@@ -64,18 +101,37 @@ const Login = () => {
           </div>
         )}
 
-        <form>
+        <form onSubmit={handleLogin}>
           <div style={{ marginBottom: '24px' }}>
             <label style={{ display: 'block', marginBottom: '12px', fontSize: '0.85rem', fontWeight: '800', color: 'var(--text-secondary)', letterSpacing: '1.5px', textTransform: 'uppercase' }}>{t('email_label')}</label>
-            <input type="email" className="form-input" placeholder="you@example.com" />
+            <input 
+              type="email" 
+              name="email"
+              className="form-input" 
+              placeholder="you@example.com" 
+              value={formData.email}
+              onChange={handleChange}
+            />
           </div>
           <div style={{ marginBottom: '40px' }}>
             <label style={{ display: 'block', marginBottom: '12px', fontSize: '0.85rem', fontWeight: '800', color: 'var(--text-secondary)', letterSpacing: '1.5px', textTransform: 'uppercase' }}>{t('password_label')}</label>
-            <input type="password" className="form-input" placeholder="••••••••" />
+            <input 
+              type="password" 
+              name="password"
+              className="form-input" 
+              placeholder="••••••••" 
+              value={formData.password}
+              onChange={handleChange}
+            />
           </div>
           
-          <button type="button" className="premium-button" style={{ width: '100%', marginBottom: '20px', padding: '18px', border: 'none', cursor: 'pointer' }}>
-            {t('signin_btn')}
+          <button 
+            type="submit" 
+            className="premium-button" 
+            disabled={loading}
+            style={{ width: '100%', marginBottom: '20px', padding: '18px', border: 'none', cursor: 'pointer', opacity: loading ? 0.7 : 1 }}
+          >
+            {loading ? 'Signing in...' : t('signin_btn')}
           </button>
           
           <div style={{ position: 'relative', textAlign: 'center', margin: '32px 0' }}>
@@ -124,3 +180,4 @@ const Login = () => {
 };
 
 export default Login;
+

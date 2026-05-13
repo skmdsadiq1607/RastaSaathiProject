@@ -13,6 +13,46 @@ const Register = () => {
   const { t } = useLanguage();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  
+  // Form State
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: ''
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.password) {
+      setError('Please fill in all fields.');
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError('');
+      const res = await axios.post(`${API_BASE_URL}/auth/register`, {
+        name: formData.name,
+        phone: formData.email, // Backend uses 'phone' field for identity
+        password: formData.password,
+        role: 'victim' // Default role
+      });
+      
+      localStorage.setItem('token', res.data.data.accessToken);
+      localStorage.setItem('user', JSON.stringify(res.data.data.user));
+      window.dispatchEvent(new Event('storage'));
+      navigate('/dashboard');
+    } catch (err) {
+      console.error("Registration Error:", err);
+      setError(err.response?.data?.message || 'Registration failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const registerWithGoogle = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
@@ -64,22 +104,48 @@ const Register = () => {
           </div>
         )}
 
-        <form>
+        <form onSubmit={handleRegister}>
           <div style={{ marginBottom: '24px' }}>
             <label style={{ display: 'block', marginBottom: '12px', fontSize: '0.85rem', fontWeight: '800', color: 'var(--text-secondary)', letterSpacing: '1.5px', textTransform: 'uppercase' }}>Full Name</label>
-            <input type="text" className="form-input" placeholder="John Doe" />
+            <input 
+              type="text" 
+              name="name"
+              className="form-input" 
+              placeholder="John Doe" 
+              value={formData.name}
+              onChange={handleChange}
+            />
           </div>
           <div style={{ marginBottom: '24px' }}>
             <label style={{ display: 'block', marginBottom: '12px', fontSize: '0.85rem', fontWeight: '800', color: 'var(--text-secondary)', letterSpacing: '1.5px', textTransform: 'uppercase' }}>{t('email_label')}</label>
-            <input type="email" className="form-input" placeholder="you@example.com" />
+            <input 
+              type="email" 
+              name="email"
+              className="form-input" 
+              placeholder="you@example.com" 
+              value={formData.email}
+              onChange={handleChange}
+            />
           </div>
           <div style={{ marginBottom: '40px' }}>
             <label style={{ display: 'block', marginBottom: '12px', fontSize: '0.85rem', fontWeight: '800', color: 'var(--text-secondary)', letterSpacing: '1.5px', textTransform: 'uppercase' }}>{t('password_label')}</label>
-            <input type="password" className="form-input" placeholder="••••••••" />
+            <input 
+              type="password" 
+              name="password"
+              className="form-input" 
+              placeholder="••••••••" 
+              value={formData.password}
+              onChange={handleChange}
+            />
           </div>
           
-          <button type="button" className="premium-button" style={{ width: '100%', marginBottom: '20px', padding: '18px', border: 'none', cursor: 'pointer' }}>
-            {t('register_btn')}
+          <button 
+            type="submit" 
+            className="premium-button" 
+            disabled={loading}
+            style={{ width: '100%', marginBottom: '20px', padding: '18px', border: 'none', cursor: 'pointer', opacity: loading ? 0.7 : 1 }}
+          >
+            {loading ? 'Creating Account...' : t('register_btn')}
           </button>
           
           <div style={{ position: 'relative', textAlign: 'center', margin: '32px 0' }}>
@@ -128,3 +194,4 @@ const Register = () => {
 };
 
 export default Register;
+
