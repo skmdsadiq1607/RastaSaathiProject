@@ -20,7 +20,7 @@ async function findNearestResponders({ lat, lng, limit = 5, maxDistanceMeters = 
   return responders;
 }
 
-async function dispatchAlerts({ io, incident, victimUser, severityLevel, hospitalName, etaSeconds, lang }) {
+async function dispatchAlerts({ io, incident, victimUser, severityLevel, hospitalName, hospitalLocation, etaSeconds, lang }) {
   const alerts = await Alerts.create({ incidentId: incident._id, deliveries: [] });
 
   const title = t(lang, 'alerts.SOS_TITLE');
@@ -76,6 +76,8 @@ async function dispatchAlerts({ io, incident, victimUser, severityLevel, hospita
   const smsBody = t(lang, 'sms.SOS', {
     lat: incident.location.coordinates[1],
     lng: incident.location.coordinates[0],
+    hLat: hospitalLocation?.coordinates[1],
+    hLng: hospitalLocation?.coordinates[0],
     severity: severityLevel || 'UNKNOWN',
     hospital: hospitalName || 'UNKNOWN',
     eta: typeof etaSeconds === 'number' ? Math.round(etaSeconds / 60) + 'm' : 'NA'

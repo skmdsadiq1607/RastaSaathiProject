@@ -4,5 +4,5 @@
   "errors.NOT_FOUND": "नहीं मिला",
   "alerts.SOS_TITLE": "आपातकालीन SOS",
   "alerts.SOS_BODY": "दुर्घटना की सूचना मिली है। तुरंत सहायता चाहिए।",
-  "sms.SOS": "🚨 आपातकालीन SOS - रास्ता-साथी 🚨\n\nएक दुर्घटना की सूचना मिली है।\n📍 स्थान: https://www.google.com/maps?q={lat},{lng}\n⚠️ गंभीरता: {severity}\n🏥 अस्पताल: {hospital}\n⏳ समय: ~{eta}\n\nमदद रास्ते में है। कृपया संपर्क में रहें।"
+  "sms.SOS": "🚨 आपातकालीन SOS - रास्ता-साथी 🚨\n\nएक दुर्घटना की सूचना मिली है।\n📍 दुर्घटना का स्थान: https://www.google.com/maps?q={lat},{lng}\n🏥 अस्पताल: {hospital}\n⚠️ गंभीरता: {severity}\n⏳ समय: ~{eta}\n\n🗺️ दिशा-निर्देश (दुर्घटना से अस्पताल):\nhttps://www.google.com/maps/dir/?api=1&origin={lat},{lng}&destination={hLat},{hLng}&travelmode=driving\n\nमदद रास्ते में है। कृपया संपर्क में रहें।"
 }

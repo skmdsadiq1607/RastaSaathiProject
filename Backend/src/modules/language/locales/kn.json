@@ -4,5 +4,5 @@
   "errors.NOT_FOUND": "ಕಂಡುಬಂದಿಲ್ಲ",
   "alerts.SOS_TITLE": "ತುರ್ತು SOS",
   "alerts.SOS_BODY": "ಅಪಘಾತ ವರದಿಯಾಗಿದೆ. ತಕ್ಷಣ ಸಹಾಯ ಬೇಕು.",
-  "sms.SOS": "🚨 ತುರ್ತು SOS - ರಾಸ್ತಾ-ಸಾಥಿ 🚨\n\nಅಪಘಾತ ವರದಿಯಾಗಿದೆ.\n📍 ಸ್ಥಳ: https://www.google.com/maps?q={lat},{lng}\n⚠️ ತೀವ್ರತೆ: {severity}\n🏥 ಆಸ್ಪತ್ರೆ: {hospital}\n⏳ ಸಮಯ: ~{eta}\n\nಸಹಾಯ ಬರುತ್ತಿದೆ. ದಯವಿಟ್ಟು ಸಂಪರ್ಕದಲ್ಲಿರಿ।"
+  "sms.SOS": "🚨 ತುರ್ತು SOS - ರಾಸ್ತಾ-ಸಾಥಿ 🚨\n\nಅಪಘಾತ ವರದಿಯಾಗಿದೆ.\n📍 ಅಪಘಾತದ ಸ್ಥಳ: https://www.google.com/maps?q={lat},{lng}\n🏥 ಆಸ್ಪತ್ರೆ: {hospital}\n⚠️ ತೀವ್ರತೆ: {severity}\n⏳ ಸಮಯ: ~{eta}\n\n🗺️ ನ್ಯಾವಿಗೇಷನ್ (ಅಪಘಾತದಿಂದ ಆಸ್ಪತ್ರೆಗೆ):\nhttps://www.google.com/maps/dir/?api=1&origin={lat},{lng}&destination={hLat},{hLng}&travelmode=driving\n\nಸಹಾಯ ಬರುತ್ತಿದೆ. ದಯವಿಟ್ಟು ಸಂಪರ್ಕದಲ್ಲಿರಿ।"
 }

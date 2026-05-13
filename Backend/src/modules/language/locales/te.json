@@ -4,5 +4,5 @@
   "errors.NOT_FOUND": "కనపడలేదు",
   "alerts.SOS_TITLE": "అత్యవసర SOS",
   "alerts.SOS_BODY": "ప్రమాదం నివేదించబడింది. తక్షణ సహాయం అవసరం.",
-  "sms.SOS": "🚨 అత్యవసర SOS - రాస్తా-సాథీ 🚨\n\nఒక ప్రమాదం నివేదించబడింది.\n📍 స్థలం: https://www.google.com/maps?q={lat},{lng}\n⚠️ తీవ్రత: {severity}\n🏥 ఆసుపత్రి: {hospital}\n⏳ సమయం: ~{eta}\n\nసహాయం వస్తోంది. దయచేసి అందుబాటులో ఉండండి।"
+  "sms.SOS": "🚨 అత్యవసర SOS - రాస్తా-సాథీ 🚨\n\nఒక ప్రమాదం నివేదించబడింది.\n📍 ప్రమాద స్థలం: https://www.google.com/maps?q={lat},{lng}\n🏥 ఆసుపత్రి: {hospital}\n⚠️ తీవ్రత: {severity}\n⏳ సమయం: ~{eta}\n\n🗺️ దారి సూచిక (ప్రమాద స్థలం నుండి ఆసుపత్రికి):\nhttps://www.google.com/maps/dir/?api=1&origin={lat},{lng}&destination={hLat},{hLng}&travelmode=driving\n\nసహాయం వస్తోంది. దయచేసి అందుబాటులో ఉండండి।"
 }

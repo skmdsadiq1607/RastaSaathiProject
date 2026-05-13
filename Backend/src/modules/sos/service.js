@@ -51,6 +51,7 @@ async function triggerSos({ io, redis, queues, lat, lng, userId, injuryType, veh
     victimUser,
     severityLevel: severity.level,
     hospitalName: nearest?.name,
+    hospitalLocation: nearest?.location,
     etaSeconds: hospitalSelection?.[0]?.etaSeconds,
     lang: victimUser?.language || 'en'
   });
