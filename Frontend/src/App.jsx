@@ -21,7 +21,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
-import Safety from './pages/Safety';
+import RoadSafety from './pages/RoadSafety';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -205,7 +205,7 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/safety" element={<Safety />} />
+          <Route path="/safety" element={<RoadSafety />} />
         </Routes>
       </main>
 
