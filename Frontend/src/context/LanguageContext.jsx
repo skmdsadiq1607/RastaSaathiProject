@@ -170,7 +170,23 @@ const TRANSLATIONS = {
     latency: "Response Time",
     stats_hospitals: "Medical Centers",
     stats_responders: "Active Responders",
-    project_stage: "Development Phase"
+    project_stage: "Development Phase",
+
+    // Guide Usage
+    guide_usage_title: "How to Use RastaSaathi",
+    guide_use_step1_title: "Create Safety Profile",
+    guide_use_step1_desc: "Register and complete your medical profile. This ensures rescuers have critical health data during emergencies.",
+    guide_use_step2_title: "Build Safety Network",
+    guide_use_step2_desc: "Add your emergency contacts. They will receive automated WhatsApp alerts with your live location if you trigger an SOS.",
+    guide_use_step3_title: "Activate WhatsApp Alerts",
+    guide_use_step3_desc: "Join our automated alert grid. Send 'join soft-peace' to our Twilio number to enable real-time messaging.",
+    guide_use_step4_title: "Trigger SOS Protocol",
+    guide_use_step4_desc: "In an emergency, hit the SOS button. Our geospatial engine immediately matches you with the best available trauma center.",
+    guide_use_step5_title: "Consult AI Medic",
+    guide_use_step5_desc: "Use our dual-model AI triage to get instant first-aid guidance. Stabilize the victim while help is on the way.",
+    guide_use_step6_title: "Follow Rescue Map",
+    guide_use_step6_desc: "Track the dispatch in real-time. Follow the optimized routes to the nearest verified medical facility.",
+    twilio_command: "Join soft-peace"
   },
   hi: {
     // Navigation
@@ -322,8 +338,24 @@ const TRANSLATIONS = {
     citizen_first_desc: "अत्यधिक तनाव में काम करने के लिए डिज़ाइन किया गया एक सहज इंटरफ़ेस।",
     latency: "प्रतिक्रिया समय",
     stats_hospitals: "चिकित्सा केंद्र",
-    stats_responders: "सक्रिय उत्तरदाता",
-    project_stage: "विकास चरण"
+    stats_responders: "सक्रिय प्रतिक्रियाकर्ता",
+    project_stage: "विकास चरण",
+
+    // Guide Usage
+    guide_usage_title: "रास्तासाथी का उपयोग कैसे करें",
+    guide_use_step1_title: "सुरक्षा प्रोफ़ाइल बनाएं",
+    guide_use_step1_desc: "रजिस्टर करें और अपनी मेडिकल प्रोफ़ाइल पूरी करें। यह सुनिश्चित करता है कि बचावकर्मियों के पास आपातकालीन स्थिति में महत्वपूर्ण स्वास्थ्य डेटा हो।",
+    guide_use_step2_title: "सुरक्षा नेटवर्क बनाएं",
+    guide_use_step2_desc: "अपने आपातकालीन संपर्क जोड़ें। यदि आप SOS ट्रिगर करते हैं तो उन्हें आपके लाइव स्थान के साथ स्वचालित व्हाट्सएप अलर्ट प्राप्त होंगे।",
+    guide_use_step3_title: "व्हाट्सएप अलर्ट सक्रिय करें",
+    guide_use_step3_desc: "हमारे स्वचालित अलर्ट ग्रिड से जुड़ें। रीयल-टाइम मैसेजिंग सक्षम करने के लिए हमारे नंबर पर 'join soft-peace' भेजें।",
+    guide_use_step4_title: "SOS प्रोटोकॉल ट्रिगर करें",
+    guide_use_step4_desc: "आपातकालीन स्थिति में, SOS बटन दबाएं। हमारा इंजन तुरंत आपको सर्वोत्तम उपलब्ध ट्रॉमा सेंटर से मिलाता है।",
+    guide_use_step5_title: "AI मेडिक से परामर्श करें",
+    guide_use_step5_desc: "तत्काल प्राथमिक चिकित्सा मार्गदर्शन प्राप्त करने के लिए हमारे AI ट्राइएज का उपयोग करें। मदद आने तक पीड़ित को स्थिर करें।",
+    guide_use_step6_title: "रेस्क्यू मैप का पालन करें",
+    guide_use_step6_desc: "रीयल-टाइम में प्रेषण को ट्रैक करें। निकटतम सत्यापित चिकित्सा सुविधा के लिए अनुकूलित मार्गों का पालन करें।",
+    twilio_command: "Join soft-peace"
   },
   te: {
     // Navigation
@@ -475,8 +507,24 @@ const TRANSLATIONS = {
     citizen_first_desc: "ఒత్తిడిలో కూడా పనిచేసే సులభమైన ఇంటర్‌ఫేస్.",
     latency: "ప్రతిస్పందన సమయం",
     stats_hospitals: "వైద్య కేంద్రాలు",
-    stats_responders: "యాక్టివ్ రెస్పాండర్స్",
-    project_stage: "అభివృద్ధి దశ"
+    stats_responders: "క్రియాశీల స్పందనదారులు",
+    project_stage: "అభివృద్ధి దశ",
+
+    // Guide Usage
+    guide_usage_title: "రాస్తాసాథీని ఎలా ఉపయోగించాలి",
+    guide_use_step1_title: "భద్రతా ప్రొఫైల్‌ను సృష్టించండి",
+    guide_use_step1_desc: "నమోదు చేసుకుని మీ వైద్య ప్రొఫైల్‌ను పూర్తి చేయండి. ఇది అత్యవసర సమయాల్లో రక్షకులకు కీలక ఆరోగ్య డేటా ఉందని నిర్ధారిస్తుంది.",
+    guide_use_step2_title: "భద్రతా నెట్‌వర్క్‌ను నిర్మించండి",
+    guide_use_step2_desc: "మీ అత్యవసర పరిచయాలను జోడించండి. మీరు SOSని ట్రిగ్గర్ చేస్తే వారు మీ ప్రత్యక్ష స్థానంతో స్వయంచాలక వాట్సాప్ హెచ్చరికలను అందుకుంటారు.",
+    guide_use_step3_title: "వాట్సాప్ అలర్ట్‌లను సక్రియం చేయండి",
+    guide_use_step3_desc: "మా స్వయంచాలక అలర్ట్ గ్రిడ్‌లో చేరండి. రియల్-టైమ్ మెసేజింగ్‌ని ప్రారంభించడానికి మా నంబర్‌కు 'join soft-peace' పంపండి.",
+    guide_use_step4_title: "SOS ప్రోటోకాల్‌ను ట్రిగ్గర్ చేయండి",
+    guide_use_step4_desc: "అత్యవసర పరిస్థితిలో, SOS బటన్‌ను నొక్కండి. మా ఇంజిన్ వెంటనే మీకు అందుబాటులో ఉన్న ఉత్తమ ట్రామా సెంటర్‌తో మ్యాచ్ చేస్తుంది.",
+    guide_use_step5_title: "AI మెడిక్‌ను సంప్రదించండి",
+    guide_use_step5_desc: "తక్షణ ప్రథమ చికిత్స మార్గదర్శకత్వం పొందడానికి మా AI ట్రయేజ్‌ని ఉపయోగించండి. సహాయం వచ్చే వరకు బాధితుడిని స్థిరీకరించండి.",
+    guide_use_step6_title: "రెస్క్యూ మ్యాప్‌ని అనుసరించండి",
+    guide_use_step6_desc: "రియల్-టైమ్‌లో పంపడాన్ని ట్రాక్ చేయండి. సమీపంలోని ధృవీకరించబడిన వైద్య సదుపాయానికి అనుకూలమైన మార్గాలను అనుసరించండి.",
+    twilio_command: "Join soft-peace"
   },
   ta: {
     // Navigation
@@ -629,7 +677,23 @@ const TRANSLATIONS = {
     latency: "பதிலளிப்பு நேரம்",
     stats_hospitals: "மருத்துவ மையங்கள்",
     stats_responders: "செயலில் உள்ள பதிலளிப்பவர்கள்",
-    project_stage: "மேம்பாட்டு நிலை"
+    project_stage: "மேம்பாட்டு நிலை",
+
+    // Guide Usage
+    guide_usage_title: "ராஸ்தாசாத்தியை எவ்வாறு பயன்படுத்துவது",
+    guide_use_step1_title: "பாதுகாப்பு சுயவிவரத்தை உருவாக்கவும்",
+    guide_use_step1_desc: "பதிவு செய்து உங்கள் மருத்துவ சுயவிவரத்தை பூர்த்தி செய்யவும். இது அவசர காலங்களில் மீட்பவர்களுக்கு முக்கியமான தரவு இருப்பதை உறுதி செய்கிறது.",
+    guide_use_step2_title: "பாதுகாப்பு பிணையத்தை உருவாக்குங்கள்",
+    guide_use_step2_desc: "உங்கள் அவசர கால தொடர்புகளை சேர்க்கவும். நீங்கள் SOS ஐத் தூண்டினால், அவர்கள் உங்கள் நேரடி இருப்பிடத்துடன் கூடிய வாட்ஸ்அப் விழிப்பூட்டல்களைப் பெறுவார்கள்.",
+    guide_use_step3_title: "வாட்ஸ்அப் விழிப்பூட்டல்களைச் செயல்படுத்தவும்",
+    guide_use_step3_desc: "எங்கள் தானியங்கி விழிப்பூட்டல் அமைப்பில் சேரவும். நிகழ்நேர செய்தியிடலை இயக்க எங்களது எண்ணிற்கு 'join soft-peace' என அனுப்பவும்.",
+    guide_use_step4_title: "SOS நெறிமுறையைத் தூண்டவும்",
+    guide_use_step4_desc: "அவசர காலத்தில், SOS பட்டனை அழுத்தவும். எங்களது அமைப்பு உடனடியாக சிறந்த சிகிச்சை மையத்துடன் உங்களை இணைக்கும்.",
+    guide_use_step5_title: "AI மெடிக்கிடம் ஆலோசனை பெறவும்",
+    guide_use_step5_desc: "உடனடி முதலுதவி வழிகாட்டுதலைப் பெற எங்களது AI மதிப்பீட்டைப் பயன்படுத்தவும். உதவி வரும் வரை பாதிக்கப்பட்டவரை உறுதிப்படுத்தவும்.",
+    guide_use_step6_title: "மீட்பு வரைபடத்தைப் பின்பற்றவும்",
+    guide_use_step6_desc: "நிகழ்நேரத்தில் மீட்பு நடவடிக்கைகளைக் கண்காணிக்கவும். அருகிலுள்ள சரிபார்க்கப்பட்ட மருத்துவ மையத்திற்கு உகந்த வழிகளைப் பின்பற்றவும்.",
+    twilio_command: "Join soft-peace"
   }
 };
 

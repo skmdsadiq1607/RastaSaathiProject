@@ -77,7 +77,7 @@ const Guide = () => {
                       {step.isHighlight && (
                         <div style={{ marginTop: '20px', display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
                            <div style={{ padding: '10px 20px', background: 'rgba(0,0,0,0.3)', borderRadius: '8px', border: '1px dashed #10b981', color: '#10b981', fontWeight: '700', fontFamily: 'monospace' }}>
-                              Join soft-peace
+                              {t('twilio_command')}
                            </div>
                            <a 
                              href="https://wa.me/14155238886?text=Join%20soft-peace" 
