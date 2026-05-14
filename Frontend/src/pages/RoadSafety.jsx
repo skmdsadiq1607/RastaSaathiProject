@@ -103,11 +103,10 @@ const RoadSafety = () => {
     >
       <div style={{ textAlign: 'center', marginBottom: '60px' }}>
         <h1 style={{ fontSize: '3.5rem', fontWeight: '900', marginBottom: '20px' }}>
-          Road Safety <span className="text-gradient">Guidelines</span>
+          {t('road_safety').split(' ')[0]} <span className="text-gradient">{t('road_safety').split(' ')[1] || 'Guidelines'}</span>
         </h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', maxWidth: '700px', margin: '0 auto' }}>
-          Essential protocols and safety measures to protect yourself and others on the road. 
-          Compliance saves lives.
+          {t('impact_sub')}
         </p>
       </div>
 
@@ -137,7 +136,7 @@ const RoadSafety = () => {
               }}>
                 {section.icon}
               </div>
-              <h2 style={{ fontSize: '1.5rem', fontWeight: '800' }}>{section.title}</h2>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: '800' }}>{t(section.id + '_safety') || section.title}</h2>
             </div>
 
             {section.description && (
@@ -169,11 +168,11 @@ const RoadSafety = () => {
         }}
       >
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', padding: '8px 20px', background: 'rgba(239, 68, 68, 0.1)', borderRadius: '100px', color: '#ef4444', fontWeight: '800', fontSize: '0.8rem', marginBottom: '20px' }}>
-          <AlertCircle size={16} /> EMERGENCY ALERT
+          <AlertCircle size={16} /> {t('official_protocol')}
         </div>
-        <h2 style={{ fontSize: '2rem', fontWeight: '900', marginBottom: '15px' }}>Every Second Counts.</h2>
+        <h2 style={{ fontSize: '2rem', fontWeight: '900', marginBottom: '15px' }}>{t('hero_title')}</h2>
         <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto 30px' }}>
-          Follow these guidelines to minimize risks. In case of any incident, RastaSaathi AI is always ready to coordinate your rescue.
+          {t('golden_minute_sub')}
         </p>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <button 

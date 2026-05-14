@@ -89,7 +89,7 @@ const Profile = () => {
           </div>
           <div>
             <h1 style={{ fontSize: '2.5rem', fontWeight: '900' }}>{t('profile')}</h1>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>Manage your identity and emergency response grid.</p>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>{t('manage_grid')}</p>
           </div>
         </div>
 
@@ -112,19 +112,19 @@ const Profile = () => {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px', marginBottom: '50px' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <label style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.85rem', fontWeight: '900', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px' }}>
-              <User size={16} /> Full Name
+              <User size={16} /> {t('full_name')}
             </label>
             <input 
               type="text" 
               className="form-input" 
-              placeholder="Your full name"
+              placeholder={t('full_name')}
               value={name} 
               onChange={(e) => setName(e.target.value)} 
             />
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <label style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.85rem', fontWeight: '900', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px' }}>
-              <Globe size={16} /> Language Priority
+              <Globe size={16} /> {t('lang_priority')}
             </label>
             <select 
               className="form-input" 
@@ -148,12 +148,12 @@ const Profile = () => {
                 <Shield size={24} color="#ef4444" />
               </div>
               <div>
-                <h2 style={{ fontSize: '1.5rem', fontWeight: '900' }}>Emergency Contacts</h2>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Recipients of your automated SOS alerts.</p>
+                <h2 style={{ fontSize: '1.5rem', fontWeight: '900' }}>{t('emergency_contacts')}</h2>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{t('recipients_sos')}</p>
               </div>
             </div>
             <button onClick={addContact} className="btn btn-glass" style={{ padding: '12px 24px', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <Plus size={18} /> Add New
+              <Plus size={18} /> {t('add_new')}
             </button>
           </div>
 
@@ -171,7 +171,7 @@ const Profile = () => {
                    <input 
                     type="text" 
                     className="form-input" 
-                    placeholder="Contact Name" 
+                    placeholder={t('full_name')} 
                     value={contact.name} 
                     onChange={(e) => updateContact(idx, 'name', e.target.value)}
                     style={{ background: 'rgba(0,0,0,0.2)' }}
@@ -200,8 +200,8 @@ const Profile = () => {
             {contacts.length === 0 && (
               <div style={{ textAlign: 'center', color: 'var(--text-secondary)', padding: '40px', border: '2px dashed var(--border-glass)', borderRadius: '24px', background: 'rgba(255,255,255,0.01)' }}>
                 <AlertTriangle size={32} style={{ marginBottom: '16px', opacity: 0.5 }} />
-                <p style={{ fontWeight: '600' }}>No emergency contacts detected.</p>
-                <p style={{ fontSize: '0.85rem' }}>Add at least one contact to enable WhatsApp SOS alerts.</p>
+                <p style={{ fontWeight: '600' }}>{t('no_contacts')}</p>
+                <p style={{ fontSize: '0.85rem' }}>{t('add_one_contact')}</p>
               </div>
             )}
           </div>
@@ -213,7 +213,7 @@ const Profile = () => {
           className="premium-button" 
           style={{ width: '100%', marginTop: '60px', padding: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', fontSize: '1.2rem' }}
         >
-          {loading ? 'SYNCHRONIZING...' : <><Save size={24} /> SAVE GRID CHANGES</>}
+          {loading ? 'SYNCHRONIZING...' : <><Save size={24} /> {t('save_grid')}</>}
         </button>
       </div>
     </motion.div>

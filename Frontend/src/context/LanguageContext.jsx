@@ -69,12 +69,12 @@ const TRANSLATIONS = {
     manage_grid: "Manage your identity and emergency response grid.",
     full_name: "Full Name",
     lang_priority: "Preferred Language",
-    emergency_contacts: "Safety Network",
+    emergency_contacts: "Emergency Contacts",
     recipients_sos: "Your emergency contacts who will receive automated WhatsApp alerts.",
-    add_new: "Add Contact",
-    save_grid: "UPDATE SAFETY PROFILE",
+    add_new: "Add New",
+    save_grid: "SAVE GRID CHANGES",
     no_contacts: "No contacts in your network yet.",
-    add_one_contact: "Add at least one safety contact to enable automated WhatsApp SOS alerts.",
+    add_one_contact: "Add at least one contact to enable WhatsApp SOS alerts.",
 
     // Auth
     login_title: "Secure Login",
@@ -90,7 +90,7 @@ const TRANSLATIONS = {
     have_account: "Already have an account?",
 
     // Footer
-    footer_tagline: "When Every Second Counts, RastaSaathi Responds.",
+    footer_tagline: "Bridging the gap between accidents and life-saving care.",
     hackathon_tag: "IIT MADRAS ROAD SAFETY HACKATHON 2026",
     contact_email: "rastasaathi@gmail.com",
     contact_phone: "+91 9441921812",
@@ -99,13 +99,14 @@ const TRANSLATIONS = {
     official_protocol: "OFFICIAL EMERGENCY PROTOCOL",
     golden_minute_title: "The Golden Minute",
     golden_minute_sub: "In an emergency, every second counts. RastaSaathi is designed to occupy the 'Golden Hour' with absolute technical precision.",
-    human_impact: "The Human Impact",
-    strategic_partnerships: "Strategic Partnerships",
-    emergency_liaison: "Emergency Liaison",
-    headquarters: "Headquarters",
-    direct_support: "Direct Support",
-    direct_support_sub: "If you are a medical professional or emergency responder looking to integrate with our grid, please reach out directly via email.",
-    contact_us_now: "Get in Touch",
+    human_impact: "Saving Lives Every Second.",
+    impact_sub: "RastaSaathi orchestrates AI and geospatial data to reclaim the 'Golden Hour.' We eliminate bureaucracy so medical care arrives when it matters most.",
+    strategic_partnerships: "Our Ecosystem",
+    emergency_liaison: "Verified Trauma Grid",
+    headquarters: "Command & Control Hub",
+    direct_support: "Partner with Us",
+    direct_support_sub: "Integrate with our grid to redefine emergency response.",
+    contact_us_now: "Join the Mission",
     contact_sub: "Get in touch with our team for collaboration or support.",
     email_us: "Official Email",
     call_us: "Emergency Line",
@@ -196,7 +197,16 @@ const TRANSLATIONS = {
     critical_severity: "Critical",
     high_severity: "High",
     medium_severity: "Medium",
-    low_severity: "Low"
+    low_severity: "Low",
+    protocol_for: "Protocol for",
+    medic_fallback_msg: "I understand this is an emergency. Please pick from the list or type keywords like 'Bleeding' or 'Burn'. Always call 108 immediately.",
+    
+    // Road Safety Categories
+    general_tips: "General Tips",
+    pedestrian_safety: "For Pedestrians",
+    driver_safety: "For Motor Vehicle Drivers",
+    child_safety: "For Children",
+    parent_safety: "For Parents"
   },
   hi: {
     // Navigation
@@ -271,21 +281,8 @@ const TRANSLATIONS = {
     no_contacts: "कोई आपातकालीन संपर्क नहीं मिला।",
     add_one_contact: "व्हाट्सएप अलर्ट सक्षम करने के लिए कम से कम एक संपर्क जोड़ें।",
 
-    // Auth
-    login_title: "सुरक्षित लॉगिन",
-    login_sub: "अपने रास्तासाथी डैशबोर्ड में प्रवेश करें",
-    register_title: "नेटवर्क से जुड़ें",
-    register_sub: "आपातकालीन सेवाओं को सक्षम करने के लिए अपनी प्रोफ़ाइल बनाएं",
-    email_label: "ईमेल पता",
-    password_label: "सुरक्षा पासवर्ड",
-    signin_btn: "डैशबोर्ड लॉगिन",
-    register_btn: "रजिस्टर करें",
-    google_btn: "गूगल के साथ जारी रखें",
-    no_account: "रास्तासाथी पर नए हैं?",
-    have_account: "पहले से खाता है?",
-
     // Footer
-    footer_tagline: "जब हर सेकंड मायने रखता है, RastaSaathi प्रतिक्रिया देता है।",
+    footer_tagline: "दुर्घटनाओं और जीवन रक्षक देखभाल के बीच की दूरी को पाटना।",
     hackathon_tag: "IIT मद्रास रोड सेफ्टी हैकाथॉन 2026",
     contact_email: "rastasaathi@gmail.com",
     contact_phone: "+91 9441921812",
@@ -294,13 +291,13 @@ const TRANSLATIONS = {
     official_protocol: "आधिकारिक आपातकालीन प्रोटोकॉल",
     golden_minute_title: "स्वर्णिम मिनट",
     golden_minute_sub: "आपातकाल में हर सेकंड मायने रखता है। रास्तासाथी को पूर्ण तकनीकी सटीकता के साथ 'स्वर्णिम घंटे' को भरने के लिए डिज़ाइन किया गया है।",
-    human_impact: "मानवीय प्रभाव",
-    strategic_partnerships: "रणनीतिक साझेदारी",
-    emergency_liaison: "आपातकालीन संपर्क",
-    headquarters: "मुख्यालय",
-    direct_support: "प्रत्यक्ष समर्थन",
-    direct_support_sub: "यदि आप एक चिकित्सा पेशेवर हैं, तो कृपया ईमेल के माध्यम से संपर्क करें।",
-    contact_us_now: "संपर्क करें",
+    human_impact: "मिशन क्रिटिकल",
+    strategic_partnerships: "सामरिक नेटवर्क",
+    emergency_liaison: "सत्यापित ट्रॉमा केंद्र",
+    headquarters: "केंद्रीय नियंत्रण हब",
+    direct_support: "इकोसिस्टम पार्टनर",
+    direct_support_sub: "आपातकालीन प्रतिक्रिया को फिर से परिभाषित करने के लिए अपनी सुविधा को हमारे ग्रिड के साथ एकीकृत करें।",
+    contact_us_now: "ग्रिड में शामिल हों",
     safety_first: "सुरक्षा प्रोटोकॉल",
     safety_assist_text: "रास्तासाथी एक सहायता उपकरण है। आपातकाल में हमेशा तुरंत 108/112 पर कॉल करें।",
     do_not: "क्या न करें",
@@ -375,7 +372,16 @@ const TRANSLATIONS = {
     critical_severity: "गंभीर",
     high_severity: "उच्च",
     medium_severity: "मध्यम",
-    low_severity: "कम"
+    low_severity: "कम",
+    protocol_for: "प्रोटोकॉल के लिए",
+    medic_fallback_msg: "मैं समझता हूँ कि यह एक आपात स्थिति है। कृपया सूची में से चुनें या 'रक्तस्राव' या 'जलन' जैसे कीवर्ड टाइप करें। हमेशा तुरंत 108 पर कॉल करें।",
+    
+    // Road Safety Categories
+    general_tips: "सामान्य सुझाव",
+    pedestrian_safety: "पैदल यात्रियों के लिए",
+    driver_safety: "वाहन चालकों के लिए",
+    child_safety: "बच्चों के लिए",
+    parent_safety: "अभिभावकों के लिए"
   },
   te: {
     // Navigation
@@ -450,19 +456,6 @@ const TRANSLATIONS = {
     no_contacts: "మీ నెట్‌వర్క్‌లో కాంటాక్ట్‌లు లేవు.",
     add_one_contact: "వాట్సాప్ అలర్ట్‌లను ప్రారంభించడానికి కనీసం ఒక కాంటాక్ట్‌ను యాడ్ చేయండి.",
 
-    // Auth
-    login_title: "సురక్షిత లాగిన్",
-    login_sub: "మీ రాస్తాసాథీ డాష్‌బోర్డ్‌ను యాక్సెస్ చేయండి",
-    register_title: "నెట్‌వర్క్‌లో చేరండి",
-    register_sub: "అత్యవసర సేవలను ప్రారంభించడానికి మీ ప్రొఫైల్‌ను సృష్టించండి",
-    email_label: "ఈమెయిల్ అడ్రస్",
-    password_label: "సెక్యూరిటీ పాస్‌వర్డ్",
-    signin_btn: "డాష్‌బోర్డ్ లాగిన్",
-    register_btn: "రిజిస్టర్",
-    google_btn: "గూగుల్‌తో కొనసాగండి",
-    no_account: "రాస్తాసాథీకి కొత్తా?",
-    have_account: "ఇప్పటికే ఖాతా ఉందా?",
-
     // Footer
     footer_tagline: "ప్రతి సెకను విలువైనప్పుడు, RastaSaathi స్పందిస్తుంది.",
     hackathon_tag: "IIT మద్రాస్ రోడ్ సేఫ్టీ హ్యాకథాన్ 2026",
@@ -493,58 +486,6 @@ const TRANSLATIONS = {
     scale_desc: "నగర వ్యాప్తంగా స్కేల్ కోసం క్లౌడ్-నేటివ్ ఇన్ఫ్రాస్ట్రక్చర్.",
     excellence: "వైద్య ఖచ్చితత్వం",
     excellence_desc: "వైద్య డేటాపై శిక్షణ పొందిన AI మోడల్స్.",
-
-    // Core Tech
-    orch_feature1_title: "జియోస్పేషియల్ ఇంటెలిజెన్స్",
-    orch_feature1_desc: "బాధితులను ట్రామా సెంటర్లతో రీయల్-టైమ్ మ్యాచింగ్.",
-    orch_feature2_title: "AI-ఆధారిత ట్రైయేజ్",
-    orch_feature2_desc: "తక్షణ, అధిక-ఖచ్చితమైన గాయాల అంచనా.",
-    orch_feature3_title: "విశ్వసనీయ భద్రతా గ్రిడ్",
-    orch_feature3_desc: "ధృవీకరించబడిన నెట్‌వర్క్.",
-
-    // Mission & About
-    mission_page_title: "మా మిషన్ & విజన్",
-    mission_page_sub: "అత్యవసర ప్రతిస్పందన భవిష్యత్తును మార్చడం.",
-    mission_v_title: "విజన్",
-    mission_v_desc: "రోడ్డు ప్రమాదాల్లో ఎవరూ చనిపోని ప్రపంచం.",
-    mission_m_title: "మిషన్",
-    mission_m_desc: "పౌరులను AI ట్రైయేజ్‌తో శక్తివంతం చేయడం.",
-    mission_manifesto: "భద్రతా మేనిఫెస్టో",
-    origin_tech: "మా టెక్నాలజీ స్టాక్",
-    about_vision_title: "మౌలిక సదుపాయాలు",
-    about_vision_desc: "AI మోడల్స్ మరియు జియోస్పేషియల్ డేటాబేస్‌ల వ్యవస్థ.",
-    feature_ai_title: "ఇంటెలిజెంట్ ట్రైయేజ్ కోర్",
-    about_tech_desc: "మా ఆర్కిటెక్చర్ రీయల్-టైమ్ వైద్య అంచనాలను అందిస్తుంది.",
-    feature_route_title: "ఖచ్చితమైన రూటింగ్",
-    feature_route_desc: "బాధితులను ప్రత్యేక ఆసుపత్రులతో జత చేయడం.",
-    response_gap_title: "ప్రతిస్పందన అంతరాన్ని పూడ్చడం",
-    response_gap_p1: "రాస్తాసాథీ అత్యవసర ప్రక్రియను ఆటోమేట్ చేస్తుంది, ప్రాణాలను కాపాడుతుంది.",
-    verified_protocols: "క్లినికల్ ప్రమాణాలు",
-    verified_protocols_desc: "అంతర్జాతీయ ప్రమాణాలకు అనుగుణంగా AI ప్రోటోకాల్స్.",
-    data_security: "ఎంటర్‌ప్రైజ్ సెక్యూరిటీ",
-    data_security_desc: "బాధితుల డేటా ఎన్‌క్రిప్షన్ ద్వారా సురక్షితం.",
-    citizen_first: "యూజర్-సెంట్రిక్ డిజైన్",
-    citizen_first_desc: "ఒత్తిడిలో కూడా పనిచేసే సులభమైన ఇంటర్‌ఫేస్.",
-    latency: "ప్రతిస్పందన సమయం",
-    stats_hospitals: "వైద్య కేంద్రాలు",
-    stats_responders: "క్రియాశీల స్పందనదారులు",
-    project_stage: "అభివృద్ధి దశ",
-
-    // Guide Usage
-    guide_usage_title: "రాస్తాసాథీని ఎలా ఉపయోగించాలి",
-    guide_use_step1_title: "భద్రతా ప్రొఫైల్‌ను సృష్టించండి",
-    guide_use_step1_desc: "నమోదు చేసుకుని మీ వైద్య ప్రొఫైల్‌ను పూర్తి చేయండి. ఇది అత్యవసర సమయాల్లో రక్షకులకు కీలక ఆరోగ్య డేటా ఉందని నిర్ధారిస్తుంది.",
-    guide_use_step2_title: "భద్రతా నెట్‌వర్క్‌ను నిర్మించండి",
-    guide_use_step2_desc: "మీ అత్యవసర పరిచయాలను జోడించండి. మీరు SOSని ట్రిగ్గర్ చేస్తే వారు మీ ప్రత్యక్ష స్థానంతో స్వయంచాలక వాట్సాప్ హెచ్చరికలను అందుకుంటారు.",
-    guide_use_step3_title: "వాట్సాప్ అలర్ట్‌లను సక్రియం చేయండి",
-    guide_use_step3_desc: "మా స్వయంచాలక అలర్ట్ గ్రిడ్‌లో చేరండి. రియల్-టైమ్ మెసేజింగ్‌ని ప్రారంభించడానికి మా నంబర్‌కు 'join soft-peace' పంపండి.",
-    guide_use_step4_title: "SOS ప్రోటోకాల్‌ను ట్రిగ్గర్ చేయండి",
-    guide_use_step4_desc: "అత్యవసర పరిస్థితిలో, SOS బటన్‌ను నొక్కండి. మా ఇంజిన్ వెంటనే మీకు అందుబాటులో ఉన్న ఉత్తమ ట్రామా సెంటర్‌తో మ్యాచ్ చేస్తుంది.",
-    guide_use_step5_title: "AI మెడిక్‌ను సంప్రదించండి",
-    guide_use_step5_desc: "తక్షణ ప్రథమ చికిత్స మార్గదర్శకత్వం పొందడానికి మా AI ట్రయేజ్‌ని ఉపయోగించండి. సహాయం వచ్చే వరకు బాధితుడిని స్థిరీకరించండి.",
-    guide_use_step6_title: "రెస్క్యూ మ్యాప్‌ని అనుసరించండి",
-    guide_use_step6_desc: "రియల్-టైమ్‌లో పంపడాన్ని ట్రాక్ చేయండి. సమీపంలోని ధృవీకరించబడిన వైద్య సదుపాయానికి అనుకూలమైన మార్గాలను అనుసరించండి.",
-    twilio_command: "Join soft-peace",
     severity_label: "తీవ్రత",
     first_aid_label: "ప్రథమ చికిత్స సూచనలు",
     avoid_label: "ఏమి చేయకూడదు",
@@ -582,7 +523,7 @@ const TRANSLATIONS = {
     impact_sub: "எங்கள் தொழில்நுட்பம் அவசர காலங்களில் விரைவாக செயல்பட AI ஐப் பயன்படுத்துகிறது.",
     results_title: "முடிவுகளுக்காக வடிவமைக்கப்பட்டது.",
     journey_title: "பாதுகாப்பு பயணம்",
-    journey_sub: "தொழில்நுட்பம் மற்றும் மருத்துவ நிபுணத்துவத்தின் துல்லியமான ஒருங்கிணைப்பு.",
+    journey_sub: "தொழில்நுட்பம் మరియు వైద్య నిపుణత్వத்தின் துல்லியமான ஒருங்கிணைப்பு.",
     step1_title: "SOS ஐத் தொடங்கவும்",
     step1_desc: "அவசர பொத்தானை அழுத்தவும். நாங்கள் துல்லியமான GPS தரவைப் பிடிக்கிறோம்.",
     step2_title: "AI மதிப்பீடு",
@@ -628,102 +569,6 @@ const TRANSLATIONS = {
     save_grid: "சுயவிவரத்தைப் புதுப்பிக்கவும்",
     no_contacts: "தொடர்புகள் எதுவும் இல்லை.",
     add_one_contact: "வாட்ஸ்அப் எச்சரிக்கைகளைச் செயல்படுத்த ஒரு தொடர்பையாவது சேர்க்கவும்.",
-
-    // Auth
-    login_title: "பாதுகாப்பான உள்நுழைவு",
-    login_sub: "உங்கள் ராஸ்தாசாத்தி டாஷ்போர்டை அணுகவும்",
-    register_title: "நெட்வொர்க்கில் இணையுங்கள்",
-    register_sub: "அவசர சேவைகளைச் செயல்படுத்த உங்கள் சுயவிவரத்தை உருவாக்கவும்",
-    email_label: "மின்னஞ்சல் முகவரி",
-    password_label: "கடவுச்சொல்",
-    signin_btn: "டாஷ்போர்டு உள்நுழைவு",
-    register_btn: "பதிவு செய்க",
-    google_btn: "கூகிள் மூலம் தொடரவும்",
-    no_account: "புதியவரா?",
-    have_account: "ஏற்கனவே கணக்கு உள்ளதா?",
-
-    // Footer
-    footer_tagline: "ஒவ்வொரு நொடியும் முக்கியம் எனும்போது, RastaSaathi பதிலளிக்கிறது.",
-    hackathon_tag: "IIT மெட்ராஸ் சாலை பாதுகாப்பு ஹேக்கத்தான் 2026",
-    contact_email: "rastasaathi@gmail.com",
-    contact_phone: "+91 9441921812",
-    made_with: "உருவாக்கப்பட்டது",
-    by_team: "ராஸ்தாசாத்தி குழுவால்",
-    official_protocol: "அதிகாரப்பூர்வ அவசர நெறிமுறை",
-    golden_minute_title: "பொற்கால நிமிடம்",
-    golden_minute_sub: "அவசர காலத்தில் ஒவ்வொரு நொடியும் முக்கியம்.",
-    human_impact: "மனித தாக்கம்",
-    strategic_partnerships: "மூலோபாய கூட்டாண்மைகள்",
-    emergency_liaison: "அவசர தொடர்பு",
-    headquarters: "தலைமையகம்",
-    direct_support: "நேரடி ஆதரவு",
-    direct_support_sub: "நீங்கள் ஒரு மருத்துவ நிபுணராக இருந்தால், மின்னஞ்சல் மூலம் தொடர்பு கொள்ளவும்.",
-    contact_us_now: "தொடர்பு கொள்ளவும்",
-    safety_first: "பாதுகாப்பு நெறிமுறை",
-    safety_assist_text: "రాస్తాసాథీ ఒక సహాయక సాధనం. అత్యవసర సమయంలో ఎల్లప్పుడూ 108/112 ఐ அழைக்கவும்.",
-    do_not: "செய்யக்கூடாதவை",
-    do: "செய்ய வேண்டியவை",
-    do_not_move: "காயமடைந்தவரை நகர்த்த வேண்டாம்.",
-    do_stay_line: "உதவி வரும் வரை AI மருத்துவரின் அறிவுறுத்தல்களைப் பின்பற்றவும்.",
-    connect_now: "பணியில் இணையுங்கள்",
-    zero_delay: "தாமதமின்மை",
-    zero_delay_desc: "உடனடி தானியங்கி எச்சரிக்கைகள்.",
-    scale: "அளவிடக்கூடியது",
-    scale_desc: "நகரம் முழுவதும் அளவிடக்கூடிய உள்கட்டமைப்பு.",
-    excellence: "மருத்துவ துல்லியம்",
-    excellence_desc: "மருத்துவ தரவுகளில் பயிற்றுவிக்கப்பட்ட AI மாதிரிகள்.",
-
-    // Core Tech
-    orch_feature1_title: "புவிசார் நுண்ணறிவு",
-    orch_feature1_desc: "பாதிக்கப்பட்டவர்களை மருத்துவமனைகளுடன் இணைத்தல்.",
-    orch_feature2_title: "AI மதிப்பீடு",
-    orch_feature2_desc: "உடனடி மற்றும் துல்லியமான காய மதிப்பீடு.",
-    orch_feature3_title: "பாதுகாப்பு கட்டம்",
-    orch_feature3_desc: "சரிபார்க்கப்பட்ட నెట్వర్క్.",
-
-    // Mission & About
-    mission_page_title: "எங்கள் பணி & பார்வை",
-    mission_page_sub: "அவசர கால நடவடிக்கைகளின் எதிர்காலத்தை மறுவரையறை செய்தல்.",
-    mission_v_title: "பார்வை",
-    mission_v_desc: "சாலை விபத்துகளில் உயிரிழப்புகள் இல்லாத உலகம்.",
-    mission_m_title: "பணி",
-    mission_m_desc: "மக்களுக்கு AI மதிப்பீடு மூலம் அதிகாரம் அளித்தல்.",
-    mission_manifesto: "பாதுகாப்பு அறிக்கை",
-    origin_tech: "எங்கள் தொழில்நுட்ப அடுக்கு",
-    about_vision_title: "உள்கட்டமைப்பு",
-    about_vision_desc: "AI மாதிரிகள் மற்றும் புவிசார் தரவுத்தளங்களின் அமைப்பு.",
-    feature_ai_title: "அறிவுசார் மதிப்பீடு",
-    about_tech_desc: "எங்கள் அமைப்பு நிகழ்நேర மருத்துவ மதிப்பீடுகளை வழங்குகிறது.",
-    feature_route_title: "துல்லியமான ரூட்டிங்",
-    feature_route_desc: "பாதிக்கப்பட்டவர்களை மருத்துவமனைகளுடன் இணைத்தல்.",
-    response_gap_title: "இடைவெளியைக் குறைத்தல்",
-    response_gap_p1: "రాస్తాసాథీ అవసర ప్రక్రియను ఆటోమేట్ చేస్తుంది, ప్రాణాలను కాపాడుతుంది.",
-    verified_protocols: "மருத்துவ தரநிலைகள்",
-    verified_protocols_desc: "சர்வதேச தரநிலைகளுக்கு ஏற்ப AI நெறிமுறைகள்.",
-    data_security: "பாதுகாப்பு",
-    data_security_desc: "தரவுகள் குறியாக்க முறை மூலம் பாதுகாக்கப்படுகிறது.",
-    citizen_first: "பயனர் சார்ந்த வடிவமைப்பு",
-    citizen_first_desc: "எளிமையான இంటర్‌ఫேஸ்.",
-    latency: "பதிலளிப்பு நேரம்",
-    stats_hospitals: "மருத்துவ மையங்கள்",
-    stats_responders: "செயலில் உள்ள பதிலளிப்பவர்கள்",
-    project_stage: "மேம்பாட்டு நிலை",
-
-    // Guide Usage
-    guide_usage_title: "ராஸ்தாசாத்தியை எவ்வாறு பயன்படுத்துவது",
-    guide_use_step1_title: "பாதுகாப்பு சுயவிவரத்தை உருவாக்கவும்",
-    guide_use_step1_desc: "பதிவு செய்து உங்கள் மருத்துவ சுயவிவரத்தை பூர்த்தி செய்யவும். இது அவசர காலங்களில் மீட்பவர்களுக்கு முக்கியமான தரவு இருப்பதை உறுதி செய்கிறது.",
-    guide_use_step2_title: "பாதுகாப்பு பிணையத்தை உருவாக்குங்கள்",
-    guide_use_step2_desc: "உங்கள் அவசர கால தொடர்புகளை சேர்க்கவும். நீங்கள் SOS ஐத் தூண்டினால், அவர்கள் உங்கள் நேரடி இருப்பிடத்துடன் கூடிய வாட்ஸ்அப் விழிப்பூட்டல்களைப் பெறுவார்கள்.",
-    guide_use_step3_title: "வாட்ஸ்அப் விழிப்பூட்டல்களைச் செயல்படுத்தவும்",
-    guide_use_step3_desc: "எங்கள் தானியங்கி விழிப்பூட்டல் அமைப்பில் சேரவும். நிகழ்நேர செய்தியிடலை இயக்க எங்களது எண்ணிற்கு 'join soft-peace' என அனுப்பவும்.",
-    guide_use_step4_title: "SOS நெறிமுறையைத் தூண்டவும்",
-    guide_use_step4_desc: "அவசர காலத்தில், SOS பட்டனை அழுத்தவும். எங்களது அமைப்பு உடனடியாக சிறந்த சிகிச்சை மையத்துடன் உங்களை இணைக்கும்.",
-    guide_use_step5_title: "AI மெடிக்கிடம் ஆலோசனை பெறவும்",
-    guide_use_step5_desc: "உடனடி முதலுதவி வழிகாட்டுதலைப் பெற எங்களது AI மதிப்பீட்டைப் பயன்படுத்தவும். உதவி வரும் வரை பாதிக்கப்பட்டவரை உறுதிப்படுத்தவும்.",
-    guide_use_step6_title: "மீட்பு வரைபடத்தைப் பின்பற்றவும்",
-    guide_use_step6_desc: "நிகழ்நேரத்தில் மீட்பு நடவடிக்கைகளைக் கண்காணிக்கவும். அருகிலுள்ள சரிபார்க்கப்பட்ட மருத்துவ மையத்திற்கு உகந்த வழிகளைப் பின்பற்றவும்.",
-    twilio_command: "Join soft-peace",
     severity_label: "தீவிரம்",
     first_aid_label: "முதலுதவி வழிமுறைகள்",
     avoid_label: "தவிர்க்க வேண்டியவை",
@@ -782,16 +627,27 @@ export const LanguageProvider = ({ children }) => {
   const [lang, setLang] = useState('en');
 
   const t = (key) => {
-    return TRANSLATIONS[lang]?.[key] || TRANSLATIONS['en'][key] || key;
+    // Robust translation logic with direct name fallbacks
+    const translation = TRANSLATIONS[lang]?.[key] || TRANSLATIONS['en'][key];
+    
+    if (translation) return translation;
+
+    // Direct name fallbacks for common label leaks
+    const fallbacks = {
+      severity_label: "Severity",
+      first_aid_label: "First Aid Instructions",
+      avoid_label: "What to Avoid",
+      describe_situation: "Describe the situation..."
+    };
+
+    return fallbacks[key] || key;
   };
 
   const setLanguage = (newLang) => {
     setLang(newLang);
-    // Persist language choice
     localStorage.setItem('raasta_lang', newLang);
   };
 
-  // Load persisted language
   React.useEffect(() => {
     const saved = localStorage.getItem('raasta_lang');
     if (saved && TRANSLATIONS[saved]) {
@@ -806,12 +662,4 @@ export const LanguageProvider = ({ children }) => {
   );
 };
 
-export const useLanguage = () => {
-  const context = useContext(LanguageContext);
-  if (!context) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
-  }
-  return context;
-};
-
-export default LanguageContext;
+export const useLanguage = () => useContext(LanguageContext);

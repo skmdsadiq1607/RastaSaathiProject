@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 // Version 1.1.1 - Optimized Alignment and Spacing
 import { Routes, Route, NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
-import { LogOut, Menu, X, ChevronRight, Globe as GlobeIcon, Heart, User } from 'lucide-react';
+import { LogOut, Menu, X, ChevronRight, Globe as GlobeIcon, Heart, User, Mail, Phone, Home as HomeIcon, LayoutDashboard, ShieldCheck, BookOpen, MessageSquare } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useLanguage } from './context/LanguageContext';
 
@@ -60,24 +60,24 @@ const App = () => {
 
   return (
     <div className="page-wrapper" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      
+
       <nav className="glass-nav">
         <div className="container" style={{ display: 'flex', alignItems: 'center', width: '100%', height: '80px' }}>
           {/* Logo Section */}
           <Link to="/" style={{ textDecoration: 'none', color: 'white', display: 'flex', alignItems: 'center', marginRight: '30px' }}>
             <Logo size={32} />
           </Link>
-          
+
           {/* Desktop Navigation */}
           <div className="desktop-menu" style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
             <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
               {navLinks.map(link => (
-                <NavLink 
+                <NavLink
                   key={link.to}
-                  to={link.to} 
-                  style={({ isActive }) => ({ 
-                    color: isActive ? 'var(--brand-red)' : 'var(--text-secondary)', 
-                    textDecoration: 'none', 
+                  to={link.to}
+                  style={({ isActive }) => ({
+                    color: isActive ? 'var(--brand-red)' : 'var(--text-secondary)',
+                    textDecoration: 'none',
                     fontWeight: '700',
                     fontSize: '0.85rem',
                     letterSpacing: '0.3px',
@@ -89,9 +89,9 @@ const App = () => {
                 </NavLink>
               ))}
             </div>
-            
+
             <div style={{ height: '24px', width: '1px', background: 'var(--border-glass)', margin: '0 20px' }}></div>
-            
+
             <LanguageSwitcher />
 
             {/* Right Side Actions */}
@@ -103,9 +103,9 @@ const App = () => {
                 </>
               ) : (
                 <>
-                  <Link to="/profile" className="btn btn-glass" style={{ 
-                    display: 'flex', 
-                    alignItems: 'center', 
+                  <Link to="/profile" className="btn btn-glass" style={{
+                    display: 'flex',
+                    alignItems: 'center',
                     gap: '8px',
                     padding: '8px 16px',
                     fontSize: '0.85rem'
@@ -115,12 +115,12 @@ const App = () => {
                   <Link to="/dashboard" className="btn btn-primary" style={{ padding: '8px 20px', fontSize: '0.85rem' }}>
                     {t('dashboard')}
                   </Link>
-                  <button onClick={handleLogout} className="btn" style={{ 
-                    background: 'transparent', 
-                    border: '1px solid rgba(239, 68, 68, 0.3)', 
-                    color: '#ef4444', 
-                    padding: '8px 16px', 
-                    fontSize: '0.85rem' 
+                  <button onClick={handleLogout} className="btn" style={{
+                    background: 'transparent',
+                    border: '1px solid rgba(239, 68, 68, 0.3)',
+                    color: '#ef4444',
+                    padding: '8px 16px',
+                    fontSize: '0.85rem'
                   }}>
                     {t('logout')}
                   </button>
@@ -137,12 +137,12 @@ const App = () => {
                   <User size={24} />
                 </Link>
               )}
-              <button 
-                className="mobile-toggle" 
-                onClick={() => setIsMenuOpen(true)} 
-                style={{ 
-                  background: 'rgba(255,255,255,0.05)', 
-                  border: '1px solid rgba(255,255,255,0.1)', 
+              <button
+                className="mobile-toggle"
+                onClick={() => setIsMenuOpen(true)}
+                style={{
+                  background: 'rgba(255,255,255,0.05)',
+                  border: '1px solid rgba(255,255,255,0.1)',
                   color: 'white',
                   width: '44px',
                   height: '44px',
@@ -164,7 +164,7 @@ const App = () => {
           {isMenuOpen && (
             <>
               {/* Backdrop */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -174,14 +174,14 @@ const App = () => {
               />
 
               {/* Drawer */}
-              <motion.div 
+              <motion.div
                 initial={{ x: '100%' }}
                 animate={{ x: 0 }}
                 exit={{ x: '100%' }}
                 transition={{ type: 'spring', damping: 25, stiffness: 200 }}
                 className="mobile-menu-drawer"
                 style={{
-                  position: 'fixed', top: 0, right: 0, bottom: 0, 
+                  position: 'fixed', top: 0, right: 0, bottom: 0,
                   width: '100%', height: '100dvh', // Full screen
                   padding: '30px', display: 'flex', flexDirection: 'column',
                   overflowY: 'auto', // Scrollable
@@ -190,7 +190,7 @@ const App = () => {
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px', flexShrink: 0 }}>
                   <Logo size={28} />
-                  <button 
+                  <button
                     onClick={() => setIsMenuOpen(false)}
                     style={{ background: 'rgba(255,255,255,0.05)', border: 'none', borderRadius: '50%', width: '48px', height: '48px', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                   >
@@ -218,7 +218,7 @@ const App = () => {
                 </div>
 
                 <div style={{ height: '1px', background: 'rgba(255,255,255,0.1)', margin: '20px 0', flexShrink: 0 }}></div>
-                
+
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
                   {!isLoggedIn ? (
                     <>
@@ -264,50 +264,96 @@ const App = () => {
 
       <footer className="glass-panel" style={{ marginTop: 'auto', borderTop: '1px solid var(--border-glass)', borderRadius: 0, padding: '80px 0 40px' }}>
         <div className="container">
-          <div className="responsive-grid-4" style={{ marginBottom: '60px' }}>
-            <div>
-              <Logo size={40} />
-              <p style={{ color: 'var(--text-secondary)', marginTop: '20px', lineHeight: '1.6' }}>
-                {t('footer_tagline').split(/(RastaSaathi)/g).map((part, i) => 
-                  part === 'RastaSaathi' ? <span key={i}>Rasta<span style={{ color: '#ef4444' }}>Saathi</span></span> : part
-                )}
-              </p>
-              <div style={{ marginTop: '24px', fontWeight: '800', color: '#ef4444', letterSpacing: '1px', fontSize: '0.75rem' }}>
-                {t('hackathon_tag')}
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            gap: '60px', 
+            flexWrap: 'wrap',
+            marginBottom: '60px'
+          }}>
+            {/* Left Side: Brand & Mission */}
+            <div style={{ flex: '1.5', minWidth: '320px' }}>
+              <div style={{ color: 'white', fontWeight: '900', fontSize: '1.8rem', letterSpacing: '1px', marginBottom: '24px' }}>
+                Rasta<span style={{ color: '#ef4444' }}>Saathi</span>
               </div>
-            </div>
-            
-            <div>
-              <h3 style={{ fontSize: '1.2rem', fontWeight: '800', marginBottom: '20px' }}>{t('human_impact')}</h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.5' }}>
-                {t('impact_sub')}
+              <h3 style={{ 
+                fontSize: '2rem', 
+                color: 'white', 
+                marginBottom: '20px',
+                lineHeight: '1.2' 
+              }}>
+                Saving Lives <span style={{ color: '#ef4444' }}>Every Second.</span>
+              </h3>
+              <p style={{ 
+                color: 'var(--text-secondary)', 
+                fontSize: '1.1rem', 
+                lineHeight: '1.7',
+                maxWidth: '500px'
+              }}>
+                At RastaSaathi, we believe every life is precious. Our technology is built to fight for every second, ensuring that the 'Golden Hour' is never lost to bureaucracy or delay.
               </p>
             </div>
 
-            <div>
-              <h3 style={{ fontSize: '1.2rem', fontWeight: '800', marginBottom: '20px' }}>{t('strategic_partnerships')}</h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-secondary)' }}>
-                   <GlobeIcon size={16} color="#3b82f6" /> {t('emergency_liaison')}
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-secondary)' }}>
-                   <Heart size={16} color="#ef4444" /> {t('headquarters')}
-                </div>
+            {/* Right Side: Connect */}
+            <div style={{ 
+              flex: '1', 
+              display: 'flex', 
+              flexDirection: 'column',
+              alignItems: 'flex-end',
+              minWidth: '250px'
+            }}>
+              <h4 style={{ color: 'white', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '25px', opacity: 0.5 }}>Connect with Us</h4>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '18px', width: 'fit-content' }}>
+                <a href={`mailto:${t('contact_email')}`} style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '12px', 
+                  color: 'var(--text-secondary)', 
+                  textDecoration: 'none',
+                  fontWeight: '600',
+                  fontSize: '0.95rem'
+                }}
+                onMouseOver={(e) => e.currentTarget.style.color = 'white'}
+                onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
+                >
+                  <div style={{ padding: '8px', background: 'rgba(255,255,255,0.05)', borderRadius: '10px' }}><Mail size={18} /></div>
+                  Official Email
+                </a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '12px', 
+                  color: 'var(--text-secondary)', 
+                  textDecoration: 'none',
+                  fontWeight: '600',
+                  fontSize: '0.95rem'
+                }}
+                onMouseOver={(e) => e.currentTarget.style.color = 'white'}
+                onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
+                >
+                  <div style={{ padding: '8px', background: 'rgba(255,255,255,0.05)', borderRadius: '10px' }}><GlobeIcon size={18} /></div>
+                  Github Repository
+                </a>
+                <Link to="/contact" style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '12px', 
+                  color: 'var(--text-secondary)', 
+                  textDecoration: 'none',
+                  fontWeight: '600',
+                  fontSize: '0.95rem'
+                }}
+                onMouseOver={(e) => e.currentTarget.style.color = 'white'}
+                onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
+                >
+                  <div style={{ padding: '8px', background: 'rgba(255,255,255,0.05)', borderRadius: '10px' }}><Phone size={18} /></div>
+                  Contact Support
+                </Link>
               </div>
-            </div>
-
-            <div>
-              <h3 style={{ fontSize: '1.2rem', fontWeight: '800', marginBottom: '20px' }}>{t('direct_support')}</h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '15px' }}>
-                {t('direct_support_sub')}
-              </p>
-              <a href={`mailto:${t('contact_email')}`} style={{ color: '#ef4444', textDecoration: 'none', fontWeight: '700' }}>
-                {t('contact_us_now')} &rarr;
-              </a>
             </div>
           </div>
           
-          <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '30px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px', textAlign: 'center' }}>
+          <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '40px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px', textAlign: 'center' }}>
             <div style={{ color: 'white', fontWeight: '800', fontSize: '1.2rem', letterSpacing: '1px' }}>
               Rasta<span style={{ color: '#ef4444' }}>Saathi</span>
             </div>

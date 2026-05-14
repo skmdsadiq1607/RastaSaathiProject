@@ -39,13 +39,13 @@ const PublicChat = () => {
 
       if (matched) {
         setMessages(prev => [...prev, { 
-          text: `Protocol for ${matched.title}:`, 
+          text: `${t('protocol_for')} ${matched.title}:`, 
           isBot: true, 
           data: matched 
         }]);
       } else {
         setMessages(prev => [...prev, { 
-          text: "I understand this is an emergency. Please pick from the list or type words like 'Bleeding' or 'Burn'. Always call 108 immediately.", 
+          text: t('medic_fallback_msg'), 
           isBot: true, 
           data: null 
         }]);
@@ -125,7 +125,7 @@ const PublicChat = () => {
                       </div>
 
                       <div>
-                        <div style={{ fontSize: '0.85rem', fontWeight: '700', color: '#dc2626', marginBottom: '5px' }}>❌ {t('avoid_label')}:</div>
+                        <div style={{ fontSize: '0.85rem', fontWeight: '700', color: '#dc2626', marginBottom: '5px' }}>🚫 {t('avoid_label')}:</div>
                         {m.data.avoid.map((step, si) => (
                           <div key={si} style={{ fontSize: '0.8rem', color: '#475569', marginBottom: '3px', fontWeight: '500' }}>• {step}</div>
                         ))}
