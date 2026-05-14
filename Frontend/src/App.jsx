@@ -167,10 +167,8 @@ const App = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                style={{
-                  position: 'fixed', inset: 0, background: 'rgba(0, 0, 0, 0.4)',
-                  backdropFilter: 'blur(10px)', zIndex: 1050
-                }}
+                className="mobile-menu-backdrop"
+                style={{ backdropFilter: 'blur(10px)' }}
                 onClick={() => setIsMenuOpen(false)}
               />
 
@@ -180,24 +178,23 @@ const App = () => {
                 animate={{ x: 0 }}
                 exit={{ x: '100%' }}
                 transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                className="mobile-menu-drawer"
                 style={{
                   position: 'fixed', top: 0, right: 0, bottom: 0, width: 'min(320px, 85vw)',
-                  background: '#020617', borderLeft: '1px solid rgba(255,255,255,0.1)',
-                  padding: '40px 30px', display: 'flex', flexDirection: 'column',
-                  zIndex: 1060, boxShadow: '-10px 0 30px rgba(0,0,0,0.5)'
+                  padding: '40px 30px', display: 'flex', flexDirection: 'column'
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
                   <Logo size={28} />
                   <button 
                     onClick={() => setIsMenuOpen(false)}
-                    style={{ background: 'rgba(255,255,255,0.05)', border: 'none', borderRadius: '50%', width: '40px', height: '40px', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                    style={{ background: 'rgba(255,255,255,0.05)', border: 'none', borderRadius: '50%', width: '44px', height: '44px', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                   >
-                    <X size={20} />
+                    <X size={24} />
                   </button>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   {navLinks.map((link) => (
                     <Link
                       key={link.to}
@@ -206,7 +203,8 @@ const App = () => {
                         fontSize: '1.1rem', fontWeight: '700', color: location.pathname === link.to ? '#ef4444' : 'white',
                         textDecoration: 'none', padding: '16px 20px', borderRadius: '16px',
                         background: location.pathname === link.to ? 'rgba(239, 68, 68, 0.1)' : 'transparent',
-                        transition: 'all 0.3s ease'
+                        transition: 'all 0.3s ease',
+                        border: location.pathname === link.to ? '1px solid rgba(239, 68, 68, 0.2)' : '1px solid transparent'
                       }}
                       onClick={() => setIsMenuOpen(false)}
                     >
@@ -220,19 +218,19 @@ const App = () => {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   {!isLoggedIn ? (
                     <>
-                      <Link to="/login" className="btn btn-glass" style={{ width: '100%', padding: '18px' }} onClick={() => setIsMenuOpen(false)}>{t('login')}</Link>
-                      <Link to="/register" className="btn btn-primary" style={{ width: '100%', padding: '18px' }} onClick={() => setIsMenuOpen(false)}>{t('register_btn')}</Link>
+                      <Link to="/login" className="btn btn-glass" style={{ width: '100%', padding: '18px', fontSize: '1rem' }} onClick={() => setIsMenuOpen(false)}>{t('login')}</Link>
+                      <Link to="/register" className="btn btn-primary" style={{ width: '100%', padding: '18px', fontSize: '1rem' }} onClick={() => setIsMenuOpen(false)}>{t('register_btn')}</Link>
                     </>
                   ) : (
                     <>
-                      <Link to="/dashboard" className="btn btn-primary" style={{ width: '100%', padding: '18px' }} onClick={() => setIsMenuOpen(false)}>{t('dashboard')}</Link>
-                      <button onClick={() => { handleLogout(); setIsMenuOpen(false); }} className="btn" style={{ color: '#ef4444', width: '100%', background: 'rgba(239, 68, 68, 0.05)', padding: '18px' }}>{t('logout')}</button>
+                      <Link to="/dashboard" className="btn btn-primary" style={{ width: '100%', padding: '18px', fontSize: '1rem' }} onClick={() => setIsMenuOpen(false)}>{t('dashboard')}</Link>
+                      <button onClick={() => { handleLogout(); setIsMenuOpen(false); }} className="btn" style={{ color: '#ef4444', width: '100%', background: 'rgba(239, 68, 68, 0.05)', padding: '18px', fontSize: '1rem' }}>{t('logout')}</button>
                     </>
                   )}
                 </div>
 
-                <div style={{ marginTop: 'auto', padding: '20px', background: 'rgba(255,255,255,0.03)', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.05)' }}>
-                  <div style={{ fontSize: '0.75rem', fontWeight: '800', color: 'var(--text-secondary)', marginBottom: '15px', textTransform: 'uppercase', letterSpacing: '1px', textAlign: 'center' }}>
+                <div style={{ marginTop: 'auto', padding: '24px', background: 'rgba(255,255,255,0.03)', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.08)' }}>
+                  <div style={{ fontSize: '0.7rem', fontWeight: '900', color: '#ef4444', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '2px', textAlign: 'center' }}>
                     {t('language_label')}
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'center' }}>
