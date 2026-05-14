@@ -38,7 +38,7 @@ const Home = () => {
             flexDirection: 'column', 
             justifyContent: 'center', 
             alignItems: 'center',
-            paddingBottom: '200px' // Offset center further upwards
+            paddingBottom: '120px' // Bring back down a bit
           }}
         >
           <motion.div variants={itemVariants} style={{ marginBottom: '24px' }}>
