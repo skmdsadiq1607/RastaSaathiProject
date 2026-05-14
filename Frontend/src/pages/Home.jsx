@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Shield, MapPin, Smartphone, BookOpen, Activity, Globe, Heart, Zap, CheckCircle, Award, Star, Users, ArrowRight, Radio } from 'lucide-react';
+import { Shield, MapPin, Smartphone, BookOpen, Activity, Globe, Heart, Zap, CheckCircle, Award, Star, Users, ArrowRight, Radio, ShieldCheck, ZapOff, ActivitySquare } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import Logo from '../components/Logo';
 
@@ -19,7 +19,11 @@ const Home = () => {
   };
 
   return (
-    <div style={{ overflow: 'hidden' }}>
+    <div style={{ overflow: 'hidden', position: 'relative' }}>
+      {/* Background Ambient Glows */}
+      <div style={{ position: 'absolute', top: '-10%', left: '-10%', width: '40vw', height: '40vw', background: 'radial-gradient(circle, rgba(239, 68, 68, 0.15) 0%, transparent 70%)', filter: 'blur(100px)', zIndex: -1 }}></div>
+      <div style={{ position: 'absolute', top: '20%', right: '-5%', width: '30vw', height: '30vw', background: 'radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%)', filter: 'blur(80px)', zIndex: -1 }}></div>
+
       <div className="container" style={{ paddingBottom: '120px' }}>
         
         {/* HERO SECTION */}
@@ -27,29 +31,29 @@ const Home = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          style={{ textAlign: 'center', marginBottom: '180px' }}
+          style={{ textAlign: 'center', marginBottom: '180px', paddingTop: '60px' }}
         >
           <motion.div variants={itemVariants} style={{ marginBottom: '40px' }}>
             <span style={{ 
               display: 'inline-flex', alignItems: 'center', gap: '12px', padding: '14px 32px', 
               background: 'rgba(239, 68, 68, 0.08)', borderRadius: '100px', border: '1px solid rgba(239, 68, 68, 0.2)', 
-              color: '#ef4444', fontSize: '0.9rem', fontWeight: '900', letterSpacing: '2px'
+              color: '#ef4444', fontSize: '0.9rem', fontWeight: '900', letterSpacing: '2px', textTransform: 'uppercase'
             }}>
               <Radio size={18} className="pulse-sos" /> {t('national_initiative')}
             </span>
           </motion.div>
           
-          <motion.h1 variants={itemVariants} style={{ fontSize: 'clamp(3rem, 9vw, 5.5rem)', lineHeight: '1.0', marginBottom: '32px', letterSpacing: '-0.05em', fontWeight: 900 }}>
+          <motion.h1 variants={itemVariants} style={{ fontSize: 'clamp(3.5rem, 10vw, 6rem)', lineHeight: '0.95', marginBottom: '32px', letterSpacing: '-0.06em', fontWeight: 900 }}>
             {t('hero_title').split('.')[0]}<span style={{ color: '#ef4444' }}>.</span>
           </motion.h1>
           
-          <motion.p variants={itemVariants} style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: '800px', margin: '0 auto 60px', lineHeight: '1.6', fontWeight: '500' }}>
+          <motion.p variants={itemVariants} style={{ fontSize: '1.4rem', color: 'var(--text-secondary)', maxWidth: '850px', margin: '0 auto 60px', lineHeight: '1.6', fontWeight: '500' }}>
             {t('hero_sub')}
           </motion.p>
 
           <motion.div variants={itemVariants} style={{ display: 'flex', gap: '24px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/guide" className="btn btn-primary hero-btn">
-              <BookOpen size={28} /> {t('view_guide')}
+              <Zap size={28} /> {t('view_guide')}
             </Link>
             <Link to="/about" className="btn btn-glass hero-btn">
               {t('vision')}
@@ -62,42 +66,41 @@ const Home = () => {
         <div className="section-spacing">
           <div className="responsive-grid-2" style={{ alignItems: 'center', gap: '100px' }}>
             <motion.div initial={{ opacity: 0, x: -60 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-              <div style={{ color: '#ef4444', fontWeight: '900', letterSpacing: '2px', marginBottom: '24px', fontSize: '0.9rem' }}>{t('precision_eng')}</div>
-              <h2 style={{ fontSize: 'clamp(2.5rem, 6vw, 3.5rem)', lineHeight: '1.1', marginBottom: '32px' }}>{t('impact_title')}</h2>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', lineHeight: '1.8', marginBottom: '48px' }}>
-                {t('hero_sub')}
+              <div style={{ color: '#ef4444', fontWeight: '900', letterSpacing: '3px', marginBottom: '24px', fontSize: '0.9rem', textTransform: 'uppercase' }}>{t('precision_eng')}</div>
+              <h2 style={{ fontSize: 'clamp(3rem, 7vw, 4rem)', lineHeight: '1.05', marginBottom: '32px', fontWeight: 900 }}>{t('impact_title')}</h2>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '1.25rem', lineHeight: '1.8', marginBottom: '48px' }}>
+                Our architecture combines high-frequency geospatial indexing with state-of-the-art AI triage to ensure zero-latency emergency response.
               </p>
               
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px' }}>
-                <Metric value="LIVE" label="MEDICAL GRID" />
-                <Metric value="AI" label="TRIAGE CORE" />
-                <Metric value="0s" label="RESPONSE GAP" />
+                <Metric value="99.9%" label="UPTIME GRID" />
+                <Metric value="<2s" label="DISPATCH" />
+                <Metric value="AI" label="TRIAGE" />
               </div>
             </motion.div>
 
             <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               className="glass-panel" 
-              style={{ padding: '80px 60px', background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, transparent 100%)' }}
+              style={{ padding: '80px 60px', background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.07) 0%, rgba(2, 6, 23, 0.4) 100%)', borderRadius: '48px' }}
             >
-              <h3 style={{ fontSize: '2.2rem', marginBottom: '48px', fontWeight: 900 }}>{t('results_title')}</h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-                <Capability icon={<Zap />} text={t('impact_feature1')} />
-                <Capability icon={<Activity />} text={t('impact_feature2')} />
-                <Capability icon={<Shield />} text={t('impact_feature3')} />
-                <Capability icon={<MapPin />} text={t('dynamic_routing')} />
+              <h3 style={{ fontSize: '2.5rem', marginBottom: '48px', fontWeight: 900, letterSpacing: '-0.02em' }}>{t('results_title')}</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '36px' }}>
+                <Capability icon={<ShieldCheck />} text={t('orch_feature3_title')} sub={t('orch_feature3_desc')} />
+                <Capability icon={<ActivitySquare />} text={t('orch_feature2_title')} sub={t('orch_feature2_desc')} />
+                <Capability icon={<MapPin />} text={t('orch_feature1_title')} sub={t('orch_feature1_desc')} />
               </div>
             </motion.div>
           </div>
         </div>
 
         {/* THE JOURNEY */}
-        <div style={{ marginTop: '200px' }}>
-           <div style={{ textAlign: 'center', marginBottom: '100px' }}>
-              <h2 style={{ fontSize: 'clamp(2.5rem, 6vw, 3.5rem)', marginBottom: '24px' }}>{t('journey_title')}</h2>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '1.25rem', maxWidth: '700px', margin: '0 auto' }}>{t('journey_sub')}</p>
+        <div style={{ marginTop: '240px' }}>
+           <div style={{ textAlign: 'center', marginBottom: '120px' }}>
+              <h2 style={{ fontSize: 'clamp(3rem, 7vw, 4.5rem)', marginBottom: '24px', fontWeight: 900 }}>{t('journey_title')}</h2>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '1.4rem', maxWidth: '800px', margin: '0 auto' }}>{t('journey_sub')}</p>
            </div>
            
            <div className="responsive-grid">
@@ -112,14 +115,15 @@ const Home = () => {
           initial={{ opacity: 0, y: 80 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="glass-panel pulse-sos cta-panel" 
+          className="glass-panel cta-panel" 
+          style={{ background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(2, 6, 23, 0.8) 100%)', border: '1px solid rgba(239, 68, 68, 0.2)' }}
         >
           <div style={{ width: '100px', height: '100px', background: 'rgba(239, 68, 68, 0.1)', borderRadius: '30px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 48px' }}>
             <Users size={50} color="#ef4444" />
           </div>
-          <h2 style={{ fontSize: 'clamp(2.5rem, 6vw, 3.5rem)', marginBottom: '32px', lineHeight: '1.1' }}>{t('join_national_mission')}</h2>
-          <p style={{ fontSize: '1.4rem', color: 'var(--text-secondary)', maxWidth: '750px', margin: '0 auto 60px', lineHeight: '1.7' }}>
-            RastaSaathi is scaling across major urban corridors. Join our mission to eliminate road fatalities through technology and collective action.
+          <h2 style={{ fontSize: 'clamp(3rem, 7vw, 4.5rem)', marginBottom: '32px', lineHeight: '1.0', fontWeight: 900 }}>{t('join_national_mission')}</h2>
+          <p style={{ fontSize: '1.5rem', color: 'var(--text-secondary)', maxWidth: '850px', margin: '0 auto 60px', lineHeight: '1.6', fontWeight: 500 }}>
+            RastaSaathi is scaling its emergency grid across major urban corridors. Join our mission to eliminate road fatalities through precision technology.
           </p>
           
           <Link to="/register" className="btn btn-primary cta-btn">
@@ -132,56 +136,38 @@ const Home = () => {
   );
 };
 
-const MetricBox = ({ label, value }) => (
-  <div style={{ padding: '20px 30px', background: 'rgba(255,255,255,0.03)', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.05)' }}>
-    <div style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', marginBottom: '8px', letterSpacing: '1px' }}>{label}</div>
-    <div style={{ fontSize: '1.6rem', fontWeight: '900', color: 'white' }}>{value}</div>
-  </div>
-);
-
-const FeedItem = ({ title, time, loc, severity, color }) => (
-  <div style={{ padding: '24px', background: 'rgba(255,255,255,0.02)', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.05)' }}>
-     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-        <div style={{ fontSize: '0.8rem', fontWeight: '900', color: color, textTransform: 'uppercase' }}>{title}</div>
-        <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{time}</div>
-     </div>
-     <div style={{ fontSize: '1.1rem', fontWeight: '700', marginBottom: '8px' }}>{loc}</div>
-     <div style={{ display: 'inline-block', padding: '4px 12px', background: `${color}15`, color: color, borderRadius: '8px', fontSize: '0.75rem', fontWeight: '900' }}>
-        {severity} Triage
-     </div>
-  </div>
-);
-
 const Metric = ({ value, label }) => (
   <div style={{ textAlign: 'left' }}>
-    <div style={{ fontSize: '2.5rem', fontWeight: '900', color: '#ef4444', marginBottom: '12px' }}>{value}</div>
-    <div style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', fontWeight: '900', letterSpacing: '2px', textTransform: 'uppercase' }}>{label}</div>
+    <div style={{ fontSize: '2.8rem', fontWeight: '900', color: '#ef4444', marginBottom: '8px', letterSpacing: '-1px' }}>{value}</div>
+    <div style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', fontWeight: '900', letterSpacing: '2px', textTransform: 'uppercase' }}>{label}</div>
   </div>
 );
 
-const Capability = ({ icon, text }) => (
-  <div style={{ display: 'flex', alignItems: 'center', gap: '24px', color: 'rgba(255,255,255,0.95)' }}>
-    <div style={{ color: '#ef4444' }}>{React.cloneElement(icon, { size: 30 })}</div>
-    <span style={{ fontSize: '1.4rem', fontWeight: '700' }}>{text}</span>
+const Capability = ({ icon, text, sub }) => (
+  <div style={{ display: 'flex', gap: '28px', color: 'white' }}>
+    <div style={{ 
+      flexShrink: 0, width: '64px', height: '64px', background: 'rgba(239, 68, 68, 0.1)', 
+      borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ef4444' 
+    }}>
+      {React.cloneElement(icon, { size: 32 })}
+    </div>
+    <div>
+      <div style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '8px' }}>{text}</div>
+      <div style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', lineHeight: '1.5' }}>{sub}</div>
+    </div>
   </div>
 );
 
 const StepCard = ({ num, title, desc, icon, color }) => (
-  <motion.div whileHover={{ y: -20 }} className="glass-panel" style={{ padding: '80px 50px', position: 'relative', overflow: 'hidden' }}>
+  <motion.div whileHover={{ y: -20 }} className="glass-panel" style={{ padding: '80px 50px', position: 'relative', overflow: 'hidden', borderRadius: '40px' }}>
     <div style={{ position: 'absolute', top: '-20px', right: '-20px', fontSize: '10rem', fontWeight: '900', color: 'rgba(255,255,255,0.03)', lineHeight: 1 }}>{num}</div>
-    <div style={{ width: '80px', height: '80px', background: `${color}15`, borderRadius: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: color, marginBottom: '48px' }}>
-      {React.cloneElement(icon, { size: 40 })}
+    <div style={{ width: '84px', height: '84px', background: `${color}15`, borderRadius: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: color, marginBottom: '48px' }}>
+      {React.cloneElement(icon, { size: 44 })}
     </div>
-    <h3 style={{ fontSize: '2rem', marginBottom: '24px', position: 'relative', zIndex: 1 }}>{title}</h3>
-    <p style={{ color: 'var(--text-secondary)', fontSize: '1.25rem', lineHeight: '1.8', position: 'relative', zIndex: 1 }}>{desc}</p>
+    <h3 style={{ fontSize: '2.2rem', marginBottom: '24px', position: 'relative', zIndex: 1, fontWeight: 900 }}>{title}</h3>
+    <p style={{ color: 'var(--text-secondary)', fontSize: '1.3rem', lineHeight: '1.7', position: 'relative', zIndex: 1, fontWeight: 500 }}>{desc}</p>
   </motion.div>
 );
 
-const FooterInfo = ({ label, value }) => (
-  <div style={{ textAlign: 'center' }}>
-     <div style={{ color: '#ef4444', fontSize: '0.7rem', fontWeight: '900', marginBottom: '12px', letterSpacing: '2px', textTransform: 'uppercase' }}>{label}</div>
-     <div style={{ fontSize: '1.25rem', fontWeight: '800' }}>{value}</div>
-  </div>
-);
-
 export default Home;
+
