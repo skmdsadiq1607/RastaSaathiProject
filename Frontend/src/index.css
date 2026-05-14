@@ -95,6 +95,10 @@ h3 { font-size: clamp(1.4rem, 4vw, 1.8rem); }
   .mobile-only-ui {
     display: flex !important;
   }
+  .glass-nav {
+    background: #010411 !important;
+    backdrop-filter: none !important;
+  }
 }
 
 .glass-nav {
