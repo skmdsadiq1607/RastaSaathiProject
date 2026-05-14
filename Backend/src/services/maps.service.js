@@ -29,5 +29,20 @@ async function directions({ origin, destination, mode = 'driving', avoid, altern
   return data;
 }
 
-module.exports = { distanceMatrix, directions };
+async function findNearbyHospitals({ lat, lng, radius = 50000 }) {
+  if (!env.GOOGLE_MAPS_API_KEY) throw new AppError('Google Maps API key not configured', 500, 'CONFIG_ERROR');
+  const params = {
+    key: env.GOOGLE_MAPS_API_KEY,
+    location: `${lat},${lng}`,
+    radius,
+    type: 'hospital'
+  };
+  const { data } = await axios.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json', { params, timeout: 8000 });
+  if (data.status !== 'OK' && data.status !== 'ZERO_RESULTS') {
+    throw new AppError('Places API failed', 502, 'MAPS_ERROR', data);
+  }
+  return data.results;
+}
+
+module.exports = { distanceMatrix, directions, findNearbyHospitals };
 
