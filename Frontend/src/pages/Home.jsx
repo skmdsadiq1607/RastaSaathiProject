@@ -38,7 +38,7 @@ const Home = () => {
             flexDirection: 'column', 
             justifyContent: 'center', 
             alignItems: 'center',
-            paddingBottom: '120px' // Bring back down a bit
+            paddingBottom: '80px' // Final downward tweak
           }}
         >
           <motion.div variants={itemVariants} style={{ marginBottom: '24px' }}>
