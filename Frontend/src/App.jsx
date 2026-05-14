@@ -129,33 +129,34 @@ const App = () => {
             </div>
           </div>
 
-          {/* Mobile UI */}
-          <div className="mobile-only-ui" style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '15px', zIndex: 1100 }}>
-            {isLoggedIn && (
-              <Link to="/profile" className="mobile-profile-link" style={{ color: 'white' }}>
-                <User size={24} />
-              </Link>
-            )}
-            <button 
-              className="mobile-toggle" 
-              onClick={() => setIsMenuOpen(!isMenuOpen)} 
-              style={{ 
-                background: 'rgba(255,255,255,0.05)', 
-                border: '1px solid rgba(255,255,255,0.1)', 
-                color: 'white',
-                width: '44px',
-                height: '44px',
-                borderRadius: '12px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer',
-                transition: 'all 0.3s ease'
-              }}
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+          {/* Mobile UI - Hidden when menu is open */}
+          {!isMenuOpen && (
+            <div className="mobile-only-ui" style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '15px' }}>
+              {isLoggedIn && (
+                <Link to="/profile" className="mobile-profile-link" style={{ color: 'white' }}>
+                  <User size={24} />
+                </Link>
+              )}
+              <button 
+                className="mobile-toggle" 
+                onClick={() => setIsMenuOpen(true)} 
+                style={{ 
+                  background: 'rgba(255,255,255,0.05)', 
+                  border: '1px solid rgba(255,255,255,0.1)', 
+                  color: 'white',
+                  width: '44px',
+                  height: '44px',
+                  borderRadius: '12px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer'
+                }}
+              >
+                <Menu size={24} />
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Mobile Menu Overlay */}
