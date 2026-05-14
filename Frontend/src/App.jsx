@@ -284,7 +284,7 @@ const App = () => {
           
           <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '30px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px', textAlign: 'center' }}>
             <div style={{ color: 'white', fontWeight: '800', fontSize: '1.2rem', letterSpacing: '1px' }}>
-              RastaSaathi
+              Rasta<span style={{ color: '#ef4444' }}>Saathi</span>
             </div>
             <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', fontWeight: '600' }}>
               {t('made_with')} ❤️ {t('by_team')}
