@@ -19,7 +19,7 @@ const TRANSLATIONS = {
     navigation: "Navigation",
 
     // Home Page
-    hero_title: "Seconds Save Lives.",
+    hero_title: "When Every Second Counts, RastaSaathi Responds.",
     hero_sub: "RastaSaathi uses AI and real-time alerts to bridge the gap between accident and life-saving care.",
     view_guide: "View Guide",
     vision: "Our Vision",
@@ -90,7 +90,7 @@ const TRANSLATIONS = {
     have_account: "Already have an account?",
 
     // Footer
-    footer_tagline: "Bridging the gap between accident and care.",
+    footer_tagline: "When Every Second Counts, RastaSaathi Responds.",
     hackathon_tag: "IIT MADRAS ROAD SAFETY HACKATHON 2026",
     contact_email: "rastasaathi@gmail.com",
     contact_phone: "+91 9441921812",
@@ -188,7 +188,7 @@ const TRANSLATIONS = {
     navigation: "नेविगेशन",
 
     // Home Page
-    hero_title: "सेकंड जान बचाते हैं।",
+    hero_title: "जब हर सेकंड मायने रखता है, RastaSaathi प्रतिक्रिया देता है।",
     hero_sub: "रास्तासाथी दुर्घटना और जीवन रक्षक देखभाल के बीच की दूरी को पाटने के लिए एआई और रीयल-टाइम अलर्ट का उपयोग करता है।",
     view_guide: "मार्गदर्शिका देखें",
     vision: "दृष्टिकोण",
@@ -259,7 +259,7 @@ const TRANSLATIONS = {
     have_account: "पहले से खाता है?",
 
     // Footer
-    footer_tagline: "दुर्घटना और देखभाल के बीच की दूरी को पाटना।",
+    footer_tagline: "जब हर सेकंड मायने रखता है, RastaSaathi प्रतिक्रिया देता है।",
     hackathon_tag: "IIT मद्रास रोड सेफ्टी हैकाथॉन 2026",
     contact_email: "rastasaathi@gmail.com",
     contact_phone: "+91 9441921812",
@@ -341,7 +341,7 @@ const TRANSLATIONS = {
     navigation: "నావిగేషన్",
 
     // Home Page
-    hero_title: "క్షణాలు ప్రాణాలను కాపాడతాయి.",
+    hero_title: "ప్రతి సెకను విలువైనప్పుడు, RastaSaathi స్పందిస్తుంది.",
     hero_sub: "ప్రమాదానికి మరియు ప్రాణరక్షక సంరక్షణకు మధ్య ఉన్న అంతరాన్ని పూడ్చడానికి రాస్తాసాథీ ఏఐని ఉపయోగిస్తుంది.",
     view_guide: "మార్గదర్శిని చూడండి",
     vision: "దృష్టి",
@@ -412,7 +412,7 @@ const TRANSLATIONS = {
     have_account: "ఇప్పటికే ఖాతా ఉందా?",
 
     // Footer
-    footer_tagline: "ప్రమాదానికి మరియు సంరక్షణకు మధ్య ఉన్న అంతరాన్ని పూడ్చడం.",
+    footer_tagline: "ప్రతి సెకను విలువైనప్పుడు, RastaSaathi స్పందిస్తుంది.",
     hackathon_tag: "IIT మద్రాస్ రోడ్ సేఫ్టీ హ్యాకథాన్ 2026",
     contact_email: "rastasaathi@gmail.com",
     contact_phone: "+91 9441921812",
@@ -488,13 +488,13 @@ const TRANSLATIONS = {
     login: "உள்நுழைவு",
     logout: "வெளியேறுதல்",
     profile: "சுயவிவரம்",
-    road_safety: "பாதுకాப்பு வழிகாட்டுதல்கள்",
+    road_safety: "பாதுகாப்பு வழிகாட்டுதல்கள்",
     vision_mission: "பார்வையும் நோக்கமும்",
     language_label: "மொழி",
     navigation: "வழிசெலுத்தல்",
 
     // Home Page
-    hero_title: "நொடிகள் உயிர்களைக் காக்கின்றன.",
+    hero_title: "ஒவ்வொரு நொடியும் முக்கியம் எனும்போது, RastaSaathi பதிலளிக்கிறது.",
     hero_sub: "விபத்துக்கும் உயிர்காக்கும் சிகிச்சைக்கும் இடையிலான இடைவெளியைக் குறைக்க ராஸ்தாசாத்தி உதவுகிறது.",
     view_guide: "வழிகாட்டியைப் பார்க்கவும்",
     vision: "நோக்கம்",
@@ -565,7 +565,7 @@ const TRANSLATIONS = {
     have_account: "ஏற்கனவே கணக்கு உள்ளதா?",
 
     // Footer
-    footer_tagline: "விபத்துக்கும் சிகிச்சைக்கும் இடையிலான இடைவெளியைக் குறைத்தல்.",
+    footer_tagline: "ஒவ்வொரு நொடியும் முக்கியம் எனும்போது, RastaSaathi பதிலளிக்கிறது.",
     hackathon_tag: "IIT மெட்ராஸ் சாலை பாதுகாப்பு ஹேக்கத்தான் 2026",
     contact_email: "rastasaathi@gmail.com",
     contact_phone: "+91 9441921812",

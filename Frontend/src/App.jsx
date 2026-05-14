@@ -245,7 +245,9 @@ const App = () => {
             <div>
               <Logo size={40} />
               <p style={{ color: 'var(--text-secondary)', marginTop: '20px', lineHeight: '1.6' }}>
-                {t('footer_tagline')}
+                {t('footer_tagline').split(/(RastaSaathi)/g).map((part, i) => 
+                  part === 'RastaSaathi' ? <span key={i}>Rasta<span style={{ color: '#ef4444' }}>Saathi</span></span> : part
+                )}
               </p>
               <div style={{ marginTop: '24px', fontWeight: '800', color: '#ef4444', letterSpacing: '1px', fontSize: '0.75rem' }}>
                 {t('hackathon_tag')}

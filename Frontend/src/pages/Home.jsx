@@ -44,7 +44,9 @@ const Home = () => {
           </motion.div>
           
           <motion.h1 variants={itemVariants} style={{ marginBottom: '28px', fontWeight: 800 }}>
-            {t('hero_title').split('.')[0]}<span style={{ color: '#ef4444' }}>.</span>
+            {t('hero_title').split(/(RastaSaathi)/g).map((part, i) => 
+              part === 'RastaSaathi' ? <span key={i}>Rasta<span style={{ color: '#ef4444' }}>Saathi</span></span> : part
+            )}
           </motion.h1>
           
           <motion.p variants={itemVariants} style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', maxWidth: '750px', margin: '0 auto 48px', lineHeight: '1.6' }}>
