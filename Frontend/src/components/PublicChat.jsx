@@ -61,7 +61,6 @@ const PublicChat = () => {
             initial={{ opacity: 0, y: 20, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
-            className="glass-panel"
             style={{ 
               width: 'min(380px, 90vw)', 
               height: 'min(550px, 70vh)', 
@@ -69,32 +68,38 @@ const PublicChat = () => {
               display: 'flex', 
               flexDirection: 'column', 
               overflow: 'hidden', 
-              border: '1px solid rgba(239, 68, 68, 0.3)', 
-              boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
+              background: 'white',
+              borderRadius: '24px',
+              border: '1px solid rgba(0,0,0,0.1)', 
+              boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
               position: 'absolute',
               bottom: '80px',
-              right: '0'
+              right: '0',
+              zIndex: 1000
             }}
           >
             {/* Header */}
-            <div style={{ background: 'rgba(239, 68, 68, 0.1)', padding: '15px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+            <div style={{ background: '#f8fafc', padding: '15px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #e2e8f0' }}>
               <div style={{ display: 'flex', alignItems: 'center' }}>
-                <span style={{ fontWeight: '700', letterSpacing: '0.5px', color: 'white' }}>Rasta</span><span style={{ fontWeight: '700', letterSpacing: '0.5px', color: '#ef4444' }}>Saathi</span>
-                <span style={{ fontWeight: '700', letterSpacing: '0.5px', color: 'white', marginLeft: '5px' }}>Medic</span>
+                <span style={{ fontWeight: '800', color: '#1e293b' }}>Rasta</span><span style={{ fontWeight: '800', color: '#ef4444' }}>Saathi</span>
+                <span style={{ fontWeight: '800', color: '#64748b', marginLeft: '5px' }}>Medic</span>
               </div>
-              <X size={20} onClick={() => setIsOpen(false)} style={{ cursor: 'pointer' }} />
+              <X size={20} onClick={() => setIsOpen(false)} style={{ cursor: 'pointer', color: '#64748b' }} />
             </div>
 
             {/* Messages */}
-            <div style={{ flex: 1, padding: '20px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '15px' }}>
+            <div style={{ flex: 1, padding: '20px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '15px', background: 'white' }}>
               {messages.map((m, i) => (
                 <div key={i} style={{ alignSelf: m.isBot ? 'flex-start' : 'flex-end', maxWidth: '90%' }}>
                   <div style={{ 
-                    background: m.isBot ? 'rgba(255,255,255,0.05)' : '#ef4444',
+                    background: m.isBot ? '#f1f5f9' : '#ef4444',
+                    color: m.isBot ? '#1e293b' : 'white',
                     padding: '12px 16px',
                     borderRadius: m.isBot ? '0 15px 15px 15px' : '15px 0 15px 15px',
                     fontSize: '0.9rem',
-                    lineHeight: '1.4'
+                    lineHeight: '1.4',
+                    fontWeight: '500',
+                    boxShadow: '0 2px 5px rgba(0,0,0,0.05)'
                   }}>
                     {m.text}
                   </div>
@@ -103,7 +108,7 @@ const PublicChat = () => {
                     <motion.div 
                       initial={{ opacity: 0, x: -10 }} 
                       animate={{ opacity: 1, x: 0 }}
-                      style={{ marginTop: '10px', background: 'rgba(0,0,0,0.2)', padding: '15px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}
+                      style={{ marginTop: '10px', background: '#f8fafc', padding: '15px', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.05)' }}
                     >
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
                         <ShieldAlert size={16} color={m.data.severity === 'Critical' ? '#ef4444' : '#f59e0b'} />
@@ -113,20 +118,20 @@ const PublicChat = () => {
                       </div>
 
                       <div style={{ marginBottom: '12px' }}>
-                        <div style={{ fontSize: '0.85rem', fontWeight: '700', color: '#10b981', marginBottom: '5px' }}>✅ {t('first_aid_label')}:</div>
+                        <div style={{ fontSize: '0.85rem', fontWeight: '700', color: '#059669', marginBottom: '5px' }}>✅ {t('first_aid_label')}:</div>
                         {m.data.firstAid.map((step, si) => (
-                          <div key={si} style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.8)', marginBottom: '3px' }}>• {step}</div>
+                          <div key={si} style={{ fontSize: '0.8rem', color: '#475569', marginBottom: '3px', fontWeight: '500' }}>• {step}</div>
                         ))}
                       </div>
 
                       <div>
-                        <div style={{ fontSize: '0.85rem', fontWeight: '700', color: '#ef4444', marginBottom: '5px' }}>❌ {t('avoid_label')}:</div>
+                        <div style={{ fontSize: '0.85rem', fontWeight: '700', color: '#dc2626', marginBottom: '5px' }}>❌ {t('avoid_label')}:</div>
                         {m.data.avoid.map((step, si) => (
-                          <div key={si} style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.8)', marginBottom: '3px' }}>• {step}</div>
+                          <div key={si} style={{ fontSize: '0.8rem', color: '#475569', marginBottom: '3px', fontWeight: '500' }}>• {step}</div>
                         ))}
                       </div>
 
-                      <div style={{ marginTop: '15px', paddingTop: '10px', borderTop: '1px solid rgba(255,255,255,0.1)', textAlign: 'center' }}>
+                      <div style={{ marginTop: '15px', paddingTop: '10px', borderTop: '1px solid #e2e8f0', textAlign: 'center' }}>
                         <a href="tel:108" style={{ color: '#ef4444', textDecoration: 'none', fontWeight: '800', fontSize: '1rem' }}>📞 {t('call_108')}</a>
                       </div>
                     </motion.div>
@@ -137,7 +142,7 @@ const PublicChat = () => {
             </div>
 
             {/* Input & Dropdown */}
-            <div style={{ padding: '15px', borderTop: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.2)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <div style={{ padding: '15px', borderTop: '1px solid #e2e8f0', background: '#f8fafc', display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <select 
                 onChange={(e) => {
                   if(e.target.value) {
@@ -145,11 +150,11 @@ const PublicChat = () => {
                     setTimeout(() => handleSend(e.target.value), 100);
                   }
                 }}
-                style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '10px', color: 'white', fontSize: '0.85rem', cursor: 'pointer' }}
+                style={{ width: '100%', background: 'white', border: '1px solid #cbd5e1', borderRadius: '8px', padding: '10px', color: '#1e293b', fontSize: '0.85rem', cursor: 'pointer', outline: 'none' }}
               >
                 <option value="">{t('select_emergency')}</option>
                 {EMERGENCIES.map(e => (
-                  <option key={e.id} value={e.title} style={{ background: '#020617' }}>{e.title}</option>
+                  <option key={e.id} value={e.title}>{e.title}</option>
                 ))}
               </select>
               
@@ -160,9 +165,9 @@ const PublicChat = () => {
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSend()}
                   placeholder={t('describe_situation')}
-                  style={{ flex: 1, background: 'rgba(255,255,255,0.05)', border: 'none', borderRadius: '8px', padding: '12px', color: 'white', fontSize: '0.9rem' }}
+                  style={{ flex: 1, background: 'white', border: '1px solid #cbd5e1', borderRadius: '8px', padding: '12px', color: '#1e293b', fontSize: '0.9rem', outline: 'none' }}
                 />
-                <button onClick={() => handleSend()} style={{ background: '#ef4444', border: 'none', borderRadius: '8px', padding: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <button onClick={() => handleSend()} style={{ background: '#ef4444', border: 'none', borderRadius: '8px', padding: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 10px rgba(239,68,68,0.2)' }}>
                   <Send size={18} color="white" />
                 </button>
               </div>
