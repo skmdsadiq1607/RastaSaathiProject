@@ -33,12 +33,13 @@ body {
 h1, h2, h3, h4 {
   font-family: var(--font-heading);
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
 }
 
-h1 { font-size: clamp(2.5rem, 8vw, 4rem); }
-h2 { font-size: clamp(2rem, 6vw, 3rem); }
-h3 { font-size: clamp(1.5rem, 4vw, 2rem); }
+h1 { font-size: clamp(3rem, 8vw, 4.5rem); }
+h2 { font-size: clamp(2.2rem, 6vw, 3.2rem); }
+h3 { font-size: clamp(1.4rem, 4vw, 1.8rem); }
 
 .container {
   width: 100%;
@@ -48,20 +49,39 @@ h3 { font-size: clamp(1.5rem, 4vw, 2rem); }
 }
 
 
-/* MINIMAL GLASS */
+/* PREMIUM MINIMAL GLASS */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 24px;
-  transition: all 0.4s ease;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-panel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.03), transparent);
+  transform: skewX(-25deg);
+  transition: 0.75s;
+}
+
+.glass-panel:hover::after {
+  left: 150%;
 }
 
 .glass-panel:hover {
-  border-color: rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.03);
-  transform: translateY(-2px);
+  border-color: rgba(239, 68, 68, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .mobile-only-ui {
@@ -83,9 +103,9 @@ h3 { font-size: clamp(1.5rem, 4vw, 2rem); }
   left: 0;
   right: 0;
   height: var(--nav-height);
-  background: rgba(2, 6, 23, 0.85);
-  backdrop-filter: blur(15px);
-  border-bottom: 1px solid var(--border-glass);
+  background: rgba(1, 4, 17, 0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
   display: flex;
   align-items: center;
   z-index: 1000;
@@ -97,13 +117,13 @@ h3 { font-size: clamp(1.5rem, 4vw, 2rem); }
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 12px 24px;
+  padding: 14px 28px;
   border-radius: 12px;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.95rem;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   border: none;
   font-family: var(--font-body);
 }
@@ -111,11 +131,13 @@ h3 { font-size: clamp(1.5rem, 4vw, 2rem); }
 .btn-primary {
   background: #ef4444;
   color: white;
+  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.2);
 }
 
 .btn-primary:hover {
-  background: #dc2626;
-  transform: translateY(-2px);
+  background: #f87171;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 35px rgba(239, 68, 68, 0.4);
 }
 
 .btn-glass {
@@ -125,35 +147,43 @@ h3 { font-size: clamp(1.5rem, 4vw, 2rem); }
 }
 
 .btn-glass:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 /* FORMS */
 .form-input {
   width: 100%;
-  padding: 14px 20px;
+  padding: 16px 22px;
   background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
   color: white;
-  font-size: 0.95rem;
+  font-size: 1rem;
   transition: all 0.3s ease;
 }
 
 .form-input:focus {
   outline: none;
   border-color: #ef4444;
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .premium-button {
   background: #ef4444;
   color: white;
-  font-weight: 700;
-  font-size: 1rem;
-  border-radius: 12px;
-  transition: all 0.3s ease;
+  font-weight: 800;
+  font-size: 1.05rem;
+  border-radius: 14px;
+  transition: all 0.4s ease;
   border: none;
   cursor: pointer;
+  box-shadow: 0 10px 30px rgba(239, 68, 68, 0.2);
+}
+
+.premium-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 40px rgba(239, 68, 68, 0.4);
 }
 
 .premium-button:hover {
