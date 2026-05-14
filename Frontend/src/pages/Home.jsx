@@ -33,13 +33,11 @@ const Home = () => {
           animate="visible"
           style={{ 
             textAlign: 'center', 
-            minHeight: '90vh', 
+            minHeight: '85vh', 
             display: 'flex', 
             flexDirection: 'column', 
             justifyContent: 'center', 
-            alignItems: 'center',
-            paddingTop: '80px',
-            paddingBottom: '80px'
+            alignItems: 'center'
           }}
         >
           <motion.div variants={itemVariants} style={{ marginBottom: '24px' }}>
