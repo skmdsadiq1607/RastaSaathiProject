@@ -161,67 +161,88 @@ const App = () => {
         {/* Mobile Menu Overlay */}
         <AnimatePresence>
           {isMenuOpen && (
-            <motion.div 
-              initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
-              animate={{ opacity: 1, backdropFilter: 'blur(20px)' }}
-              exit={{ opacity: 0, backdropFilter: 'blur(0px)' }}
-              style={{
-                position: 'fixed', inset: 0, background: 'rgba(2, 6, 23, 0.85)',
-                zIndex: 1050, display: 'flex', alignItems: 'center', justifyContent: 'center'
-              }}
-              onClick={() => setIsMenuOpen(false)}
-            >
+            <>
+              {/* Backdrop */}
               <motion.div 
-                initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                onClick={(e) => e.stopPropagation()}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 style={{
-                  width: '90%', maxWidth: '400px', background: 'rgba(2, 6, 23, 0.95)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)', borderRadius: '32px',
-                  padding: '60px 40px', display: 'flex', flexDirection: 'column', gap: '20px',
-                position: 'fixed', top: 0, right: 0, bottom: 0, width: '280px',
-                background: '#020617', padding: '100px 30px', zIndex: 1060,
-                display: 'flex', flexDirection: 'column', gap: '20px',
-                borderLeft: '1px solid rgba(255,255,255,0.05)'
-              }}
-            >
-              <div style={{ marginBottom: '20px', textAlign: 'center' }}>
-                <Logo size={32} />
-              </div>
-              {navLinks.map((link) => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  style={{
-                    fontSize: '1rem', fontWeight: '600', color: location.pathname === link.to ? '#ef4444' : 'white',
-                    textDecoration: 'none', padding: '12px 16px', borderRadius: '8px',
-                    background: location.pathname === link.to ? 'rgba(239, 68, 68, 0.05)' : 'transparent'
-                  }}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <div style={{ height: '1px', background: 'rgba(255,255,255,0.05)', margin: '10px 0' }}></div>
-              {!isLoggedIn ? (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  <Link to="/login" className="btn btn-glass" style={{ width: '100%', fontSize: '0.9rem' }} onClick={() => setIsMenuOpen(false)}>{t('login')}</Link>
-                  <Link to="/register" className="btn btn-primary" style={{ width: '100%', fontSize: '0.9rem' }} onClick={() => setIsMenuOpen(false)}>{t('register_btn')}</Link>
+                  position: 'fixed', inset: 0, background: 'rgba(0, 0, 0, 0.4)',
+                  backdropFilter: 'blur(10px)', zIndex: 1050
+                }}
+                onClick={() => setIsMenuOpen(false)}
+              />
+
+              {/* Drawer */}
+              <motion.div 
+                initial={{ x: '100%' }}
+                animate={{ x: 0 }}
+                exit={{ x: '100%' }}
+                transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                style={{
+                  position: 'fixed', top: 0, right: 0, bottom: 0, width: 'min(320px, 85vw)',
+                  background: '#020617', borderLeft: '1px solid rgba(255,255,255,0.1)',
+                  padding: '40px 30px', display: 'flex', flexDirection: 'column',
+                  zIndex: 1060, boxShadow: '-10px 0 30px rgba(0,0,0,0.5)'
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
+                  <Logo size={28} />
+                  <button 
+                    onClick={() => setIsMenuOpen(false)}
+                    style={{ background: 'rgba(255,255,255,0.05)', border: 'none', borderRadius: '50%', width: '40px', height: '40px', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                  >
+                    <X size={20} />
+                  </button>
                 </div>
-              ) : (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  <Link to="/dashboard" className="btn btn-primary" style={{ width: '100%', fontSize: '0.9rem' }} onClick={() => setIsMenuOpen(false)}>{t('dashboard')}</Link>
-                  <button onClick={handleLogout} className="btn" style={{ color: '#ef4444', width: '100%', background: 'rgba(239, 68, 68, 0.03)', fontSize: '0.9rem' }}>{t('logout')}</button>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.to}
+                      to={link.to}
+                      style={{
+                        fontSize: '1.1rem', fontWeight: '700', color: location.pathname === link.to ? '#ef4444' : 'white',
+                        textDecoration: 'none', padding: '16px 20px', borderRadius: '16px',
+                        background: location.pathname === link.to ? 'rgba(239, 68, 68, 0.1)' : 'transparent',
+                        transition: 'all 0.3s ease'
+                      }}
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
                 </div>
-              )}
-              <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'center' }}>
-                <LanguageSwitcher />
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+
+                <div style={{ height: '1px', background: 'rgba(255,255,255,0.1)', margin: '30px 0' }}></div>
+                
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  {!isLoggedIn ? (
+                    <>
+                      <Link to="/login" className="btn btn-glass" style={{ width: '100%', padding: '18px' }} onClick={() => setIsMenuOpen(false)}>{t('login')}</Link>
+                      <Link to="/register" className="btn btn-primary" style={{ width: '100%', padding: '18px' }} onClick={() => setIsMenuOpen(false)}>{t('register_btn')}</Link>
+                    </>
+                  ) : (
+                    <>
+                      <Link to="/dashboard" className="btn btn-primary" style={{ width: '100%', padding: '18px' }} onClick={() => setIsMenuOpen(false)}>{t('dashboard')}</Link>
+                      <button onClick={() => { handleLogout(); setIsMenuOpen(false); }} className="btn" style={{ color: '#ef4444', width: '100%', background: 'rgba(239, 68, 68, 0.05)', padding: '18px' }}>{t('logout')}</button>
+                    </>
+                  )}
+                </div>
+
+                <div style={{ marginTop: 'auto', padding: '20px', background: 'rgba(255,255,255,0.03)', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                  <div style={{ fontSize: '0.75rem', fontWeight: '800', color: 'var(--text-secondary)', marginBottom: '15px', textTransform: 'uppercase', letterSpacing: '1px', textAlign: 'center' }}>
+                    {t('language_label')}
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <LanguageSwitcher />
+                  </div>
+                </div>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
       </nav>
 
       <main style={{ flex: 1, paddingTop: '120px' }}>
