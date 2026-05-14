@@ -282,12 +282,18 @@ const App = () => {
             </div>
           </div>
           
-          <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '20px' }}>
-            <div style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
-              &copy; 2026 RastaSaathi. All Rights Reserved.
+          <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '30px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px', textAlign: 'center' }}>
+            <div style={{ color: 'white', fontWeight: '800', fontSize: '1.2rem', letterSpacing: '1px' }}>
+              RastaSaathi
             </div>
-            <div style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
+            <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', fontWeight: '600' }}>
               {t('made_with')} ❤️ {t('by_team')}
+            </div>
+            <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.8rem', fontWeight: '500', letterSpacing: '1px' }}>
+              Dr.Lakshmi | Sadiq | Krishna | Chakravarthi | Hasini
+            </div>
+            <div style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.75rem', marginTop: '10px' }}>
+              &copy; 2026 RastaSaathi. All Rights Reserved.
             </div>
           </div>
         </div>
