@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
-import { Activity, Globe, Shield, Users, Target, Rocket, Award, Cpu, Heart, Database, Zap, Layers } from 'lucide-react';
 import { Activity, Globe, Shield, Users, Target, Rocket, Award, Cpu, Heart, Database, Zap, Layers, Eye, CheckCircle } from 'lucide-react';
 
 const About = () => {
