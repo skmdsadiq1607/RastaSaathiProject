@@ -294,61 +294,59 @@ const App = () => {
               </p>
             </div>
 
-            {/* Right Side: Connect */}
+            {/* Right Side: Connect Icons Only */}
             <div style={{ 
               flex: '1', 
               display: 'flex', 
               flexDirection: 'column',
               alignItems: 'flex-end',
-              minWidth: '250px'
+              minWidth: '200px'
             }}>
-              <h4 style={{ color: 'white', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '25px', opacity: 0.5 }}>Connect with Us</h4>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '18px', width: 'fit-content' }}>
-                <a href={`mailto:${t('contact_email')}`} style={{ 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  gap: '12px', 
-                  color: 'var(--text-secondary)', 
-                  textDecoration: 'none',
-                  fontWeight: '600',
-                  fontSize: '0.95rem'
-                }}
-                onMouseOver={(e) => e.currentTarget.style.color = 'white'}
-                onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
-                >
-                  <div style={{ padding: '8px', background: 'rgba(255,255,255,0.05)', borderRadius: '10px' }}><Mail size={18} /></div>
-                  Official Email
-                </a>
-                <a href="https://github.com/skmdsadiq1607/RastaSaathiProject" target="_blank" rel="noopener noreferrer" style={{ 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  gap: '12px', 
-                  color: 'var(--text-secondary)', 
-                  textDecoration: 'none',
-                  fontWeight: '600',
-                  fontSize: '0.95rem'
-                }}
-                onMouseOver={(e) => e.currentTarget.style.color = 'white'}
-                onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
-                >
-                  <div style={{ padding: '8px', background: 'rgba(255,255,255,0.05)', borderRadius: '10px' }}><GlobeIcon size={18} /></div>
-                  Github Repository
-                </a>
-                <Link to="/contact" style={{ 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  gap: '12px', 
-                  color: 'var(--text-secondary)', 
-                  textDecoration: 'none',
-                  fontWeight: '600',
-                  fontSize: '0.95rem'
-                }}
-                onMouseOver={(e) => e.currentTarget.style.color = 'white'}
-                onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
-                >
-                  <div style={{ padding: '8px', background: 'rgba(255,255,255,0.05)', borderRadius: '10px' }}><Phone size={18} /></div>
-                  Contact Support
-                </Link>
+              <h4 style={{ color: 'white', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '25px', opacity: 0.5 }}>Connect</h4>
+              <div style={{ display: 'flex', gap: '15px' }}>
+                {[
+                  { href: `mailto:${t('contact_email')}`, icon: <Mail size={20} />, label: 'Email' },
+                  { href: "https://github.com/skmdsadiq1607/RastaSaathiProject", icon: <GlobeIcon size={20} />, label: 'Github', target: '_blank' },
+                  { to: "/contact", icon: <Phone size={20} />, label: 'Contact' }
+                ].map((item, idx) => {
+                  const LinkComponent = item.to ? Link : 'a';
+                  return (
+                    <LinkComponent 
+                      key={idx}
+                      to={item.to}
+                      href={item.href}
+                      target={item.target}
+                      rel={item.target ? "noopener noreferrer" : undefined}
+                      style={{ 
+                        width: '45px',
+                        height: '45px',
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        justifyContent: 'center',
+                        background: 'rgba(255,255,255,0.05)',
+                        border: '1px solid rgba(255,255,255,0.1)',
+                        borderRadius: '12px',
+                        color: 'var(--text-secondary)',
+                        transition: 'all 0.3s ease',
+                        textDecoration: 'none'
+                      }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
+                        e.currentTarget.style.color = 'white';
+                        e.currentTarget.style.transform = 'translateY(-3px)';
+                        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)';
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
+                        e.currentTarget.style.color = 'var(--text-secondary)';
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+                      }}
+                    >
+                      {item.icon}
+                    </LinkComponent>
+                  );
+                })}
               </div>
             </div>
           </div>
