@@ -219,8 +219,9 @@ const App = () => {
                 <LanguageSwitcher />
               </div>
             </motion.div>
-          )}
-        </AnimatePresence>
+          </motion.div>
+        )}
+      </AnimatePresence>
       </nav>
 
       <main style={{ flex: 1, paddingTop: '120px' }}>
