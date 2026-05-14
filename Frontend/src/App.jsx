@@ -181,31 +181,34 @@ const App = () => {
                 transition={{ type: 'spring', damping: 25, stiffness: 200 }}
                 className="mobile-menu-drawer"
                 style={{
-                  position: 'fixed', top: 0, right: 0, bottom: 0, width: 'min(320px, 85vw)',
-                  padding: '40px 30px', display: 'flex', flexDirection: 'column'
+                  position: 'fixed', top: 0, right: 0, bottom: 0, 
+                  width: '100%', height: '100dvh', // Full screen
+                  padding: '30px', display: 'flex', flexDirection: 'column',
+                  overflowY: 'auto', // Scrollable
+                  WebkitOverflowScrolling: 'touch'
                 }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px', flexShrink: 0 }}>
                   <Logo size={28} />
                   <button 
                     onClick={() => setIsMenuOpen(false)}
-                    style={{ background: 'rgba(255,255,255,0.05)', border: 'none', borderRadius: '50%', width: '44px', height: '44px', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                    style={{ background: 'rgba(255,255,255,0.05)', border: 'none', borderRadius: '50%', width: '48px', height: '48px', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                   >
-                    <X size={24} />
+                    <X size={28} />
                   </button>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
                   {navLinks.map((link) => (
                     <Link
                       key={link.to}
                       to={link.to}
                       style={{
-                        fontSize: '1.1rem', fontWeight: '700', color: location.pathname === link.to ? '#ef4444' : 'white',
-                        textDecoration: 'none', padding: '16px 20px', borderRadius: '16px',
+                        fontSize: '1.25rem', fontWeight: '800', color: location.pathname === link.to ? '#ef4444' : 'white',
+                        textDecoration: 'none', padding: '20px', borderRadius: '20px',
                         background: location.pathname === link.to ? 'rgba(239, 68, 68, 0.1)' : 'transparent',
-                        transition: 'all 0.3s ease',
-                        border: location.pathname === link.to ? '1px solid rgba(239, 68, 68, 0.2)' : '1px solid transparent'
+                        border: location.pathname === link.to ? '1px solid rgba(239, 68, 68, 0.2)' : '1px solid transparent',
+                        textAlign: 'center'
                       }}
                       onClick={() => setIsMenuOpen(false)}
                     >
@@ -214,24 +217,24 @@ const App = () => {
                   ))}
                 </div>
 
-                <div style={{ height: '1px', background: 'rgba(255,255,255,0.1)', margin: '30px 0' }}></div>
+                <div style={{ height: '1px', background: 'rgba(255,255,255,0.1)', margin: '20px 0', flexShrink: 0 }}></div>
                 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
                   {!isLoggedIn ? (
                     <>
-                      <Link to="/login" className="btn btn-glass" style={{ width: '100%', padding: '18px', fontSize: '1rem' }} onClick={() => setIsMenuOpen(false)}>{t('login')}</Link>
-                      <Link to="/register" className="btn btn-primary" style={{ width: '100%', padding: '18px', fontSize: '1rem' }} onClick={() => setIsMenuOpen(false)}>{t('register_btn')}</Link>
+                      <Link to="/login" className="btn btn-glass" style={{ width: '100%', padding: '20px', fontSize: '1.1rem' }} onClick={() => setIsMenuOpen(false)}>{t('login')}</Link>
+                      <Link to="/register" className="btn btn-primary" style={{ width: '100%', padding: '20px', fontSize: '1.1rem' }} onClick={() => setIsMenuOpen(false)}>{t('register_btn')}</Link>
                     </>
                   ) : (
                     <>
-                      <Link to="/dashboard" className="btn btn-primary" style={{ width: '100%', padding: '18px', fontSize: '1rem' }} onClick={() => setIsMenuOpen(false)}>{t('dashboard')}</Link>
-                      <button onClick={() => { handleLogout(); setIsMenuOpen(false); }} className="btn" style={{ color: '#ef4444', width: '100%', background: 'rgba(239, 68, 68, 0.05)', padding: '18px', fontSize: '1rem' }}>{t('logout')}</button>
+                      <Link to="/dashboard" className="btn btn-primary" style={{ width: '100%', padding: '20px', fontSize: '1.1rem' }} onClick={() => setIsMenuOpen(false)}>{t('dashboard')}</Link>
+                      <button onClick={() => { handleLogout(); setIsMenuOpen(false); }} className="btn" style={{ color: '#ef4444', width: '100%', background: 'rgba(239, 68, 68, 0.05)', padding: '20px', fontSize: '1.1rem' }}>{t('logout')}</button>
                     </>
                   )}
                 </div>
 
-                <div style={{ marginTop: 'auto', padding: '24px', background: 'rgba(255,255,255,0.03)', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.08)' }}>
-                  <div style={{ fontSize: '0.7rem', fontWeight: '900', color: '#ef4444', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '2px', textAlign: 'center' }}>
+                <div style={{ marginTop: '30px', padding: '30px', background: 'rgba(255,255,255,0.03)', borderRadius: '32px', border: '1px solid rgba(255,255,255,0.08)', marginBottom: '30px' }}>
+                  <div style={{ fontSize: '0.8rem', fontWeight: '900', color: '#ef4444', marginBottom: '20px', textTransform: 'uppercase', letterSpacing: '3px', textAlign: 'center' }}>
                     {t('language_label')}
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'center' }}>

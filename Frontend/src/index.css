@@ -268,29 +268,20 @@ h3 { font-size: clamp(1.4rem, 4vw, 1.8rem); }
   }
 }
 
-/* MOBILE MENU CLASSES */
-.mobile-menu-backdrop {
-  position: fixed !important;
-  inset: 0 !important;
-  background-color: #020617 !important;
-  opacity: 1 !important;
-  z-index: 1050 !important;
-}
-
 .mobile-menu-drawer {
   background: #020617 !important;
   background-color: #020617 !important;
-  border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
-  box-shadow: -20px 0 80px rgba(0, 0, 0, 1) !important;
+  border: none !important;
+  box-shadow: none !important;
   opacity: 1 !important;
   visibility: visible !important;
   display: flex !important;
-  z-index: 2000 !important;
+  z-index: 2001 !important;
+  overflow-y: auto !important;
 }
 
 .mobile-menu-backdrop {
-  background-color: rgba(0, 0, 0, 0.8) !important;
-  z-index: 1999 !important;
+  display: none !important;
 }
 
 /* ANIMATIONS - REMOVED SIREN GLOW */
