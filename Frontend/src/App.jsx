@@ -319,7 +319,7 @@ const App = () => {
                   <div style={{ padding: '8px', background: 'rgba(255,255,255,0.05)', borderRadius: '10px' }}><Mail size={18} /></div>
                   Official Email
                 </a>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" style={{ 
+                <a href="https://github.com/skmdsadiq1607/RastaSaathiProject" target="_blank" rel="noopener noreferrer" style={{ 
                   display: 'flex', 
                   alignItems: 'center', 
                   gap: '12px', 
