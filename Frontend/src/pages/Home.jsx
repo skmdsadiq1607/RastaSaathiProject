@@ -31,7 +31,16 @@ const Home = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          style={{ textAlign: 'center', marginBottom: '120px', paddingTop: '40px' }}
+          style={{ 
+            textAlign: 'center', 
+            minHeight: '90vh', 
+            display: 'flex', 
+            flexDirection: 'column', 
+            justifyContent: 'center', 
+            alignItems: 'center',
+            paddingTop: '80px',
+            paddingBottom: '80px'
+          }}
         >
           <motion.div variants={itemVariants} style={{ marginBottom: '24px' }}>
             <span style={{ 
