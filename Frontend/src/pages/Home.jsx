@@ -33,11 +33,12 @@ const Home = () => {
           animate="visible"
           style={{ 
             textAlign: 'center', 
-            minHeight: '85vh', 
+            minHeight: '80vh', 
             display: 'flex', 
             flexDirection: 'column', 
             justifyContent: 'center', 
-            alignItems: 'center'
+            alignItems: 'center',
+            paddingBottom: '200px' // Offset center further upwards
           }}
         >
           <motion.div variants={itemVariants} style={{ marginBottom: '24px' }}>
