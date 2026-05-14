@@ -238,7 +238,7 @@ const App = () => {
                     {t('language_label')}
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <LanguageSwitcher />
+                    <LanguageSwitcher variant="grid" />
                   </div>
                 </div>
               </motion.div>

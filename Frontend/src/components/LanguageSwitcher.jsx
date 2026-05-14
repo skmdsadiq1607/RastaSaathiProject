@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Globe, ChevronDown } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
-const LanguageSwitcher = () => {
+const LanguageSwitcher = ({ variant = 'dropdown' }) => {
   const { lang, setLang } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -27,6 +27,42 @@ const LanguageSwitcher = () => {
   }, []);
 
   const currentLangLabel = languages.find(l => l.code === lang)?.label || 'English';
+
+  if (variant === 'grid') {
+    return (
+      <div style={{ 
+        display: 'grid', 
+        gridTemplateColumns: '1fr 1fr', 
+        gap: '12px', 
+        width: '100%' 
+      }}>
+        {languages.map((l) => (
+          <motion.button
+            key={l.code}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setLang(l.code)}
+            style={{
+              padding: '16px',
+              borderRadius: '16px',
+              border: lang === l.code ? '2px solid #ef4444' : '1px solid rgba(255,255,255,0.1)',
+              background: lang === l.code ? 'rgba(239, 68, 68, 0.1)' : 'rgba(255,255,255,0.03)',
+              color: lang === l.code ? '#ef4444' : 'white',
+              fontSize: '1rem',
+              fontWeight: '800',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textAlign: 'center'
+            }}
+          >
+            {l.label}
+          </motion.button>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div ref={dropdownRef} style={{ position: 'relative' }}>
