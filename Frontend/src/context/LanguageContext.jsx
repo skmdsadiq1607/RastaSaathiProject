@@ -83,7 +83,7 @@ export const TRANSLATIONS = {
     email_label: "Email Address",
     password_label: "Security Password",
     signin_btn: "Login to Dashboard",
-    register_btn: "Create Safety Account",
+    register_btn: "Register",
     google_btn: "Continue with Google",
     no_account: "New to RastaSaathi?",
     have_account: "Already have an account?",
