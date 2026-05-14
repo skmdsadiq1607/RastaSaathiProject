@@ -113,7 +113,7 @@ const PublicChat = () => {
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
                         <ShieldAlert size={16} color={m.data.severity === 'Critical' ? '#ef4444' : '#f59e0b'} />
                         <span style={{ fontSize: '0.75rem', fontWeight: '800', color: m.data.severity === 'Critical' ? '#ef4444' : '#f59e0b', textTransform: 'uppercase' }}>
-                          {m.data.severity} {t('severity_label')}
+                          {t(m.data.severity.toLowerCase() + '_severity')} {t('severity_label')}
                         </span>
                       </div>
 
