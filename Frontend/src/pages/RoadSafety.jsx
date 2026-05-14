@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Users, Car, Footprints, Heart, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Shield, Users, Car, Footprints, Heart, CheckCircle2, AlertCircle, ArrowRight } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const RoadSafety = () => {
+  const { t } = useLanguage();
   const sections = [
     {
       id: 'general',
@@ -173,8 +175,14 @@ const RoadSafety = () => {
         <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto 30px' }}>
           Follow these guidelines to minimize risks. In case of any incident, RastaSaathi AI is always ready to coordinate your rescue.
         </p>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
-          <button className="premium-button" onClick={() => window.location.href='/dashboard'}>Go to Dashboard</button>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <button 
+            className="btn btn-primary" 
+            style={{ padding: '16px 40px', fontSize: '1.1rem' }}
+            onClick={() => window.location.href='/dashboard'}
+          >
+            {t('dashboard')} <ArrowRight size={20} style={{ marginLeft: '10px' }} />
+          </button>
         </div>
       </motion.div>
     </motion.div>
