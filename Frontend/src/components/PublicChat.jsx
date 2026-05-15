@@ -12,10 +12,13 @@ const PublicChat = () => {
     { text: t('medic_welcome'), isBot: true, data: null }
   ]);
   const [input, setInput] = useState('');
+  const chatContainerRef = useRef(null);
   const chatEndRef = useRef(null);
 
   const scrollToBottom = () => {
-    chatEndRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
   };
 
   useEffect(() => {
@@ -88,7 +91,10 @@ const PublicChat = () => {
             </div>
 
             {/* Messages */}
-            <div style={{ flex: 1, padding: '20px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '15px', background: 'white' }}>
+            <div 
+              ref={chatContainerRef}
+              style={{ flex: 1, padding: '20px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '15px', background: 'white' }}
+            >
               {messages.map((m, i) => (
                 <div key={i} style={{ alignSelf: m.isBot ? 'flex-start' : 'flex-end', maxWidth: '90%' }}>
                   <div style={{ 

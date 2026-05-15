@@ -50,6 +50,7 @@ const Dashboard = () => {
   const [sessionId, setSessionId] = useState(null);
   const [loadingMsg, setLoadingMsg] = useState(false);
   const [apiLoading, setApiLoading] = useState(false);
+  const chatContainerRef = useRef(null);
   const chatEndRef = useRef(null);
 
   // Map State
@@ -67,7 +68,9 @@ const Dashboard = () => {
   }, [navigate]);
 
   useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
   }, [messages]);
 
   const triggerSOS = async () => {
@@ -259,7 +262,10 @@ const Dashboard = () => {
             <h3 style={{ fontSize: '1.2rem', fontWeight: '900' }}>{t('ai_medic')}</h3>
           </div>
           
-          <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '15px', paddingRight: '8px' }}>
+          <div 
+            ref={chatContainerRef}
+            style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '15px', paddingRight: '8px' }}
+          >
             <AnimatePresence>
               {messages.map((msg, idx) => (
                 <motion.div key={idx} initial={{ opacity: 0, x: msg.role === 'user' ? 10 : -10 }} animate={{ opacity: 1, x: 0 }} style={{ background: msg.role === 'user' ? 'rgba(59, 130, 246, 0.1)' : 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', padding: '16px', borderRadius: '18px', alignSelf: msg.role === 'user' ? 'flex-end' : 'flex-start', maxWidth: '90%' }}>
