@@ -20,6 +20,7 @@ const { dashboardRoutes } = require('../modules/dashboard/routes');
 const { insightsRoutes } = require('../modules/insights/routes');
 const { voiceRoutes } = require('../modules/voice/routes');
 const { summaryRoutes } = require('../modules/summary/routes');
+const rescueRoutes = require('../modules/rescue/routes');
 
 async function initExpress({ app, io }) {
   app.use((req, res, next) => {
@@ -50,6 +51,7 @@ async function initExpress({ app, io }) {
   router.use('/insights', insightsRoutes());
   router.use('/voice', voiceRoutes());
   router.use('/summary', summaryRoutes());
+  router.use('/rescue', rescueRoutes);
 
   app.use('/api', router);
 

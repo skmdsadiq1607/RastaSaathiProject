@@ -1,5 +1,7 @@
 const { ok } = require('../../utils/responseFormatter');
 const { triggerSos } = require('./service');
+const { generateAccidentReport } = require('../incident/report.service');
+const { User } = require('../auth/model');
 
 async function triggerSosController(req, res, next) {
   try {
@@ -17,7 +19,19 @@ async function triggerSosController(req, res, next) {
       vehicleType
     });
     console.log(`[SOS Controller] SOS triggered successfully. Incident ID: ${result.incident._id}`);
-    res.status(201).json(ok({ data: result, message: 'SOS triggered' }));
+    
+    // Generate Accident Report PDF
+    const victim = result.incident.userId ? await User.findById(result.incident.userId).lean() : null;
+    const report = await generateAccidentReport(result.incident, victim, {
+      hospitalSelection: result.hospitalSelection,
+      policeSelection: result.policeSelection,
+      rescueSelection: result.rescueSelection
+    });
+
+    res.status(201).json(ok({ 
+      data: { ...result, report }, 
+      message: 'SOS triggered and report generated' 
+    }));
   } catch (err) {
     console.error(`[SOS Controller] ERROR: ${err.message}`);
     next(err);
