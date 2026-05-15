@@ -91,7 +91,7 @@ async function callGeminiWithRetry({ system, user }) {
 }
 
 // Unified AI Caller: Tries OpenAI -> Claude -> Gemini
-async function callClaude({ system, user, maxTokens = 600 }) {
+async function callAi({ system, user, maxTokens = 600 }) {
   // 1. Try OpenAI (Primary)
   try {
     return await callOpenAI({ system, user, maxTokens });
@@ -120,5 +120,5 @@ async function callClaude({ system, user, maxTokens = 600 }) {
   }
 }
 
-module.exports = { callClaude };
+module.exports = { callAi };
 

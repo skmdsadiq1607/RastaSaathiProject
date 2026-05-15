@@ -77,6 +77,7 @@ async function dispatchAlerts({ io, incident, victimUser, severityLevel, hospita
   for (const c of contacts) {
     const smsBody = t(lang, 'sms.SOS', {
       name: c.name || 'Emergency Contact',
+      victimName: victimUser?.name || 'A loved one',
       lat: incident.location.coordinates[1],
       lng: incident.location.coordinates[0],
       hLat: hospitalLocation?.coordinates[1],

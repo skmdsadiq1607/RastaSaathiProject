@@ -1,11 +1,11 @@
 const { FirstAid } = require('./model');
-const { callClaude } = require('../../services/ai.service');
+const { callAi } = require('../../services/ai.service');
 const { firstAidPrompt } = require('../../utils/aiPrompts');
 const { logDecision } = require('../transparency/service');
 
 async function startSession({ incidentId, userId, injuryType, severityLevel, resourcesAvailable, language }) {
   const prompt = firstAidPrompt({ injuryType, severityLevel, resourcesAvailable, language });
-  const { text } = await callClaude({
+  const { text } = await callAi({
     system: 'You produce strictly-valid JSON only.',
     user: prompt,
     maxTokens: 900
@@ -54,7 +54,7 @@ async function followup({ sessionId, question }) {
     .map((m) => `${m.role.toUpperCase()}: ${m.content}`)
     .join('\n');
 
-  const { text } = await callClaude({
+  const { text } = await callAi({
     system: 'You are continuing a first-aid session. Be concise and safe.',
     user: `Continue this first-aid session in language=${session.language}.\n\nHistory:\n${history}\n\nUser question: ${question}`,
     maxTokens: 400

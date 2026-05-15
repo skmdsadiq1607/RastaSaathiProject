@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Users, Car, Footprints, Heart, CheckCircle2, AlertCircle, ArrowRight } from 'lucide-react';
+import { Shield, Users, Car, Footprints, Heart, CheckCircle2, AlertCircle, ArrowRight, Phone } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 const RoadSafety = () => {
@@ -94,6 +94,23 @@ const RoadSafety = () => {
     }
   ];
 
+  const emergencyContacts = [
+    { name: "Police", number: "100", type: "primary" },
+    { name: "Fire", number: "101", type: "primary" },
+    { name: "Ambulance", number: "102, 108", type: "primary" },
+    { name: "Women Helpline", number: "181", type: "secondary" },
+    { name: "Child Line", number: "1098", type: "secondary" },
+    { name: "Traffic Help", number: "1073", type: "secondary" },
+    { name: "MeeSeva Center", number: "1100", type: "info" },
+    { name: "Crime Stopper", number: "1090", type: "info" },
+    { name: "Blood Bank", number: "040-24745243", type: "medical" },
+    { name: "Electricity Complaint", number: "1912", type: "info" },
+    { name: "Osmania General Hospital", number: "040-23538846", type: "medical" },
+    { name: "Gandhi Hospital", number: "040-27505566", type: "medical" },
+    { name: "Government Chest Hospital", number: "040-23814421", type: "medical" },
+    { name: "Government ENT Hospital", number: "040-24740245", type: "medical" }
+  ];
+
   return (
     <motion.div 
       initial={{ opacity: 0 }} 
@@ -103,7 +120,7 @@ const RoadSafety = () => {
     >
       <div style={{ textAlign: 'center', marginBottom: '60px' }}>
         <h1 style={{ fontSize: '3.5rem', fontWeight: '900', marginBottom: '20px' }}>
-          {t('road_safety').split(' ')[0]} <span className="text-gradient">{t('road_safety').split(' ')[1] || 'Guidelines'}</span>
+          Safety Guidelines & <span style={{ color: '#ef4444' }}>Emergency Contacts</span>
         </h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', maxWidth: '700px', margin: '0 auto' }}>
           {t('impact_sub')}
@@ -155,6 +172,49 @@ const RoadSafety = () => {
             </ul>
           </motion.div>
         ))}
+      </div>
+
+      <div style={{ marginTop: '80px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+          <h2 style={{ fontSize: '2.5rem', fontWeight: '900', marginBottom: '10px' }}>
+            Emergency <span className="text-gradient">Helplines</span>
+          </h2>
+          <p style={{ color: 'var(--text-secondary)' }}>Click any contact to initiate a call immediately.</p>
+        </div>
+        
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px' }}>
+          {emergencyContacts.map((contact, i) => (
+            <motion.a
+              key={i}
+              href={`tel:${contact.number.split(',')[0].trim()}`}
+              whileHover={{ scale: 1.02, y: -5 }}
+              whileTap={{ scale: 0.98 }}
+              className="glass-panel"
+              style={{ 
+                padding: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '20px', 
+                textDecoration: 'none',
+                border: contact.type === 'primary' ? '1px solid rgba(239, 68, 68, 0.3)' : '1px solid rgba(255,255,255,0.08)',
+                background: contact.type === 'primary' ? 'rgba(239, 68, 68, 0.08)' : 'rgba(255,255,255,0.03)'
+              }}
+            >
+              <div style={{ 
+                width: '45px', height: '45px', borderRadius: '12px', 
+                background: contact.type === 'primary' ? '#ef4444' : 'rgba(255,255,255,0.1)', 
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: 'white', flexShrink: 0
+              }}>
+                <Phone size={20} />
+              </div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '4px' }}>{contact.name}</div>
+                <div style={{ fontSize: '1.2rem', fontWeight: '900', color: contact.type === 'primary' ? '#ef4444' : 'white' }}>{contact.number}</div>
+              </div>
+            </motion.a>
+          ))}
+        </div>
       </div>
 
       <motion.div 
