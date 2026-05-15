@@ -40,6 +40,53 @@ import { useLanguage } from '../context/LanguageContext';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
+const formatBotMessage = (text) => {
+  if (!text) return text;
+  
+  try {
+    // Try to parse if it's a JSON string
+    let data = text;
+    if (typeof text === 'string' && (text.trim().startsWith('{') || text.trim().startsWith('['))) {
+      try {
+        data = JSON.parse(text);
+      } catch (e) {
+        // Not valid JSON, continue with normal text
+      }
+    }
+
+    if (typeof data === 'object' && data !== null) {
+      const parts = [];
+      
+      if (data.steps && Array.isArray(data.steps)) {
+        parts.push(<div key="steps" style={{ marginBottom: '16px' }}>
+          <div style={{ color: '#10b981', fontWeight: '800', fontSize: '0.75rem', marginBottom: '8px', textTransform: 'uppercase' }}>📋 Execution Steps</div>
+          {data.steps.map((step, i) => <div key={i} style={{ marginBottom: '6px', fontSize: '0.95rem' }}>{step}</div>)}
+        </div>);
+      }
+      
+      if (data.warnings && Array.isArray(data.warnings)) {
+        parts.push(<div key="warnings" style={{ marginBottom: '16px' }}>
+          <div style={{ color: '#f59e0b', fontWeight: '800', fontSize: '0.75rem', marginBottom: '8px', textTransform: 'uppercase' }}>⚠️ Critical Warnings</div>
+          {data.warnings.map((w, i) => <div key={i} style={{ marginBottom: '4px', fontSize: '0.95rem', color: '#fbbf24' }}>• {w}</div>)}
+        </div>);
+      }
+      
+      if (data.whenToEscalate && Array.isArray(data.whenToEscalate)) {
+        parts.push(<div key="escalate">
+          <div style={{ color: '#ef4444', fontWeight: '800', fontSize: '0.75rem', marginBottom: '8px', textTransform: 'uppercase' }}>🚨 When to Call 108</div>
+          {data.whenToEscalate.map((e, i) => <div key={i} style={{ marginBottom: '4px', fontSize: '0.95rem', color: '#fca5a5' }}>• {e}</div>)}
+        </div>);
+      }
+
+      if (parts.length > 0) return parts;
+    }
+  } catch (e) {
+    console.error("Format error:", e);
+  }
+
+  return <p style={{ fontSize: '1rem', whiteSpace: 'pre-line', lineHeight: '1.5' }}>{text}</p>;
+};
+
 const Dashboard = () => {
   const { t } = useLanguage();
   const [sosActive, setSosActive] = useState(false);
@@ -288,7 +335,11 @@ const Dashboard = () => {
             <AnimatePresence>
               {messages.map((msg, idx) => (
                 <motion.div key={idx} initial={{ opacity: 0, x: msg.role === 'user' ? 10 : -10 }} animate={{ opacity: 1, x: 0 }} style={{ background: msg.role === 'user' ? 'rgba(59, 130, 246, 0.1)' : 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', padding: '16px', borderRadius: '18px', alignSelf: msg.role === 'user' ? 'flex-end' : 'flex-start', maxWidth: '90%' }}>
-                  <p style={{ fontSize: '1rem', whiteSpace: 'pre-line', lineHeight: '1.5' }}>{msg.text}</p>
+                  {msg.role === 'user' ? (
+                    <p style={{ fontSize: '1rem', whiteSpace: 'pre-line', lineHeight: '1.5' }}>{msg.text}</p>
+                  ) : (
+                    formatBotMessage(msg.text)
+                  )}
                 </motion.div>
               ))}
             </AnimatePresence>
