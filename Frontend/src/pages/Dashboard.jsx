@@ -1,53 +1,40 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Activity, Navigation, MessageCircle, Send, MapPin, Shield, Zap, AlertTriangle, Radio, Hospital, Users, Loader2, FileText, Wrench } from 'lucide-react';
+import { Activity, Navigation, MessageCircle, Send, MapPin, Shield, Zap, AlertTriangle, Radio, Hospital, Users, Loader2 } from 'lucide-react';
 import axios from 'axios';
 import GoogleMapReact from 'google-map-react';
 import Logo from '../components/Logo';
 
 // Professional Scale Marker
-const Marker = ({ text, type }) => {
-  const getColors = () => {
-    switch (type) {
-      case 'victim': return { bg: '#ef4444', icon: <Radio size={14} className="pulse-sos" /> };
-      case 'police': return { bg: '#3b82f6', icon: <Shield size={14} /> };
-      case 'rescue': return { bg: '#f59e0b', icon: <Wrench size={14} /> };
-      default: return { bg: '#10b981', icon: <Hospital size={14} /> };
-    }
-  };
-  
-  const colors = getColors();
-
-  return (
-    <div style={{
-      position: 'absolute',
-      transform: 'translate(-50%, -100%)',
-      pointerEvents: 'none',
-      zIndex: type === 'victim' ? 100 : 50
-    }}>
-      <motion.div 
-        initial={{ scale: 0 }} 
-        animate={{ scale: 1 }} 
-        style={{ 
-          color: 'white', 
-          background: colors.bg, 
-          padding: '6px 12px', borderRadius: '12px', display: 'inline-flex', 
-          alignItems: 'center', gap: '6px', fontWeight: '800', fontSize: '11px',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.3)', border: '1.5px solid white',
-          whiteSpace: 'nowrap'
-        }}
-      >
-        {colors.icon} 
-        {text}
-      </motion.div>
-      <div style={{ 
-        width: '8px', height: '8px', background: colors.bg, 
-        borderRadius: '50%', border: '1.5px solid white', margin: '-4px auto 0' 
-      }}></div>
-    </div>
-  );
-};
+const Marker = ({ text, type }) => (
+  <div style={{
+    position: 'absolute',
+    transform: 'translate(-50%, -100%)',
+    pointerEvents: 'none',
+    zIndex: type === 'victim' ? 100 : 50
+  }}>
+    <motion.div 
+      initial={{ scale: 0 }} 
+      animate={{ scale: 1 }} 
+      style={{ 
+        color: 'white', 
+        background: type === 'victim' ? '#ef4444' : '#3b82f6', 
+        padding: '6px 12px', borderRadius: '12px', display: 'inline-flex', 
+        alignItems: 'center', gap: '6px', fontWeight: '800', fontSize: '11px',
+        boxShadow: '0 4px 12px rgba(0,0,0,0.3)', border: '1.5px solid white',
+        whiteSpace: 'nowrap'
+      }}
+    >
+      {type === 'victim' ? <Radio size={14} className="pulse-sos" /> : <Hospital size={14} />} 
+      {text}
+    </motion.div>
+    <div style={{ 
+      width: '8px', height: '8px', background: type === 'victim' ? '#ef4444' : '#3b82f6', 
+      borderRadius: '50%', border: '1.5px solid white', margin: '-4px auto 0' 
+    }}></div>
+  </div>
+);
 
 import { useLanguage } from '../context/LanguageContext';
 
@@ -71,10 +58,6 @@ const Dashboard = () => {
   const [victimLocation, setVictimLocation] = useState(null);
   const [hospitalLocation, setHospitalLocation] = useState(null);
   const [selectedHospitalName, setSelectedHospitalName] = useState('');
-  const [policeStations, setPoliceStations] = useState([]);
-  const [rescueServices, setRescueServices] = useState([]);
-  const [reportUrl, setReportUrl] = useState(null);
-  const [activeFilters, setActiveFilters] = useState(['hospital', 'police', 'rescue']);
 
   const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
   const navigate = useNavigate();
@@ -114,33 +97,27 @@ const Dashboard = () => {
           headers: { Authorization: `Bearer ${token}` }
         });
 
-          const { hospitalSelection, policeSelection, rescueSelection, aiGuidance } = sosRes.data.data;
-          const nearest = hospitalSelection?.[0]?.hospital;
+        const { hospitalSelection, aiGuidance } = sosRes.data.data;
+        const nearest = hospitalSelection?.[0]?.hospital;
 
-          if (nearest) {
-            const hLoc = { lat: nearest.location.coordinates[1], lng: nearest.location.coordinates[0] };
-            setHospitalLocation(hLoc);
-            setSelectedHospitalName(nearest.name);
-            setPoliceStations(policeSelection || []);
-            setRescueServices(rescueSelection || []);
-            setMapCenter({ lat: (latitude + hLoc.lat) / 2, lng: (longitude + hLoc.lng) / 2 });
-            
-            setMessages(prev => [...prev, { 
-              role: 'bot', 
-              text: `${t('sos_success')}\n\n${t('contacts_notified')}\n${t('nearest_hospital')} ${nearest.name}\n${t('eta')} ${hospitalSelection[0].etaSeconds ? Math.round(hospitalSelection[0].etaSeconds / 60) + ' min' : t('calculating')}` 
-            }]);
-          } else {
-            setMessages(prev => [...prev, { role: 'bot', text: t('no_hospitals') }]);
-          }
+        if (nearest) {
+          const hLoc = { lat: nearest.location.coordinates[1], lng: nearest.location.coordinates[0] };
+          setHospitalLocation(hLoc);
+          setSelectedHospitalName(nearest.name);
+          setMapCenter({ lat: (latitude + hLoc.lat) / 2, lng: (longitude + hLoc.lng) / 2 });
+          
+          setMessages(prev => [...prev, { 
+            role: 'bot', 
+            text: `${t('sos_success')}\n\n${t('contacts_notified')}\n${t('nearest_hospital')} ${nearest.name}\n${t('eta')} ${hospitalSelection[0].etaSeconds ? Math.round(hospitalSelection[0].etaSeconds / 60) + ' min' : t('calculating')}` 
+          }]);
+        } else {
+          setMessages(prev => [...prev, { role: 'bot', text: t('no_hospitals') }]);
+        }
 
-          if (aiGuidance) {
-            setSessionId(aiGuidance.sessionId);
-            setMessages(prev => [...prev, { role: 'bot', text: `${t('ai_activated')}\n${aiGuidance.guidance?.answer || 'Stay calm. Help is on the way.'}` }]);
-          }
-
-          if (sosRes.data.data.report) {
-            setReportUrl(sosRes.data.data.report.publicUrl);
-          }
+        if (aiGuidance) {
+          setSessionId(aiGuidance.sessionId);
+          setMessages(prev => [...prev, { role: 'bot', text: `${t('ai_activated')}\n${aiGuidance.guidance?.answer || 'Stay calm. Help is on the way.'}` }]);
+        }
       } catch (err) {
         console.error('SOS Error:', err);
         const errMsg = err.response?.data?.error?.message || 'Network grid unreachable.';
@@ -245,40 +222,12 @@ const Dashboard = () => {
                   }}
                 >
                   {victimLocation && <Marker lat={victimLocation.lat} lng={victimLocation.lng} text="EMERGENCY SITE" type="victim" />}
-                  {hospitalLocation && activeFilters.includes('hospital') && <Marker lat={hospitalLocation.lat} lng={hospitalLocation.lng} text={selectedHospitalName} type="hospital" />}
-                  {activeFilters.includes('police') && policeStations.map((p, i) => (
-                    <Marker key={i} lat={p.location.coordinates[1]} lng={p.location.coordinates[0]} text={p.name} type="police" />
-                  ))}
-                  {activeFilters.includes('rescue') && rescueServices.map((r, i) => (
-                    <Marker key={i} lat={r.location.coordinates[1]} lng={r.location.coordinates[0]} text={r.name} type="rescue" />
-                  ))}
+                  {hospitalLocation && <Marker lat={hospitalLocation.lat} lng={hospitalLocation.lng} text={selectedHospitalName} type="hospital" />}
                 </GoogleMapReact>
 
-                <div style={{ position: 'absolute', top: '15px', left: '15px', right: '15px', display: 'flex', justifyContent: 'space-between', gap: '10px' }}>
-                   <div style={{ display: 'flex', gap: '10px' }}>
-                    <div style={{ padding: '10px 20px', background: '#ef4444', color: 'white', borderRadius: '100px', fontSize: '0.8rem', fontWeight: '900', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <Radio size={16} className="pulse-sos" /> {t('sos_active')}
-                    </div>
-                    <div style={{ display: 'flex', background: 'rgba(15, 23, 42, 0.9)', borderRadius: '100px', padding: '5px', gap: '5px' }}>
-                      {[
-                        { id: 'hospital', icon: <Hospital size={14} />, label: 'Hospitals' },
-                        { id: 'police', icon: <Shield size={14} />, label: 'Police' },
-                        { id: 'rescue', icon: <Wrench size={14} />, label: 'Towing' }
-                      ].map(f => (
-                        <button
-                          key={f.id}
-                          onClick={() => setActiveFilters(prev => prev.includes(f.id) ? prev.filter(x => x !== f.id) : [...prev, f.id])}
-                          style={{
-                            border: 'none', background: activeFilters.includes(f.id) ? 'rgba(255,255,255,0.1)' : 'transparent',
-                            color: activeFilters.includes(f.id) ? 'white' : 'rgba(255,255,255,0.4)',
-                            padding: '5px 12px', borderRadius: '100px', fontSize: '0.7rem', fontWeight: '800', cursor: 'pointer',
-                            display: 'flex', alignItems: 'center', gap: '6px'
-                          }}
-                        >
-                          {f.icon} {f.label}
-                        </button>
-                      ))}
-                    </div>
+                <div style={{ position: 'absolute', top: '15px', left: '15px', right: '15px', display: 'flex', justifyContent: 'space-between', pointerEvents: 'none' }}>
+                   <div style={{ padding: '10px 20px', background: '#ef4444', color: 'white', borderRadius: '100px', fontSize: '0.8rem', fontWeight: '900', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <Radio size={16} className="pulse-sos" /> {t('sos_active')}
                    </div>
                    <div style={{ padding: '10px 20px', background: 'rgba(15, 23, 42, 0.9)', color: 'white', borderRadius: '100px', fontSize: '0.8rem', fontWeight: '800' }}>{t('geospatial_grid')}</div>
                 </div>
@@ -293,36 +242,10 @@ const Dashboard = () => {
                         <div style={{ color: 'var(--text-secondary)', fontSize: '0.65rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('system_status')}</div>
                         <div style={{ fontSize: '1.2rem', fontWeight: '900' }}>{apiLoading ? t('sync_grid') : t('dispatched_alerts')}</div>
                       </div>
-                      <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                      <div style={{ textAlign: 'right' }}>
                         <div style={{ color: 'var(--text-secondary)', fontSize: '0.65rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('target_center')}</div>
                         <div style={{ fontSize: '1.2rem', fontWeight: '900', color: '#3b82f6' }}>{selectedHospitalName || (apiLoading ? t('calculating') : 'Manual Mode')}</div>
-                        {reportUrl && (
-                          <a 
-                            href={`${API_BASE_URL.replace('/api', '')}${reportUrl}`} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            style={{ 
-                              fontSize: '0.7rem', color: '#10b981', textDecoration: 'none', 
-                              display: 'flex', alignItems: 'center', gap: '5px', fontWeight: '800' 
-                            }}
-                          >
-                            <FileText size={12} /> DOWNLOAD REPORT
-                          </a>
-                        )}
                       </div>
-                    </div>
-                    
-                    <div style={{ marginTop: '20px', pt: '20px', borderTop: '1px solid rgba(255,255,255,0.05)', display: 'flex', gap: '15px' }}>
-                      {policeStations.length > 0 && (
-                        <button className="btn btn-glass" style={{ flex: 1, fontSize: '0.75rem', gap: '8px' }}>
-                          <Shield size={14} color="#3b82f6" /> {t('call_police') || 'Call Police'}
-                        </button>
-                      )}
-                      {rescueServices.length > 0 && (
-                        <button className="btn btn-glass" style={{ flex: 1, fontSize: '0.75rem', gap: '8px' }}>
-                          <Wrench size={14} color="#f59e0b" /> {t('call_towing') || 'Call Towing'}
-                        </button>
-                      )}
                     </div>
                   </div>
                 </div>

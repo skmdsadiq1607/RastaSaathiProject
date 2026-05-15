@@ -22,7 +22,6 @@ async function triggerSos({ io, redis, queues, lat, lng, userId, injuryType, veh
   const { dispatchAlerts } = require('../alerts/service');
   const { startSession } = require('../firstaid/service');
   const { predictSeverityRuleBased } = require('../../utils/severityScorer');
-  const { routeEmergency } = require('../routing/engine.service');
 
   const victimUser = userId ? await User.findById(userId).lean() : null;
   const incident = await createIncident({ userId, lat, lng, injuryType, vehicleType });
@@ -37,15 +36,13 @@ async function triggerSos({ io, redis, queues, lat, lng, userId, injuryType, veh
   // 1. Determine Severity
   const severity = predictSeverityRuleBased({ injuryType, vehicleType });
 
-  // 2. Intelligent Multi-Resource Routing (Hospital, Police, Rescue)
-  const routing = await routeEmergency({
-    lat, lng,
-    severity,
-    injuryType,
-    vehicleType
+  // 2. Select Nearest Hospital
+  const hospitalSelection = await selectHospital({ 
+    lat, lng, 
+    severityLevel: severity.level, 
+    injuryType 
   });
-  
-  const nearest = routing.medical?.[0]?.hospital;
+  const nearest = hospitalSelection?.[0]?.hospital;
 
   // 3. Dispatch Alerts (WhatsApp/SMS/FCM)
   await dispatchAlerts({
@@ -79,15 +76,7 @@ async function triggerSos({ io, redis, queues, lat, lng, userId, injuryType, veh
     io.of('/dashboard').emit('dashboard:sos', { incidentId: String(incident._id), lat, lng });
   }
 
-  return { 
-    sos, 
-    incident, 
-    hospitalSelection: routing.medical, 
-    policeSelection: routing.police,
-    rescueSelection: routing.rescue,
-    routingReason: routing.routingReason,
-    aiGuidance 
-  };
+  return { sos, incident, hospitalSelection, aiGuidance };
 }
 
 module.exports = { triggerSos };
