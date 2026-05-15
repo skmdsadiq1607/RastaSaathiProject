@@ -17,6 +17,11 @@ const TRANSLATIONS = {
     vision_mission: "Vision & Mission",
     language_label: "Language",
     navigation: "Navigation",
+    general_safety: "General Tips",
+    pedestrians_safety: "For Pedestrians",
+    drivers_safety: "For Motorists",
+    children_safety: "For Children",
+    parents_safety: "For Parents",
 
     // Home Page
     hero_title: "When Every Second Counts, RastaSaathi Responds.",
@@ -223,6 +228,11 @@ const TRANSLATIONS = {
     vision_mission: "विज़न और मिशन",
     language_label: "भाषा",
     navigation: "नेविगेशन",
+    general_safety: "सामान्य सुझाव",
+    pedestrians_safety: "पैदल यात्रियों के लिए",
+    drivers_safety: "वाहन चालकों के लिए",
+    children_safety: "बच्चों के लिए",
+    parents_safety: "माता-पिता के लिए",
 
     // Home Page
     hero_title: "जब हर सेकंड मायने रखता है, RastaSaathi प्रतिक्रिया देता है।",
@@ -399,6 +409,11 @@ const TRANSLATIONS = {
     vision_mission: "విజన్ & మిషన్",
     language_label: "భాష",
     navigation: "నావిగేషన్",
+    general_safety: "సాధారణ చిట్కాలు",
+    pedestrians_safety: "పాదచారుల కోసం",
+    drivers_safety: "వాహన చోదకుల కోసం",
+    children_safety: "పిల్లల కోసం",
+    parents_safety: "తల్లిదండ్రుల కోసం",
 
     // Home Page
     hero_title: "ప్రతి సెకను విలువైనప్పుడు, RastaSaathi స్పందిస్తుంది.",
@@ -514,6 +529,11 @@ const TRANSLATIONS = {
     vision_mission: "பார்வையும் நோக்கமும்",
     language_label: "மொழி",
     navigation: "வழிசெலுத்தல்",
+    general_safety: "பொதுவான குறிப்புகள்",
+    pedestrians_safety: "நடைபாதையில் செல்பவர்களுக்காக",
+    drivers_safety: "வாகன ஓட்டுநர்களுக்காக",
+    children_safety: "குழந்தைகளுக்காக",
+    parents_safety: "பெற்றோர்களுக்காக",
 
     // Home Page
     hero_title: "ஒவ்வொரு நொடியும் முக்கியம் எனும்போது, RastaSaathi பதிலளிக்கிறது.",
