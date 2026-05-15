@@ -144,10 +144,9 @@ async function selectHospital({ lat, lng, severityLevel, injuryType, requiredSpe
       const score = 0.2 * icuAvail + 0.3 * trauma + 0.3 * eta + 0.1 * blood + 0.1 * spec;
 
       return { hospital: h, score, etaSeconds };
-    })
-    .sort((a, b) => b.score - a.score);
+    });
 
-  // Secondary sort for exact distance if scores are equal or for extra accuracy
+  // PRIORITY: Sort strictly by physical distance to ensure 'Nearest' is accurate
   ranked.sort((a, b) => {
     const distA = calculateDistance(lat, lng, a.hospital.location.coordinates[1], a.hospital.location.coordinates[0]);
     const distB = calculateDistance(lat, lng, b.hospital.location.coordinates[1], b.hospital.location.coordinates[0]);

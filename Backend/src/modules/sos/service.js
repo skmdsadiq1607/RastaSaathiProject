@@ -45,6 +45,7 @@ async function triggerSos({ io, redis, queues, lat, lng, userId, injuryType, veh
 
   // 2b. Select Nearest Police Station
   const policeSelection = await selectPoliceStation({ lat, lng });
+  const nearestPolice = policeSelection?.[0];
 
   // 3. Dispatch Alerts (WhatsApp/SMS/FCM)
   await dispatchAlerts({
@@ -54,6 +55,8 @@ async function triggerSos({ io, redis, queues, lat, lng, userId, injuryType, veh
     severityLevel: severity.level,
     hospitalName: nearest?.name,
     hospitalLocation: nearest?.location,
+    policeName: nearestPolice?.name,
+    policeLocation: nearestPolice?.location,
     etaSeconds: hospitalSelection?.[0]?.etaSeconds,
     lang: victimUser?.language || 'en'
   });
