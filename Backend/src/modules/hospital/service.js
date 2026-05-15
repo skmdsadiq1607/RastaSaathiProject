@@ -1,6 +1,6 @@
 const { Hospital } = require('./model');
 const { Resources } = require('../resources/model');
-const { distanceMatrix, findNearbyHospitals } = require('../../services/maps.service');
+const { distanceMatrix, findNearbyHospitals, findNearbyPoliceStations } = require('../../services/maps.service');
 const { AppError } = require('../../utils/AppError');
 
 function specialtyMatchScore(hospitalSpecialties, requiredSpecialty) {
@@ -140,5 +140,31 @@ async function selectHospital({ lat, lng, severityLevel, injuryType, requiredSpe
   return ranked;
 }
 
-module.exports = { selectHospital };
+async function selectPoliceStation({ lat, lng }) {
+  const origin = { lat, lng };
+  let googlePolice = [];
+  try {
+    googlePolice = await findNearbyPoliceStations({ lat, lng, radius: 15000 });
+  } catch (err) {
+    console.error('[Police Service] Google Places API failed');
+  }
+
+  if (!googlePolice.length) return [];
+
+  const finalPolice = googlePolice.map(gp => ({
+    _id: gp.place_id,
+    name: gp.name,
+    address: gp.vicinity,
+    location: {
+      type: 'Point',
+      coordinates: [gp.geometry.location.lng, gp.geometry.location.lat]
+    },
+    rating: gp.rating,
+    phoneNumber: '+91 100' // General Emergency
+  }));
+
+  return finalPolice.slice(0, 3);
+}
+
+module.exports = { selectHospital, selectPoliceStation };
 

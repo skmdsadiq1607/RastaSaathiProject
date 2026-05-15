@@ -58,6 +58,7 @@ const Dashboard = () => {
   const [victimLocation, setVictimLocation] = useState(null);
   const [hospitalLocation, setHospitalLocation] = useState(null);
   const [selectedHospitalName, setSelectedHospitalName] = useState('');
+  const [policeStations, setPoliceStations] = useState([]);
 
   const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
   const navigate = useNavigate();
@@ -97,13 +98,14 @@ const Dashboard = () => {
           headers: { Authorization: `Bearer ${token}` }
         });
 
-        const { hospitalSelection, aiGuidance } = sosRes.data.data;
+        const { hospitalSelection, policeSelection, aiGuidance } = sosRes.data.data;
         const nearest = hospitalSelection?.[0]?.hospital;
 
         if (nearest) {
           const hLoc = { lat: nearest.location.coordinates[1], lng: nearest.location.coordinates[0] };
           setHospitalLocation(hLoc);
           setSelectedHospitalName(nearest.name);
+          setPoliceStations(policeSelection || []);
           setMapCenter({ lat: (latitude + hLoc.lat) / 2, lng: (longitude + hLoc.lng) / 2 });
           
           setMessages(prev => [...prev, { 
@@ -223,6 +225,9 @@ const Dashboard = () => {
                 >
                   {victimLocation && <Marker lat={victimLocation.lat} lng={victimLocation.lng} text="EMERGENCY SITE" type="victim" />}
                   {hospitalLocation && <Marker lat={hospitalLocation.lat} lng={hospitalLocation.lng} text={selectedHospitalName} type="hospital" />}
+                  {policeStations.map((p, idx) => (
+                    <Marker key={idx} lat={p.location.coordinates[1]} lng={p.location.coordinates[0]} text={p.name} type="police" />
+                  ))}
                 </GoogleMapReact>
 
                 <div style={{ position: 'absolute', top: '15px', left: '15px', right: '15px', display: 'flex', justifyContent: 'space-between', pointerEvents: 'none' }}>
@@ -242,9 +247,15 @@ const Dashboard = () => {
                         <div style={{ color: 'var(--text-secondary)', fontSize: '0.65rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('system_status')}</div>
                         <div style={{ fontSize: '1.2rem', fontWeight: '900' }}>{apiLoading ? t('sync_grid') : t('dispatched_alerts')}</div>
                       </div>
-                      <div style={{ textAlign: 'right' }}>
-                        <div style={{ color: 'var(--text-secondary)', fontSize: '0.65rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('target_center')}</div>
-                        <div style={{ fontSize: '1.2rem', fontWeight: '900', color: '#3b82f6' }}>{selectedHospitalName || (apiLoading ? t('calculating') : 'Manual Mode')}</div>
+                      <div style={{ textAlign: 'right', display: 'flex', gap: '20px' }}>
+                        <div>
+                          <div style={{ color: 'var(--text-secondary)', fontSize: '0.65rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('nearest_police') || 'Nearest Police'}</div>
+                          <div style={{ fontSize: '1rem', fontWeight: '900', color: '#3b82f6' }}>{policeStations[0]?.name || 'Locating...'}</div>
+                        </div>
+                        <div>
+                          <div style={{ color: 'var(--text-secondary)', fontSize: '0.65rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('target_center')}</div>
+                          <div style={{ fontSize: '1rem', fontWeight: '900', color: '#10b981' }}>{selectedHospitalName || (apiLoading ? t('calculating') : 'Manual Mode')}</div>
+                        </div>
                       </div>
                     </div>
                   </div>

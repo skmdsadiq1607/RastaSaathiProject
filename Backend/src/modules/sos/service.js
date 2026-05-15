@@ -18,7 +18,7 @@ async function triggerSos({ io, redis, queues, lat, lng, userId, injuryType, veh
   await enforceSosRateLimit({ redis, userId });
 
   const { User } = require('../auth/model');
-  const { selectHospital } = require('../hospital/service');
+  const { selectHospital, selectPoliceStation } = require('../hospital/service');
   const { dispatchAlerts } = require('../alerts/service');
   const { startSession } = require('../firstaid/service');
   const { predictSeverityRuleBased } = require('../../utils/severityScorer');
@@ -36,13 +36,15 @@ async function triggerSos({ io, redis, queues, lat, lng, userId, injuryType, veh
   // 1. Determine Severity
   const severity = predictSeverityRuleBased({ injuryType, vehicleType });
 
-  // 2. Select Nearest Hospital
   const hospitalSelection = await selectHospital({ 
     lat, lng, 
     severityLevel: severity.level, 
     injuryType 
   });
   const nearest = hospitalSelection?.[0]?.hospital;
+
+  // 2b. Select Nearest Police Station
+  const policeSelection = await selectPoliceStation({ lat, lng });
 
   // 3. Dispatch Alerts (WhatsApp/SMS/FCM)
   await dispatchAlerts({
@@ -76,7 +78,7 @@ async function triggerSos({ io, redis, queues, lat, lng, userId, injuryType, veh
     io.of('/dashboard').emit('dashboard:sos', { incidentId: String(incident._id), lat, lng });
   }
 
-  return { sos, incident, hospitalSelection, aiGuidance };
+  return { sos, incident, hospitalSelection, policeSelection, aiGuidance };
 }
 
 module.exports = { triggerSos };
