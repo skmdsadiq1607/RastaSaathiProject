@@ -108,9 +108,17 @@ const Dashboard = () => {
           setPoliceStations(policeSelection || []);
           setMapCenter({ lat: (latitude + hLoc.lat) / 2, lng: (longitude + hLoc.lng) / 2 });
           
+          let botMessage = `${t('sos_success')}\n\n${t('contacts_notified')}\n${t('nearest_hospital')} ${nearest.name}`;
+          
+          if (policeSelection && policeSelection.length > 0) {
+            botMessage += `\n${t('nearest_police')} ${policeSelection[0].name}`;
+          }
+          
+          botMessage += `\n${t('eta')} ${hospitalSelection[0].etaSeconds ? Math.round(hospitalSelection[0].etaSeconds / 60) + ' min' : t('calculating')}`;
+
           setMessages(prev => [...prev, { 
             role: 'bot', 
-            text: `${t('sos_success')}\n\n${t('contacts_notified')}\n${t('nearest_hospital')} ${nearest.name}\n${t('eta')} ${hospitalSelection[0].etaSeconds ? Math.round(hospitalSelection[0].etaSeconds / 60) + ' min' : t('calculating')}` 
+            text: botMessage
           }]);
         } else {
           setMessages(prev => [...prev, { role: 'bot', text: t('no_hospitals') }]);
