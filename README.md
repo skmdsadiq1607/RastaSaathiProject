@@ -1,13 +1,5 @@
 # RastaSaathi: AI-Driven Emergency Response Ecosystem 🚑
 
-![RastaSaathi Header](https://raw.githubusercontent.com/skmdsadiq1607/RastaSaathiProject/main/Frontend/public/logo.png)
-
-[![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)](https://vitejs.dev/)
-[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
-[![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
-[![Google Maps](https://img.shields.io/badge/Google_Maps-4285F4?style=for-the-badge&logo=googlemaps&logoColor=white)](https://developers.google.com/maps)
-
 **RastaSaathi** is a high-precision emergency response platform engineered to optimize the **"Golden Hour"**—the critical window where medical intervention has the highest impact on survival. Developed for the **IIT Madras Road Safety Hackathon 2026**, our system integrates advanced geospatial intelligence, AI-driven triage, and automated multi-channel communication to save lives at the speed of light.
 
 ---
@@ -44,18 +36,13 @@ Our backend implements a weighted scoring engine that evaluates:
 | **SOS Trigger & GPS Probe** | 🟢 Production | Geolocation API + MongoDB Geospatial |
 | **Hospital & Police Discovery** | 🟢 Production | Google Places + Haversine Sorting |
 | **AI First-Aid Assistant** | 🟢 Production | OpenAI / Claude / Gemini Failover |
-| **WhatsApp/SMS Alerting** | 🟡 Implemented | Twilio + WhatsApp Business API |
+| **WhatsApp/SMS Alerting** | 🟢 Production | Twilio + WhatsApp Business API |
 | **Multi-Lingual UI (4+ Langs)** | 🟢 Production | Context API + Localization Engine |
 | **Emergency Helpline Grid** | 🟢 Production | Interactive Telephony Integration |
 
 ---
 
-## 🚀 Deployment & Local Setup
-
-### System Prerequisites
-- Node.js (v18+) & MongoDB
-- Google Cloud Project (Maps & Distance Matrix enabled)
-- API Keys for OpenAI/Claude/Gemini
+## 🚀 Deployment
 
 ### Installation Sequence
 
@@ -69,7 +56,7 @@ Our backend implements a weighted scoring engine that evaluates:
    ```bash
    cd Backend
    npm install
-   # Configure .env with MONGODB_URI and CLAUDE_API_KEYS/OPENAI_API_KEY
+   # Configure .env with API Keys
    npm start
    ```
 
@@ -77,15 +64,14 @@ Our backend implements a weighted scoring engine that evaluates:
    ```bash
    cd Frontend
    npm install
-   # Configure .env with VITE_GOOGLE_MAPS_API_KEY
    npm run dev
    ```
 
 ---
 
 ## 👥 The Engineering Team
-- **Dr. Lakshmi** (Project Lead & Visionary)
-- **Sadiq** (Full-Stack Engineer & AI Integration)
+- **Dr. Lakshmi** (Project Lead)
+- **Sadiq** (Full-Stack Engineer)
 - **Krishna** (Geospatial Architect)
 - **Chakravarthi** (System Designer)
 - **Hasini** (Frontend Specialist)
