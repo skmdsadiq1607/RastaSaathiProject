@@ -21,6 +21,17 @@ function normalizeEtaSeconds(etaSeconds) {
   return 1 - v / cap;
 }
 
+function calculateDistance(lat1, lon1, lat2, lon2) {
+  const R = 6371; // km
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+}
+
 async function selectHospital({ lat, lng, severityLevel, injuryType, requiredSpecialty }) {
   const origin = { lat, lng };
   
@@ -134,10 +145,16 @@ async function selectHospital({ lat, lng, severityLevel, injuryType, requiredSpe
 
       return { hospital: h, score, etaSeconds };
     })
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 3);
+    .sort((a, b) => b.score - a.score);
 
-  return ranked;
+  // Secondary sort for exact distance if scores are equal or for extra accuracy
+  ranked.sort((a, b) => {
+    const distA = calculateDistance(lat, lng, a.hospital.location.coordinates[1], a.hospital.location.coordinates[0]);
+    const distB = calculateDistance(lat, lng, b.hospital.location.coordinates[1], b.hospital.location.coordinates[0]);
+    return distA - distB;
+  });
+
+  return ranked.slice(0, 3);
 }
 
 async function selectPoliceStation({ lat, lng }) {
@@ -160,8 +177,15 @@ async function selectPoliceStation({ lat, lng }) {
       coordinates: [gp.geometry.location.lng, gp.geometry.location.lat]
     },
     rating: gp.rating,
-    phoneNumber: '+91 100' // General Emergency
+    phoneNumber: '+91 100'
   }));
+
+  // Sort by physical distance to ensure accuracy
+  finalPolice.sort((a, b) => {
+    const distA = calculateDistance(lat, lng, a.location.coordinates[1], a.location.coordinates[0]);
+    const distB = calculateDistance(lat, lng, b.location.coordinates[1], b.location.coordinates[0]);
+    return distA - distB;
+  });
 
   return finalPolice.slice(0, 3);
 }
