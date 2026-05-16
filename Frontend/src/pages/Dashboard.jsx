@@ -44,47 +44,68 @@ const formatBotMessage = (text) => {
   if (!text) return text;
   
   try {
-    // Try to parse if it's a JSON string
+    // Try to parse if it's a JSON string (for the structured fallback)
     let data = text;
     if (typeof text === 'string' && (text.trim().startsWith('{') || text.trim().startsWith('['))) {
       try {
         data = JSON.parse(text);
-      } catch (e) {
-        // Not valid JSON, continue with normal text
-      }
+      } catch (e) {}
     }
 
-    if (typeof data === 'object' && data !== null) {
+    if (typeof data === 'object' && data !== null && (data.steps || data.warnings)) {
       const parts = [];
-      
-      if (data.steps && Array.isArray(data.steps)) {
+      if (data.steps) {
         parts.push(<div key="steps" style={{ marginBottom: '16px' }}>
-          <div style={{ color: '#10b981', fontWeight: '800', fontSize: '0.75rem', marginBottom: '8px', textTransform: 'uppercase' }}>📋 Execution Steps</div>
-          {data.steps.map((step, i) => <div key={i} style={{ marginBottom: '6px', fontSize: '0.95rem' }}>{step}</div>)}
+          <div style={{ color: '#10b981', fontWeight: '800', fontSize: '0.7rem', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>📋 Execution Steps</div>
+          {data.steps.map((step, i) => <div key={i} style={{ marginBottom: '8px', fontSize: '0.9rem', lineHeight: '1.4' }}>{step}</div>)}
         </div>);
       }
-      
-      if (data.warnings && Array.isArray(data.warnings)) {
+      if (data.warnings) {
         parts.push(<div key="warnings" style={{ marginBottom: '16px' }}>
-          <div style={{ color: '#f59e0b', fontWeight: '800', fontSize: '0.75rem', marginBottom: '8px', textTransform: 'uppercase' }}>⚠️ Critical Warnings</div>
-          {data.warnings.map((w, i) => <div key={i} style={{ marginBottom: '4px', fontSize: '0.95rem', color: '#fbbf24' }}>• {w}</div>)}
+          <div style={{ color: '#f59e0b', fontWeight: '800', fontSize: '0.7rem', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>⚠️ Critical Warnings</div>
+          {data.warnings.map((w, i) => <div key={i} style={{ marginBottom: '4px', fontSize: '0.9rem', color: '#fbbf24' }}>• {w}</div>)}
         </div>);
       }
-      
-      if (data.whenToEscalate && Array.isArray(data.whenToEscalate)) {
+      if (data.whenToEscalate) {
         parts.push(<div key="escalate">
-          <div style={{ color: '#ef4444', fontWeight: '800', fontSize: '0.75rem', marginBottom: '8px', textTransform: 'uppercase' }}>🚨 When to Call 108</div>
-          {data.whenToEscalate.map((e, i) => <div key={i} style={{ marginBottom: '4px', fontSize: '0.95rem', color: '#fca5a5' }}>• {e}</div>)}
+          <div style={{ color: '#ef4444', fontWeight: '800', fontSize: '0.7rem', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>🚨 When to Call 108</div>
+          {data.whenToEscalate.map((e, i) => <div key={i} style={{ marginBottom: '4px', fontSize: '0.9rem', color: '#fca5a5' }}>• {e}</div>)}
         </div>);
       }
-
-      if (parts.length > 0) return parts;
+      return parts;
     }
-  } catch (e) {
-    console.error("Format error:", e);
-  }
+  } catch (e) {}
 
-  return <p style={{ fontSize: '1rem', whiteSpace: 'pre-line', lineHeight: '1.5' }}>{text}</p>;
+  // Handle Markdown-style text from AI
+  const lines = text.split('\n');
+  return lines.map((line, idx) => {
+    // Headers
+    if (line.startsWith('### ')) return <h3 key={idx} style={{ fontSize: '1.1rem', fontWeight: '900', color: '#3b82f6', marginTop: '16px', marginBottom: '8px' }}>{line.replace('### ', '')}</h3>;
+    if (line.startsWith('## ')) return <h2 key={idx} style={{ fontSize: '1.3rem', fontWeight: '900', color: '#3b82f6', marginTop: '20px', marginBottom: '10px' }}>{line.replace('## ', '')}</h2>;
+    
+    // Bold text
+    let content = line;
+    const boldRegex = /\*\*(.*?)\*\*/g;
+    const parts = [];
+    let lastIdx = 0;
+    let match;
+    while ((match = boldRegex.exec(line)) !== null) {
+      parts.push(line.substring(lastIdx, match.index));
+      parts.push(<strong key={match.index} style={{ color: '#fff', fontWeight: '800' }}>{match[1]}</strong>);
+      lastIdx = match.index + match[0].length;
+    }
+    parts.push(line.substring(lastIdx));
+
+    // Bullet points
+    if (line.trim().startsWith('* ') || line.trim().startsWith('- ')) {
+      return <div key={idx} style={{ display: 'flex', gap: '8px', marginBottom: '4px', paddingLeft: '8px' }}>
+        <span style={{ color: '#3b82f6' }}>•</span>
+        <span style={{ fontSize: '0.95rem' }}>{parts.length > 1 ? parts : line.trim().substring(2)}</span>
+      </div>;
+    }
+
+    return <p key={idx} style={{ fontSize: '0.95rem', margin: '4px 0', lineHeight: '1.5', minHeight: '1em' }}>{parts.length > 1 ? parts : line}</p>;
+  });
 };
 
 const Dashboard = () => {
@@ -226,10 +247,32 @@ const Dashboard = () => {
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="container" style={{ paddingBottom: '40px' }}>
       <div className="dashboard-grid">
         <style>{`
-          .dashboard-grid { display: grid; grid-template-columns: 1fr 400px; gap: 30px; }
+          .dashboard-grid { display: grid; grid-template-columns: 1fr 420px; gap: 30px; }
           @media (max-width: 1100px) { .dashboard-grid { grid-template-columns: 1fr; } }
           .pulse-sos { animation: pulse-red 2s infinite; }
           @keyframes pulse-red { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+          
+          .chat-bubble {
+            max-width: 85%;
+            padding: 16px 20px;
+            border-radius: 18px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+          }
+          .bot-bubble {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-bottom-left-radius: 4px;
+            color: #e2e8f0;
+          }
+          .user-bubble {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            border-bottom-right-radius: 4px;
+            color: white;
+            align-self: flex-end;
+          }
         `}</style>
         
         <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
@@ -356,23 +399,33 @@ const Dashboard = () => {
             <h3 style={{ fontSize: '1.2rem', fontWeight: '900' }}>{t('ai_medic')}</h3>
           </div>
           
-          <div 
-            ref={chatContainerRef}
-            style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '15px', paddingRight: '8px' }}
-          >
-            <AnimatePresence>
-              {messages.map((msg, idx) => (
-                <motion.div key={idx} initial={{ opacity: 0, x: msg.role === 'user' ? 10 : -10 }} animate={{ opacity: 1, x: 0 }} style={{ background: msg.role === 'user' ? 'rgba(59, 130, 246, 0.1)' : 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', padding: '16px', borderRadius: '18px', alignSelf: msg.role === 'user' ? 'flex-end' : 'flex-start', maxWidth: '90%' }}>
-                  {msg.role === 'user' ? (
-                    <p style={{ fontSize: '1rem', whiteSpace: 'pre-line', lineHeight: '1.5' }}>{msg.text}</p>
-                  ) : (
-                    formatBotMessage(msg.text)
-                  )}
-                </motion.div>
-              ))}
-            </AnimatePresence>
-            <div ref={chatEndRef} />
-          </div>
+          <div ref={chatContainerRef} style={{ flex: 1, overflowY: 'auto', padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                {messages.map((m, i) => (
+                  <div key={i} style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    alignItems: m.role === 'user' ? 'flex-end' : 'flex-start',
+                    gap: '4px'
+                  }}>
+                    {m.role === 'bot' && (
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px', marginLeft: '4px' }}>
+                        <div style={{ width: '6px', height: '6px', background: '#3b82f6', borderRadius: '50%' }}></div>
+                        <span style={{ fontSize: '0.65rem', fontWeight: '800', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px' }}>AI MEDIC CORE</span>
+                      </div>
+                    )}
+                    <div className={`chat-bubble ${m.role === 'bot' ? 'bot-bubble' : 'user-bubble'}`}>
+                      {m.role === 'bot' ? <div className="markdown-body">{formatBotMessage(m.text)}</div> : m.text}
+                    </div>
+                  </div>
+                ))}
+                {loadingMsg && (
+                  <div style={{ display: 'flex', gap: '8px', padding: '12px', background: 'rgba(30, 41, 59, 0.3)', borderRadius: '12px', width: 'fit-content' }}>
+                    <Loader2 className="animate-spin" size={14} color="#3b82f6" />
+                    <span style={{ fontSize: '0.75rem', fontWeight: '700', color: '#94a3b8' }}>AI ANALYSIS IN PROGRESS...</span>
+                  </div>
+                )}
+                <div ref={chatEndRef} />
+              </div>
           
           <div style={{ marginTop: '20px', display: 'flex', gap: '10px' }}>
             <input type="text" className="form-input" placeholder={t('emergency_guidance')} style={{ background: 'rgba(0,0,0,0.4)', flex: 1, padding: '14px 18px', fontSize: '0.95rem' }} value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && sendMessage()} />
