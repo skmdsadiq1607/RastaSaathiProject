@@ -5,6 +5,7 @@ import { Activity, Navigation, MessageCircle, Send, MapPin, Shield, Zap, AlertTr
 import axios from 'axios';
 import GoogleMapReact from 'google-map-react';
 import Logo from '../components/Logo';
+import { useTheme } from '../context/ThemeContext';
 
 // Professional Scale Marker
 const Marker = ({ text, type }) => (
@@ -110,6 +111,7 @@ const formatBotMessage = (text) => {
 
 const Dashboard = () => {
   const { t } = useLanguage();
+  const { theme } = useTheme();
   const [sosActive, setSosActive] = useState(false);
   const [messages, setMessages] = useState([
     { role: 'bot', text: t('medic_welcome') }
@@ -260,15 +262,16 @@ const Dashboard = () => {
             line-height: 1.5;
             position: relative;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
           }
           .bot-bubble {
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid rgba(59, 130, 246, 0.2);
+            background: var(--bg-deep);
+            border: 1px solid var(--border-glass);
             border-bottom-left-radius: 4px;
-            color: #e2e8f0;
+            color: var(--text-primary);
           }
           .user-bubble {
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            background: var(--brand-red);
             border-bottom-right-radius: 4px;
             color: white;
             align-self: flex-end;
@@ -276,7 +279,7 @@ const Dashboard = () => {
         `}</style>
         
         <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
-          <div className="glass-panel" style={{ padding: '0', overflow: 'hidden', minHeight: '550px', position: 'relative', display: 'flex', flexDirection: 'column', background: '#020617' }}>
+          <div className="glass-panel" style={{ padding: '0', overflow: 'hidden', minHeight: '550px', position: 'relative', display: 'flex', flexDirection: 'column' }}>
             {!sosActive ? (
               <div style={{ padding: '60px 20px', textAlign: 'center', flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                  <motion.div initial={{ y: 20 }} animate={{ y: 0 }} style={{ marginBottom: '40px' }}>
@@ -310,14 +313,14 @@ const Dashboard = () => {
                   center={mapCenter} 
                   defaultZoom={14} 
                   options={{ 
-                    styles: [
+                    styles: theme === 'dark' ? [
                       { "elementType": "geometry", "stylers": [{ "color": "#0f172a" }] },
                       { "featureType": "road", "elementType": "geometry", "stylers": [{ "color": "#1e293b" }] },
                       { "featureType": "poi", "stylers": [{ "visibility": "off" }] },
                       { "featureType": "transit", "stylers": [{ "visibility": "off" }] },
                       { "elementType": "labels.text.fill", "stylers": [{ "color": "#4b5563" }] },
                       { "elementType": "labels.text.stroke", "stylers": [{ "visibility": "off" }] }
-                    ], 
+                    ] : [], 
                     disableDefaultUI: true 
                   }}
                 >
@@ -336,14 +339,14 @@ const Dashboard = () => {
                 </div>
 
                 <div style={{ position: 'absolute', bottom: '15px', left: '15px', right: '15px' }}>
-                  <div className="glass-panel" style={{ padding: '24px', background: 'rgba(2, 6, 23, 0.95)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                  <div className="glass-panel" style={{ padding: '24px', background: 'var(--bg-primary)', opacity: 0.95 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-                      <div style={{ width: '48px', height: '48px', background: 'rgba(239, 68, 68, 0.1)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <div style={{ width: '48px', height: '48px', background: 'var(--brand-red-glow)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         {apiLoading ? <Loader2 className="animate-spin" color="#ef4444" /> : <Activity size={24} color="#ef4444" />}
                       </div>
                       <div style={{ flex: 1 }}>
                         <div style={{ color: 'var(--text-secondary)', fontSize: '0.65rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('system_status')}</div>
-                        <div style={{ fontSize: '1.2rem', fontWeight: '900' }}>{apiLoading ? t('sync_grid') : t('dispatched_alerts')}</div>
+                        <div style={{ fontSize: '1.2rem', fontWeight: '900', color: 'var(--text-primary)' }}>{apiLoading ? t('sync_grid') : t('dispatched_alerts')}</div>
                       </div>
                       <div style={{ textAlign: 'right', display: 'flex', gap: '24px', alignItems: 'center' }}>
                         <div>
@@ -391,7 +394,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="glass-panel sidebar-chat" style={{ padding: '24px', display: 'flex', flexDirection: 'column', height: '600px', background: 'rgba(2, 6, 23, 0.6)' }}>
+        <div className="glass-panel sidebar-chat" style={{ padding: '24px', display: 'flex', flexDirection: 'column', height: '600px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '15px', borderBottom: '1px solid var(--border-glass)', paddingBottom: '20px', marginBottom: '20px' }}>
             <div style={{ width: '42px', height: '42px', background: 'rgba(16, 185, 129, 0.1)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Zap color="#10b981" fill="#10b981" size={20} />

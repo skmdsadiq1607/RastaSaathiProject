@@ -31,19 +31,19 @@ const About = () => {
         {/* Core Pillars */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '50px', marginBottom: '100px' }}>
           <motion.div 
-            whileHover={{ x: 10, backgroundColor: 'rgba(255,255,255,0.02)' }} 
-            style={{ padding: '30px', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.05)', transition: '0.3s' }}
+            whileHover={{ x: 10, backgroundColor: 'var(--brand-red-glow)' }} 
+            style={{ padding: '30px', borderRadius: '24px', border: '1px solid var(--border-glass)', transition: '0.3s' }}
           >
-            <h2 style={{ fontSize: '1.8rem', marginBottom: '16px', color: 'white' }}>{t('feature_ai_title')}</h2>
+            <h2 style={{ fontSize: '1.8rem', marginBottom: '16px', color: 'var(--text-primary)' }}>{t('feature_ai_title')}</h2>
             <p style={{ color: 'var(--text-secondary)', lineHeight: '1.8', fontSize: '1.1rem' }}>
               {t('about_tech_desc')}
             </p>
           </motion.div>
           <motion.div 
-            whileHover={{ x: 10, backgroundColor: 'rgba(255,255,255,0.02)' }} 
-            style={{ padding: '30px', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.05)', transition: '0.3s' }}
+            whileHover={{ x: 10, backgroundColor: 'var(--brand-red-glow)' }} 
+            style={{ padding: '30px', borderRadius: '24px', border: '1px solid var(--border-glass)', transition: '0.3s' }}
           >
-            <h2 style={{ fontSize: '1.8rem', marginBottom: '16px', color: 'white' }}>{t('feature_route_title')}</h2>
+            <h2 style={{ fontSize: '1.8rem', marginBottom: '16px', color: 'var(--text-primary)' }}>{t('feature_route_title')}</h2>
             <p style={{ color: 'var(--text-secondary)', lineHeight: '1.8', fontSize: '1.1rem' }}>
               {t('feature_route_desc')} {t('orch_feature1_desc')}
             </p>
@@ -88,8 +88,8 @@ const AboutItem = ({ icon, title, desc }) => (
 );
 
 const StatMini = ({ label, value }) => (
-  <div style={{ padding: '24px', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '12px' }}>
-    <div style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '4px' }}>{value}</div>
+  <div style={{ padding: '24px', border: '1px solid var(--border-glass)', borderRadius: '12px', background: 'var(--bg-deep)' }}>
+    <div style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '4px', color: 'var(--text-primary)' }}>{value}</div>
     <div style={{ color: 'var(--text-secondary)', fontSize: '0.7rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{label}</div>
   </div>
 );

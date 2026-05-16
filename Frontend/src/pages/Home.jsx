@@ -51,7 +51,7 @@ const Home = () => {
             </span>
           </motion.div>
           
-          <motion.h1 variants={itemVariants} style={{ marginBottom: '28px', fontWeight: 800 }}>
+          <motion.h1 variants={itemVariants} style={{ marginBottom: '28px', fontWeight: 800, color: 'var(--text-primary)' }}>
             {t('hero_title').split(/(RastaSaathi)/g).map((part, i) => 
               part === 'RastaSaathi' ? <span key={i}>Rasta<span style={{ color: '#ef4444' }}>Saathi</span></span> : part
             )}
@@ -94,9 +94,9 @@ const Home = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               className="glass-panel"
-              style={{ padding: '60px 50px', background: 'rgba(255, 255, 255, 0.01)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '32px' }}
+              style={{ padding: '60px 50px', borderRadius: '32px' }}
             >
-              <h3 style={{ fontSize: '1.8rem', marginBottom: '40px' }}>{t('results_title')}</h3>
+              <h3 style={{ fontSize: '1.8rem', marginBottom: '40px', color: 'var(--text-primary)' }}>{t('results_title')}</h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
                 <Capability icon={<ShieldCheck size={24} />} text={t('orch_feature3_title')} sub={t('orch_feature3_desc')} />
                 <Capability icon={<ActivitySquare size={24} />} text={t('orch_feature2_title')} sub={t('orch_feature2_desc')} />
@@ -127,8 +127,8 @@ const Home = () => {
           viewport={{ once: true }}
           style={{ 
             marginTop: '180px', padding: '100px 40px', textAlign: 'center', 
-            background: 'linear-gradient(180deg, transparent, rgba(239, 68, 68, 0.02))',
-            borderTop: '1px solid rgba(255,255,255,0.05)', borderRadius: '40px'
+            background: 'linear-gradient(180deg, transparent, var(--brand-red-glow))',
+            borderTop: '1px solid var(--border-glass)', borderRadius: '40px'
           }}
         >
           <h2 style={{ marginBottom: '28px' }}>{t('join_national_mission')}</h2>
@@ -156,13 +156,13 @@ const Metric = ({ value, label }) => (
 const Capability = ({ icon, text, sub }) => (
   <motion.div whileHover={{ x: 10 }} style={{ display: 'flex', gap: '24px' }}>
     <div style={{ 
-      width: '48px', height: '48px', background: 'rgba(239, 68, 68, 0.1)', 
+      width: '48px', height: '48px', background: 'var(--brand-red-glow)', 
       borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ef4444', flexShrink: 0
     }}>
       {icon}
     </div>
     <div>
-      <div style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '6px' }}>{text}</div>
+      <div style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '6px', color: 'var(--text-primary)' }}>{text}</div>
       <div style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.5' }}>{sub}</div>
     </div>
   </motion.div>
@@ -172,10 +172,10 @@ const StepItem = ({ num, title, desc }) => (
   <motion.div 
     whileHover={{ y: -10 }}
     className="glass-panel"
-    style={{ padding: '40px', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '24px' }}
+    style={{ padding: '40px', borderRadius: '24px' }}
   >
     <div style={{ fontSize: '0.9rem', fontWeight: '900', color: '#ef4444', marginBottom: '24px' }}>PHASE {num}</div>
-    <h3 style={{ fontSize: '1.5rem', marginBottom: '16px' }}>{title}</h3>
+    <h3 style={{ fontSize: '1.5rem', marginBottom: '16px', color: 'var(--text-primary)' }}>{title}</h3>
     <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: '1.6' }}>{desc}</p>
   </motion.div>
 );

@@ -28,13 +28,13 @@ const Mission = () => {
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '60px', marginBottom: '100px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '50px', paddingBottom: '60px', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '50px', paddingBottom: '60px', borderBottom: '1px solid var(--border-glass)' }}>
             <motion.div whileHover={{ y: -5 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
-                <div style={{ padding: '10px', background: 'rgba(239, 68, 68, 0.1)', borderRadius: '12px' }}>
+                <div style={{ padding: '10px', background: 'var(--brand-red-glow)', borderRadius: '12px' }}>
                   <Eye size={22} color="#ef4444" />
                 </div>
-                <h2 style={{ fontSize: '1.6rem', fontWeight: '800' }}>{t('mission_v_title')}</h2>
+                <h2 style={{ fontSize: '1.6rem', fontWeight: '800', color: 'var(--text-primary)' }}>{t('mission_v_title')}</h2>
               </div>
               <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.8' }}>
                 {t('mission_v_desc')}
@@ -45,7 +45,7 @@ const Mission = () => {
                 <div style={{ padding: '10px', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '12px' }}>
                   <Target size={22} color="#3b82f6" />
                 </div>
-                <h2 style={{ fontSize: '1.6rem', fontWeight: '800' }}>{t('mission_m_title')}</h2>
+                <h2 style={{ fontSize: '1.6rem', fontWeight: '800', color: 'var(--text-primary)' }}>{t('mission_m_title')}</h2>
               </div>
               <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.8' }}>
                 {t('mission_m_desc')}
@@ -59,7 +59,7 @@ const Mission = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           className="glass-panel"
-          style={{ textAlign: 'center', padding: '80px 40px', background: 'rgba(239, 68, 68, 0.02)', border: '1px solid rgba(239, 68, 68, 0.1)', borderRadius: '32px', marginBottom: '100px' }}
+          style={{ textAlign: 'center', padding: '80px 40px', borderRadius: '32px', marginBottom: '100px' }}
         >
           <Heart size={48} color="#ef4444" style={{ marginBottom: '32px' }} />
           <h2 style={{ fontSize: '2.2rem', marginBottom: '24px' }}>{t('human_impact')}</h2>
@@ -82,7 +82,7 @@ const Mission = () => {
 const CommitItem = ({ icon, title, desc }) => (
   <div>
      <div style={{ marginBottom: '16px' }}>{icon}</div>
-     <div style={{ fontWeight: '700', fontSize: '1.1rem', marginBottom: '8px' }}>{title}</div>
+     <div style={{ fontWeight: '700', fontSize: '1.1rem', marginBottom: '8px', color: 'var(--text-primary)' }}>{title}</div>
      <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.4' }}>{desc}</div>
   </div>
 );

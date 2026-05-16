@@ -14,12 +14,11 @@ const Logo = ({ size = 28, light = false }) => {
         userSelect: 'none'
       }}
     >
-      <span style={{ color: 'white' }}>Rasta</span>
+      <span style={{ color: 'var(--text-primary)' }}>Rasta</span>
       <span style={{ 
-        color: 'white',
-        background: light ? 'none' : 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)',
-        WebkitBackgroundClip: light ? 'none' : 'text',
-        WebkitTextFillColor: light ? 'white' : 'transparent',
+        background: 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
         marginLeft: '1px'
       }}>Saathi</span>
     </div>
