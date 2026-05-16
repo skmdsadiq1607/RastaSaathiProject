@@ -9,11 +9,12 @@
 ### 1. High-Precision Resource Discovery
 Unlike standard map searches, RastaSaathi utilizes a **Physical Haversine Proximity Algorithm** combined with Google’s **Distance Matrix API**. This ensures that victims are routed to the *literally* closest medical facility (ICU-capable) and Law Enforcement precinct (Police Station) with sub-meter accuracy.
 
-### 2. Multi-Model AI Medic (Failover Brain)
-Our AI First-Aid guidance is built on a **Failover Architecture** using 11 rotating API keys across three frontier models:
-- **OpenAI GPT-4o** (Primary)
-- **Anthropic Claude 3.5 Sonnet** (Failover Layer 1)
-- **Google Gemini 1.5 Flash** (Failover Layer 2)
+### 2. Multi-Model AI Medic (High-Reliability Failover)
+Our AI First-Aid guidance is built on a **Failover Architecture** designed for zero-downtime during emergencies:
+- **Google Gemini 1.5 Flash** (Primary / Cost-Optimized)
+- **OpenAI GPT-4o-mini** (Failover Layer 1)
+- **Anthropic Claude 3.5 Sonnet** (Failover Layer 2)
+- **Structured Trauma Protocol** (Hardened Safety Fallback - JSON encoded)
 This ensures 100% uptime for medical guidance, even during global API outages or rate-limiting scenarios.
 
 ### 3. Automated Emergency Grid (WhatsApp/SMS)

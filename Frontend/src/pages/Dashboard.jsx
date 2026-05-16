@@ -302,7 +302,7 @@ const Dashboard = () => {
                         <div style={{ color: 'var(--text-secondary)', fontSize: '0.65rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('system_status')}</div>
                         <div style={{ fontSize: '1.2rem', fontWeight: '900' }}>{apiLoading ? t('sync_grid') : t('dispatched_alerts')}</div>
                       </div>
-                      <div style={{ textAlign: 'right', display: 'flex', gap: '20px' }}>
+                      <div style={{ textAlign: 'right', display: 'flex', gap: '24px', alignItems: 'center' }}>
                         <div>
                           <div style={{ color: 'var(--text-secondary)', fontSize: '0.65rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('nearest_police') || 'Nearest Police'}</div>
                           <div style={{ fontSize: '1rem', fontWeight: '900', color: '#3b82f6' }}>{policeStations[0]?.name || 'Locating...'}</div>
@@ -311,6 +311,34 @@ const Dashboard = () => {
                           <div style={{ color: 'var(--text-secondary)', fontSize: '0.65rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('target_center')}</div>
                           <div style={{ fontSize: '1rem', fontWeight: '900', color: '#10b981' }}>{selectedHospitalName || (apiLoading ? t('calculating') : 'Manual Mode')}</div>
                         </div>
+                        
+                        {hospitalLocation && victimLocation && (
+                          <motion.button 
+                            whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(59, 130, 246, 0.4)' }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={() => {
+                              const url = `https://www.google.com/maps/dir/?api=1&origin=${victimLocation.lat},${victimLocation.lng}&destination=${hospitalLocation.lat},${hospitalLocation.lng}&travelmode=driving`;
+                              window.open(url, '_blank');
+                            }}
+                            style={{ 
+                              padding: '12px 20px', 
+                              background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)', 
+                              color: 'white', 
+                              borderRadius: '12px', 
+                              border: 'none',
+                              fontWeight: '900', 
+                              fontSize: '0.8rem', 
+                              cursor: 'pointer',
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: '8px',
+                              marginLeft: '10px'
+                            }}
+                          >
+                            <Navigation size={16} />
+                            {t('navigate')}
+                          </motion.button>
+                        )}
                       </div>
                     </div>
                   </div>

@@ -22,6 +22,7 @@ const TRANSLATIONS = {
     drivers_safety: "For Motorists",
     children_safety: "For Children",
     parents_safety: "For Parents",
+    navigate: "Navigate",
 
     // Home Page
     hero_title: "When Every Second Counts, RastaSaathi Responds.",
@@ -233,6 +234,7 @@ const TRANSLATIONS = {
     drivers_safety: "वाहन चालकों के लिए",
     children_safety: "बच्चों के लिए",
     parents_safety: "माता-पिता के लिए",
+    navigate: "नेविगेट करें",
 
     // Home Page
     hero_title: "जब हर सेकंड मायने रखता है, RastaSaathi प्रतिक्रिया देता है।",
@@ -414,6 +416,7 @@ const TRANSLATIONS = {
     drivers_safety: "వాహన చోదకుల కోసం",
     children_safety: "పిల్లల కోసం",
     parents_safety: "తల్లిదండ్రుల కోసం",
+    navigate: "నావిగేట్",
 
     // Home Page
     hero_title: "ప్రతి సెకను విలువైనప్పుడు, RastaSaathi స్పందిస్తుంది.",
@@ -534,6 +537,7 @@ const TRANSLATIONS = {
     drivers_safety: "வாகன ஓட்டுநர்களுக்காக",
     children_safety: "குழந்தைகளுக்காக",
     parents_safety: "பெற்றோர்களுக்காக",
+    navigate: "வழிகாட்டுதல்",
 
     // Home Page
     hero_title: "ஒவ்வொரு நொடியும் முக்கியம் எனும்போது, RastaSaathi பதிலளிக்கிறது.",
@@ -617,6 +621,7 @@ const TRANSLATIONS = {
     vision_mission: "وژن اور مشن",
     language_label: "زبان",
     navigation: "نیویگیشن",
+    navigate: "نیویگیٹ",
     hero_title: "جب ہر سیکنڈ اہم ہوتا ہے، RastaSaathi جواب دیتا ہے۔",
     hero_sub: "راستہ ساتھی حادثے اور جان بچانے والی دیکھ بھال کے درمیان فرق کو ختم کرنے کے لیے AI اور ریئل ٹائم الرٹس کا استعمال کرتا ہے۔",
     view_guide: "گائیڈ دیکھیں",

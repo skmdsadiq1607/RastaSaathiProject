@@ -3,29 +3,41 @@ const Anthropic = require('@anthropic-ai/sdk');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const OpenAI = require('openai');
 const { env } = require('../config/env');
-const { claudeKeyManager, geminiKeyManager } = require('../utils/apiKeyManager');
+const { claudeKeyManager, geminiKeyManager, openaiKeyManager } = require('../utils/apiKeyManager');
 const { AppError } = require('../utils/AppError');
 const { logger } = require('../utils/logger');
 
-async function callOpenAI({ system, user, maxTokens = 600 }) {
-  if (!env.OPENAI_API_KEY) throw new Error('No OpenAI API key available');
-  const openai = new OpenAI({ apiKey: env.OPENAI_API_KEY });
-  
-  try {
-    const response = await openai.chat.completions.create({
-      model: "gpt-4o-mini", // Cost-effective and fast for emergency guidance
-      messages: [
-        { role: "system", content: system },
-        { role: "user", content: user }
-      ],
-      max_tokens: maxTokens
-    });
-    const text = response.choices[0].message.content;
-    return { text, raw: response, provider: 'openai' };
-  } catch (error) {
-    logger.error(`[OpenAI API Error] ${error.message}`);
-    throw error;
+async function callOpenAIWithRetry({ system, user, maxTokens = 600 }) {
+  const maxRetries = openaiKeyManager.keys.length;
+  let attempt = 0;
+  while (attempt < maxRetries) {
+    const key = openaiKeyManager.getCurrentKey();
+    if (!key) throw new Error('No OpenAI API key available');
+    
+    const openai = new OpenAI({ apiKey: key });
+    
+    try {
+      const response = await openai.chat.completions.create({
+        model: "gpt-4o-mini",
+        messages: [
+          { role: "system", content: system },
+          { role: "user", content: user }
+        ],
+        max_tokens: maxTokens
+      });
+      const text = response.choices[0].message.content;
+      return { text, raw: response, provider: 'openai' };
+    } catch (error) {
+      logger.error(`[OpenAI API Error] Key: ${key.slice(0, 15)}... | Error: ${error.message}`);
+      if (error.status === 429 || error.status === 401 || error.status === 403) {
+        openaiKeyManager.rotateKey();
+        attempt++;
+      } else {
+        throw error;
+      }
+    }
   }
+  throw new Error('Exhausted all OpenAI API retries');
 }
 
 async function callClaudeWithRetry({ system, user, maxTokens = 600, retries = 1 }) {
@@ -90,29 +102,45 @@ async function callGeminiWithRetry({ system, user }) {
   throw new Error('Exhausted all Gemini API retries');
 }
 
-// Unified AI Caller: Tries OpenAI -> Claude -> Gemini
+// Unified AI Caller: Tries Gemini -> OpenAI -> Claude
 async function callAi({ system, user, maxTokens = 600 }) {
-  // 1. Try OpenAI (Primary)
+  // 1. Try Gemini (Primary for Hackathon/Reliability)
   try {
-    return await callOpenAI({ system, user, maxTokens });
-  } catch (openAiError) {
-    logger.warn(`[AI Service] OpenAI Failed: ${openAiError.message}. Falling back to Claude...`);
+    return await callGeminiWithRetry({ system, user });
+  } catch (geminiError) {
+    logger.warn(`[AI Service] Gemini Failed: ${geminiError.message}. Falling back to OpenAI...`);
     
-    // 2. Try Claude (Secondary)
+    // 2. Try OpenAI (Secondary)
     try {
-      return await callClaudeWithRetry({ system, user, maxTokens });
-    } catch (claudeError) {
-      logger.error(`[AI Service] Claude Failed: ${claudeError.message}. Falling back to Gemini...`);
+      return await callOpenAIWithRetry({ system, user, maxTokens });
+    } catch (openAiError) {
+      logger.error(`[AI Service] OpenAI Failed: ${openAiError.message}. Falling back to Claude...`);
       
-      // 3. Try Gemini (Tertiary)
+      // 3. Try Claude (Tertiary)
       try {
-        return await callGeminiWithRetry({ system, user });
-      } catch (geminiError) {
-        logger.error(`[AI Service] Gemini Failed: ${geminiError.message}`);
+        return await callClaudeWithRetry({ system, user, maxTokens });
+      } catch (claudeError) {
+        logger.error(`[AI Service] Claude Failed: ${claudeError.message}`);
         
-        // Final Safety Fallback
+        // Final Safety Fallback (Structured JSON for UI stability)
         return { 
-          text: "I'm having a slight connection issue with my advanced brain, but I can still help! For most road emergencies: \n1. Stay calm and ensure the area is safe. \n2. Check for responsiveness and breathing. \n3. If bleeding, apply firm pressure with a clean cloth. \n4. Do not move the person unless there is an immediate danger like fire. \n\nPlease tell me more about the injury so I can give specific steps.",
+          text: JSON.stringify({
+            steps: [
+              "Stay calm and ensure the area is safe.",
+              "Check for responsiveness and breathing.",
+              "If bleeding, apply firm pressure with a clean cloth.",
+              "Do not move the person unless there is immediate danger (e.g., fire)."
+            ],
+            warnings: [
+              "High-precision AI analysis is currently restricted. Following basic trauma protocols.",
+              "Do not provide oral fluids to unconscious victims."
+            ],
+            whenToEscalate: [
+              "Uncontrolled bleeding",
+              "Difficulty breathing",
+              "Unconsciousness"
+            ]
+          }),
           provider: 'fallback'
         };
       }
