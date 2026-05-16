@@ -71,11 +71,11 @@ Our backend implements a weighted scoring engine that evaluates:
 ---
 
 ## 👥 The Engineering Team
-- **Dr. Lakshmi** (Project Lead)
-- **Sadiq** (Full-Stack Engineer)
-- **Krishna** (Geospatial Architect)
-- **Chakravarthi** (System Designer)
-- **Hasini** (Frontend Specialist)
+- **Dr. Lakshmi** 
+- **Sadiq** 
+- **Krishna** 
+- **Chakravarthi** 
+- **Hasini** 
 
 ---
 
