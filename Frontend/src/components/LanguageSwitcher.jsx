@@ -44,9 +44,9 @@ const LanguageSwitcher = ({ variant = 'dropdown' }) => {
             style={{
               padding: '16px',
               borderRadius: '16px',
-              border: lang === l.code ? '2px solid #ef4444' : '1px solid var(--border-glass)',
-              background: lang === l.code ? 'var(--brand-red-glow)' : 'var(--glass-bg)',
-              color: lang === l.code ? '#ef4444' : 'var(--text-primary)',
+              border: lang === l.code ? '2px solid var(--brand-red)' : '1px solid var(--border-glass)',
+              background: lang === l.code ? 'var(--brand-red-glow)' : 'var(--bg-primary)',
+              color: lang === l.code ? 'var(--brand-red)' : 'var(--text-primary)',
               fontSize: '1rem',
               fontWeight: '800',
               cursor: 'pointer',
@@ -54,7 +54,8 @@ const LanguageSwitcher = ({ variant = 'dropdown' }) => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              textAlign: 'center'
+              textAlign: 'center',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
             }}
           >
             {l.label}
@@ -74,8 +75,8 @@ const LanguageSwitcher = ({ variant = 'dropdown' }) => {
           display: 'flex',
           alignItems: 'center',
           gap: '10px',
-          background: 'var(--glass-bg)',
-          border: '1px solid var(--border-glass)',
+          background: 'var(--bg-deep)',
+          border: '1.5px solid var(--border-glass)',
           padding: '10px 18px',
           borderRadius: '14px',
           cursor: 'pointer',
@@ -83,12 +84,13 @@ const LanguageSwitcher = ({ variant = 'dropdown' }) => {
           fontSize: '0.9rem',
           fontWeight: '700',
           backdropFilter: 'blur(12px)',
-          transition: 'all 0.3s ease'
+          transition: 'all 0.3s ease',
+          boxShadow: '0 4px 15px rgba(0,0,0,0.05)'
         }}
       >
-        <Globe size={18} color="#ef4444" />
+        <Globe size={18} color="var(--brand-red)" />
         <span style={{ letterSpacing: '0.5px' }}>{currentLangLabel}</span>
-        <ChevronDown size={14} style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }} />
+        <ChevronDown size={14} color="var(--text-secondary)" style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }} />
       </motion.div>
 
       <AnimatePresence>
@@ -112,7 +114,7 @@ const LanguageSwitcher = ({ variant = 'dropdown' }) => {
               backdropFilter: 'blur(24px)'
             }}
           >
-            <div style={{ fontSize: '0.7rem', fontWeight: '900', color: 'var(--text-secondary)', padding: '8px 12px', textTransform: 'uppercase', letterSpacing: '2px' }}>
+            <div style={{ fontSize: '0.7rem', fontWeight: '900', color: 'var(--brand-red)', padding: '8px 12px', textTransform: 'uppercase', letterSpacing: '2px', opacity: 0.8 }}>
               Select Language
             </div>
             {languages.map((l) => (
