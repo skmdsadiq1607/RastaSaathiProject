@@ -82,10 +82,10 @@ const Profile = () => {
       className="container"
       style={{ paddingBottom: '100px', maxWidth: '900px' }}
     >
-      <div className="glass-panel" style={{ padding: '50px', background: 'rgba(2, 6, 23, 0.6)' }}>
+      <div className="glass-panel" style={{ padding: '50px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '30px', marginBottom: '50px', flexWrap: 'wrap' }}>
-          <div style={{ width: '80px', height: '80px', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <User size={40} color="#3b82f6" />
+          <div style={{ width: '80px', height: '80px', background: 'var(--brand-red-glow)', borderRadius: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <User size={40} color="var(--brand-red)" />
           </div>
           <div>
             <h1 style={{ fontSize: '2.5rem', fontWeight: '900' }}>{t('profile')}</h1>
@@ -130,7 +130,7 @@ const Profile = () => {
               className="form-input" 
               value={language} 
               onChange={(e) => setLanguage(e.target.value)}
-              style={{ appearance: 'none', background: 'rgba(0,0,0,0.3)' }}
+              style={{ appearance: 'none' }}
             >
               <option value="en">English</option>
               <option value="hi">हिन्दी (Hindi)</option>
@@ -144,8 +144,8 @@ const Profile = () => {
         <div style={{ borderTop: '1px solid var(--border-glass)', paddingTop: '50px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px', flexWrap: 'wrap', gap: '20px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-              <div style={{ width: '48px', height: '48px', background: 'rgba(239, 68, 68, 0.1)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Shield size={24} color="#ef4444" />
+              <div style={{ width: '48px', height: '48px', background: 'var(--brand-red-glow)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Shield size={24} color="var(--brand-red)" />
               </div>
               <div>
                 <h2 style={{ fontSize: '1.5rem', fontWeight: '900' }}>{t('emergency_contacts')}</h2>
@@ -165,7 +165,7 @@ const Profile = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 className="glass-panel"
-                style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 60px', gap: '20px', padding: '24px', background: 'rgba(255,255,255,0.02)', borderRadius: '20px' }}
+                style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 60px', gap: '20px', padding: '24px', borderRadius: '20px' }}
               >
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                    <input 
@@ -174,7 +174,6 @@ const Profile = () => {
                     placeholder={t('full_name')} 
                     value={contact.name} 
                     onChange={(e) => updateContact(idx, 'name', e.target.value)}
-                    style={{ background: 'rgba(0,0,0,0.2)' }}
                   />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -184,7 +183,6 @@ const Profile = () => {
                     placeholder="Phone (e.g. +91...)" 
                     value={contact.phone} 
                     onChange={(e) => updateContact(idx, 'phone', e.target.value)}
-                    style={{ background: 'rgba(0,0,0,0.2)' }}
                   />
                 </div>
                 <button 
@@ -198,7 +196,7 @@ const Profile = () => {
               </motion.div>
             ))}
             {contacts.length === 0 && (
-              <div style={{ textAlign: 'center', color: 'var(--text-secondary)', padding: '40px', border: '2px dashed var(--border-glass)', borderRadius: '24px', background: 'rgba(255,255,255,0.01)' }}>
+              <div style={{ textAlign: 'center', color: 'var(--text-secondary)', padding: '40px', border: '2px dashed var(--border-glass)', borderRadius: '24px' }}>
                 <AlertTriangle size={32} style={{ marginBottom: '16px', opacity: 0.5 }} />
                 <p style={{ fontWeight: '600' }}>{t('no_contacts')}</p>
                 <p style={{ fontSize: '0.85rem' }}>{t('add_one_contact')}</p>

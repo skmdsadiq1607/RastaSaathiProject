@@ -147,13 +147,13 @@ const RoadSafety = () => {
             <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '25px' }}>
               <div style={{ 
                 width: '50px', height: '50px', borderRadius: '14px', 
-                background: 'rgba(255,255,255,0.05)', display: 'flex', 
+                background: 'var(--brand-red-glow)', display: 'flex', 
                 alignItems: 'center', justifyContent: 'center',
-                border: '1px solid rgba(255,255,255,0.1)'
+                border: '1px solid var(--border-glass)'
               }}>
                 {section.icon}
               </div>
-              <h2 style={{ fontSize: '1.5rem', fontWeight: '800' }}>{t(section.id + '_safety') || section.title}</h2>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--text-primary)' }}>{t(section.id + '_safety') || section.title}</h2>
             </div>
 
             {section.description && (
@@ -165,7 +165,7 @@ const RoadSafety = () => {
             <ul style={{ display: 'flex', flexDirection: 'column', gap: '12px', listStyle: 'none', padding: 0 }}>
               {section.items.map((item, i) => (
                 <li key={i} style={{ display: 'flex', gap: '12px', fontSize: '0.95rem', lineHeight: '1.5', color: 'var(--text-secondary)' }}>
-                  <CheckCircle2 size={18} style={{ flexShrink: 0, marginTop: '2px', color: 'rgba(255,255,255,0.3)' }} />
+                  <CheckCircle2 size={18} style={{ flexShrink: 0, marginTop: '2px', color: 'var(--brand-red)' }} />
                   <span>{item}</span>
                 </li>
               ))}
@@ -196,21 +196,21 @@ const RoadSafety = () => {
                 alignItems: 'center', 
                 gap: '20px', 
                 textDecoration: 'none',
-                border: contact.type === 'primary' ? '1px solid rgba(239, 68, 68, 0.3)' : '1px solid rgba(255,255,255,0.08)',
-                background: contact.type === 'primary' ? 'rgba(239, 68, 68, 0.08)' : 'rgba(255,255,255,0.03)'
+                border: contact.type === 'primary' ? '1.5px solid var(--brand-red)' : '1px solid var(--border-glass)',
+                background: contact.type === 'primary' ? 'var(--brand-red-glow)' : 'var(--glass-bg)'
               }}
             >
               <div style={{ 
                 width: '45px', height: '45px', borderRadius: '12px', 
-                background: contact.type === 'primary' ? '#ef4444' : 'rgba(255,255,255,0.1)', 
+                background: contact.type === 'primary' ? 'var(--brand-red)' : 'var(--brand-red-glow)', 
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: 'white', flexShrink: 0
+                color: contact.type === 'primary' ? 'white' : 'var(--brand-red)', flexShrink: 0
               }}>
                 <Phone size={20} />
               </div>
               <div style={{ flex: 1 }}>
                 <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '4px' }}>{contact.name}</div>
-                <div style={{ fontSize: '1.2rem', fontWeight: '900', color: contact.type === 'primary' ? '#ef4444' : 'white' }}>{contact.number}</div>
+                <div style={{ fontSize: '1.2rem', fontWeight: '900', color: 'var(--text-primary)' }}>{contact.number}</div>
               </div>
             </motion.a>
           ))}
@@ -223,14 +223,14 @@ const RoadSafety = () => {
         className="glass-panel"
         style={{ 
           marginTop: '60px', padding: '40px', textAlign: 'center',
-          background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(239, 68, 68, 0.05) 100%)',
-          border: '1px solid rgba(255,255,255,0.1)'
+          background: 'linear-gradient(135deg, var(--brand-red-glow) 0%, transparent 100%)',
+          border: '1px solid var(--border-glass)'
         }}
       >
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', padding: '8px 20px', background: 'rgba(239, 68, 68, 0.1)', borderRadius: '100px', color: '#ef4444', fontWeight: '800', fontSize: '0.8rem', marginBottom: '20px' }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', padding: '8px 20px', background: 'var(--brand-red-glow)', borderRadius: '100px', color: 'var(--brand-red)', fontWeight: '800', fontSize: '0.8rem', marginBottom: '20px' }}>
           <AlertCircle size={16} /> {t('official_protocol')}
         </div>
-        <h2 style={{ fontSize: '2rem', fontWeight: '900', marginBottom: '15px' }}>{t('hero_title')}</h2>
+        <h2 style={{ fontSize: '2rem', fontWeight: '900', marginBottom: '15px', color: 'var(--text-primary)' }}>{t('hero_title')}</h2>
         <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto 30px' }}>
           {t('golden_minute_sub')}
         </p>

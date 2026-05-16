@@ -25,11 +25,11 @@ const Contact = () => {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
           <div className="glass-panel" style={{ padding: '35px', display: 'flex', alignItems: 'center', gap: '20px' }}>
-            <div style={{ background: 'rgba(239, 68, 68, 0.1)', padding: '15px', borderRadius: '15px' }}>
+            <div style={{ background: 'var(--brand-red-glow)', padding: '15px', borderRadius: '15px' }}>
               <Mail color="#ef4444" size={28} />
             </div>
             <div>
-              <div style={{ fontWeight: '800', fontSize: '1.1rem' }}>{t('email_us')}</div>
+              <div style={{ fontWeight: '800', fontSize: '1.1rem', color: 'var(--text-primary)' }}>{t('email_us')}</div>
               <div style={{ color: 'var(--text-secondary)' }}>{t('contact_email')}</div>
             </div>
           </div>
@@ -39,7 +39,7 @@ const Contact = () => {
               <Phone color="#3b82f6" size={28} />
             </div>
             <div>
-              <div style={{ fontWeight: '800', fontSize: '1.1rem' }}>{t('call_us')}</div>
+              <div style={{ fontWeight: '800', fontSize: '1.1rem', color: 'var(--text-primary)' }}>{t('call_us')}</div>
               <div style={{ color: 'var(--text-secondary)' }}>{t('contact_phone')}</div>
             </div>
           </div>
@@ -49,14 +49,14 @@ const Contact = () => {
               <MapPin color="#10b981" size={28} />
             </div>
             <div>
-              <div style={{ fontWeight: '800', fontSize: '1.1rem' }}>{t('location')}</div>
+              <div style={{ fontWeight: '800', fontSize: '1.1rem', color: 'var(--text-primary)' }}>{t('location')}</div>
               <div style={{ color: 'var(--text-secondary)' }}>IIT Madras, Chennai</div>
             </div>
           </div>
         </div>
 
         <div className="glass-panel" style={{ padding: '50px' }}>
-          <h3 style={{ marginBottom: '32px', fontSize: '1.8rem', fontWeight: '800' }}>Send a Message</h3>
+          <h3 style={{ marginBottom: '32px', fontSize: '1.8rem', fontWeight: '800', color: 'var(--text-primary)' }}>Send a Message</h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
             <input type="text" className="form-input" placeholder="Your Name" />
             <input type="email" className="form-input" placeholder="Your Email" />
@@ -105,8 +105,8 @@ const Contact = () => {
               { label: t('stat_accuracy'), val: t('stat_99') }
             ].map((stat, i) => (
               <div key={i} style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '2.5rem', fontWeight: '900', color: 'white' }}>{stat.val}</div>
-                <div style={{ fontSize: '0.8rem', color: '#ef4444', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '2px' }}>{stat.label}</div>
+                <div style={{ fontSize: '2.5rem', fontWeight: '900', color: 'var(--text-primary)' }}>{stat.val}</div>
+                <div style={{ fontSize: '0.8rem', color: 'var(--brand-red)', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '2px' }}>{stat.label}</div>
               </div>
             ))}
           </div>

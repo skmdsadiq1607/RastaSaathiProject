@@ -422,16 +422,16 @@ const Dashboard = () => {
                   </div>
                 ))}
                 {loadingMsg && (
-                  <div style={{ display: 'flex', gap: '8px', padding: '12px', background: 'rgba(30, 41, 59, 0.3)', borderRadius: '12px', width: 'fit-content' }}>
+                  <div style={{ display: 'flex', gap: '8px', padding: '12px', background: 'var(--bg-deep)', border: '1px solid var(--border-glass)', borderRadius: '12px', width: 'fit-content' }}>
                     <Loader2 className="animate-spin" size={14} color="#3b82f6" />
-                    <span style={{ fontSize: '0.75rem', fontWeight: '700', color: '#94a3b8' }}>AI ANALYSIS IN PROGRESS...</span>
+                    <span style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--text-secondary)' }}>AI ANALYSIS IN PROGRESS...</span>
                   </div>
                 )}
                 <div ref={chatEndRef} />
               </div>
           
           <div style={{ marginTop: '20px', display: 'flex', gap: '10px' }}>
-            <input type="text" className="form-input" placeholder={t('emergency_guidance')} style={{ background: 'rgba(0,0,0,0.4)', flex: 1, padding: '14px 18px', fontSize: '0.95rem' }} value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && sendMessage()} />
+            <input type="text" className="form-input" placeholder={t('emergency_guidance')} style={{ flex: 1, padding: '14px 18px', fontSize: '0.95rem' }} value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && sendMessage()} />
             <button onClick={sendMessage} className="premium-button" style={{ width: '50px', height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Send size={20} /></button>
           </div>
         </div>

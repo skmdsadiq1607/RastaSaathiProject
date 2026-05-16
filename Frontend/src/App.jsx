@@ -230,10 +230,10 @@ const App = () => {
                         key={link.to}
                         to={link.to}
                         style={{
-                          fontSize: '1.25rem', fontWeight: '800', color: location.pathname === link.to ? '#ef4444' : 'var(--text-primary)',
+                          fontSize: '1.25rem', fontWeight: '800', color: location.pathname === link.to ? 'var(--brand-red)' : 'var(--text-primary)',
                           textDecoration: 'none', padding: '20px', borderRadius: '20px',
-                          background: location.pathname === link.to ? 'rgba(239, 68, 68, 0.1)' : 'transparent',
-                          border: location.pathname === link.to ? '1px solid rgba(239, 68, 68, 0.2)' : '1px solid transparent',
+                          background: location.pathname === link.to ? 'var(--brand-red-glow)' : 'transparent',
+                          border: location.pathname === link.to ? '1px solid var(--brand-red)' : '1px solid transparent',
                           textAlign: 'center'
                         }}
                         onClick={() => setIsMenuOpen(false)}
