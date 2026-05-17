@@ -125,6 +125,12 @@ const Dashboard = () => {
   const [apiLoading, setApiLoading] = useState(false);
   const [sosTimestamp, setSosTimestamp] = useState(null);
   const [pdfGenerating, setPdfGenerating] = useState(false);
+  
+  // SOS countdown states (declared at top of component)
+  const [countdownActive, setCountdownActive] = useState(false);
+  const [countdownSeconds, setCountdownSeconds] = useState(5);
+  const [countdownTimer, setCountdownTimer] = useState(null);
+
   const chatContainerRef = useRef(null);
   const chatEndRef = useRef(null);
 
@@ -204,10 +210,6 @@ const Dashboard = () => {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   }, [messages]);
-
-  const [countdownActive, setCountdownActive] = useState(false);
-  const [countdownSeconds, setCountdownSeconds] = useState(5);
-  const [countdownTimer, setCountdownTimer] = useState(null);
 
   const triggerSOS = () => {
     setCountdownActive(true);
