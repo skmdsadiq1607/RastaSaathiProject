@@ -1,4 +1,4 @@
-const { Incident } = require('./model');
+const { Incident, getNextSequenceValue } = require('./model');
 const { AppError } = require('../../utils/AppError');
 
 // GPS impact detection settings
@@ -16,8 +16,14 @@ async function createIncident({ userId, lat, lng, injuryType, vehicleType }) {
   if (typeof lat !== 'number' || typeof lng !== 'number') {
     throw new AppError('Invalid location', 400, 'VALIDATION_ERROR');
   }
+  
+  // Fetch next sequential count and pad it to four digits (e.g. RS-0001, RS-0002)
+  const seq = await getNextSequenceValue('incidentSeq');
+  const ticketNumber = `RS-${String(seq).padStart(4, '0')}`;
+
   const incident = await Incident.create({
     createdByUser: userId || undefined,
+    ticketNumber,
     location: { type: 'Point', coordinates: [lng, lat] },
     injuryType,
     vehicleType

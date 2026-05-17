@@ -120,6 +120,7 @@ const Dashboard = () => {
   ]);
   const [input, setInput] = useState('');
   const [sessionId, setSessionId] = useState(null);
+  const [ticketNumber, setTicketNumber] = useState('');
   const [loadingMsg, setLoadingMsg] = useState(false);
   const [apiLoading, setApiLoading] = useState(false);
   const [sosTimestamp, setSosTimestamp] = useState(null);
@@ -221,7 +222,10 @@ const Dashboard = () => {
           headers: { Authorization: `Bearer ${token}` }
         });
 
-        const { hospitalSelection, policeSelection, aiGuidance } = sosRes.data.data;
+        const { hospitalSelection, policeSelection, aiGuidance, incident } = sosRes.data.data;
+        if (incident && incident.ticketNumber) {
+          setTicketNumber(incident.ticketNumber);
+        }
         const nearest = hospitalSelection?.[0]?.hospital;
 
         if (nearest) {
@@ -571,7 +575,8 @@ const Dashboard = () => {
               <div style={{ background: '#fef2f2', border: '1px solid #fca5a5', color: '#ef4444', padding: '6px 14px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: '800', letterSpacing: '1px', display: 'inline-block' }}>
                 GRID SYNCED
               </div>
-              <div style={{ fontSize: '0.65rem', color: '#64748b', marginTop: '6px', fontWeight: '700' }}>INCIDENT ID: {sessionId || 'PENDING'}</div>
+              <div style={{ fontSize: '0.75rem', color: '#0f172a', marginTop: '8px', fontWeight: '800' }}>RECEIPT NO: {ticketNumber || 'RS-PENDING'}</div>
+              <div style={{ fontSize: '0.65rem', color: '#64748b', marginTop: '4px', fontWeight: '700' }}>INCIDENT ID: {sessionId || 'PENDING'}</div>
             </div>
           </div>
 
