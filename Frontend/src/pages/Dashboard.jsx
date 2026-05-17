@@ -162,20 +162,33 @@ const Dashboard = () => {
       });
 
       const imgWidth = 210; // A4 standard width in mm
-      const pageHeight = 295; // A4 standard height in mm
+      const pageHeight = 297; // A4 standard height in mm
+      const marginTop = 15; // Top margin in mm
+      const marginBottom = 15; // Bottom margin in mm
+      const printableHeight = pageHeight - marginTop - marginBottom; // 267 mm
+      
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
       
       let heightLeft = imgHeight;
-      let position = 0;
+      let pageIndex = 0;
 
-      pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-
-      while (heightLeft >= 0) {
-        position = heightLeft - imgHeight;
-        pdf.addPage();
-        pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
+      while (heightLeft > 0) {
+        if (pageIndex > 0) {
+          pdf.addPage();
+        }
+        
+        const drawY = marginTop - (pageIndex * printableHeight);
+        pdf.addImage(imgData, 'JPEG', 0, drawY, imgWidth, imgHeight);
+        
+        // Draw white masks to maintain clean margins and prevent bleed-through
+        pdf.setFillColor(255, 255, 255);
+        // Top margin mask
+        pdf.rect(0, 0, imgWidth, marginTop, 'F');
+        // Bottom margin mask
+        pdf.rect(0, pageHeight - marginBottom, imgWidth, marginBottom, 'F');
+        
+        heightLeft -= printableHeight;
+        pageIndex++;
       }
 
       pdf.save(`Rasta-Saathi_SOS_Incident_Report_${new Date().toISOString().slice(0, 10)}.pdf`);
