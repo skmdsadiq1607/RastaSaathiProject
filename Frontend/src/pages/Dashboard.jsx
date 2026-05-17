@@ -441,21 +441,30 @@ const Dashboard = () => {
                   </motion.div>
                 ) : (
                   <motion.button 
-                    whileHover={{ scale: 1.05 }} 
-                    whileTap={{ scale: 0.95 }} 
+                    whileHover={{ 
+                      y: -4,
+                      boxShadow: '0 12px 0 #b91c1c, 0 20px 30px rgba(239, 68, 68, 0.4)'
+                    }} 
+                    whileTap={{ 
+                      y: 6,
+                      boxShadow: '0 2px 0 #b91c1c, 0 5px 10px rgba(239, 68, 68, 0.3)'
+                    }} 
                     onClick={triggerSOS} 
                     style={{ 
                       width: '160px', height: '160px', borderRadius: '50%', 
-                      background: '#ef4444', 
+                      background: 'linear-gradient(180deg, #ef4444 0%, #dc2626 100%)', 
                       border: 'none', color: '#ffffff', 
-                      cursor: 'pointer', boxShadow: '0 10px 40px rgba(239, 68, 68, 0.4)',
+                      cursor: 'pointer', 
+                      boxShadow: '0 8px 0 #b91c1c, 0 15px 25px rgba(239, 68, 68, 0.35)',
                       display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
                       overflow: 'hidden',
-                      padding: 0
+                      padding: 0,
+                      outline: 'none',
+                      borderTop: '3px solid rgba(255, 255, 255, 0.45)', // Premium glossy top highlight
                     }}
                   >
                     <Logo size={22} light />
-                    <span style={{ fontSize: '1.6rem', fontWeight: '900', marginTop: '4px', color: '#ffffff' }}>SOS</span>
+                    <span style={{ fontSize: '1.6rem', fontWeight: '900', marginTop: '4px', color: '#ffffff', textShadow: '0 2px 4px rgba(0,0,0,0.2)' }}>SOS</span>
                   </motion.button>
                 )}
               </div>
