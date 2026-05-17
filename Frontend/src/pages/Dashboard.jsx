@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Activity, Navigation, MessageCircle, Send, MapPin, Shield, Zap, AlertTriangle, Radio, Hospital, Users, Loader2 } from 'lucide-react';
+import { Activity, Navigation, MessageCircle, Send, MapPin, Shield, Zap, AlertTriangle, Radio, Hospital, Users, Loader2, FileDown } from 'lucide-react';
 import axios from 'axios';
 import GoogleMapReact from 'google-map-react';
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
 import Logo from '../components/Logo';
 import { useTheme } from '../context/ThemeContext';
 
@@ -120,11 +122,61 @@ const Dashboard = () => {
   const [sessionId, setSessionId] = useState(null);
   const [loadingMsg, setLoadingMsg] = useState(false);
   const [apiLoading, setApiLoading] = useState(false);
+  const [sosTimestamp, setSosTimestamp] = useState(null);
+  const [pdfGenerating, setPdfGenerating] = useState(false);
   const chatContainerRef = useRef(null);
   const chatEndRef = useRef(null);
 
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+
   // Map State
   const [mapCenter, setMapCenter] = useState({ lat: 17.3850, lng: 78.4867 });
+
+  const downloadSosReportPDF = async () => {
+    try {
+      const element = document.getElementById('sos-pdf-report');
+      if (!element) return;
+
+      setPdfGenerating(true);
+
+      const canvas = await html2canvas(element, {
+        scale: 2, // Double resolution for clean, premium print lines
+        useCORS: true,
+        backgroundColor: '#0b0f19',
+        logging: false,
+      });
+
+      const imgData = canvas.toDataURL('image/jpeg', 0.95);
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: 'a4',
+      });
+
+      const imgWidth = 210; // A4 standard width in mm
+      const pageHeight = 295; // A4 standard height in mm
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      
+      let heightLeft = imgHeight;
+      let position = 0;
+
+      pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+
+      pdf.save(`Rasta-Saathi_SOS_Incident_Report_${new Date().toISOString().slice(0, 10)}.pdf`);
+    } catch (err) {
+      console.error('Failed to generate high-fidelity SOS report:', err);
+    } finally {
+      setPdfGenerating(false);
+    }
+  };
   const [victimLocation, setVictimLocation] = useState(null);
   const [hospitalLocation, setHospitalLocation] = useState(null);
   const [selectedHospitalName, setSelectedHospitalName] = useState('');
@@ -146,6 +198,7 @@ const Dashboard = () => {
 
   const triggerSOS = async () => {
     setSosActive(true);
+    setSosTimestamp(new Date());
     setApiLoading(true);
     setMessages(prev => [...prev, { role: 'bot', text: t('initiating_protocol') }]);
 
@@ -359,31 +412,60 @@ const Dashboard = () => {
                         </div>
                         
                         {hospitalLocation && victimLocation && (
-                          <motion.button 
-                            whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(59, 130, 246, 0.4)' }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={() => {
-                              const url = `https://www.google.com/maps/dir/?api=1&origin=${victimLocation.lat},${victimLocation.lng}&destination=${hospitalLocation.lat},${hospitalLocation.lng}&travelmode=driving`;
-                              window.open(url, '_blank');
-                            }}
-                            style={{ 
-                              padding: '12px 20px', 
-                              background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)', 
-                              color: 'white', 
-                              borderRadius: '12px', 
-                              border: 'none',
-                              fontWeight: '900', 
-                              fontSize: '0.8rem', 
-                              cursor: 'pointer',
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: '8px',
-                              marginLeft: '10px'
-                            }}
-                          >
-                            <Navigation size={16} />
-                            {t('navigate')}
-                          </motion.button>
+                          <div style={{ display: 'flex', gap: '10px', marginLeft: '10px' }}>
+                            <motion.button 
+                              whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(239, 68, 68, 0.4)' }}
+                              whileTap={{ scale: 0.95 }}
+                              onClick={downloadSosReportPDF}
+                              disabled={pdfGenerating}
+                              style={{ 
+                                padding: '12px 20px', 
+                                background: 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)', 
+                                color: 'white', 
+                                borderRadius: '12px', 
+                                border: 'none',
+                                fontWeight: '900', 
+                                fontSize: '0.8rem', 
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '8px',
+                                opacity: pdfGenerating ? 0.7 : 1
+                              }}
+                            >
+                              {pdfGenerating ? (
+                                <Loader2 className="animate-spin" size={16} />
+                              ) : (
+                                <FileDown size={16} />
+                              )}
+                              {pdfGenerating ? 'Generating...' : 'Download Report'}
+                            </motion.button>
+
+                            <motion.button 
+                              whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(59, 130, 246, 0.4)' }}
+                              whileTap={{ scale: 0.95 }}
+                              onClick={() => {
+                                const url = `https://www.google.com/maps/dir/?api=1&origin=${victimLocation.lat},${victimLocation.lng}&destination=${hospitalLocation.lat},${hospitalLocation.lng}&travelmode=driving`;
+                                window.open(url, '_blank');
+                              }}
+                              style={{ 
+                                padding: '12px 20px', 
+                                background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)', 
+                                color: 'white', 
+                                borderRadius: '12px', 
+                                border: 'none',
+                                fontWeight: '900', 
+                                fontSize: '0.8rem', 
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '8px'
+                              }}
+                            >
+                              <Navigation size={16} />
+                              {t('navigate')}
+                            </motion.button>
+                          </div>
                         )}
                       </div>
                     </div>
@@ -434,6 +516,117 @@ const Dashboard = () => {
             <input type="text" className="form-input" placeholder={t('emergency_guidance')} style={{ flex: 1, padding: '14px 18px', fontSize: '0.95rem' }} value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && sendMessage()} />
             <button onClick={sendMessage} className="premium-button" style={{ width: '50px', height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Send size={20} /></button>
           </div>
+        </div>
+      </div>
+
+      {/* Hidden PDF Report Template (rendered off-screen, but present in DOM so html2canvas can capture it) */}
+      <div style={{ position: 'absolute', left: '-9999px', top: '-9999px' }}>
+        <div id="sos-pdf-report" style={{
+          width: '800px',
+          padding: '40px',
+          background: '#0b0f19',
+          color: '#f8fafc',
+          fontFamily: "'Inter', sans-serif",
+          boxSizing: 'border-box',
+          border: '4px double #ef4444'
+        }}>
+          {/* Header */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid rgba(239, 68, 68, 0.3)', paddingBottom: '20px', marginBottom: '30px' }}>
+            <div>
+              <div style={{ color: '#ef4444', fontWeight: '900', letterSpacing: '3px', fontSize: '0.75rem', textTransform: 'uppercase', marginBottom: '6px' }}>RASTA-SAATHI EMERGENCY COMMAND SYSTEM</div>
+              <h1 style={{ margin: 0, fontSize: '1.8rem', fontWeight: '900', color: '#ffffff', letterSpacing: '-0.5px' }}>🚨 INCIDENT DISPATCH REPORT</h1>
+            </div>
+            <div style={{ textAlign: 'right' }}>
+              <div style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)', color: '#ef4444', padding: '6px 14px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: '800', letterSpacing: '1px', display: 'inline-block' }}>
+                COMMAND GRID SYNCED
+              </div>
+              <div style={{ fontSize: '0.65rem', color: '#94a3b8', marginTop: '6px', fontWeight: '700' }}>INCIDENT ID: {sessionId || 'PENDING'}</div>
+            </div>
+          </div>
+
+          {/* Metadata Grid */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px', marginBottom: '35px' }}>
+            
+            {/* Column 1: Victim & Location */}
+            <div style={{ background: '#0f172a', padding: '20px', borderRadius: '12px', border: '1px solid #1e293b' }}>
+              <h3 style={{ margin: '0 0 16px 0', fontSize: '0.9rem', color: '#3b82f6', textTransform: 'uppercase', letterSpacing: '1px', borderBottom: '1px solid #1e293b', paddingBottom: '8px', fontWeight: '800' }}>👤 Victim & Site Details</h3>
+              
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.85rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: '#94a3b8' }}>Victim Name:</span>
+                  <span style={{ fontWeight: '700', color: '#f8fafc' }}>{user.name || 'Anonymous Victim'}</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: '#94a3b8' }}>Identity Profile:</span>
+                  <span style={{ fontWeight: '700', color: '#f8fafc' }}>{user.phone || 'N/A'}</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: '#94a3b8' }}>GPS Location:</span>
+                  <span style={{ fontWeight: '700', color: '#f8fafc' }}>{victimLocation ? `${victimLocation.lat.toFixed(6)}, ${victimLocation.lng.toFixed(6)}` : 'N/A'}</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: '#94a3b8' }}>Active Language:</span>
+                  <span style={{ fontWeight: '700', color: '#f8fafc', textTransform: 'uppercase' }}>{user.language || 'EN'}</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: '#94a3b8' }}>Report Date:</span>
+                  <span style={{ fontWeight: '700', color: '#f8fafc' }}>{sosTimestamp ? sosTimestamp.toLocaleString() : new Date().toLocaleString()}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Column 2: Emergency Dispatches */}
+            <div style={{ background: '#0f172a', padding: '20px', borderRadius: '12px', border: '1px solid #1e293b' }}>
+              <h3 style={{ margin: '0 0 16px 0', fontSize: '0.9rem', color: '#10b981', textTransform: 'uppercase', letterSpacing: '1px', borderBottom: '1px solid #1e293b', paddingBottom: '8px', fontWeight: '800' }}>🚑 Tactical Dispatches</h3>
+              
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.85rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                  <span style={{ color: '#94a3b8' }}>Target Trauma Center:</span>
+                  <span style={{ fontWeight: '800', color: '#10b981', fontSize: '0.95rem' }}>{selectedHospitalName || 'PENDING DISPATCH'}</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                  <span style={{ color: '#94a3b8' }}>Assigned Police Precinct:</span>
+                  <span style={{ fontWeight: '800', color: '#3b82f6', fontSize: '0.95rem' }}>{policeStations[0]?.name || 'PENDING DISPATCH'}</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid #1e293b', paddingTop: '8px', marginTop: '4px' }}>
+                  <span style={{ color: '#94a3b8' }}>Hospital ETA:</span>
+                  <span style={{ fontWeight: '700', color: '#fbbf24' }}>
+                    {hospitalLocation ? 'Dispatched' : 'Calculating...'}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Section: Medical Guidance */}
+          <div style={{ background: '#0f172a', padding: '24px', borderRadius: '12px', border: '1px solid #1e293b', marginBottom: '30px' }}>
+            <h3 style={{ margin: '0 0 16px 0', fontSize: '0.95rem', color: '#ef4444', textTransform: 'uppercase', letterSpacing: '1.5px', borderBottom: '1px solid #1e293b', paddingBottom: '8px', fontWeight: '900' }}>🧠 AI MEDIC CORE FIRST AID ADVISORY</h3>
+            
+            <div style={{ fontSize: '0.85rem', lineHeight: '1.6', color: '#cbd5e1' }}>
+              {messages.filter(m => m.role === 'bot').slice(1).map((m, idx) => (
+                <div key={idx} style={{ marginBottom: '16px', background: '#0b0f19', padding: '15px', borderRadius: '8px', borderLeft: '3px solid #3b82f6' }}>
+                  <div style={{ color: '#3b82f6', fontWeight: '800', fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px' }}>Advisory Step {idx + 1}</div>
+                  <div style={{ whiteSpace: 'pre-wrap' }}>{m.text}</div>
+                </div>
+              ))}
+              {messages.filter(m => m.role === 'bot').slice(1).length === 0 && (
+                <div style={{ fontStyle: 'italic', color: '#94a3b8' }}>No emergency chat messages generated yet. Please refer to standard Golden Hour procedures.</div>
+              )}
+            </div>
+          </div>
+
+          {/* Footer */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #1e293b', paddingTop: '20px', fontSize: '0.75rem', color: '#94a3b8' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ef4444' }}></div>
+              <span style={{ fontWeight: '700', letterSpacing: '1px' }}>RASTA-SAATHI SECURE EMERGRID</span>
+            </div>
+            <div>
+              <span>REPORT GENERATED AUTOMATICALLY BY SECURE GATEWAY</span>
+            </div>
+          </div>
+
         </div>
       </div>
     </motion.div>
