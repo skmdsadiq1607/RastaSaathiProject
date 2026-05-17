@@ -2,10 +2,48 @@ const axios = require('axios');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { OAuth2Client } = require('google-auth-library');
+const https = require('https');
 
 const { User } = require('./model');
 const { env } = require('../../config/env');
 const { AppError } = require('../../utils/AppError');
+
+// High-performance Keep-Alive agent to reuse connections and avoid TLS handshake latency
+const httpsAgent = new https.Agent({
+  keepAlive: true,
+  maxSockets: 32,
+  keepAliveMsecs: 1000,
+});
+
+// In-memory cache for validated Google access tokens to avoid redundant network requests
+const googleTokenCache = {
+  cache: new Map(),
+  ttlMs: 15 * 60 * 1000, // 15 minutes TTL
+
+  get(token) {
+    const item = this.cache.get(token);
+    if (!item) return null;
+    if (Date.now() > item.expiry) {
+      this.cache.delete(token);
+      return null;
+    }
+    return item.value;
+  },
+
+  set(token, value) {
+    // Evict expired entries to prevent memory leaks
+    const now = Date.now();
+    for (const [k, v] of this.cache.entries()) {
+      if (now > v.expiry) {
+        this.cache.delete(k);
+      }
+    }
+    this.cache.set(token, {
+      value,
+      expiry: now + this.ttlMs
+    });
+  }
+};
 
 function signAccessToken(user) {
   return jwt.sign({ sub: String(user._id), role: user.role }, env.JWT_SECRET, { expiresIn: '15m' });
@@ -81,21 +119,33 @@ async function refresh({ refreshToken }) {
 
 async function googleLogin({ token, fcmToken, role = 'victim' }) {
   try {
-    // Verify Access Token via Google UserInfo API
-    const googleRes = await axios.get(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${token}`);
-    const payload = googleRes.data;
-    
-    if (!payload.sub) throw new Error('Invalid token');
+    // 1. Check in-memory cache for validated token details
+    let payload = googleTokenCache.get(token);
+
+    if (!payload) {
+      // 2. Cache miss: Verify Access Token via Google UserInfo API using Keep-Alive
+      const googleRes = await axios.get(
+        `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${token}`,
+        { httpsAgent, timeout: 8000 }
+      );
+      payload = googleRes.data;
+      
+      if (!payload || !payload.sub) throw new Error('Invalid token');
+
+      // 3. Cache the verified payload
+      googleTokenCache.set(token, payload);
+    }
 
     const { email, name, sub: googleId } = payload;
     
     let user = await User.findOne({ phone: email });
     
     if (!user) {
+      // 4. Optimize bcrypt salt rounds (4) for social logins to eliminate CPU registry bottleneck
       user = await User.create({
         name: name,
         phone: email, 
-        passwordHash: await bcrypt.hash(googleId, 12),
+        passwordHash: await bcrypt.hash(googleId, 4),
         role: role,
         language: 'en'
       });
