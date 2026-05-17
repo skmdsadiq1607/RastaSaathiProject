@@ -142,7 +142,7 @@ const Dashboard = () => {
       const canvas = await html2canvas(element, {
         scale: 2, // Double resolution for clean, premium print lines
         useCORS: true,
-        backgroundColor: '#0b0f19',
+        backgroundColor: '#ffffff', // Professional white background for official print documents
         logging: false,
       });
 
@@ -546,23 +546,32 @@ const Dashboard = () => {
         <div id="sos-pdf-report" style={{
           width: '800px',
           padding: '40px',
-          background: '#0b0f19',
-          color: '#f8fafc',
+          background: '#ffffff', // Clean white background for official print documents
+          color: '#0f172a', // Premium dark slate text for absolute legibility
           fontFamily: "'Inter', sans-serif",
           boxSizing: 'border-box',
-          border: '4px double #ef4444'
+          border: '1.5px solid #cbd5e1',
+          borderRadius: '8px'
         }}>
           {/* Header */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid rgba(239, 68, 68, 0.3)', paddingBottom: '20px', marginBottom: '30px' }}>
-            <div>
-              <div style={{ color: '#ef4444', fontWeight: '900', letterSpacing: '3px', fontSize: '0.75rem', textTransform: 'uppercase', marginBottom: '6px' }}>RASTA-SAATHI EMERGENCY COMMAND SYSTEM</div>
-              <h1 style={{ margin: 0, fontSize: '1.8rem', fontWeight: '900', color: '#ffffff', letterSpacing: '-0.5px' }}>🚨 INCIDENT DISPATCH REPORT</h1>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid #e2e8f0', paddingBottom: '20px', marginBottom: '30px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+              {/* Rasta-Saathi Logo on Top Left */}
+              <div style={{ display: 'flex', alignItems: 'center', fontFamily: 'system-ui, sans-serif', fontSize: '28px', fontWeight: '900', letterSpacing: '-1.5px' }}>
+                <span style={{ color: '#0f172a' }}>Rasta</span>
+                <span style={{ color: '#ef4444', marginLeft: '1px' }}>Saathi</span>
+              </div>
+              <div style={{ width: '1px', height: '32px', background: '#e2e8f0' }}></div>
+              <div>
+                <div style={{ color: '#ef4444', fontWeight: '800', letterSpacing: '2px', fontSize: '0.65rem', textTransform: 'uppercase' }}>EMERGENCY RESPONSE GRID</div>
+                <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: '700' }}>OFFICIAL INCIDENT REPORT</div>
+              </div>
             </div>
             <div style={{ textAlign: 'right' }}>
-              <div style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)', color: '#ef4444', padding: '6px 14px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: '800', letterSpacing: '1px', display: 'inline-block' }}>
-                COMMAND GRID SYNCED
+              <div style={{ background: '#fef2f2', border: '1px solid #fca5a5', color: '#ef4444', padding: '6px 14px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: '800', letterSpacing: '1px', display: 'inline-block' }}>
+                GRID SYNCED
               </div>
-              <div style={{ fontSize: '0.65rem', color: '#94a3b8', marginTop: '6px', fontWeight: '700' }}>INCIDENT ID: {sessionId || 'PENDING'}</div>
+              <div style={{ fontSize: '0.65rem', color: '#64748b', marginTop: '6px', fontWeight: '700' }}>INCIDENT ID: {sessionId || 'PENDING'}</div>
             </div>
           </div>
 
@@ -570,49 +579,49 @@ const Dashboard = () => {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px', marginBottom: '35px' }}>
             
             {/* Column 1: Victim & Location */}
-            <div style={{ background: '#0f172a', padding: '20px', borderRadius: '12px', border: '1px solid #1e293b' }}>
-              <h3 style={{ margin: '0 0 16px 0', fontSize: '0.9rem', color: '#3b82f6', textTransform: 'uppercase', letterSpacing: '1px', borderBottom: '1px solid #1e293b', paddingBottom: '8px', fontWeight: '800' }}>👤 Victim & Site Details</h3>
+            <div style={{ background: '#f8fafc', padding: '20px', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+              <h3 style={{ margin: '0 0 16px 0', fontSize: '0.9rem', color: '#2563eb', textTransform: 'uppercase', letterSpacing: '1px', borderBottom: '1px solid #e2e8f0', paddingBottom: '8px', fontWeight: '800' }}>👤 Victim & Site Details</h3>
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.85rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: '#94a3b8' }}>Victim Name:</span>
-                  <span style={{ fontWeight: '700', color: '#f8fafc' }}>{user.name || 'Anonymous Victim'}</span>
+                  <span style={{ color: '#64748b' }}>Victim Name:</span>
+                  <span style={{ fontWeight: '700', color: '#0f172a' }}>{user.name || 'Anonymous Victim'}</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: '#94a3b8' }}>Identity Profile:</span>
-                  <span style={{ fontWeight: '700', color: '#f8fafc' }}>{user.phone || 'N/A'}</span>
+                  <span style={{ color: '#64748b' }}>Identity Profile:</span>
+                  <span style={{ fontWeight: '700', color: '#0f172a' }}>{user.phone || 'N/A'}</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: '#94a3b8' }}>GPS Location:</span>
-                  <span style={{ fontWeight: '700', color: '#f8fafc' }}>{victimLocation ? `${victimLocation.lat.toFixed(6)}, ${victimLocation.lng.toFixed(6)}` : 'N/A'}</span>
+                  <span style={{ color: '#64748b' }}>GPS Location:</span>
+                  <span style={{ fontWeight: '700', color: '#0f172a' }}>{victimLocation ? `${victimLocation.lat.toFixed(6)}, ${victimLocation.lng.toFixed(6)}` : 'N/A'}</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: '#94a3b8' }}>Active Language:</span>
-                  <span style={{ fontWeight: '700', color: '#f8fafc', textTransform: 'uppercase' }}>{user.language || 'EN'}</span>
+                  <span style={{ color: '#64748b' }}>Active Language:</span>
+                  <span style={{ fontWeight: '700', color: '#0f172a', textTransform: 'uppercase' }}>{user.language || 'EN'}</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: '#94a3b8' }}>Report Date:</span>
-                  <span style={{ fontWeight: '700', color: '#f8fafc' }}>{sosTimestamp ? sosTimestamp.toLocaleString() : new Date().toLocaleString()}</span>
+                  <span style={{ color: '#64748b' }}>Report Date:</span>
+                  <span style={{ fontWeight: '700', color: '#0f172a' }}>{sosTimestamp ? sosTimestamp.toLocaleString() : new Date().toLocaleString()}</span>
                 </div>
               </div>
             </div>
 
             {/* Column 2: Emergency Dispatches */}
-            <div style={{ background: '#0f172a', padding: '20px', borderRadius: '12px', border: '1px solid #1e293b' }}>
-              <h3 style={{ margin: '0 0 16px 0', fontSize: '0.9rem', color: '#10b981', textTransform: 'uppercase', letterSpacing: '1px', borderBottom: '1px solid #1e293b', paddingBottom: '8px', fontWeight: '800' }}>🚑 Tactical Dispatches</h3>
+            <div style={{ background: '#f8fafc', padding: '20px', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+              <h3 style={{ margin: '0 0 16px 0', fontSize: '0.9rem', color: '#16a34a', textTransform: 'uppercase', letterSpacing: '1px', borderBottom: '1px solid #e2e8f0', paddingBottom: '8px', fontWeight: '800' }}>🚑 Tactical Dispatches</h3>
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.85rem' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                  <span style={{ color: '#94a3b8' }}>Target Trauma Center:</span>
-                  <span style={{ fontWeight: '800', color: '#10b981', fontSize: '0.95rem' }}>{selectedHospitalName || 'PENDING DISPATCH'}</span>
+                  <span style={{ color: '#64748b' }}>Target Trauma Center:</span>
+                  <span style={{ fontWeight: '800', color: '#16a34a', fontSize: '0.95rem' }}>{selectedHospitalName || 'PENDING DISPATCH'}</span>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                  <span style={{ color: '#94a3b8' }}>Assigned Police Precinct:</span>
-                  <span style={{ fontWeight: '800', color: '#3b82f6', fontSize: '0.95rem' }}>{policeStations[0]?.name || 'PENDING DISPATCH'}</span>
+                  <span style={{ color: '#64748b' }}>Assigned Police Precinct:</span>
+                  <span style={{ fontWeight: '800', color: '#2563eb', fontSize: '0.95rem' }}>{policeStations[0]?.name || 'PENDING DISPATCH'}</span>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid #1e293b', paddingTop: '8px', marginTop: '4px' }}>
-                  <span style={{ color: '#94a3b8' }}>Hospital ETA:</span>
-                  <span style={{ fontWeight: '700', color: '#fbbf24' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid #e2e8f0', paddingTop: '8px', marginTop: '4px' }}>
+                  <span style={{ color: '#64748b' }}>Hospital ETA:</span>
+                  <span style={{ fontWeight: '700', color: '#d97706' }}>
                     {hospitalLocation ? 'Dispatched' : 'Calculating...'}
                   </span>
                 </div>
@@ -622,27 +631,27 @@ const Dashboard = () => {
           </div>
 
           {/* Section: Medical Guidance */}
-          <div style={{ background: '#0f172a', padding: '24px', borderRadius: '12px', border: '1px solid #1e293b', marginBottom: '30px' }}>
-            <h3 style={{ margin: '0 0 16px 0', fontSize: '0.95rem', color: '#ef4444', textTransform: 'uppercase', letterSpacing: '1.5px', borderBottom: '1px solid #1e293b', paddingBottom: '8px', fontWeight: '900' }}>🧠 AI MEDIC CORE FIRST AID ADVISORY</h3>
+          <div style={{ background: '#f8fafc', padding: '24px', borderRadius: '12px', border: '1px solid #e2e8f0', marginBottom: '30px' }}>
+            <h3 style={{ margin: '0 0 16px 0', fontSize: '0.95rem', color: '#ef4444', textTransform: 'uppercase', letterSpacing: '1.5px', borderBottom: '1px solid #e2e8f0', paddingBottom: '8px', fontWeight: '900' }}>🧠 AI MEDIC CORE FIRST AID ADVISORY</h3>
             
-            <div style={{ fontSize: '0.85rem', lineHeight: '1.6', color: '#cbd5e1' }}>
+            <div style={{ fontSize: '0.85rem', lineHeight: '1.6', color: '#334155' }}>
               {messages.filter(m => m.role === 'bot').slice(1).map((m, idx) => (
-                <div key={idx} style={{ marginBottom: '16px', background: '#0b0f19', padding: '15px', borderRadius: '8px', borderLeft: '3px solid #3b82f6' }}>
-                  <div style={{ color: '#3b82f6', fontWeight: '800', fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px' }}>Advisory Step {idx + 1}</div>
+                <div key={idx} style={{ marginBottom: '16px', background: '#ffffff', padding: '15px', borderRadius: '8px', border: '1px solid #e2e8f0', borderLeft: '4px solid #ef4444' }}>
+                  <div style={{ color: '#ef4444', fontWeight: '800', fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px' }}>Advisory Step {idx + 1}</div>
                   <div style={{ whiteSpace: 'pre-wrap' }}>{m.text}</div>
                 </div>
               ))}
               {messages.filter(m => m.role === 'bot').slice(1).length === 0 && (
-                <div style={{ fontStyle: 'italic', color: '#94a3b8' }}>No emergency chat messages generated yet. Please refer to standard Golden Hour procedures.</div>
+                <div style={{ fontStyle: 'italic', color: '#64748b' }}>No emergency chat messages generated yet. Please refer to standard Golden Hour procedures.</div>
               )}
             </div>
           </div>
 
           {/* Footer */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #1e293b', paddingTop: '20px', fontSize: '0.75rem', color: '#94a3b8' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #e2e8f0', paddingTop: '20px', fontSize: '0.75rem', color: '#64748b' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ef4444' }}></div>
-              <span style={{ fontWeight: '700', letterSpacing: '1px' }}>RASTA-SAATHI SECURE EMERGRID</span>
+              <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ef4444' }}></div>
+              <span style={{ fontWeight: '700', letterSpacing: '1px', color: '#0f172a' }}>RASTA-SAATHI SECURE EMERGRID</span>
             </div>
             <div>
               <span>REPORT GENERATED AUTOMATICALLY BY SECURE GATEWAY</span>
