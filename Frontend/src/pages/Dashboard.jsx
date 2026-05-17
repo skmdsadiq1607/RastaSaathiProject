@@ -197,7 +197,40 @@ const Dashboard = () => {
     }
   }, [messages]);
 
-  const triggerSOS = async () => {
+  const [countdownActive, setCountdownActive] = useState(false);
+  const [countdownSeconds, setCountdownSeconds] = useState(5);
+  const [countdownTimer, setCountdownTimer] = useState(null);
+
+  const triggerSOS = () => {
+    setCountdownActive(true);
+    setCountdownSeconds(5);
+    
+    const timer = setInterval(() => {
+      setCountdownSeconds((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          setCountdownActive(false);
+          // Execute the actual dispatch!
+          executeSOS();
+          return 5;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    
+    setCountdownTimer(timer);
+  };
+
+  const cancelSOSCountdown = () => {
+    if (countdownTimer) {
+      clearInterval(countdownTimer);
+    }
+    setCountdownTimer(null);
+    setCountdownActive(false);
+    setCountdownSeconds(5);
+  };
+
+  const executeSOS = async () => {
     setSosActive(true);
     setSosTimestamp(new Date());
     setApiLoading(true);
@@ -347,21 +380,72 @@ const Dashboard = () => {
                   </p>
                 </motion.div>
 
-                <motion.button 
-                  whileHover={{ scale: 1.05 }} 
-                  whileTap={{ scale: 0.95 }} 
-                  onClick={triggerSOS} 
-                  style={{ 
-                    width: '160px', height: '160px', borderRadius: '50%', 
-                    background: 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)', 
-                    border: '10px solid rgba(239,68,68,0.2)', color: 'white', 
-                    cursor: 'pointer', boxShadow: '0 0 50px rgba(239,68,68,0.5)',
-                    display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
-                  }}
-                >
-                  <Logo size={22} light />
-                  <span style={{ fontSize: '1.6rem', fontWeight: '900', marginTop: '4px' }}>SOS</span>
-                </motion.button>
+                {countdownActive ? (
+                  <motion.div 
+                    initial={{ scale: 0.9, opacity: 0 }} 
+                    animate={{ scale: 1, opacity: 1 }}
+                    style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
+                  >
+                    <div className="pulse-sos" style={{ 
+                      width: '180px', height: '180px', borderRadius: '50%', 
+                      background: 'rgba(239, 68, 68, 0.1)', 
+                      border: '6px solid #ef4444',
+                      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                      boxShadow: '0 0 40px rgba(239, 68, 68, 0.2)',
+                      marginBottom: '30px'
+                    }}>
+                      <span style={{ fontSize: '0.8rem', fontWeight: '900', color: '#ef4444', letterSpacing: '2px', textTransform: 'uppercase' }}>DISPATCHING IN</span>
+                      <span style={{ fontSize: '4.5rem', fontWeight: '900', color: '#ef4444', lineHeight: '1' }}>{countdownSeconds}</span>
+                    </div>
+
+                    <button 
+                      onClick={cancelSOSCountdown}
+                      className="btn"
+                      style={{ 
+                        padding: '16px 40px', 
+                        background: '#0f172a',
+                        color: '#ffffff', 
+                        border: '2px solid #ef4444',
+                        borderRadius: '100px',
+                        fontSize: '1rem',
+                        fontWeight: '900',
+                        letterSpacing: '1px',
+                        cursor: 'pointer',
+                        boxShadow: '0 4px 20px rgba(239,68,68,0.15)',
+                        transition: 'all 0.3s'
+                      }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.background = '#ef4444';
+                        e.currentTarget.style.color = '#ffffff';
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.background = '#0f172a';
+                        e.currentTarget.style.color = '#ffffff';
+                      }}
+                    >
+                      CANCEL DISPATCH
+                    </button>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', fontWeight: '700', marginTop: '14px', letterSpacing: '0.5px' }}>
+                      Tap to cancel the alarm within the window.
+                    </p>
+                  </motion.div>
+                ) : (
+                  <motion.button 
+                    whileHover={{ scale: 1.05 }} 
+                    whileTap={{ scale: 0.95 }} 
+                    onClick={triggerSOS} 
+                    style={{ 
+                      width: '160px', height: '160px', borderRadius: '50%', 
+                      background: 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)', 
+                      border: '10px solid rgba(239,68,68,0.2)', color: '#ffffff', 
+                      cursor: 'pointer', boxShadow: '0 0 50px rgba(239,68,68,0.5)',
+                      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
+                    }}
+                  >
+                    <Logo size={22} light />
+                    <span style={{ fontSize: '1.6rem', fontWeight: '900', marginTop: '4px', color: '#ffffff' }}>SOS</span>
+                  </motion.button>
+                )}
               </div>
             ) : (
               <div style={{ flex: 1, position: 'relative' }}>
