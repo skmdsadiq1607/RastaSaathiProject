@@ -16,7 +16,7 @@ const Logo = ({ size = 28, light = false }) => {
     >
       <span style={{ color: 'var(--text-primary)' }}>Rasta</span>
       <span style={{ 
-        background: 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)',
+        background: light ? 'var(--text-primary)' : 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)',
         WebkitBackgroundClip: 'text',
         WebkitTextFillColor: 'transparent',
         marginLeft: '1px'
