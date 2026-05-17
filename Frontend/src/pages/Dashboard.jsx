@@ -192,6 +192,14 @@ const Dashboard = () => {
   }, [navigate]);
 
   useEffect(() => {
+    return () => {
+      if (countdownTimer) {
+        clearInterval(countdownTimer);
+      }
+    };
+  }, [countdownTimer]);
+
+  useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
