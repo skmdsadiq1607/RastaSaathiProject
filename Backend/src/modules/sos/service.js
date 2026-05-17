@@ -14,7 +14,7 @@ async function enforceSosRateLimit({ redis, userId }) {
   }
 }
 
-async function triggerSos({ io, redis, queues, lat, lng, userId, injuryType, vehicleType }) {
+async function triggerSos({ io, redis, queues, lat, lng, userId, injuryType, vehicleType, message }) {
   await enforceSosRateLimit({ redis, userId });
 
   const { User } = require('../auth/model');
@@ -24,7 +24,7 @@ async function triggerSos({ io, redis, queues, lat, lng, userId, injuryType, veh
   const { predictSeverityRuleBased } = require('../../utils/severityScorer');
 
   const victimUser = userId ? await User.findById(userId).lean() : null;
-  const incident = await createIncident({ userId, lat, lng, injuryType, vehicleType });
+  const incident = await createIncident({ userId, lat, lng, injuryType, vehicleType, message });
   const sos = await SOS.create({
     userId: userId || undefined,
     incidentId: incident._id,

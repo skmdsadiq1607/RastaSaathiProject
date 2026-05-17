@@ -463,6 +463,14 @@ const Profile = () => {
 
             </div>
 
+            {/* Section: Custom Emergency Message */}
+            <div style={{ background: '#f8fafc', padding: '24px', borderRadius: '12px', border: '1px solid #e2e8f0', marginBottom: '30px' }}>
+              <h3 style={{ margin: '0 0 16px 0', fontSize: '0.95rem', color: '#2563eb', textTransform: 'uppercase', letterSpacing: '1.5px', borderBottom: '1px solid #e2e8f0', paddingBottom: '8px', fontWeight: '900' }}>👤 VICTIM'S EMERGENCY NOTE / MESSAGE</h3>
+              <div style={{ fontSize: '0.9rem', lineHeight: '1.6', color: '#0f172a', fontWeight: '700', background: '#ffffff', padding: '15px', borderRadius: '8px', border: '1px solid #e2e8f0', borderLeft: '4px solid #2563eb', whiteSpace: 'pre-wrap' }}>
+                {selectedIncident.message || "No custom message entered. Automated GPS Dispatch Protocol executed."}
+              </div>
+            </div>
+
             {/* Section: Medical Guidance */}
             <div style={{ background: '#f8fafc', padding: '24px', borderRadius: '12px', border: '1px solid #e2e8f0', marginBottom: '30px' }}>
               <h3 style={{ margin: '0 0 16px 0', fontSize: '0.95rem', color: '#ef4444', textTransform: 'uppercase', letterSpacing: '1.5px', borderBottom: '1px solid #e2e8f0', paddingBottom: '8px', fontWeight: '900' }}>🧠 EMERGENCY FIRST AID PROTOCOL</h3>

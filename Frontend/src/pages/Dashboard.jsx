@@ -125,6 +125,7 @@ const Dashboard = () => {
   const [apiLoading, setApiLoading] = useState(false);
   const [sosTimestamp, setSosTimestamp] = useState(null);
   const [pdfGenerating, setPdfGenerating] = useState(false);
+  const [customEmergencyMessage, setCustomEmergencyMessage] = useState('');
   
   // SOS countdown states (declared at top of component)
   const [countdownActive, setCountdownActive] = useState(false);
@@ -260,7 +261,8 @@ const Dashboard = () => {
         const sosRes = await axios.post(`${API_BASE_URL}/sos/trigger`, {
           lat: latitude,
           lng: longitude,
-          injuryType: 'Traffic collision trauma'
+          injuryType: 'Traffic collision trauma',
+          message: customEmergencyMessage
         }, {
           headers: { Authorization: `Bearer ${token}` }
         });
@@ -385,9 +387,35 @@ const Dashboard = () => {
                  <motion.div initial={{ y: 20 }} animate={{ y: 0 }} style={{ marginBottom: '40px' }}>
                   <div style={{ color: '#ef4444', fontWeight: '900', letterSpacing: '2px', fontSize: '0.7rem', marginBottom: '12px' }}>{t('secure_terminal')}</div>
                   <h1 style={{ fontSize: '2.8rem', marginBottom: '16px', fontWeight: '900' }}>{t('ready_dispatch')}</h1>
-                  <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '450px', margin: '0 auto' }}>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '450px', margin: '0 auto', marginBottom: '24px' }}>
                     {t('trigger_sub')}
                   </p>
+                  
+                  <div style={{ margin: '20px auto 0', maxWidth: '380px', width: '100%', textAlign: 'left' }}>
+                    <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '800', color: 'var(--text-secondary)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                      📝 Custom Emergency Note / Message (Optional)
+                    </label>
+                    <input 
+                      type="text"
+                      placeholder="e.g., Severe leg bleeding, passenger trapped..."
+                      value={customEmergencyMessage}
+                      onChange={(e) => setCustomEmergencyMessage(e.target.value)}
+                      style={{ 
+                        width: '100%', 
+                        background: 'var(--bg-deep)', 
+                        border: '1px solid var(--border-glass)',
+                        borderRadius: '12px',
+                        padding: '14px 18px',
+                        fontSize: '0.95rem',
+                        color: 'var(--text-primary)',
+                        outline: 'none',
+                        boxSizing: 'border-box',
+                        transition: 'all 0.3s ease'
+                      }}
+                      onFocus={(e) => e.target.style.borderColor = '#ef4444'}
+                      onBlur={(e) => e.target.style.borderColor = 'var(--border-glass)'}
+                    />
+                  </div>
                 </motion.div>
 
                 {countdownActive ? (
@@ -737,6 +765,14 @@ const Dashboard = () => {
               </div>
             </div>
 
+          </div>
+
+          {/* Section: Custom Emergency Message */}
+          <div style={{ background: '#f8fafc', padding: '24px', borderRadius: '12px', border: '1px solid #e2e8f0', marginBottom: '30px' }}>
+            <h3 style={{ margin: '0 0 16px 0', fontSize: '0.95rem', color: '#2563eb', textTransform: 'uppercase', letterSpacing: '1.5px', borderBottom: '1px solid #e2e8f0', paddingBottom: '8px', fontWeight: '900' }}>👤 VICTIM'S EMERGENCY NOTE / MESSAGE</h3>
+            <div style={{ fontSize: '0.9rem', lineHeight: '1.6', color: '#0f172a', fontWeight: '700', background: '#ffffff', padding: '15px', borderRadius: '8px', border: '1px solid #e2e8f0', borderLeft: '4px solid #2563eb', whiteSpace: 'pre-wrap' }}>
+              {customEmergencyMessage || "No custom message entered. Automated GPS Dispatch Protocol executed."}
+            </div>
           </div>
 
           {/* Section: Medical Guidance */}

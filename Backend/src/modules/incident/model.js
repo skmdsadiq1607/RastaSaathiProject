@@ -23,6 +23,7 @@ const IncidentSchema = new mongoose.Schema(
     status: { type: String, enum: Object.values(INCIDENT_STATUS), default: INCIDENT_STATUS.OPEN, index: true },
     injuryType: { type: String },
     vehicleType: { type: String },
+    message: { type: String }, // User's custom text message/emergency description
     assignedResponder: { type: mongoose.Schema.Types.ObjectId, ref: 'User', index: true },
     selectedHospital: { type: mongoose.Schema.Types.ObjectId, ref: 'Hospital' }
   },

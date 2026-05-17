@@ -12,7 +12,7 @@ function computeGDelta(accelerometer) {
   return delta;
 }
 
-async function createIncident({ userId, lat, lng, injuryType, vehicleType }) {
+async function createIncident({ userId, lat, lng, injuryType, vehicleType, message }) {
   if (typeof lat !== 'number' || typeof lng !== 'number') {
     throw new AppError('Invalid location', 400, 'VALIDATION_ERROR');
   }
@@ -26,7 +26,8 @@ async function createIncident({ userId, lat, lng, injuryType, vehicleType }) {
     ticketNumber,
     location: { type: 'Point', coordinates: [lng, lat] },
     injuryType,
-    vehicleType
+    vehicleType,
+    message
   });
   return incident;
 }
