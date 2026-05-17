@@ -442,39 +442,28 @@ const Dashboard = () => {
                 ) : (
                   <motion.button 
                     whileHover={{ 
-                      y: -4,
-                      boxShadow: 'inset 0 4px 8px rgba(255,255,255,0.45), inset 0 -4px 8px rgba(0,0,0,0.25), 0 12px 0 #b91c1c, 0 20px 30px rgba(239, 68, 68, 0.45)'
+                      scale: 1.05,
+                      boxShadow: '0 0 40px rgba(239, 68, 68, 0.6)'
                     }} 
                     whileTap={{ 
-                      y: 6,
-                      boxShadow: 'inset 0 2px 4px rgba(255,255,255,0.3), inset 0 -2px 4px rgba(0,0,0,0.2), 0 2px 0 #b91c1c, 0 5px 10px rgba(239, 68, 68, 0.3)'
+                      scale: 0.95,
+                      boxShadow: '0 0 15px rgba(239, 68, 68, 0.3)'
                     }} 
                     onClick={triggerSOS} 
                     style={{ 
                       width: '160px', height: '160px', borderRadius: '50%', 
-                      background: 'linear-gradient(180deg, #ef4444 0%, #dc2626 100%)', 
+                      background: '#ef4444', 
                       border: 'none', color: '#ffffff', 
                       cursor: 'pointer', 
-                      // Layered Spherical 3D shading box shadow!
-                      boxShadow: 'inset 0 4px 8px rgba(255, 255, 255, 0.45), inset 0 -4px 8px rgba(0, 0, 0, 0.25), 0 8px 0 #b91c1c, 0 15px 25px rgba(239, 68, 68, 0.35)',
+                      boxShadow: '0 0 25px rgba(239, 68, 68, 0.35)',
                       display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
                       overflow: 'hidden',
                       padding: 0,
-                      outline: 'none',
-                      borderTop: '3px solid rgba(255, 255, 255, 0.5)', 
-                      position: 'relative'
+                      outline: 'none'
                     }}
                   >
-                    {/* Glossy Glass reflection overlay */}
-                    <div style={{
-                      position: 'absolute',
-                      top: 0, left: 0, right: 0, height: '50%',
-                      background: 'linear-gradient(180deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 100%)',
-                      pointerEvents: 'none'
-                    }}></div>
-                    
                     <Logo size={22} light />
-                    <span style={{ fontSize: '1.6rem', fontWeight: '900', marginTop: '4px', color: '#ffffff', textShadow: '0 2px 4px rgba(0,0,0,0.3)', zIndex: 1 }}>SOS</span>
+                    <span style={{ fontSize: '1.6rem', fontWeight: '900', marginTop: '4px', color: '#ffffff' }}>SOS</span>
                   </motion.button>
                 )}
               </div>
