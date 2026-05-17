@@ -392,83 +392,105 @@ const Dashboard = () => {
                 </div>
 
                 <div style={{ position: 'absolute', bottom: '15px', left: '15px', right: '15px' }}>
-                  <div className="glass-panel" style={{ padding: '24px', background: 'var(--bg-primary)', opacity: 0.95 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-                      <div style={{ width: '48px', height: '48px', background: 'var(--brand-red-glow)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        {apiLoading ? <Loader2 className="animate-spin" color="#ef4444" /> : <Activity size={24} color="#ef4444" />}
-                      </div>
-                      <div style={{ flex: 1 }}>
-                        <div style={{ color: 'var(--text-secondary)', fontSize: '0.65rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('system_status')}</div>
-                        <div style={{ fontSize: '1.2rem', fontWeight: '900', color: 'var(--text-primary)' }}>{apiLoading ? t('sync_grid') : t('dispatched_alerts')}</div>
-                      </div>
-                      <div style={{ textAlign: 'right', display: 'flex', gap: '24px', alignItems: 'center' }}>
-                        <div>
-                          <div style={{ color: 'var(--text-secondary)', fontSize: '0.65rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('nearest_police') || 'Nearest Police'}</div>
-                          <div style={{ fontSize: '1rem', fontWeight: '900', color: '#3b82f6' }}>{policeStations[0]?.name || 'Locating...'}</div>
+                  <div className="glass-panel" style={{ padding: '20px', background: 'var(--bg-primary)', opacity: 0.98, border: '1.5px solid var(--border-glass)' }}>
+                    {/* Top Row: Information Grid */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr 1fr', gap: '20px', alignItems: 'center', marginBottom: hospitalLocation && victimLocation ? '16px' : '0' }}>
+                      {/* Column 1: System Status */}
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                        <div style={{ width: '40px', height: '40px', background: 'var(--brand-red-glow)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                          {apiLoading ? <Loader2 className="animate-spin" color="#ef4444" size={20} /> : <Activity size={20} color="#ef4444" />}
                         </div>
                         <div>
-                          <div style={{ color: 'var(--text-secondary)', fontSize: '0.65rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('target_center')}</div>
-                          <div style={{ fontSize: '1rem', fontWeight: '900', color: '#10b981' }}>{selectedHospitalName || (apiLoading ? t('calculating') : 'Manual Mode')}</div>
+                          <div style={{ color: 'var(--text-secondary)', fontSize: '0.6rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('system_status')}</div>
+                          <div style={{ fontSize: '1rem', fontWeight: '900', color: 'var(--text-primary)', whiteSpace: 'nowrap' }}>{apiLoading ? t('sync_grid') : t('dispatched_alerts')}</div>
                         </div>
-                        
-                        {hospitalLocation && victimLocation && (
-                          <div style={{ display: 'flex', gap: '10px', marginLeft: '10px' }}>
-                            <motion.button 
-                              whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(239, 68, 68, 0.4)' }}
-                              whileTap={{ scale: 0.95 }}
-                              onClick={downloadSosReportPDF}
-                              disabled={pdfGenerating}
-                              style={{ 
-                                padding: '12px 20px', 
-                                background: 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)', 
-                                color: 'white', 
-                                borderRadius: '12px', 
-                                border: 'none',
-                                fontWeight: '900', 
-                                fontSize: '0.8rem', 
-                                cursor: 'pointer',
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '8px',
-                                opacity: pdfGenerating ? 0.7 : 1
-                              }}
-                            >
-                              {pdfGenerating ? (
-                                <Loader2 className="animate-spin" size={16} />
-                              ) : (
-                                <FileDown size={16} />
-                              )}
-                              {pdfGenerating ? 'Generating...' : 'Download Report'}
-                            </motion.button>
+                      </div>
 
-                            <motion.button 
-                              whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(59, 130, 246, 0.4)' }}
-                              whileTap={{ scale: 0.95 }}
-                              onClick={() => {
-                                const url = `https://www.google.com/maps/dir/?api=1&origin=${victimLocation.lat},${victimLocation.lng}&destination=${hospitalLocation.lat},${hospitalLocation.lng}&travelmode=driving`;
-                                window.open(url, '_blank');
-                              }}
-                              style={{ 
-                                padding: '12px 20px', 
-                                background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)', 
-                                color: 'white', 
-                                borderRadius: '12px', 
-                                border: 'none',
-                                fontWeight: '900', 
-                                fontSize: '0.8rem', 
-                                cursor: 'pointer',
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '8px'
-                              }}
-                            >
-                              <Navigation size={16} />
-                              {t('navigate')}
-                            </motion.button>
-                          </div>
-                        )}
+                      {/* Column 2: Nearest Police */}
+                      <div style={{ borderLeft: '1px solid var(--border-glass)', paddingLeft: '20px' }}>
+                        <div style={{ color: 'var(--text-secondary)', fontSize: '0.6rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('nearest_police') || 'Nearest Police'}</div>
+                        <div style={{ fontSize: '0.9rem', fontWeight: '800', color: '#3b82f6', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', lineHeight: '1.3' }}>
+                          {policeStations[0]?.name || 'Locating...'}
+                        </div>
+                      </div>
+
+                      {/* Column 3: Target Trauma Center */}
+                      <div style={{ borderLeft: '1px solid var(--border-glass)', paddingLeft: '20px' }}>
+                        <div style={{ color: 'var(--text-secondary)', fontSize: '0.6rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('target_center')}</div>
+                        <div style={{ fontSize: '0.9rem', fontWeight: '800', color: '#10b981', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', lineHeight: '1.3' }}>
+                          {selectedHospitalName || (apiLoading ? t('calculating') : 'Manual Mode')}
+                        </div>
                       </div>
                     </div>
+
+                    {/* Separator Line */}
+                    {hospitalLocation && victimLocation && (
+                      <div style={{ height: '1px', background: 'var(--border-glass)', marginBottom: '16px' }}></div>
+                    )}
+
+                    {/* Bottom Row: Actions */}
+                    {hospitalLocation && victimLocation && (
+                      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px' }}>
+                        <motion.button 
+                          whileHover={{ scale: 1.02, boxShadow: '0 0 20px rgba(239, 68, 68, 0.3)' }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={downloadSosReportPDF}
+                          disabled={pdfGenerating}
+                          style={{ 
+                            flex: 1,
+                            maxWidth: '240px',
+                            padding: '12px 20px', 
+                            background: 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)', 
+                            color: 'white', 
+                            borderRadius: '10px', 
+                            border: 'none',
+                            fontWeight: '900', 
+                            fontSize: '0.85rem', 
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '8px',
+                            opacity: pdfGenerating ? 0.7 : 1
+                          }}
+                        >
+                          {pdfGenerating ? (
+                            <Loader2 className="animate-spin" size={16} />
+                          ) : (
+                            <FileDown size={16} />
+                          )}
+                          {pdfGenerating ? 'Generating...' : 'Download Report'}
+                        </motion.button>
+
+                        <motion.button 
+                          whileHover={{ scale: 1.02, boxShadow: '0 0 20px rgba(59, 130, 246, 0.3)' }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => {
+                            const url = `https://www.google.com/maps/dir/?api=1&origin=${victimLocation.lat},${victimLocation.lng}&destination=${hospitalLocation.lat},${hospitalLocation.lng}&travelmode=driving`;
+                            window.open(url, '_blank');
+                          }}
+                          style={{ 
+                            flex: 1,
+                            maxWidth: '240px',
+                            padding: '12px 20px', 
+                            background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)', 
+                            color: 'white', 
+                            borderRadius: '10px', 
+                            border: 'none',
+                            fontWeight: '900', 
+                            fontSize: '0.85rem', 
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '8px'
+                          }}
+                        >
+                          <Navigation size={16} />
+                          {t('navigate')}
+                        </motion.button>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
