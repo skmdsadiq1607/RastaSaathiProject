@@ -182,6 +182,7 @@ const Dashboard = () => {
         
         // Draw white masks to maintain clean margins and prevent bleed-through
         pdf.setFillColor(255, 255, 255);
+        pdf.setDrawColor(255, 255, 255); // Force draw/stroke color to white to hide any outlines!
         // Top margin mask
         pdf.rect(0, 0, imgWidth, marginTop, 'F');
         // Bottom margin mask
