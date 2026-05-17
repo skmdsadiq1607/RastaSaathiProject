@@ -99,5 +99,14 @@ function cancelCountdown(countdownId) {
   setTimeout(() => cache.delete(`countdown:cancel:${countdownId}`), 30000);
 }
 
-module.exports = { createIncident, getIncidentById, initGpsDetector, cancelCountdown };
+async function getUserIncidents(userId) {
+  const incidents = await Incident.find({ createdByUser: userId })
+    .populate('createdByUser', 'name phone role language')
+    .populate('assignedResponder', 'name phone role')
+    .populate('selectedHospital')
+    .sort({ createdAt: -1 }); // Newest first
+  return incidents;
+}
+
+module.exports = { createIncident, getIncidentById, initGpsDetector, cancelCountdown, getUserIncidents };
 

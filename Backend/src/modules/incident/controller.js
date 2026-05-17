@@ -1,5 +1,5 @@
 const { ok } = require('../../utils/responseFormatter');
-const { createIncident, getIncidentById } = require('./service');
+const { createIncident, getIncidentById, getUserIncidents } = require('./service');
 
 async function createIncidentController(req, res, next) {
   try {
@@ -20,5 +20,15 @@ async function getIncidentController(req, res, next) {
   }
 }
 
-module.exports = { createIncidentController, getIncidentController };
+async function getUserIncidentsController(req, res, next) {
+  try {
+    const userId = req.user?.sub;
+    const incidents = await getUserIncidents(userId);
+    res.json(ok({ data: { incidents } }));
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports = { createIncidentController, getIncidentController, getUserIncidentsController };
 
