@@ -446,10 +446,12 @@ const Dashboard = () => {
                     onClick={triggerSOS} 
                     style={{ 
                       width: '160px', height: '160px', borderRadius: '50%', 
-                      background: 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)', 
-                      border: '10px solid rgba(239,68,68,0.2)', color: '#ffffff', 
-                      cursor: 'pointer', boxShadow: '0 0 50px rgba(239,68,68,0.5)',
-                      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
+                      background: '#ef4444', 
+                      border: 'none', color: '#ffffff', 
+                      cursor: 'pointer', boxShadow: '0 10px 40px rgba(239, 68, 68, 0.4)',
+                      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                      overflow: 'hidden',
+                      padding: 0
                     }}
                   >
                     <Logo size={22} light />
