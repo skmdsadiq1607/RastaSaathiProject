@@ -354,21 +354,6 @@ const Dashboard = () => {
           .pulse-sos { animation: pulse-red 2s infinite; }
           @keyframes pulse-red { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
           
-          .radar-ring {
-            position: absolute;
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            border: 2px solid rgba(239, 68, 68, 0.4);
-            animation: radar-pulse 3s infinite linear;
-            pointer-events: none;
-            z-index: 1;
-          }
-          @keyframes radar-pulse {
-            0% { transform: scale(1); opacity: 0.8; }
-            100% { transform: scale(1.6); opacity: 0; }
-          }
-          
           .chat-bubble {
             max-width: 85%;
             padding: 16px 20px;
@@ -455,49 +440,42 @@ const Dashboard = () => {
                     </p>
                   </motion.div>
                 ) : (
-                  <div style={{ position: 'relative', width: '240px', height: '240px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    {/* Pulsing Concentric Radar Rings */}
-                    <div className="radar-ring" style={{ animationDelay: '0s' }}></div>
-                    <div className="radar-ring" style={{ animationDelay: '1.5s' }}></div>
-
-                    <motion.button 
-                      whileHover={{ 
-                        y: -4,
-                        boxShadow: 'inset 0 4px 8px rgba(255,255,255,0.45), inset 0 -4px 8px rgba(0,0,0,0.25), 0 12px 0 #b91c1c, 0 20px 30px rgba(239, 68, 68, 0.45)'
-                      }} 
-                      whileTap={{ 
-                        y: 6,
-                        boxShadow: 'inset 0 2px 4px rgba(255,255,255,0.3), inset 0 -2px 4px rgba(0,0,0,0.2), 0 2px 0 #b91c1c, 0 5px 10px rgba(239, 68, 68, 0.3)'
-                      }} 
-                      onClick={triggerSOS} 
-                      style={{ 
-                        width: '160px', height: '160px', borderRadius: '50%', 
-                        background: 'linear-gradient(180deg, #ef4444 0%, #dc2626 100%)', 
-                        border: 'none', color: '#ffffff', 
-                        cursor: 'pointer', 
-                        // Layered Spherical 3D shading box shadow!
-                        boxShadow: 'inset 0 4px 8px rgba(255, 255, 255, 0.45), inset 0 -4px 8px rgba(0, 0, 0, 0.25), 0 8px 0 #b91c1c, 0 15px 25px rgba(239, 68, 68, 0.35)',
-                        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-                        overflow: 'hidden',
-                        padding: 0,
-                        outline: 'none',
-                        borderTop: '3px solid rgba(255, 255, 255, 0.5)', 
-                        position: 'relative',
-                        zIndex: 10
-                      }}
-                    >
-                      {/* Glossy Glass reflection overlay */}
-                      <div style={{
-                        position: 'absolute',
-                        top: 0, left: 0, right: 0, height: '50%',
-                        background: 'linear-gradient(180deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 100%)',
-                        pointerEvents: 'none'
-                      }}></div>
-                      
-                      <Logo size={22} light />
-                      <span style={{ fontSize: '1.6rem', fontWeight: '900', marginTop: '4px', color: '#ffffff', textShadow: '0 2px 4px rgba(0,0,0,0.3)', zIndex: 1 }}>SOS</span>
-                    </motion.button>
-                  </div>
+                  <motion.button 
+                    whileHover={{ 
+                      y: -4,
+                      boxShadow: 'inset 0 4px 8px rgba(255,255,255,0.45), inset 0 -4px 8px rgba(0,0,0,0.25), 0 12px 0 #b91c1c, 0 20px 30px rgba(239, 68, 68, 0.45)'
+                    }} 
+                    whileTap={{ 
+                      y: 6,
+                      boxShadow: 'inset 0 2px 4px rgba(255,255,255,0.3), inset 0 -2px 4px rgba(0,0,0,0.2), 0 2px 0 #b91c1c, 0 5px 10px rgba(239, 68, 68, 0.3)'
+                    }} 
+                    onClick={triggerSOS} 
+                    style={{ 
+                      width: '160px', height: '160px', borderRadius: '50%', 
+                      background: 'linear-gradient(180deg, #ef4444 0%, #dc2626 100%)', 
+                      border: 'none', color: '#ffffff', 
+                      cursor: 'pointer', 
+                      // Layered Spherical 3D shading box shadow!
+                      boxShadow: 'inset 0 4px 8px rgba(255, 255, 255, 0.45), inset 0 -4px 8px rgba(0, 0, 0, 0.25), 0 8px 0 #b91c1c, 0 15px 25px rgba(239, 68, 68, 0.35)',
+                      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                      overflow: 'hidden',
+                      padding: 0,
+                      outline: 'none',
+                      borderTop: '3px solid rgba(255, 255, 255, 0.5)', 
+                      position: 'relative'
+                    }}
+                  >
+                    {/* Glossy Glass reflection overlay */}
+                    <div style={{
+                      position: 'absolute',
+                      top: 0, left: 0, right: 0, height: '50%',
+                      background: 'linear-gradient(180deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 100%)',
+                      pointerEvents: 'none'
+                    }}></div>
+                    
+                    <Logo size={22} light />
+                    <span style={{ fontSize: '1.6rem', fontWeight: '900', marginTop: '4px', color: '#ffffff', textShadow: '0 2px 4px rgba(0,0,0,0.3)', zIndex: 1 }}>SOS</span>
+                  </motion.button>
                 )}
               </div>
             ) : (
