@@ -473,13 +473,49 @@ const Profile = () => {
 
             {/* Section: Medical Guidance */}
             <div style={{ background: '#f8fafc', padding: '24px', borderRadius: '12px', border: '1px solid #e2e8f0', marginBottom: '30px' }}>
-              <h3 style={{ margin: '0 0 16px 0', fontSize: '0.95rem', color: '#ef4444', textTransform: 'uppercase', letterSpacing: '1.5px', borderBottom: '1px solid #e2e8f0', paddingBottom: '8px', fontWeight: '900' }}>🧠 EMERGENCY FIRST AID PROTOCOL</h3>
+              <h3 style={{ margin: '0 0 16px 0', fontSize: '0.95rem', color: '#ef4444', textTransform: 'uppercase', letterSpacing: '1.5px', borderBottom: '1px solid #e2e8f0', paddingBottom: '8px', fontWeight: '900' }}>🧠 AI MEDIC ADVISORY & CHAT LOGS</h3>
               
-              <div style={{ fontSize: '0.85rem', lineHeight: '1.6', color: '#334155' }}>
-                <div style={{ marginBottom: '16px', background: '#ffffff', padding: '15px', borderRadius: '8px', border: '1px solid #e2e8f0', borderLeft: '4px solid #ef4444' }}>
-                  <div style={{ color: '#ef4444', fontWeight: '800', fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px' }}>Advisory Step 1</div>
-                  <div style={{ whiteSpace: 'pre-wrap' }}>Ensure the airway is completely clear. If there is heavy trauma bleeding, apply continuous direct pressure with a clean cloth. Elevate the wounded limb above heart level if no fractures are suspected. Keep the victim warm and talking to maintain consciousness.</div>
-                </div>
+              <div style={{ fontSize: '0.85rem', lineHeight: '1.6', color: '#334155', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                {selectedIncident.firstAid?.messages?.map((m, idx) => {
+                  let text = m.content;
+                  if (m.role === 'assistant' && typeof text === 'string' && text.trim().startsWith('{')) {
+                    try {
+                      const data = JSON.parse(text);
+                      text = (data.steps || []).join('\n');
+                    } catch (e) {}
+                  }
+                  
+                  return (
+                    <div 
+                      key={idx} 
+                      style={{ 
+                        padding: '14px 18px', 
+                        borderRadius: '10px', 
+                        border: '1px solid #e2e8f0', 
+                        background: m.role === 'user' ? '#f1f5f9' : '#ffffff',
+                        borderLeft: m.role === 'user' ? '4px solid #64748b' : '4px solid #ef4444',
+                        alignSelf: m.role === 'user' ? 'flex-end' : 'flex-start',
+                        maxWidth: '85%',
+                        boxSizing: 'border-box'
+                      }}
+                    >
+                      <div style={{ 
+                        color: m.role === 'user' ? '#64748b' : '#ef4444', 
+                        fontWeight: '800', 
+                        fontSize: '0.65rem', 
+                        textTransform: 'uppercase', 
+                        letterSpacing: '1px', 
+                        marginBottom: '4px' 
+                      }}>
+                        {m.role === 'user' ? '👤 Victim Inquiry' : '🚑 AI Medic Advisor'}
+                      </div>
+                      <div style={{ whiteSpace: 'pre-wrap', color: '#0f172a', fontWeight: '600' }}>{text}</div>
+                    </div>
+                  );
+                })}
+                {(!selectedIncident.firstAid || !selectedIncident.firstAid.messages || selectedIncident.firstAid.messages.length === 0) && (
+                  <div style={{ fontStyle: 'italic', color: '#64748b' }}>No emergency advisor logs generated yet. Please refer to standard Golden Hour procedures.</div>
+                )}
               </div>
             </div>
 

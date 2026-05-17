@@ -38,7 +38,12 @@ async function getIncidentById(id) {
     .populate('assignedResponder', 'name phone role')
     .populate('selectedHospital');
   if (!incident) throw new AppError('Incident not found', 404, 'NOT_FOUND');
-  return incident;
+  
+  const doc = incident.toObject();
+  const { FirstAid } = require('../firstaid/model');
+  const fa = await FirstAid.findOne({ incidentId: incident._id }).lean();
+  doc.firstAid = fa || null;
+  return doc;
 }
 
 // In-memory cache for debouncing and countdowns (since we removed Redis)
@@ -106,7 +111,17 @@ async function getUserIncidents(userId) {
     .populate('assignedResponder', 'name phone role')
     .populate('selectedHospital')
     .sort({ createdAt: -1 }); // Newest first
-  return incidents;
+
+  const { FirstAid } = require('../firstaid/model');
+  const enriched = await Promise.all(
+    incidents.map(async (inc) => {
+      const doc = inc.toObject();
+      const fa = await FirstAid.findOne({ incidentId: inc._id }).lean();
+      doc.firstAid = fa || null;
+      return doc;
+    })
+  );
+  return enriched;
 }
 
 module.exports = { createIncident, getIncidentById, initGpsDetector, cancelCountdown, getUserIncidents };
