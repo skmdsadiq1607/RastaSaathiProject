@@ -205,7 +205,6 @@ const Dashboard = () => {
   const [policeStations, setPoliceStations] = useState([]);
   const [selectedHospitalName, setSelectedHospitalName] = useState('');
   const [selectedAmbulanceName, setSelectedAmbulanceName] = useState('');
-  const [ticketNumber, setTicketNumber] = useState('');
 
   const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
   const navigate = useNavigate();
