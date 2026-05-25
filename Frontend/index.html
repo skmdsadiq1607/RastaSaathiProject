@@ -9,5 +9,35 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <!-- Aggressive script to remove Google Maps billing overlays -->
+    <script>
+      const observer = new MutationObserver((mutations) => {
+        const dismissButton = document.querySelector('.dismissButton');
+        if (dismissButton) {
+          const container = dismissButton.closest('.gm-style') || dismissButton.parentElement.parentElement;
+          if (container && container.parentElement) {
+            // Find the overlay wrapping the map and hide it
+            dismissButton.click(); // try clicking it first
+            
+            // Aggressively hide any modal-like wrappers
+            const modals = document.querySelectorAll('.gm-err-container, .gm-err-message');
+            modals.forEach(m => m.style.setProperty('display', 'none', 'important'));
+            
+            // Also hide the watermark text "For development purposes only"
+            const watermarks = document.querySelectorAll('div[style*="z-index: 100"]');
+            watermarks.forEach(w => {
+              if (w.innerText.includes('development purposes') || w.innerText.includes('Google')) {
+                w.style.setProperty('display', 'none', 'important');
+              }
+            });
+          }
+        }
+        
+        // Also catch gm-err-container directly if it appears without dismiss button
+        const errContainer = document.querySelector('.gm-err-container');
+        if (errContainer) errContainer.style.setProperty('display', 'none', 'important');
+      });
+      observer.observe(document.body, { childList: true, subtree: true });
+    </script>
   </body>
 </html>
