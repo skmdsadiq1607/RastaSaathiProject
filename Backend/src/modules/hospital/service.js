@@ -1,4 +1,5 @@
 const { Hospital } = require('./model');
+const { PoliceStation } = require('../police/model');
 const { Resources } = require('../resources/model');
 const { distanceMatrix, findNearbyHospitals, findNearbyPoliceStations } = require('../../services/maps.service');
 const { AppError } = require('../../utils/AppError');
@@ -169,6 +170,22 @@ async function selectHospital({ lat, lng, severityLevel, injuryType, requiredSpe
 
 async function selectPoliceStation({ lat, lng }) {
   const origin = { lat, lng };
+
+  // 1. Try local database first
+  const localPolice = await PoliceStation.find({
+    location: {
+      $near: {
+        $geometry: { type: 'Point', coordinates: [lng, lat] },
+        $maxDistance: 50000 // 50km
+      }
+    }
+  }).limit(5).lean();
+
+  if (localPolice.length > 0) {
+    return localPolice;
+  }
+
+  // 2. Fallback to Google Places API
   let googlePolice = [];
   try {
     googlePolice = await findNearbyPoliceStations({ lat, lng, radius: 15000 });
