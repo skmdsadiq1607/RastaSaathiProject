@@ -307,7 +307,10 @@ const Dashboard = () => {
           let botMessage = `${t('sos_success')}\n\n${t('contacts_notified')}\n${t('nearest_hospital')} ${nearest.name}`;
           
           if (policeSelection && policeSelection.length > 0) {
-            botMessage += `\n${t('nearest_police')} ${policeSelection[0].name}`;
+            botMessage += `\n🚓 ${t('nearest_police')} ${policeSelection[0].name}`;
+          }
+          if (as && as.ambulance) {
+            botMessage += `\n🚑 Ambulance: ${as.ambulance.name}`;
           }
           
           botMessage += `\n${t('eta')} ${hospitalSelection[0].etaSeconds ? Math.round(hospitalSelection[0].etaSeconds / 60) + ' min' : t('calculating')}`;
@@ -580,6 +583,14 @@ const Dashboard = () => {
                         <div style={{ color: 'var(--text-secondary)', fontSize: '0.6rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('target_center')}</div>
                         <div style={{ fontSize: '0.9rem', fontWeight: '800', color: '#10b981', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', lineHeight: '1.3' }}>
                           {selectedHospitalName || (apiLoading ? t('calculating') : 'Manual Mode')}
+                        </div>
+                      </div>
+
+                      {/* Column 4: Assigned Ambulance */}
+                      <div style={{ borderLeft: '1px solid var(--border-glass)', paddingLeft: '20px' }}>
+                        <div style={{ color: 'var(--text-secondary)', fontSize: '0.6rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>Assigned Ambulance</div>
+                        <div style={{ fontSize: '0.9rem', fontWeight: '800', color: '#f59e0b', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', lineHeight: '1.3' }}>
+                          {selectedAmbulanceName || (apiLoading ? t('calculating') : 'PENDING DISPATCH')}
                         </div>
                       </div>
                     </div>
