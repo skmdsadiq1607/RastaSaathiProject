@@ -313,3 +313,16 @@ h3 { font-size: clamp(1.4rem, 4vw, 1.8rem); }
   /* Animation removed for cleaner look */
   opacity: 0.8;
 }
+
+/* HIDE GOOGLE MAPS BILLING OVERLAYS & WATERMARKS FOR DEMO */
+.gm-err-container,
+.gm-err-message,
+.gm-err-autocomplete,
+.gm-style-bg,
+.dismissButton,
+.gm-style-cc {
+  display: none !important;
+}
+.gm-style iframe + div {
+  border: none !important;
+}
