@@ -463,13 +463,17 @@ const Profile = () => {
                     <span style={{ fontWeight: '800', color: '#16a34a', fontSize: '0.95rem' }}>{selectedIncident.selectedHospital?.name || 'TRAUMA CENTER DISPATCHED'}</span>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                    <span style={{ color: '#64748b' }}>Assigned Ambulance:</span>
+                    <span style={{ fontWeight: '800', color: '#f59e0b', fontSize: '0.95rem' }}>{selectedIncident?.selectedAmbulance?.name || 'PENDING DISPATCH'}</span>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
                     <span style={{ color: '#64748b' }}>Assigned Police Precinct:</span>
-                    <span style={{ fontWeight: '800', color: '#2563eb', fontSize: '0.95rem' }}>NEAREST COORDINATED DISTRICT</span>
+                    <span style={{ fontWeight: '800', color: '#2563eb', fontSize: '0.95rem' }}>{'Nearest Local Precinct'}</span>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid #e2e8f0', paddingTop: '8px', marginTop: '4px' }}>
-                    <span style={{ color: '#64748b' }}>Status:</span>
-                    <span style={{ fontWeight: '700', color: '#16a34a', textTransform: 'uppercase' }}>
-                      {selectedIncident.status || 'CLOSED'}
+                    <span style={{ color: '#64748b' }}>Response ETA:</span>
+                    <span style={{ fontWeight: '700', color: '#d97706' }}>
+                      {selectedIncident?.status === 'RESOLVED' ? 'Arrived' : 'Dispatched'}
                     </span>
                   </div>
                 </div>

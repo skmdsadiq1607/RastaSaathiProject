@@ -22,18 +22,18 @@ const Marker = ({ text, type }) => (
       animate={{ scale: 1 }} 
       style={{ 
         color: 'white', 
-        background: type === 'victim' ? '#ef4444' : '#3b82f6', 
+        background: type === 'victim' ? '#ef4444' : type === 'ambulance' ? '#f59e0b' : '#3b82f6', 
         padding: '6px 12px', borderRadius: '12px', display: 'inline-flex', 
         alignItems: 'center', gap: '6px', fontWeight: '800', fontSize: '11px',
         boxShadow: '0 4px 12px rgba(0,0,0,0.3)', border: '1.5px solid white',
         whiteSpace: 'nowrap'
       }}
     >
-      {type === 'victim' ? <Radio size={14} className="pulse-sos" /> : <Hospital size={14} />} 
+      {type === 'victim' ? <Radio size={14} className="pulse-sos" /> : type === 'ambulance' ? <Activity size={14} /> : <Hospital size={14} />} 
       {text}
     </motion.div>
     <div style={{ 
-      width: '8px', height: '8px', background: type === 'victim' ? '#ef4444' : '#3b82f6', 
+      width: '8px', height: '8px', background: type === 'victim' ? '#ef4444' : type === 'ambulance' ? '#f59e0b' : '#3b82f6', 
       borderRadius: '50%', border: '1.5px solid white', margin: '-4px auto 0' 
     }}></div>
   </div>
@@ -201,8 +201,11 @@ const Dashboard = () => {
   };
   const [victimLocation, setVictimLocation] = useState(null);
   const [hospitalLocation, setHospitalLocation] = useState(null);
-  const [selectedHospitalName, setSelectedHospitalName] = useState('');
+  const [ambulanceLocation, setAmbulanceLocation] = useState(null);
   const [policeStations, setPoliceStations] = useState([]);
+  const [selectedHospitalName, setSelectedHospitalName] = useState('');
+  const [selectedAmbulanceName, setSelectedAmbulanceName] = useState('');
+  const [ticketNumber, setTicketNumber] = useState('');
 
   const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
   const navigate = useNavigate();
@@ -283,15 +286,23 @@ const Dashboard = () => {
 
         const { hospitalSelection, policeSelection, aiGuidance, incident } = sosRes.data.data;
         if (incident && incident.ticketNumber) {
-          setTicketNumber(incident.ticketNumber);
+          setTicketNumber(sosRes.data.data.incident?.ticketNumber || '');
         }
+        const hs = sosRes.data.data.hospitalSelection;
+        if (hs && hs.length > 0) {
+          setHospitalLocation({ lat: hs[0].hospital.location.coordinates[1], lng: hs[0].hospital.location.coordinates[0] });
+          setSelectedHospitalName(hs[0].hospital.name);
+        }
+        const as = sosRes.data.data.ambulanceSelection;
+        if (as && as.ambulance) {
+          setAmbulanceLocation({ lat: as.ambulance.location.coordinates[1], lng: as.ambulance.location.coordinates[0] });
+          setSelectedAmbulanceName(as.ambulance.name);
+        }
+        setPoliceStations(sosRes.data.data.policeSelection || []);
+        
         const nearest = hospitalSelection?.[0]?.hospital;
-
         if (nearest) {
           const hLoc = { lat: nearest.location.coordinates[1], lng: nearest.location.coordinates[0] };
-          setHospitalLocation(hLoc);
-          setSelectedHospitalName(nearest.name);
-          setPoliceStations(policeSelection || []);
           setMapCenter({ lat: (latitude + hLoc.lat) / 2, lng: (longitude + hLoc.lng) / 2 });
           
           let botMessage = `${t('sos_success')}\n\n${t('contacts_notified')}\n${t('nearest_hospital')} ${nearest.name}`;
@@ -529,6 +540,7 @@ const Dashboard = () => {
                 >
                   {victimLocation && <Marker lat={victimLocation.lat} lng={victimLocation.lng} text="EMERGENCY SITE" type="victim" />}
                   {hospitalLocation && <Marker lat={hospitalLocation.lat} lng={hospitalLocation.lng} text={selectedHospitalName} type="hospital" />}
+                  {ambulanceLocation && <Marker lat={ambulanceLocation.lat} lng={ambulanceLocation.lng} text={selectedAmbulanceName} type="ambulance" />}
                   {policeStations.map((p, idx) => (
                     <Marker key={idx} lat={p.location.coordinates[1]} lng={p.location.coordinates[0]} text={p.name} type="police" />
                   ))}
@@ -767,13 +779,17 @@ const Dashboard = () => {
                   <span style={{ fontWeight: '800', color: '#16a34a', fontSize: '0.95rem' }}>{selectedHospitalName || 'PENDING DISPATCH'}</span>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                  <span style={{ color: '#64748b' }}>Assigned Ambulance:</span>
+                  <span style={{ fontWeight: '800', color: '#f59e0b', fontSize: '0.95rem' }}>{selectedAmbulanceName || 'PENDING DISPATCH'}</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
                   <span style={{ color: '#64748b' }}>Assigned Police Precinct:</span>
                   <span style={{ fontWeight: '800', color: '#2563eb', fontSize: '0.95rem' }}>{policeStations[0]?.name || 'PENDING DISPATCH'}</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid #e2e8f0', paddingTop: '8px', marginTop: '4px' }}>
-                  <span style={{ color: '#64748b' }}>Hospital ETA:</span>
+                  <span style={{ color: '#64748b' }}>Response ETA:</span>
                   <span style={{ fontWeight: '700', color: '#d97706' }}>
-                    {hospitalLocation ? 'Dispatched' : 'Calculating...'}
+                    {ambulanceLocation ? 'Dispatched' : 'Calculating...'}
                   </span>
                 </div>
               </div>

@@ -19,6 +19,7 @@ async function triggerSos({ io, redis, queues, lat, lng, userId, injuryType, veh
 
   const { User } = require('../auth/model');
   const { selectHospital, selectPoliceStation } = require('../hospital/service');
+  const { selectAmbulance } = require('../ambulance/service');
   const { dispatchAlerts } = require('../alerts/service');
   const { startSession } = require('../firstaid/service');
   const { predictSeverityRuleBased } = require('../../utils/severityScorer');
@@ -47,6 +48,16 @@ async function triggerSos({ io, redis, queues, lat, lng, userId, injuryType, veh
   const policeSelection = await selectPoliceStation({ lat, lng });
   const nearestPolice = policeSelection?.[0];
 
+  // 2c. Select Nearest Ambulance
+  const ambulanceSelection = await selectAmbulance({ lat, lng });
+  const nearestAmbulance = ambulanceSelection?.ambulance || null;
+
+  // Save selected ambulance to incident
+  if (nearestAmbulance) {
+    incident.selectedAmbulance = nearestAmbulance;
+    await incident.save();
+  }
+
   // 3. Dispatch Alerts (WhatsApp/SMS/FCM)
   await dispatchAlerts({
     io,
@@ -57,6 +68,8 @@ async function triggerSos({ io, redis, queues, lat, lng, userId, injuryType, veh
     hospitalLocation: nearest?.location,
     policeName: nearestPolice?.name,
     policeLocation: nearestPolice?.location,
+    ambulanceName: nearestAmbulance?.name,
+    ambulanceLocation: nearestAmbulance?.location,
     etaSeconds: hospitalSelection?.[0]?.etaSeconds,
     lang: victimUser?.language || 'en'
   });
@@ -81,7 +94,7 @@ async function triggerSos({ io, redis, queues, lat, lng, userId, injuryType, veh
     io.of('/dashboard').emit('dashboard:sos', { incidentId: String(incident._id), lat, lng });
   }
 
-  return { sos, incident, hospitalSelection, policeSelection, aiGuidance };
+  return { sos, incident, hospitalSelection, policeSelection, ambulanceSelection, aiGuidance };
 }
 
 module.exports = { triggerSos };

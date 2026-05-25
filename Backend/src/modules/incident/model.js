@@ -25,7 +25,8 @@ const IncidentSchema = new mongoose.Schema(
     vehicleType: { type: String },
     message: { type: String }, // User's custom text message/emergency description
     assignedResponder: { type: mongoose.Schema.Types.ObjectId, ref: 'User', index: true },
-    selectedHospital: { type: mongoose.Schema.Types.ObjectId, ref: 'Hospital' }
+    selectedHospital: { type: mongoose.Schema.Types.ObjectId, ref: 'Hospital' },
+    selectedAmbulance: { type: mongoose.Schema.Types.Mixed } // Can be ObjectId or Google Place Object
   },
   { timestamps: true }
 );

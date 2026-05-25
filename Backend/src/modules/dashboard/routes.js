@@ -19,6 +19,7 @@ function dashboardRoutes() {
         .populate('createdByUser', 'name phone')
         .populate('assignedResponder', 'name phone')
         .populate('selectedHospital')
+        .populate('selectedAmbulance')
         .lean();
 
       const ids = incidents.map((i) => i._id);
