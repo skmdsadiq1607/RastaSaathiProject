@@ -21,3 +21,30 @@ exports.calculateDistance = (lat1, lon1, lat2, lon2) => {
   
   return R * c;
 };
+
+/**
+ * Gets a localized place name (suburb, neighborhood, city) using free Nominatim OpenStreetMap reverse geocoding.
+ * @param {number} lat - Latitude
+ * @param {number} lng - Longitude
+ * @returns {Promise<string>} Neighborhood or City name, or empty string on failure
+ */
+exports.reverseGeocode = async (lat, lng) => {
+  const axios = require('axios');
+  try {
+    const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=14`;
+    const response = await axios.get(url, {
+      headers: {
+        'User-Agent': 'RastaSaathiSOS/1.0 (contact: support@rastasaathi.org)'
+      },
+      timeout: 1800
+    });
+    if (response.data && response.data.address) {
+      const addr = response.data.address;
+      return addr.neighbourhood || addr.suburb || addr.town || addr.village || addr.city || addr.county || '';
+    }
+  } catch (error) {
+    console.error('[GeoUtils] Nominatim reverse geocode failed:', error.message);
+  }
+  return '';
+};
+

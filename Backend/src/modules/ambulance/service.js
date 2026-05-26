@@ -62,11 +62,13 @@ async function selectAmbulance({ lat, lng }) {
   }
 
   if (finalAmbulances.length === 0) {
+    const { reverseGeocode } = require('../../utils/geoUtils');
+    const placeName = await reverseGeocode(lat, lng) || 'Local Area';
     // Mock Fallback when Google API fails and no local ambulances are within 50km
     finalAmbulances = [{
       _id: 'mock-ambulance-1',
-      name: 'City Rapid Response Ambulance',
-      address: 'Emergency Grid',
+      name: `${placeName} Rapid Response Ambulance`,
+      address: `${placeName} Emergency Grid`,
       phone: '+91 108',
       location: {
         type: 'Point',

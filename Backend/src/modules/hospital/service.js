@@ -73,11 +73,13 @@ async function selectHospital({ lat, lng, severityLevel, injuryType, requiredSpe
   }
 
   if (!finalHospitals.length) {
+    const { reverseGeocode } = require('../../utils/geoUtils');
+    const placeName = await reverseGeocode(lat, lng) || 'Local Area';
     // Mock Fallback when Google API fails and no local hospitals are within 50km
     finalHospitals = [{
       _id: 'mock-hospital-1',
-      name: 'City Central Trauma Center',
-      address: 'Emergency Grid',
+      name: `${placeName} Emergency Hospital`,
+      address: `${placeName} Emergency Grid`,
       location: {
         type: 'Point',
         coordinates: [lng - 0.005, lat + 0.005]
@@ -194,11 +196,13 @@ async function selectPoliceStation({ lat, lng }) {
   }
 
   if (!googlePolice.length) {
+    const { reverseGeocode } = require('../../utils/geoUtils');
+    const placeName = await reverseGeocode(lat, lng) || 'Local Area';
     // Mock Fallback when Google API fails or has billing issues
     return [{
       _id: 'mock-police-1',
-      name: 'Central Police Precinct',
-      address: 'Emergency Response Grid',
+      name: `${placeName} Police Station`,
+      address: `${placeName} Emergency Response Grid`,
       location: {
         type: 'Point',
         coordinates: [lng + 0.01, lat + 0.01]
