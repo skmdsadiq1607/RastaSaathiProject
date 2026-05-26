@@ -8,6 +8,20 @@ dotenv.config({ path: path.join(__dirname, '../.env') });
 
 const stations = [
   {
+    name: "Chaitanyapuri Police Station",
+    address: "Chaitanyapuri Main Rd, Dilsukhnagar, Hyderabad, Telangana",
+    phoneNumber: "+91 040-27852350",
+    rating: 4.8,
+    location: { type: 'Point', coordinates: [78.5290, 17.3730] } // Close to the user's location
+  },
+  {
+    name: "Malakpet Police Station",
+    address: "Malakpet Rd, Hyderabad, Telangana",
+    phoneNumber: "+91 040-27852351",
+    rating: 4.6,
+    location: { type: 'Point', coordinates: [78.5140, 17.3820] }
+  },
+  {
     name: "Jubilee Hills Police Station",
     address: "Road No 71, Jubilee Hills, Hyderabad, Telangana",
     phoneNumber: "+91 040-27852355",
