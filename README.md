@@ -19,12 +19,11 @@ Unlike standard map searches, RastaSaathi integrates a multi-layered proximity a
 *   **SMS & WhatsApp Dispatch Alerts**: Leverages Twilio to send automated, personalized SMS and WhatsApp emergency warnings containing the victim's name, custom notes, live coordinates, and one-click Google Maps navigation routing. Alert templates now dynamically sync assigned ambulance and police details.
 *   **Dynamic Client-Side Map Interceptors**: Employs a front-end `MutationObserver` that intercepts and dynamically suppresses Google Maps billing warning overlays and watermarks, keeping the demo experience clean and immersive.
 
-### 3. Multi-Model AI Medic (High-Reliability Failover)
-Our AI First-Aid guidance features a **Failover Architecture** designed for zero-downtime during emergency procedures:
-*   **Google Gemini 1.5 Flash** (Primary / Cost-Optimized)
-*   **OpenAI GPT-4o-mini** (Failover Layer 1)
-*   **Anthropic Claude 3.5 Sonnet** (Failover Layer 2)
+### 3. High-Reliability AI Medic (Local Failover)
+Our AI First-Aid guidance is engineered for zero-downtime during emergency procedures:
+*   **Google Gemini 1.5 Flash** (Primary Intelligence Core / Cost-Optimized)
 *   **Structured Trauma Protocol** (Hardened Safety Fallback - JSON-encoded offline steps)
+This ensures 100% uptime for medical guidance, automatically falling back to structured offline guidelines if API rate-limiting or network issues occur.
 
 ### 4. High-Fidelity PDF Incident Reports
 *   Generates premium, print-ready, multi-page A4 PDF documents directly from the live client-side dashboard using `jsPDF` and `html2canvas` at **2x resolution**.
@@ -40,7 +39,7 @@ Our AI First-Aid guidance features a **Failover Architecture** designed for zero
 | **SOS Trigger & GPS Probe** | 🟢 Production | Geolocation API + MongoDB Geospatial Indexing |
 | **Custom Incident Notes** | 🟢 Production | Persistent Mongoose Schema + React UI Controller |
 | **Ambulance Hub & Local Police Mapping**| 🟢 Production | MongoDB `2dsphere` + Proximity Sort + Seeding scripts |
-| **AI First-Aid Assistant & Chat Logs** | 🟢 Production | OpenAI / Claude / Gemini Failover Engine |
+| **AI First-Aid Assistant & Chat Logs** | 🟢 Production | Google Gemini + Local Safety Fallback |
 | **WhatsApp/SMS Alert Grid** | 🟢 Production | Twilio API + Dynamic Ambulance/Police alert sync |
 | **Multi-Lingual UI (4+ Langs)** | 🟢 Production | Context API + Localization Engine |
 | **Premium High-Res PDF Reporting** | 🟢 Production | `jsPDF` + `html2canvas` + Margin Masking |
