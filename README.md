@@ -1,20 +1,71 @@
 # RastaSaathi: AI-Driven Emergency Response Ecosystem 🚑
 
-**RastaSaathi** is a premium, high-precision emergency response platform engineered to optimize the **"Golden Hour"**—the critical window where medical and tactical intervention has the highest impact on survival. Developed for the **IIT Madras Road Safety Hackathon 2026**, our system integrates advanced geospatial intelligence, local spatial indexing, robust failover frameworks, and automated multi-channel dispatches to save lives at the speed of light.
+**RastaSaathi** is a premium, high-precision emergency response platform engineered to optimize the **"Golden Hour"**—the critical window where rapid medical and tactical intervention has the highest impact on survival. Developed for the **IIT Madras Road Safety Hackathon 2026**, our system integrates advanced geospatial intelligence, local spatial indexing, robust failover frameworks, and automated multi-channel dispatches to save lives at the speed of light.
 
 ---
 
-## 🏗️ Technical Architecture & Innovation
+## 📊 PowerPoint Presentation (PPT) Slide-Deck Outline
 
-### 1. Geospatial Grid (Ambulance, Hospital & Police Routing)
+Use the structured sections below directly for your hackathon pitch slides!
+
+### Slide 1: Title & Hook
+*   **Slide Title**: RastaSaathi — Empowering the Golden Hour
+*   **Subtitle**: AI-Driven, High-Precision Emergency Response & Resource Routing
+*   **Visual Hook**: A live-synced SOS command grid routing victims to optimal trauma care in milliseconds.
+*   **Impact Statement**: *Saving lives at the speed of light when seconds count the most.*
+
+### Slide 2: The Problem Statement (India's Road Safety Crisis)
+*   **The Critical Gap**: Emergency response delays during the crucial "Golden Hour" are leading to preventable fatalities.
+*   **Key Friction Points**:
+    *   **Geospatial Inaccuracy**: Standard map searches route by distance, ignoring real-time medical capability (ICU capacity) or travel ETAs.
+    *   **Communication Silos**: Victims, ambulances, police precincts, and hospital ERs operate in isolation without coordinated data feeds.
+    *   **Zero-Downtime Dependency**: Heavy reliance on single API integrations (like Google Maps or remote AI) poses massive failure risks during emergency grid blackouts.
+    *   **Critical Guidance Lag**: Victims lack immediate first-aid instructions in their preferred local language while waiting for responders.
+
+### Slide 3: The Solution — RastaSaathi Ecosystem
+*   **Core Objective**: A unified, automated, failover-hardened emergency grid syncing victims, ambulances, police, and hospitals instantly.
+*   **Unified Action Workflow**:
+    1.  **Victim SOS**: Exact GPS captured along with custom distress context.
+    2.  **Geospatial Proximity Match**: Instant backend identification of the nearest ambulance, police station, and optimal ICU trauma center.
+    3.  **Dynamic Dispatch Grid**: Simultaneous multi-channel notifications (WhatsApp/SMS templates with live route links).
+    4.  **AI First-Aid Advisor**: Interactive, multilingual medical instructions delivered in real-time.
+    5.  **Official Incident Report**: High-resolution multi-page PDF generation including complete conversational history logs.
+
+---
+
+## 🏗️ Technical Architecture & Core Innovation
+
+```mermaid
+graph TD
+    %% SOS Trigger Phase
+    A["👤 Victim SOS Trigger (Dashboard UI)"] -->|GPS Coordinates + Custom Note| B["⚙️ Backend Orchestrator (src/modules/sos)"]
+    
+    %% Geospatial & Routing Phase
+    B -->|MongoDB 2dsphere Query| C["🚨 Police Stations Database"]
+    B -->|MongoDB 2dsphere Query| D["🚑 Ambulance Fleet Database"]
+    B -->|Haversine Sort + Distance Matrix| E["🏥 Optimal ICU Trauma Center"]
+    
+    %% Dispatch & Alerts Phase
+    B -->|Parallel Multi-Channel Dispatch| F["💬 Twilio Alert Grid (SMS & WhatsApp)"]
+    F -->|Victim Coordinates & Route Links| G["👥 Pre-configured Emergency Contacts"]
+    
+    %% AI Guidance Phase
+    B -->|Initialize Diagnostic Session| H["🧠 AI Medic (Google Gemini 1.5 Flash)"]
+    H -->|Failover Fallback| I["📋 Structured Offline Trauma Protocol"]
+    
+    %% Document Compilation Phase
+    E & H & B -->|Assemble Incident Log| J["📄 Premium SOS Incident Report (2x A4 PDF)"]
+    J -->|Chronological Timeline Logs| K["💼 Audit-Ready Receipt (PDF Download)"]
+```
+
+### 1. High-Precision Geospatial Routing
 *   **Geospatial Indexing**: Utilizes MongoDB `2dsphere` indexes to query and rank facilities based on geographic coordinates with sub-meter accuracy.
-*   **Decoupled Local Police & Ambulance Databases**: Integrates a dedicated local schema and seed scripts (e.g., adding Chaitanyapuri/Malakpet Police Stations and Dilsukhnagar Ambulance) to allow near-instantaneous offline proximity queries.
+*   **Decoupled Local Databases**: Integrates a dedicated local schema and seed scripts (e.g., adding Chaitanyapuri/Malakpet Police Stations and Dilsukhnagar Ambulance) to allow near-instantaneous offline proximity queries.
 *   **Physical Haversine Proximity**: Pairs local calculations with Google's **Distance Matrix API** to compute live, dynamic ETAs for ambulance dispatch and trauma center routing.
 *   **Resilient API Fallback Architecture**: Includes mock fallback engines for hospitals, police precincts, and ambulances that trigger seamlessly if Google APIs or local databases suffer connection lag or rate-limits.
 
-### 2. Custom SOS Alerts & Multi-Channel Dispatch Grid
+### 2. Multi-Channel Dispatch & Alert Grid
 *   **Custom Incident Context**: Victims can input custom emergency messages (e.g., "Severe leg bleeding, passenger trapped...") directly within the SOS trigger panel. This context is persisted in the database and integrated across notifications and PDF incident reports.
-*   **SOS Countdown Timer**: Features a pulse-animated, premium circular SOS button with a built-in 5-second countdown cancel window to prevent accidental dispatches.
 *   **SMS & WhatsApp Dispatch Alerts**: Leverages Twilio to send automated, personalized SMS and WhatsApp emergency warnings containing the victim's name, custom notes, live coordinates, and one-click Google Maps navigation routing. Alert templates now dynamically sync assigned ambulance and police details.
 *   **Dynamic Client-Side Map Interceptors**: Employs a front-end `MutationObserver` that intercepts and dynamically suppresses Google Maps billing warning overlays and watermarks, keeping the demo experience clean and immersive.
 
@@ -34,69 +85,40 @@ This ensures 100% uptime for medical guidance, automatically falling back to str
 ## 🛠️ Complete Feature & Module Directory
 
 ### 🖥️ Frontend Views & Interactive Pages
-
-1.  **Dashboard (Core Control Center)**:
-    *   **Interactive 3D-styled SOS Button**: Features micro-animations, scaling hover states, and dynamic glow shadows.
-    *   **SOS Countdown Manager**: A 5-second countdown safety lock with a cancel trigger.
-    *   **Live Geospatial Map Grid**: Displays the victim's location, target trauma center, dispatched ambulance route, and nearest police stations using custom color-coded map markers.
-    *   **System Status Grid**: Real-time status tracker monitoring GPS locking, hospital reservation, police dispatch, and ambulance assignment.
-    *   **Interactive AI Medic Chatbot Sidebar**: Follow-up chat interface rendering markdown formatting, execution steps, and critical trauma warnings.
-    *   **Actionable Dispatch Board**: Includes quick actions to launch step-by-step Google Maps driving directions and instant high-fidelity A4 PDF incident report downloads.
-    *   **Custom Incident Input**: Text field for adding emergency descriptors (e.g., trapped passengers, custom trauma info) before triggering dispatch.
-
-2.  **Profile & Personal Command Center**:
-    *   **Dynamic Multi-Lingual Engine**: Integrates a localization context switcher supporting 4+ languages (English, Hindi, Telugu, Tamil, etc.).
-    *   **Emergency Contact Configuration Grid**: Save up to 5 primary contacts who receive instant, automated coordinates and route dispatches on SOS.
-    *   **Incident History Timeline**: Complete historical record of all past emergency dispatches showing ticket numbers, times, locations, and direct PDF receipt downloads.
-
-3.  **Road Safety Knowledge Hub**:
-    *   Interactive guideline panels on defensive driving, breakdown management, and helmet laws.
-    *   Step-by-step interactive breakdown checklists (e.g., placing triangle markers, exiting vehicles).
-
-4.  **Application Guides & Onboarding**:
-    *   **User Guide**: Extensive guide detailing getting started, dashboard commands, emergency dispatches, and PDF downloads.
-    *   **Mission & About Screens**: Detailing the problem statements addressed for the IIT Madras Road Safety Hackathon 2026.
-
----
+*   **Dashboard (Core Control Center)**: Includes a pulse-animated SOS button, a 5-second countdown cancel manager, a live geospatial map displaying color-coded markers (Victim, Ambulance, Hospital, Police), system status meters, an interactive AI Medic sidebar, and instant navigation triggers.
+*   **Profile & Emergency Grid**: Dynamic localization engine (English, Hindi, Telugu, Tamil, etc.), emergency contact setup (up to 5 contacts), and historical incident timeline records.
+*   **Road Safety Knowledge Hub**: Curated, interactive guide panels detailing breakdown safety checklists, defensive driving, and pedestrian guidelines.
+*   **Application Guides & Onboarding**: Complete walkthrough guide details for profile registration, active SOS tracking, and PDF document retrieval.
 
 ### ⚙️ Backend Core Modules (`src/modules`)
-
-1.  **`sos` (Emergency Orchestration)**: Handles the instant ingestion of coordinates, triggers concurrent ambulance/police/hospital queries, sends Twilio notifications, and compiles incident response payloads.
-2.  **`alerts` (Automated Notifications)**: Compiles and dispatches personalized emergency SMS and WhatsApp templates containing victim details, coordinates, and navigation links.
-3.  **`firstaid` (AI Diagnostic Advisory)**: Manages first-aid conversation sessions, prompts Gemini 1.5 Flash for JSON-structured instructions, and keeps local follow-up context.
-4.  **`police` (Precinct Management)**: Models local police stations, executes geospatial queries using MongoDB `2dsphere` indexes, and powers the offline seeding command infrastructure.
-5.  **`ambulance` (Ambulance Grid)**: Tracks ambulance fleets, queries proximity hubs, and handles nearby responder assignments.
-6.  **`hospital` (Trauma Routing)**: Performs Haversine distance calculations and reserves ICU-capable trauma centers.
-7.  **`auth` (Identity & Security)**: Powers user registration, login, and robust JWT session validation.
-8.  **`incident` (Audit Logging)**: Stores active SOS records, generates unique receipt tracking numbers, and preserves coordinates.
-9.  **`language` (Localization)**: Manages and feeds system translations for AI guidelines.
-10. **`transparency` (System Audit)**: Logs AI decisions, models used, and confidence ratings for security tracking.
-11. **`voice` (Speech Interfaces)**: Integrates transcription engines and voice-triggered emergency SOS detection.
-12. **`severity` (Trauma Scoring)**: Runs backend weighted sorting to categorize injuries and dispatch resources based on gravity.
-13. **`timeline` (Milestone Tracking)**: Logs a chronological breakdown of dispatch milestones (Ambulance dispatched, hospital reserved).
-14. **`routing` (Route Optimization)**: Calculates travel paths and integrates the Google Distance Matrix.
-15. **`fallback` (Resilience Layer)**: Coordinates local offline geo-database failovers if internet connectivity or Google APIs are interrupted.
-16. **`workflow` (Agency Sync)**: Automates multi-agency notifications between ambulances, trauma centers, and precincts.
-17. **`summary` (Incident Evaluation)**: Generates post-emergency metrics.
-18. **`insights` (Safety Analysis)**: Pulls statistical records to map accident hotspots.
-19. **`dashboard` (API Services)**: Feeds overall status indicators to the frontend.
-20. **`resources` (Supply Grid)**: Tracks available rescue equipment and specialist rosters.
+1.  **`sos`**: Core coordinate ingestion, concurrent dispatch orchestrator, and alert triggers.
+2.  **`alerts`**: Personalized Twilio SMS and WhatsApp warning templates.
+3.  **`firstaid`**: Gemini-driven JSON trauma diagnosis and ongoing session follow-ups.
+4.  **`police`**: Proximity police precinct indexing and offline seeding support.
+5.  **`ambulance`**: Assigns responder fleets based on geographic proximity.
+6.  **`hospital`**: ICU-capable trauma facility routing and Haversine distance matches.
+7.  **`auth`**: Complete secure registration, login, and JWT validation.
+8.  **`incident`**: Active SOS records, coordinate logging, and ticket number generations.
+9.  **`language`**: Feeds system translations and localization assets.
+10. **`transparency`**: AI audit logging, model histories, and decision ratings.
+11. **`voice`**: Speech-to-text integration and voice-activated SOS triggers.
+12. **`severity`**: Backend gravity scoring evaluating the magnitude of trauma.
+13. **`timeline`**: Multi-agency milestones and chronological tracking.
+14. **`routing` & `fallback`**: Google Distance Matrix routing optimization and robust offline coordinates databases.
+15. **`workflow`**: Dynamic agency status synchronization (Ambulance, hospital, police).
+16. **`summary` & `insights`**: Post-incident metric tracking and hotspot maps.
+17. **`resources` & `dashboard`**: Specialized supply rosters and main API indicators.
 
 ---
 
-## 🛠️ Feature Matrix
+## 📊 PowerPoint Pitch Deck Content Matrix
 
-| Feature | Status | Technology |
+| slide_name | core_points | technology_keywords |
 | :--- | :--- | :--- |
-| **SOS Trigger & GPS Probe** | 🟢 Production | Geolocation API + MongoDB Geospatial Indexing |
-| **Custom Incident Notes** | 🟢 Production | Persistent Mongoose Schema + React UI Controller |
-| **Ambulance & Police Grid** | 🟢 Production | MongoDB `2dsphere` + Proximity Sort + Local Database Seeding |
-| **AI First-Aid Assistant** | 🟢 Production | Google Gemini 1.5 Flash + Local Structured JSON Fallback |
-| **WhatsApp/SMS Alert Grid** | 🟢 Production | Twilio API + Dynamic Ambulance/Police Alert Sync |
-| **Multi-Lingual UI (4+ Langs)** | 🟢 Production | Context API + Localization Engine |
-| **Premium High-Res PDF Reporting**| 🟢 Production | `jsPDF` + `html2canvas` + Page Margin Masking |
-| **Resilient Mock API Fallback Layer**| 🟢 Production | Automated Local Database & Places API Mocking |
-| **Chronological Audit Trail** | 🟢 Production | AI Decision Logging + Incident Timelines |
+| **1. The Innovation** | Proximity routing + Local Seeding + Multilingual Triage | MongoDB 2dsphere, Google Maps API, HSL UI |
+| **2. Zero-Downtime Guarantee** | Gemini 1.5 Flash + Local Structured Offline Trauma Fallback | Gemini API Key Rotation, Custom JSON Schemas |
+| **3. The Dispatch Grid** | Twin alerts sent to up to 5 Emergency Contacts | Twilio SMS/WhatsApp, Google Maps Navigation Links |
+| **4. The Accountability Trial**| 2x A4 PDF reports featuring chronological chat transcript logs | jsPDF, html2canvas, Page Margin Masks |
 
 ---
 
