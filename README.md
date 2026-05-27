@@ -141,8 +141,11 @@ This ensures 100% uptime for medical guidance, automatically falling back to str
 
 3. **Seed Database (Hospital, Police, and Ambulance Assets)**
    ```bash
-   # Seeds the local geospatial collections with pre-defined trauma centers, ambulances, and police precincts
-   node src/modules/police/seed.js
+   # Seeds the local database collections with pre-defined trauma centers, ambulances, and police precincts
+   npm run seed:hospitals
+   node scripts/seedPolice.js
+   node scripts/seedAmbulances.js
+   node scripts/seedIncidents.js
    ```
 
 4. **Start Backend Server**
