@@ -28,7 +28,8 @@ const schema = Joi.object({
   FCM_SERVER_KEY: Joi.string().allow(''),
 
   CLAUDE_API_KEYS: Joi.string().allow(''),
-  OPENAI_API_KEYS: Joi.string().allow('')
+  OPENAI_API_KEYS: Joi.string().allow(''),
+  GROQ_API_KEYS: Joi.string().allow('')
 }).unknown();
 
 const { value, error } = schema.validate(process.env, {
@@ -66,7 +67,8 @@ const env = Object.freeze({
   FCM_SERVER_KEY: value.FCM_SERVER_KEY,
 
   CLAUDE_API_KEYS: value.CLAUDE_API_KEYS,
-  OPENAI_API_KEYS: value.OPENAI_API_KEYS
+  OPENAI_API_KEYS: value.OPENAI_API_KEYS,
+  GROQ_API_KEYS: value.GROQ_API_KEYS
 });
 
 module.exports = { env };

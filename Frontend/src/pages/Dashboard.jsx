@@ -10,34 +10,54 @@ import Logo from '../components/Logo';
 import { useTheme } from '../context/ThemeContext';
 
 // Professional Scale Marker
-const Marker = ({ text, type }) => (
-  <div style={{
-    position: 'absolute',
-    transform: 'translate(-50%, -100%)',
-    pointerEvents: 'none',
-    zIndex: type === 'victim' ? 100 : 50
-  }}>
-    <motion.div 
-      initial={{ scale: 0 }} 
-      animate={{ scale: 1 }} 
-      style={{ 
-        color: 'white', 
-        background: type === 'victim' ? '#ef4444' : type === 'ambulance' ? '#f59e0b' : '#3b82f6', 
-        padding: '6px 12px', borderRadius: '12px', display: 'inline-flex', 
-        alignItems: 'center', gap: '6px', fontWeight: '800', fontSize: '11px',
-        boxShadow: '0 4px 12px rgba(0,0,0,0.3)', border: '1.5px solid white',
-        whiteSpace: 'nowrap'
-      }}
-    >
-      {type === 'victim' ? <Radio size={14} className="pulse-sos" /> : type === 'ambulance' ? <Activity size={14} /> : <Hospital size={14} />} 
-      {text}
-    </motion.div>
-    <div style={{ 
-      width: '8px', height: '8px', background: type === 'victim' ? '#ef4444' : type === 'ambulance' ? '#f59e0b' : '#3b82f6', 
-      borderRadius: '50%', border: '1.5px solid white', margin: '-4px auto 0' 
-    }}></div>
-  </div>
-);
+const Marker = ({ text, type, style }) => {
+  let bgColor = '#3b82f6';
+  let IconComponent = <Hospital size={14} />;
+
+  if (type === 'victim') {
+    bgColor = '#ef4444';
+    IconComponent = <Radio size={14} className="pulse-sos" />;
+  } else if (type === 'ambulance') {
+    bgColor = '#f59e0b';
+    IconComponent = <Activity size={14} />;
+  } else if (type === 'police') {
+    bgColor = '#2563eb'; // Deep Blue / Royal Blue for Police
+    IconComponent = <Shield size={14} />;
+  } else if (type === 'hospital') {
+    bgColor = '#10b981'; // Green for Hospital
+    IconComponent = <Hospital size={14} />;
+  }
+
+  return (
+    <div style={{
+      ...style,
+      position: 'absolute',
+      transform: 'translate(-50%, -100%)',
+      pointerEvents: 'none',
+      zIndex: type === 'victim' ? 100 : type === 'police' ? 60 : 50
+    }}>
+      <motion.div 
+        initial={{ scale: 0 }} 
+        animate={{ scale: 1 }} 
+        style={{ 
+          color: 'white', 
+          background: bgColor, 
+          padding: '6px 12px', borderRadius: '12px', display: 'inline-flex', 
+          alignItems: 'center', gap: '6px', fontWeight: '800', fontSize: '11px',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.3)', border: '1.5px solid white',
+          whiteSpace: 'nowrap'
+        }}
+      >
+        {IconComponent} 
+        {text}
+      </motion.div>
+      <div style={{ 
+        width: '8px', height: '8px', background: bgColor, 
+        borderRadius: '50%', border: '1.5px solid white', margin: '-4px auto 0' 
+      }}></div>
+    </div>
+  );
+};
 
 import { useLanguage } from '../context/LanguageContext';
 
@@ -108,6 +128,42 @@ const formatBotMessage = (text) => {
     }
 
     return <p key={idx} style={{ fontSize: '0.95rem', margin: '4px 0', lineHeight: '1.5', minHeight: '1em' }}>{parts.length > 1 ? parts : line}</p>;
+  });
+};
+
+const createLeafletIcon = (text, type) => {
+  let bgColor = '#3b82f6';
+  let iconSvg = '';
+
+  if (type === 'victim') {
+    bgColor = '#ef4444';
+    iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation: pulse 1.5s infinite"><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8a6 6 0 0 1 0 8.4M19 5a10 10 0 0 1 0 14M7.8 16.2a6 6 0 0 1 0-8.4M5 19A10 10 0 0 1 5 5"/></svg>`;
+  } else if (type === 'ambulance') {
+    bgColor = '#f59e0b';
+    iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`;
+  } else if (type === 'police') {
+    bgColor = '#2563eb';
+    iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 9.7a1 1 0 0 1-.68 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 .76-.97l8-2a1 1 0 0 1 .48 0l8 2A1 1 0 0 1 20 6z"/></svg>`;
+  } else if (type === 'hospital') {
+    bgColor = '#10b981';
+    iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v12M6 12h12M18 22H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2z"/></svg>`;
+  }
+
+  const htmlContent = `
+    <div style="position: absolute; transform: translate(-50%, -100%); pointer-events: none; z-index: ${type === 'victim' ? 100 : type === 'police' ? 60 : 50}; font-family: sans-serif;">
+      <div style="color: white; background: ${bgColor}; padding: 6px 12px; border-radius: 12px; display: inline-flex; align-items: center; gap: 6px; font-weight: 800; font-size: 11px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); border: 1.5px solid white; white-space: nowrap;">
+        ${iconSvg}
+        <span>${text}</span>
+      </div>
+      <div style="width: 8px; height: 8px; background: ${bgColor}; border-radius: 50%; border: 1.5px solid white; margin: -4px auto 0;"></div>
+    </div>
+  `;
+
+  return window.L.divIcon({
+    html: htmlContent,
+    className: 'custom-map-marker',
+    iconSize: [0, 0],
+    iconAnchor: [0, 0]
   });
 };
 
@@ -205,6 +261,72 @@ const Dashboard = () => {
   const [policeStations, setPoliceStations] = useState([]);
   const [selectedHospitalName, setSelectedHospitalName] = useState('');
   const [selectedAmbulanceName, setSelectedAmbulanceName] = useState('');
+
+  const mapContainerRef = useRef(null);
+  const leafletMapRef = useRef(null);
+  const markersRef = useRef([]);
+
+  useEffect(() => {
+    if (!mapContainerRef.current || !window.L) return;
+
+    if (!leafletMapRef.current) {
+      const isDark = theme === 'dark';
+      const tileUrl = isDark 
+        ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png' 
+        : 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
+      
+      const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
+
+      const map = window.L.map(mapContainerRef.current, {
+        zoomControl: false,
+        attributionControl: false
+      }).setView([mapCenter.lat, mapCenter.lng], 14);
+
+      window.L.tileLayer(tileUrl, {
+        maxZoom: 20,
+        attribution: attribution
+      }).addTo(map);
+
+      leafletMapRef.current = map;
+    } else {
+      leafletMapRef.current.setView([mapCenter.lat, mapCenter.lng]);
+    }
+  }, [mapCenter, theme]);
+
+  // Update Markers
+  useEffect(() => {
+    const map = leafletMapRef.current;
+    if (!map || !window.L) return;
+
+    markersRef.current.forEach(m => m.remove());
+    markersRef.current = [];
+
+    const addMarker = (lat, lng, text, type) => {
+      const icon = createLeafletIcon(text, type);
+      const marker = window.L.marker([lat, lng], { icon }).addTo(map);
+      markersRef.current.push(marker);
+    };
+
+    if (victimLocation) {
+      addMarker(victimLocation.lat, victimLocation.lng, "EMERGENCY SITE", "victim");
+    }
+    if (hospitalLocation) {
+      addMarker(hospitalLocation.lat, hospitalLocation.lng, selectedHospitalName, "hospital");
+    }
+    if (ambulanceLocation) {
+      addMarker(ambulanceLocation.lat, ambulanceLocation.lng, selectedAmbulanceName, "ambulance");
+    }
+    policeStations.forEach(p => {
+      if (p.location && p.location.coordinates) {
+        addMarker(p.location.coordinates[1], p.location.coordinates[0], p.name, "police");
+      }
+    });
+
+    if (markersRef.current.length > 0) {
+      const group = new window.L.featureGroup(markersRef.current);
+      map.fitBounds(group.getBounds().pad(0.15));
+    }
+  }, [victimLocation, hospitalLocation, ambulanceLocation, policeStations, selectedHospitalName, selectedAmbulanceName]);
 
   const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
   const navigate = useNavigate();
@@ -524,38 +646,25 @@ const Dashboard = () => {
               </div>
             ) : (
               <div style={{ flex: 1, position: 'relative' }}>
-                <GoogleMapReact 
-                  bootstrapURLKeys={{ key: API_KEY }} 
-                  center={mapCenter} 
-                  defaultZoom={14} 
-                  options={{ 
-                    styles: theme === 'dark' ? [
-                      { "elementType": "geometry", "stylers": [{ "color": "#0f172a" }] },
-                      { "featureType": "road", "elementType": "geometry", "stylers": [{ "color": "#1e293b" }] },
-                      { "featureType": "poi", "stylers": [{ "visibility": "off" }] },
-                      { "featureType": "transit", "stylers": [{ "visibility": "off" }] },
-                      { "elementType": "labels.text.fill", "stylers": [{ "color": "#4b5563" }] },
-                      { "elementType": "labels.text.stroke", "stylers": [{ "visibility": "off" }] }
-                    ] : [], 
-                    disableDefaultUI: true 
-                  }}
-                >
-                  {victimLocation && <Marker lat={victimLocation.lat} lng={victimLocation.lng} text="EMERGENCY SITE" type="victim" />}
-                  {hospitalLocation && <Marker lat={hospitalLocation.lat} lng={hospitalLocation.lng} text={selectedHospitalName} type="hospital" />}
-                  {ambulanceLocation && <Marker lat={ambulanceLocation.lat} lng={ambulanceLocation.lng} text={selectedAmbulanceName} type="ambulance" />}
-                  {policeStations.map((p, idx) => (
-                    <Marker key={idx} lat={p.location.coordinates[1]} lng={p.location.coordinates[0]} text={p.name} type="police" />
-                  ))}
-                </GoogleMapReact>
+                <div 
+                  ref={mapContainerRef} 
+                  style={{ 
+                    width: '100%', 
+                    height: '100%', 
+                    minHeight: '350px', 
+                    borderRadius: '12px',
+                    zIndex: 1 
+                  }} 
+                />
 
-                <div style={{ position: 'absolute', top: '15px', left: '15px', right: '15px', display: 'flex', justifyContent: 'space-between', pointerEvents: 'none' }}>
+                <div style={{ position: 'absolute', top: '15px', left: '15px', right: '15px', display: 'flex', justifyContent: 'space-between', pointerEvents: 'none', zIndex: 1000 }}>
                    <div style={{ padding: '10px 20px', background: '#ef4444', color: 'white', borderRadius: '100px', fontSize: '0.8rem', fontWeight: '900', display: 'flex', alignItems: 'center', gap: '8px' }}>
                       <Radio size={16} className="pulse-sos" /> {t('sos_active')}
                    </div>
                    <div style={{ padding: '10px 20px', background: 'rgba(15, 23, 42, 0.9)', color: 'white', borderRadius: '100px', fontSize: '0.8rem', fontWeight: '800' }}>{t('geospatial_grid')}</div>
                 </div>
 
-                <div style={{ position: 'absolute', bottom: '15px', left: '15px', right: '15px' }}>
+                <div style={{ position: 'absolute', bottom: '15px', left: '15px', right: '15px', zIndex: 1000 }}>
                   <div className="glass-panel" style={{ padding: '20px', background: 'var(--bg-primary)', opacity: 0.98, border: '1.5px solid var(--border-glass)' }}>
                     {/* Top Row: Information Grid */}
                     <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr 1fr', gap: '20px', alignItems: 'center', marginBottom: hospitalLocation && victimLocation ? '16px' : '0' }}>

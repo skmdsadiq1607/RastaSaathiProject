@@ -3,10 +3,55 @@ const Anthropic = require('@anthropic-ai/sdk');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const OpenAI = require('openai');
 const { env } = require('../config/env');
-const { claudeKeyManager, geminiKeyManager, openaiKeyManager } = require('../utils/apiKeyManager');
+const { claudeKeyManager, geminiKeyManager, openaiKeyManager, groqKeyManager } = require('../utils/apiKeyManager');
 const { AppError } = require('../utils/AppError');
 const { logger } = require('../utils/logger');
 
+// --- Groq (PRIMARY - fastest, most free requests) ---
+async function callGroqWithRetry({ system, user, maxTokens = 600 }) {
+  const maxRetries = groqKeyManager.keys.length;
+  let attempt = 0;
+  while (attempt < maxRetries) {
+    const key = groqKeyManager.getCurrentKey();
+    if (!key) throw new Error('No Groq API key available');
+
+    try {
+      const response = await axios.post(
+        'https://api.groq.com/openai/v1/chat/completions',
+        {
+          model: 'llama-3.3-70b-versatile',
+          messages: [
+            { role: 'system', content: system },
+            { role: 'user', content: user }
+          ],
+          max_tokens: maxTokens,
+          temperature: 0.5
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${key}`,
+            'Content-Type': 'application/json'
+          },
+          timeout: 15000
+        }
+      );
+      const text = response.data.choices[0].message.content;
+      return { text, raw: response.data, provider: 'groq' };
+    } catch (error) {
+      const status = error.response?.status;
+      logger.error(`[Groq API Error] Key: ${key.slice(0, 8)}... | Status: ${status} | Error: ${error.message}`);
+      if (status === 429 || status === 401 || status === 403) {
+        groqKeyManager.rotateKey();
+        attempt++;
+      } else {
+        throw error;
+      }
+    }
+  }
+  throw new Error('Exhausted all Groq API retries');
+}
+
+// --- OpenAI ---
 async function callOpenAIWithRetry({ system, user, maxTokens = 600 }) {
   const maxRetries = openaiKeyManager.keys.length;
   let attempt = 0;
@@ -40,6 +85,7 @@ async function callOpenAIWithRetry({ system, user, maxTokens = 600 }) {
   throw new Error('Exhausted all OpenAI API retries');
 }
 
+// --- Claude ---
 async function callClaudeWithRetry({ system, user, maxTokens = 600, retries = 1 }) {
   let attempt = 0;
   while (attempt <= retries) {
@@ -71,6 +117,7 @@ async function callClaudeWithRetry({ system, user, maxTokens = 600, retries = 1 
   throw new Error('Exhausted all Claude API retries');
 }
 
+// --- Gemini ---
 async function callGeminiWithRetry({ system, user }) {
   const maxRetries = geminiKeyManager.keys.length;
   let attempt = 0;
@@ -102,27 +149,36 @@ async function callGeminiWithRetry({ system, user }) {
   throw new Error('Exhausted all Gemini API retries');
 }
 
-// Unified AI Caller: Tries Gemini -> OpenAI -> Claude
+// Unified AI Caller: Tries Groq -> Gemini -> OpenAI -> Claude -> Static Fallback
 async function callAi({ system, user, maxTokens = 600 }) {
-  // 1. Try Gemini (Primary for Hackathon/Reliability)
+  // 1. Try Groq (PRIMARY - ultra fast, 14,400 req/day free)
+  try {
+    const result = await callGroqWithRetry({ system, user, maxTokens });
+    logger.info('[AI Service] Groq responded successfully.');
+    return result;
+  } catch (groqError) {
+    logger.warn(`[AI Service] Groq Failed: ${groqError.message}. Falling back to Gemini...`);
+  }
+
+  // 2. Try Gemini (SECONDARY - 1,500 req/day free)
   try {
     return await callGeminiWithRetry({ system, user });
   } catch (geminiError) {
     logger.warn(`[AI Service] Gemini Failed: ${geminiError.message}. Falling back to OpenAI...`);
     
-    // 2. Try OpenAI (Secondary)
+    // 3. Try OpenAI
     try {
       return await callOpenAIWithRetry({ system, user, maxTokens });
     } catch (openAiError) {
       logger.error(`[AI Service] OpenAI Failed: ${openAiError.message}. Falling back to Claude...`);
       
-      // 3. Try Claude (Tertiary)
+      // 4. Try Claude
       try {
         return await callClaudeWithRetry({ system, user, maxTokens });
       } catch (claudeError) {
-        logger.error(`[AI Service] Claude Failed: ${claudeError.message}`);
+        logger.error(`[AI Service] Claude Failed: ${claudeError.message}. Using static fallback.`);
         
-        // Final Safety Fallback (Structured JSON for UI stability)
+        // Final Static Fallback (for UI stability)
         return { 
           text: JSON.stringify({
             steps: [
@@ -149,4 +205,3 @@ async function callAi({ system, user, maxTokens = 600 }) {
 }
 
 module.exports = { callAi };
-

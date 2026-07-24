@@ -32,9 +32,11 @@ class ApiKeyManager {
 const claudeKeyManager = new ApiKeyManager(env.CLAUDE_API_KEYS, 'Claude');
 const geminiKeyManager = new ApiKeyManager(env.GEMINI_API_KEYS, 'Gemini');
 const openaiKeyManager = new ApiKeyManager(env.OPENAI_API_KEYS, 'OpenAI');
+const groqKeyManager = new ApiKeyManager(env.GROQ_API_KEYS, 'Groq');
 
 module.exports = {
   claudeKeyManager,
   geminiKeyManager,
-  openaiKeyManager
+  openaiKeyManager,
+  groqKeyManager
 };

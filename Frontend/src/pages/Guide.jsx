@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ShieldCheck, Activity, Smartphone, Info, AlertTriangle, UserPlus, Users, Zap, MessageCircle, MapPin, CheckCircle2, ArrowRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import whatsappQr from '../assets/whatsapp-qr.png';
 
 const Guide = () => {
   const { t } = useLanguage();
@@ -75,18 +76,35 @@ const Guide = () => {
                       <h3 style={{ fontSize: '1.4rem', marginBottom: '8px', fontWeight: '800', color: step.isHighlight ? step.color : 'white' }}>{step.title}</h3>
                       <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6', fontSize: '1.05rem' }}>{step.desc}</p>
                       {step.isHighlight && (
-                        <div style={{ marginTop: '20px', display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
-                           <div style={{ padding: '10px 20px', background: 'rgba(0,0,0,0.3)', borderRadius: '8px', border: '1px dashed #10b981', color: '#10b981', fontWeight: '700', fontFamily: 'monospace' }}>
-                              {t('twilio_command')}
-                           </div>
-                           <a 
-                             href="https://wa.me/14155238886?text=Join%20soft-peace" 
-                             target="_blank" 
-                             rel="noopener noreferrer"
-                             style={{ color: '#10b981', textDecoration: 'none', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '5px' }}
-                           >
-                             {t('connect_now')} <ArrowRight size={16} />
-                           </a>
+                        <div style={{ marginTop: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                          <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap', alignItems: 'center' }}>
+                             <div style={{ padding: '10px 20px', background: 'rgba(0,0,0,0.3)', borderRadius: '8px', border: '1px dashed #10b981', color: '#10b981', fontWeight: '700', fontFamily: 'monospace' }}>
+                                {t('twilio_command')}
+                             </div>
+                             <a 
+                               href="https://wa.me/14155238886?text=Join%20soft-peace" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               style={{ color: '#10b981', textDecoration: 'none', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '5px' }}
+                             >
+                               {t('connect_now')} <ArrowRight size={16} />
+                             </a>
+                          </div>
+                          
+                          {/* QR Code Scan Integration */}
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '20px', background: 'rgba(0, 0, 0, 0.25)', padding: '20px', borderRadius: '16px', border: '1.5px solid var(--border-glass)', maxWidth: '440px' }}>
+                            <img 
+                              src={whatsappQr} 
+                              alt="WhatsApp Sandbox Registration QR Code" 
+                              style={{ width: '90px', height: '90px', borderRadius: '8px', border: '2px solid white', background: 'white', flexShrink: 0 }} 
+                            />
+                            <div>
+                              <div style={{ fontWeight: '800', color: 'white', marginBottom: '6px', fontSize: '1rem' }}>Scan to Instantly Link</div>
+                              <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: '1.4' }}>
+                                Scan this QR code with your phone camera to prefill the registration code in WhatsApp and activate your safety alerts immediately.
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       )}
                    </div>
