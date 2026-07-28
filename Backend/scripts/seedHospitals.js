@@ -11,17 +11,24 @@ const env = require('../src/config/env');
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-async function geocodeAddress(address, apiKey) {
+async function geocodeAddress(hospitalName, cityAddress) {
   try {
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${apiKey}`;
-    const response = await axios.get(url);
-    if (response.data.status === 'OK' && response.data.results.length > 0) {
-      const location = response.data.results[0].geometry.location;
-      return [location.lng, location.lat]; // GeoJSON requires [longitude, latitude]
+    const query = `${hospitalName}, ${cityAddress}, India`;
+    const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=1`;
+    const response = await axios.get(url, {
+      headers: {
+        'User-Agent': 'RastaSaathiEmergencyService/1.0 (sadiq@rasta-saathi.org)'
+      },
+      timeout: 10000
+    });
+    if (response.data && response.data.length > 0) {
+      const lat = parseFloat(response.data[0].lat);
+      const lon = parseFloat(response.data[0].lon);
+      return [lon, lat]; // [longitude, latitude]
     }
     return null;
   } catch (error) {
-    console.error(`Geocoding error for ${address}:`, error.message);
+    console.error(`Geocoding error for ${hospitalName}, ${cityAddress}:`, error.message);
     return null;
   }
 }
@@ -40,10 +47,9 @@ const seedHospitals = async () => {
     const rawData = fs.readFileSync(path.join(__dirname, '../hospitals.json'), 'utf8');
     const hospitalList = JSON.parse(rawData);
     
-    console.log(`Loaded ${hospitalList.length} hospitals from JSON. Starting Geocoding process (this may take a minute)...`);
+    console.log(`Loaded ${hospitalList.length} hospitals from JSON. Starting Geocoding process (approx. 1 request per second)...`);
 
     const formattedHospitals = [];
-    const GOOGLE_API_KEY = env.env.GOOGLE_MAPS_API_KEY || process.env.GOOGLE_MAPS_API_KEY;
 
     // Fallback coordinates for Hyderabad
     const baseLat = 17.4399;
@@ -53,9 +59,8 @@ const seedHospitals = async () => {
 
     for (let i = 0; i < hospitalList.length; i++) {
       const h = hospitalList[i];
-      const fullAddress = `${h.hospital_name}, ${h.address}, ${h.city}, ${h.state}`;
       
-      let coords = await geocodeAddress(fullAddress, GOOGLE_API_KEY);
+      let coords = await geocodeAddress(h.hospital_name, h.city);
       
       if (coords) {
         successCount++;
@@ -87,12 +92,12 @@ const seedHospitals = async () => {
       });
 
       // Show progress
-      if ((i + 1) % 50 === 0) {
-        console.log(`Processed ${i + 1}/${hospitalList.length} hospitals...`);
+      if ((i + 1) % 10 === 0) {
+        console.log(`Processed ${i + 1}/${hospitalList.length} hospitals... (Successful exact geocoding: ${successCount})`);
       }
 
-      // Small delay to respect Google Maps API rate limits (50 QPS)
-      await sleep(25);
+      // 1-second delay to comply with OpenStreetMap Nominatim Usage Policy (1 request/sec limit)
+      await sleep(1000);
     }
 
     console.log(`Geocoding complete! Successfully mapped ${successCount} exact locations. Inserting into Database...`);

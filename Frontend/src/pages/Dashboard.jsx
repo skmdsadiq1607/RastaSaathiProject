@@ -311,7 +311,8 @@ const Dashboard = () => {
     if (ambulanceLocation) {
       addMarker(ambulanceLocation.lat, ambulanceLocation.lng, selectedAmbulanceName, "ambulance");
     }
-    policeStations.forEach(p => {
+    // Only render the assigned/nearest police station (first element) to avoid map clutter and bounds distortion
+    policeStations.slice(0, 1).forEach(p => {
       if (p.location && p.location.coordinates) {
         addMarker(p.location.coordinates[1], p.location.coordinates[0], p.name, "police");
       }
@@ -319,7 +320,10 @@ const Dashboard = () => {
 
     if (markersRef.current.length > 0) {
       const group = new window.L.featureGroup(markersRef.current);
-      map.fitBounds(group.getBounds().pad(0.15));
+      map.fitBounds(group.getBounds(), {
+        paddingTopLeft: [40, 40],
+        paddingBottomRight: [40, 260] // Pad bottom by 260px to clear the absolute HUD overlay panel
+      });
     }
   }, [victimLocation, hospitalLocation, ambulanceLocation, policeStations, selectedHospitalName, selectedAmbulanceName]);
 
