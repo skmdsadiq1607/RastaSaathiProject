@@ -497,10 +497,10 @@ const Dashboard = () => {
   };
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="container" style={{ paddingBottom: '40px' }}>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="container" style={{ maxWidth: '1600px', width: '95%', paddingBottom: '40px' }}>
       <div className="dashboard-grid">
         <style>{`
-          .dashboard-grid { display: grid; grid-template-columns: 1fr 420px; gap: 30px; }
+          .dashboard-grid { display: grid; grid-template-columns: 1fr 480px; gap: 30px; }
           @media (max-width: 1100px) { .dashboard-grid { grid-template-columns: 1fr; } }
           .pulse-sos { animation: pulse-red 2s infinite; }
           @keyframes pulse-red { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
@@ -530,7 +530,7 @@ const Dashboard = () => {
         `}</style>
         
         <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
-          <div className="glass-panel" style={{ padding: '0', overflow: 'hidden', minHeight: '550px', position: 'relative', display: 'flex', flexDirection: 'column' }}>
+          <div className="glass-panel" style={{ padding: '0', overflow: 'hidden', minHeight: '750px', position: 'relative', display: 'flex', flexDirection: 'column' }}>
             {!sosActive ? (
               <div style={{ padding: '60px 20px', textAlign: 'center', flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                  <motion.div initial={{ y: 20 }} animate={{ y: 0 }} style={{ marginBottom: '40px' }}>
@@ -779,7 +779,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="glass-panel sidebar-chat" style={{ padding: '24px', display: 'flex', flexDirection: 'column', height: '600px' }}>
+        <div className="glass-panel sidebar-chat" style={{ padding: '24px', display: 'flex', flexDirection: 'column', height: '750px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '15px', borderBottom: '1px solid var(--border-glass)', paddingBottom: '20px', marginBottom: '20px' }}>
             <div style={{ width: '42px', height: '42px', background: 'rgba(16, 185, 129, 0.1)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Zap color="#10b981" fill="#10b981" size={20} />
