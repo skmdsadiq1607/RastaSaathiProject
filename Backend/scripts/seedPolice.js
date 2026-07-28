@@ -12,14 +12,14 @@ const stations = [
     address: "Chaitanyapuri Main Rd, Dilsukhnagar, Hyderabad, Telangana",
     phoneNumber: "+91 040-27852350",
     rating: 4.8,
-    location: { type: 'Point', coordinates: [78.5290, 17.3730] } // Close to the user's location
+    location: { type: 'Point', coordinates: [78.5362, 17.3702] }
   },
   {
     name: "Malakpet Police Station",
     address: "Malakpet Rd, Hyderabad, Telangana",
     phoneNumber: "+91 040-27852351",
     rating: 4.6,
-    location: { type: 'Point', coordinates: [78.5140, 17.3820] }
+    location: { type: 'Point', coordinates: [78.5085, 17.3785] }
   },
   {
     name: "Jubilee Hills Police Station",

@@ -24,7 +24,7 @@ const seedAmbulances = async () => {
         name: 'Dilsukhnagar Rapid Ambulance',
         address: 'Dilsukhnagar, Hyderabad',
         phone: '+91 108',
-        location: { type: 'Point', coordinates: [78.5290, 17.3730] },
+        location: { type: 'Point', coordinates: [78.5215, 17.3682] },
         status: 'AVAILABLE'
       },
       {
