@@ -132,36 +132,31 @@ const formatBotMessage = (text) => {
 };
 
 const createLeafletIcon = (text, type) => {
-  let bgColor = '#3b82f6';
   let iconSvg = '';
 
   if (type === 'victim') {
-    bgColor = '#ef4444';
-    iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation: pulse 1.5s infinite"><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8a6 6 0 0 1 0 8.4M19 5a10 10 0 0 1 0 14M7.8 16.2a6 6 0 0 1 0-8.4M5 19A10 10 0 0 1 5 5"/></svg>`;
+    iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8a6 6 0 0 1 0 8.4M19 5a10 10 0 0 1 0 14M7.8 16.2a6 6 0 0 1 0-8.4M5 19A10 10 0 0 1 5 5"/></svg>`;
   } else if (type === 'ambulance') {
-    bgColor = '#f59e0b';
-    iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`;
+    iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`;
   } else if (type === 'police') {
-    bgColor = '#2563eb';
-    iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 9.7a1 1 0 0 1-.68 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 .76-.97l8-2a1 1 0 0 1 .48 0l8 2A1 1 0 0 1 20 6z"/></svg>`;
+    iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 9.7a1 1 0 0 1-.68 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 .76-.97l8-2a1 1 0 0 1 .48 0l8 2A1 1 0 0 1 20 6z"/></svg>`;
   } else if (type === 'hospital') {
-    bgColor = '#10b981';
-    iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v12M6 12h12M18 22H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2z"/></svg>`;
+    iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v12M6 12h12M18 22H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2z"/></svg>`;
   }
 
   const htmlContent = `
-    <div style="position: absolute; transform: translate(-50%, -100%); pointer-events: none; z-index: ${type === 'victim' ? 100 : type === 'police' ? 60 : 50}; font-family: sans-serif;">
-      <div style="color: white; background: ${bgColor}; padding: 6px 12px; border-radius: 12px; display: inline-flex; align-items: center; gap: 6px; font-weight: 800; font-size: 11px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); border: 1.5px solid white; white-space: nowrap;">
+    <div class="leaflet-custom-marker type-${type}">
+      <div class="marker-glowing-pulse"></div>
+      <div class="marker-icon-circle">
         ${iconSvg}
-        <span>${text}</span>
       </div>
-      <div style="width: 8px; height: 8px; background: ${bgColor}; border-radius: 50%; border: 1.5px solid white; margin: -4px auto 0;"></div>
+      <div class="marker-label">${text}</div>
     </div>
   `;
 
   return window.L.divIcon({
     html: htmlContent,
-    className: 'custom-map-marker',
+    className: 'custom-leaflet-marker-container',
     iconSize: [0, 0],
     iconAnchor: [0, 0]
   });
@@ -504,6 +499,88 @@ const Dashboard = () => {
           @media (max-width: 1100px) { .dashboard-grid { grid-template-columns: 1fr; } }
           .pulse-sos { animation: pulse-red 2s infinite; }
           @keyframes pulse-red { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+
+          /* High-Tech Custom Leaflet Markers */
+          .leaflet-custom-marker {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+          }
+          .marker-icon-circle {
+            position: absolute;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.45);
+            border: 2px solid white;
+            z-index: 2;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          }
+          .type-victim .marker-icon-circle { background: #ef4444; border-color: #fca5a5; }
+          .type-ambulance .marker-icon-circle { background: #f59e0b; border-color: #fde68a; }
+          .type-police .marker-icon-circle { background: #2563eb; border-color: #bfdbfe; }
+          .type-hospital .marker-icon-circle { background: #10b981; border-color: #a7f3d0; }
+
+          .marker-glowing-pulse {
+            position: absolute;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            z-index: 1;
+            opacity: 0;
+            transform: translate(-50%, -50%);
+            animation: marker-pulse 2s infinite;
+          }
+          .type-victim .marker-glowing-pulse { background: rgba(239, 68, 68, 0.5); }
+          .type-ambulance .marker-glowing-pulse { background: rgba(245, 158, 11, 0.5); }
+          .type-police .marker-glowing-pulse { background: rgba(37, 99, 235, 0.5); }
+          .type-hospital .marker-glowing-pulse { background: rgba(16, 185, 129, 0.5); }
+
+          @keyframes marker-pulse {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+          }
+
+          .marker-label {
+            position: absolute;
+            top: 24px;
+            transform: translateX(-50%);
+            background: rgba(15, 23, 42, 0.95);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 800;
+            white-space: nowrap;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 3;
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: all 0.3s ease;
+          }
+          
+          .leaflet-custom-marker:hover .marker-icon-circle {
+            transform: translate(-50%, -50%) scale(1.2);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+          }
+          .leaflet-custom-marker:hover .marker-label {
+            background: rgba(15, 23, 42, 1);
+            max-width: 300px;
+            border-color: rgba(255,255,255,0.25);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+          }
           
           .chat-bubble {
             max-width: 85%;
@@ -665,9 +742,9 @@ const Dashboard = () => {
                 </div>
 
                 <div style={{ position: 'absolute', bottom: '15px', left: '15px', right: '15px', zIndex: 1000 }}>
-                  <div className="glass-panel" style={{ padding: '20px', background: 'var(--bg-primary)', opacity: 0.98, border: '1.5px solid var(--border-glass)' }}>
+                  <div className="glass-panel" style={{ padding: '20px 24px', background: 'rgba(15, 23, 42, 0.82)', border: '1px solid var(--border-glass)', boxShadow: '0 8px 32px rgba(0,0,0,0.5)', backdropFilter: 'blur(16px)' }}>
                     {/* Top Row: Information Grid */}
-                    <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr 1fr', gap: '20px', alignItems: 'center', marginBottom: hospitalLocation && victimLocation ? '16px' : '0' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr 1fr 1fr', gap: '20px', alignItems: 'center', marginBottom: hospitalLocation && victimLocation ? '16px' : '0' }}>
                       {/* Column 1: System Status */}
                       <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                         <div style={{ width: '40px', height: '40px', background: 'var(--brand-red-glow)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
