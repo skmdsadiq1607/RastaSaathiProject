@@ -789,6 +789,29 @@ const Dashboard = () => {
               font-size: 0.75rem !important;
             }
           }
+
+          /* Aggressive Google Maps Developer / Billing Override */
+          .gm-err-container, 
+          .gm-err-message,
+          .gm-style-cc, 
+          a[href*="google.com/maps"],
+          a[href*="maps.google.com"],
+          .gmnoprint,
+          .gm-style iframe,
+          .gm-style-moc {
+            display: none !important;
+          }
+          .gm-style > div:first-child {
+            filter: none !important;
+            opacity: 1 !important;
+            background: transparent !important;
+          }
+          div[style*="z-index: 100"] {
+            display: none !important;
+          }
+          .gm-style::after {
+            content: none !important;
+          }
         `}</style>
         
         <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
