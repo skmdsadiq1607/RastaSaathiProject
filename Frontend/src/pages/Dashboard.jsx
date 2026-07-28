@@ -273,9 +273,15 @@ const Dashboard = () => {
   const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
   const mapInitRef = useRef(false);
+  const [mapReady, setMapReady] = useState(false);
 
   // Load and initialize Google Maps dynamically
   useEffect(() => {
+    if (!sosActive) {
+      console.log("[Google Map] SOS not active. Skipping map initialization.");
+      return;
+    }
+    
     if (!mapContainerRef.current) {
       console.log("[Google Map] Container element not mounted yet.");
       return;
@@ -329,6 +335,7 @@ const Dashboard = () => {
           }
         });
         console.log("[Google Map] Directions renderer initialized.");
+        setMapReady(true);
       } catch (err) {
         console.error("[Google Map] Error creating Map instance:", err);
       }
@@ -352,7 +359,7 @@ const Dashboard = () => {
       };
       document.head.appendChild(script);
     }
-  }, [theme]);
+  }, [theme, sosActive]);
 
   // Update Markers & Directions
   useEffect(() => {
@@ -454,7 +461,7 @@ const Dashboard = () => {
         window.google.maps.event.removeListener(listener);
       });
     }
-  }, [victimLocation, hospitalLocation, ambulanceLocation, policeStations, selectedHospitalName, selectedAmbulanceName]);
+  }, [mapReady, victimLocation, hospitalLocation, ambulanceLocation, policeStations, selectedHospitalName, selectedAmbulanceName]);
   const navigate = useNavigate();
 
   useEffect(() => {
