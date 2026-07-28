@@ -162,6 +162,31 @@ const createLeafletIcon = (text, type) => {
   });
 };
 
+const getDistanceAndEta = (locA, locB) => {
+  if (!locA || !locB) return null;
+  const lat1 = locA.lat;
+  const lon1 = locA.lng;
+  const lat2 = locB.lat;
+  const lon2 = locB.lng;
+
+  const R = 6371; // radius of Earth in km
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = 
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+    Math.sin(dLon/2) * Math.sin(dLon/2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  const distance = R * c; // in km
+  
+  // Estimate driving time at 30 km/h (2 minutes per km) + 1 min base delay
+  const etaMinutes = Math.max(1, Math.round(distance * 2 + 1));
+  return {
+    distanceStr: `${distance.toFixed(1)} km`,
+    etaStr: `${etaMinutes} min`
+  };
+};
+
 const Dashboard = () => {
   const { t } = useLanguage();
   const { theme } = useTheme();
@@ -495,6 +520,13 @@ const Dashboard = () => {
     }
   };
 
+  const policeCoordinates = policeStations[0]?.location?.coordinates;
+  const policeLoc = policeCoordinates ? { lat: policeCoordinates[1], lng: policeCoordinates[0] } : null;
+
+  const policeDistEta = getDistanceAndEta(victimLocation, policeLoc);
+  const hospitalDistEta = getDistanceAndEta(victimLocation, hospitalLocation);
+  const ambulanceDistEta = getDistanceAndEta(victimLocation, ambulanceLocation);
+
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="container" style={{ maxWidth: '1600px', width: '95%', paddingBottom: '40px' }}>
       <div className="dashboard-grid">
@@ -766,6 +798,12 @@ const Dashboard = () => {
                         <div style={{ fontSize: '0.9rem', fontWeight: '800', color: '#3b82f6', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', lineHeight: '1.3' }}>
                           {policeStations[0]?.name || 'Locating...'}
                         </div>
+                        {policeDistEta && (
+                          <div style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontWeight: '700', marginTop: '4px', display: 'flex', gap: '8px' }}>
+                            <span>📍 {policeDistEta.distanceStr}</span>
+                            <span>⏱️ {policeDistEta.etaStr}</span>
+                          </div>
+                        )}
                       </div>
 
                       {/* Column 3: Target Trauma Center */}
@@ -774,6 +812,12 @@ const Dashboard = () => {
                         <div style={{ fontSize: '0.9rem', fontWeight: '800', color: '#10b981', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', lineHeight: '1.3' }}>
                           {selectedHospitalName || (apiLoading ? t('calculating') : 'Manual Mode')}
                         </div>
+                        {hospitalDistEta && (
+                          <div style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontWeight: '700', marginTop: '4px', display: 'flex', gap: '8px' }}>
+                            <span>📍 {hospitalDistEta.distanceStr}</span>
+                            <span>⏱️ {hospitalDistEta.etaStr}</span>
+                          </div>
+                        )}
                       </div>
 
                       {/* Column 4: Assigned Ambulance */}
@@ -782,6 +826,12 @@ const Dashboard = () => {
                         <div style={{ fontSize: '0.9rem', fontWeight: '800', color: '#f59e0b', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', lineHeight: '1.3' }}>
                           {selectedAmbulanceName || (apiLoading ? t('calculating') : 'PENDING DISPATCH')}
                         </div>
+                        {ambulanceDistEta && (
+                          <div style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontWeight: '700', marginTop: '4px', display: 'flex', gap: '8px' }}>
+                            <span>📍 {ambulanceDistEta.distanceStr}</span>
+                            <span>⏱️ {ambulanceDistEta.etaStr}</span>
+                          </div>
+                        )}
                       </div>
                     </div>
 
@@ -825,7 +875,7 @@ const Dashboard = () => {
                         </motion.button>
 
                         <motion.button 
-                          whileHover={{ scale: 1.02, boxShadow: '0 0 20px rgba(59, 130, 246, 0.3)' }}
+                          whileHover={{ scale: 1.02, boxShadow: '0 0 20px rgba(16, 185, 129, 0.3)' }}
                           whileTap={{ scale: 0.98 }}
                           onClick={() => {
                             const url = `https://www.google.com/maps/dir/?api=1&origin=${victimLocation.lat},${victimLocation.lng}&destination=${hospitalLocation.lat},${hospitalLocation.lng}&travelmode=driving`;
@@ -833,9 +883,9 @@ const Dashboard = () => {
                           }}
                           style={{ 
                             flex: 1,
-                            maxWidth: '240px',
+                            maxWidth: '180px',
                             padding: '12px 20px', 
-                            background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)', 
+                            background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', 
                             color: 'white', 
                             borderRadius: '10px', 
                             border: 'none',
@@ -849,7 +899,68 @@ const Dashboard = () => {
                           }}
                         >
                           <Navigation size={16} />
-                          {t('navigate')}
+                          Hospital Route
+                        </motion.button>
+
+                        <motion.button 
+                          whileHover={{ scale: 1.02, boxShadow: '0 0 20px rgba(37, 99, 235, 0.3)' }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => {
+                            const pLoc = policeStations[0]?.location?.coordinates;
+                            if (pLoc) {
+                              const url = `https://www.google.com/maps/dir/?api=1&origin=${victimLocation.lat},${victimLocation.lng}&destination=${pLoc[1]},${pLoc[0]}&travelmode=driving`;
+                              window.open(url, '_blank');
+                            }
+                          }}
+                          style={{ 
+                            flex: 1,
+                            maxWidth: '180px',
+                            padding: '12px 20px', 
+                            background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)', 
+                            color: 'white', 
+                            borderRadius: '10px', 
+                            border: 'none',
+                            fontWeight: '900', 
+                            fontSize: '0.85rem', 
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '8px'
+                          }}
+                        >
+                          <Navigation size={16} />
+                          Police Route
+                        </motion.button>
+
+                        <motion.button 
+                          whileHover={{ scale: 1.02, boxShadow: '0 0 20px rgba(245, 158, 11, 0.3)' }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => {
+                            if (ambulanceLocation) {
+                              const url = `https://www.google.com/maps/dir/?api=1&origin=${victimLocation.lat},${victimLocation.lng}&destination=${ambulanceLocation.lat},${ambulanceLocation.lng}&travelmode=driving`;
+                              window.open(url, '_blank');
+                            }
+                          }}
+                          style={{ 
+                            flex: 1,
+                            maxWidth: '180px',
+                            padding: '12px 20px', 
+                            background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)', 
+                            color: 'white', 
+                            borderRadius: '10px', 
+                            border: 'none',
+                            fontWeight: '900', 
+                            fontSize: '0.85rem', 
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '8px'
+                          }}
+                        >
+                          <Navigation size={16} />
+                          Ambulance Route
                         </motion.button>
                       </div>
                     )}
