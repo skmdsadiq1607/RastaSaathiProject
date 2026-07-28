@@ -32,25 +32,21 @@ async function findNearbyGoogleAmbulances({ lat, lng, radius = 50000 }) {
 }
 
 async function selectAmbulance({ lat, lng }) {
-  // 1. Try local database first
-  const localAmbulances = await Ambulance.find({
-    location: {
-      $near: {
-        $geometry: { type: 'Point', coordinates: [lng, lat] },
-        $maxDistance: 50000
-      }
-    },
-    status: 'AVAILABLE'
-  }).limit(5).lean();
+  // 1. Try Google Places first
+  let googleAmbulances = [];
+  try {
+    const { findNearbyGoogleAmbulances } = require('../../services/maps.service');
+    googleAmbulances = await findNearbyGoogleAmbulances({ lat, lng });
+  } catch (err) {
+    console.warn('[Ambulance Service] Google Places API failed');
+  }
 
-  let finalAmbulances = localAmbulances;
+  let finalAmbulances = [];
 
-  // 2. If no local ambulances, fallback to Google Places
-  if (finalAmbulances.length === 0) {
-    const googleAmbulances = await findNearbyGoogleAmbulances({ lat, lng });
+  if (googleAmbulances && googleAmbulances.length > 0) {
     finalAmbulances = googleAmbulances.map(ga => ({
       _id: ga.place_id,
-      name: ga.name,
+      name: ga.name.includes('Ambulance') ? ga.name : `${ga.name} Emergency Unit`,
       address: ga.vicinity,
       phone: '+91 108',
       location: {
@@ -61,10 +57,24 @@ async function selectAmbulance({ lat, lng }) {
     }));
   }
 
+  // 2. Fallback: Try local database
+  if (finalAmbulances.length === 0) {
+    const localAmbulances = await Ambulance.find({
+      location: {
+        $near: {
+          $geometry: { type: 'Point', coordinates: [lng, lat] },
+          $maxDistance: 50000
+        }
+      },
+      status: 'AVAILABLE'
+    }).limit(5).lean();
+    finalAmbulances = localAmbulances;
+  }
+
+  // 3. Absolute Fallback: Dynamic mock relative offset
   if (finalAmbulances.length === 0) {
     const { reverseGeocode } = require('../../utils/geoUtils');
     const placeName = await reverseGeocode(lat, lng) || 'Local Area';
-    // Mock Fallback when Google API fails and no local ambulances are within 50km
     finalAmbulances = [{
       _id: 'mock-ambulance-1',
       name: `${placeName} Rapid Response Ambulance`,
@@ -72,7 +82,7 @@ async function selectAmbulance({ lat, lng }) {
       phone: '+91 108',
       location: {
         type: 'Point',
-        coordinates: [lng + 0.005, lat - 0.005]
+        coordinates: [lng - 0.006, lat + 0.005] // Approx 0.8km offset
       },
       status: 'AVAILABLE'
     }];

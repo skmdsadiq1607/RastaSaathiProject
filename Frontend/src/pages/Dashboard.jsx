@@ -131,36 +131,6 @@ const formatBotMessage = (text) => {
   });
 };
 
-const createLeafletIcon = (text, type) => {
-  let iconSvg = '';
-
-  if (type === 'victim') {
-    iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8a6 6 0 0 1 0 8.4M19 5a10 10 0 0 1 0 14M7.8 16.2a6 6 0 0 1 0-8.4M5 19A10 10 0 0 1 5 5"/></svg>`;
-  } else if (type === 'ambulance') {
-    iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`;
-  } else if (type === 'police') {
-    iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 9.7a1 1 0 0 1-.68 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 .76-.97l8-2a1 1 0 0 1 .48 0l8 2A1 1 0 0 1 20 6z"/></svg>`;
-  } else if (type === 'hospital') {
-    iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v12M6 12h12M18 22H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2z"/></svg>`;
-  }
-
-  const htmlContent = `
-    <div class="leaflet-custom-marker type-${type}">
-      <div class="marker-glowing-pulse"></div>
-      <div class="marker-icon-circle">
-        ${iconSvg}
-      </div>
-      <div class="marker-label">${text}</div>
-    </div>
-  `;
-
-  return window.L.divIcon({
-    html: htmlContent,
-    className: 'custom-leaflet-marker-container',
-    iconSize: [0, 0],
-    iconAnchor: [0, 0]
-  });
-};
 
 const getDistanceAndEta = (locA, locB) => {
   if (!locA || !locB) return null;
@@ -283,76 +253,186 @@ const Dashboard = () => {
   const [selectedAmbulanceName, setSelectedAmbulanceName] = useState('');
 
   const mapContainerRef = useRef(null);
-  const leafletMapRef = useRef(null);
-  const markersRef = useRef([]);
+  const googleMapRef = useRef(null);
+  const googleMarkersRef = useRef([]);
+  const directionsRendererRef = useRef(null);
 
-  useEffect(() => {
-    if (!mapContainerRef.current || !window.L) return;
-
-    if (!leafletMapRef.current) {
-      const isDark = theme === 'dark';
-      const tileUrl = isDark 
-        ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png' 
-        : 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
-      
-      const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
-
-      const map = window.L.map(mapContainerRef.current, {
-        zoomControl: false,
-        attributionControl: false
-      }).setView([mapCenter.lat, mapCenter.lng], 14);
-
-      window.L.tileLayer(tileUrl, {
-        maxZoom: 20,
-        attribution: attribution
-      }).addTo(map);
-
-      leafletMapRef.current = map;
-    } else {
-      leafletMapRef.current.setView([mapCenter.lat, mapCenter.lng]);
+  const getMarkerIconSvg = (type) => {
+    if (type === 'victim') {
+      return `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8a6 6 0 0 1 0 8.4M19 5a10 10 0 0 1 0 14M7.8 16.2a6 6 0 0 1 0-8.4M5 19A10 10 0 0 1 5 5"/></svg>`;
+    } else if (type === 'ambulance') {
+      return `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`;
+    } else if (type === 'police') {
+      return `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 9.7a1 1 0 0 1-.68 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 .76-.97l8-2a1 1 0 0 1 .48 0l8 2A1 1 0 0 1 20 6z"/></svg>`;
+    } else if (type === 'hospital') {
+      return `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v12M6 12h12M18 22H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2z"/></svg>`;
     }
-  }, [mapCenter, theme]);
+    return '';
+  };
 
-  // Update Markers
+  const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+
+  // Load and initialize Google Maps dynamically
   useEffect(() => {
-    const map = leafletMapRef.current;
-    if (!map || !window.L) return;
+    if (!mapContainerRef.current) return;
 
-    markersRef.current.forEach(m => m.remove());
-    markersRef.current = [];
+    const initMap = () => {
+      if (window.googleMapObject) return; // Prevent double init
+      const isDark = theme === 'dark';
+      
+      const darkStyles = [
+        { elementType: "geometry", stylers: [{ color: "#0f172a" }] },
+        { elementType: "labels.text.stroke", stylers: [{ color: "#0f172a" }] },
+        { elementType: "labels.text.fill", stylers: [{ color: "#94a3b8" }] },
+        { featureType: "administrative.locality", elementType: "labels.text.fill", stylers: [{ color: "#cbd5e1" }] },
+        { featureType: "poi", elementType: "labels.text.fill", stylers: [{ color: "#64748b" }] },
+        { featureType: "poi.park", elementType: "geometry", stylers: [{ color: "#1e293b" }] },
+        { featureType: "road", elementType: "geometry", stylers: [{ color: "#1e293b" }] },
+        { featureType: "road", elementType: "geometry.stroke", stylers: [{ color: "#0f172a" }] },
+        { featureType: "road", elementType: "labels.text.fill", stylers: [{ color: "#64748b" }] },
+        { featureType: "road.highway", elementType: "geometry", stylers: [{ color: "#334155" }] },
+        { featureType: "road.highway", elementType: "geometry.stroke", stylers: [{ color: "#1e293b" }] },
+        { featureType: "water", elementType: "geometry", stylers: [{ color: "#020617" }] },
+        { featureType: "water", elementType: "labels.text.fill", stylers: [{ color: "#475569" }] },
+      ];
 
-    const addMarker = (lat, lng, text, type) => {
-      const icon = createLeafletIcon(text, type);
-      const marker = window.L.marker([lat, lng], { icon }).addTo(map);
-      markersRef.current.push(marker);
+      const mapOptions = {
+        center: { lat: mapCenter.lat, lng: mapCenter.lng },
+        zoom: 14,
+        disableDefaultUI: true,
+        styles: isDark ? darkStyles : [],
+      };
+
+      const map = new window.google.maps.Map(mapContainerRef.current, mapOptions);
+      googleMapRef.current = map;
+
+      // Directions render setup to draw premium route overlays
+      directionsRendererRef.current = new window.google.maps.DirectionsRenderer({
+        map: map,
+        suppressMarkers: true, // Hide default ugly pins, we render our custom ones
+        polylineOptions: {
+          strokeColor: "#ef4444",
+          strokeOpacity: 0.85,
+          strokeWeight: 4
+        }
+      });
+    };
+
+    if (window.google && window.google.maps) {
+      initMap();
+    } else {
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places`;
+      script.async = true;
+      script.defer = true;
+      script.onload = () => {
+        initMap();
+      };
+      document.head.appendChild(script);
+    }
+  }, [theme]);
+
+  // Update Markers & Directions
+  useEffect(() => {
+    const map = googleMapRef.current;
+    if (!map || !window.google || !window.google.maps) return;
+
+    // Define CustomOverlay class if it doesn't exist
+    if (!window.CustomOverlay) {
+      window.CustomOverlay = class extends window.google.maps.OverlayView {
+        constructor(position, element, map) {
+          super();
+          this.position = position;
+          this.element = element;
+          this.element.style.position = 'absolute';
+          this.element.style.transform = 'translate(-50%, -50%)';
+          this.setMap(map);
+        }
+        onAdd() {
+          const pane = this.getPanes().overlayMouseTarget;
+          pane.appendChild(this.element);
+        }
+        draw() {
+          const projection = this.getProjection();
+          if (!projection) return;
+          const point = projection.fromLatLngToDivPixel(new window.google.maps.LatLng(this.position.lat, this.position.lng));
+          if (point) {
+            this.element.style.left = point.x + 'px';
+            this.element.style.top = point.y + 'px';
+          }
+        }
+        onRemove() {
+          if (this.element.parentNode) {
+            this.element.parentNode.removeChild(this.element);
+          }
+        }
+      };
+    }
+
+    // Clear old overlays
+    googleMarkersRef.current.forEach(overlay => overlay.setMap(null));
+    googleMarkersRef.current = [];
+
+    const bounds = new window.google.maps.LatLngBounds();
+
+    const addGoogleMarker = (lat, lng, title, type) => {
+      const position = { lat, lng };
+      
+      const div = document.createElement('div');
+      div.className = `leaflet-custom-marker type-${type}`;
+      div.innerHTML = `
+        <div class="marker-glowing-pulse"></div>
+        <div class="marker-icon-circle">
+          ${getMarkerIconSvg(type)}
+        </div>
+        <div class="marker-label">${title}</div>
+      `;
+      
+      const overlay = new window.CustomOverlay(position, div, map);
+      googleMarkersRef.current.push(overlay);
+      bounds.extend(position);
     };
 
     if (victimLocation) {
-      addMarker(victimLocation.lat, victimLocation.lng, "EMERGENCY SITE", "victim");
+      addGoogleMarker(victimLocation.lat, victimLocation.lng, "EMERGENCY SITE", "victim");
     }
     if (hospitalLocation) {
-      addMarker(hospitalLocation.lat, hospitalLocation.lng, selectedHospitalName, "hospital");
+      addGoogleMarker(hospitalLocation.lat, hospitalLocation.lng, selectedHospitalName, "hospital");
     }
     if (ambulanceLocation) {
-      addMarker(ambulanceLocation.lat, ambulanceLocation.lng, selectedAmbulanceName, "ambulance");
+      addGoogleMarker(ambulanceLocation.lat, ambulanceLocation.lng, selectedAmbulanceName, "ambulance");
     }
-    // Only render the assigned/nearest police station (first element) to avoid map clutter and bounds distortion
     policeStations.slice(0, 1).forEach(p => {
       if (p.location && p.location.coordinates) {
-        addMarker(p.location.coordinates[1], p.location.coordinates[0], p.name, "police");
+        addGoogleMarker(p.location.coordinates[1], p.location.coordinates[0], p.name, "police");
       }
     });
 
-    if (markersRef.current.length > 0) {
-      const group = new window.L.featureGroup(markersRef.current);
-      map.fitBounds(group.getBounds(), {
-        paddingTopLeft: [40, 40],
-        paddingBottomRight: [40, 260] // Pad bottom by 260px to clear the absolute HUD overlay panel
+    // Draw route path to Hospital
+    if (victimLocation && hospitalLocation && directionsRendererRef.current) {
+      const directionsService = new window.google.maps.DirectionsService();
+      directionsService.route({
+        origin: { lat: victimLocation.lat, lng: victimLocation.lng },
+        destination: { lat: hospitalLocation.lat, lng: hospitalLocation.lng },
+        travelMode: window.google.maps.TravelMode.DRIVING
+      }, (result, status) => {
+        if (status === window.google.maps.DirectionsStatus.OK) {
+          directionsRendererRef.current.setDirections(result);
+        }
+      });
+    }
+
+    // Auto fit map bounds
+    if (victimLocation) {
+      map.fitBounds(bounds);
+      
+      // Pad map center slightly down to clear HUD overlap
+      const listener = window.google.maps.event.addListener(map, "idle", () => {
+        map.panBy(0, 80);
+        window.google.maps.event.removeListener(listener);
       });
     }
   }, [victimLocation, hospitalLocation, ambulanceLocation, policeStations, selectedHospitalName, selectedAmbulanceName]);
-
-  const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
   const navigate = useNavigate();
 
   useEffect(() => {

@@ -173,7 +173,38 @@ async function selectHospital({ lat, lng, severityLevel, injuryType, requiredSpe
 async function selectPoliceStation({ lat, lng }) {
   const origin = { lat, lng };
 
-  // 1. Try local database first
+  // 1. Try Google Places API first to fetch actual real-world police stations
+  let googlePolice = [];
+  try {
+    googlePolice = await findNearbyPoliceStations({ lat, lng, radius: 15000 });
+  } catch (err) {
+    console.warn('[Police Service] Google Places API failed, falling back to local database');
+  }
+
+  if (googlePolice && googlePolice.length > 0) {
+    const finalPolice = googlePolice.map(gp => ({
+      _id: gp.place_id,
+      name: gp.name,
+      address: gp.vicinity,
+      location: {
+        type: 'Point',
+        coordinates: [gp.geometry.location.lng, gp.geometry.location.lat]
+      },
+      rating: gp.rating || 4.5,
+      phoneNumber: '+91 100'
+    }));
+
+    // Sort by physical distance to ensure accuracy
+    finalPolice.sort((a, b) => {
+      const distA = calculateDistance(lat, lng, a.location.coordinates[1], a.location.coordinates[0]);
+      const distB = calculateDistance(lat, lng, b.location.coordinates[1], b.location.coordinates[0]);
+      return distA - distB;
+    });
+
+    return finalPolice.slice(0, 3);
+  }
+
+  // 2. Fallback: Try local database
   const localPolice = await PoliceStation.find({
     location: {
       $near: {
@@ -187,51 +218,20 @@ async function selectPoliceStation({ lat, lng }) {
     return localPolice;
   }
 
-  // 2. Fallback to Google Places API
-  let googlePolice = [];
-  try {
-    googlePolice = await findNearbyPoliceStations({ lat, lng, radius: 15000 });
-  } catch (err) {
-    console.error('[Police Service] Google Places API failed');
-  }
-
-  if (!googlePolice.length) {
-    const { reverseGeocode } = require('../../utils/geoUtils');
-    const placeName = await reverseGeocode(lat, lng) || 'Local Area';
-    // Mock Fallback when Google API fails or has billing issues
-    return [{
-      _id: 'mock-police-1',
-      name: `${placeName} Police Station`,
-      address: `${placeName} Emergency Response Grid`,
-      location: {
-        type: 'Point',
-        coordinates: [lng + 0.01, lat + 0.01]
-      },
-      rating: 4.5,
-      phoneNumber: '+91 100'
-    }];
-  }
-
-  const finalPolice = googlePolice.map(gp => ({
-    _id: gp.place_id,
-    name: gp.name,
-    address: gp.vicinity,
+  // 3. Absolute Fallback: Dynamic mock relative offset
+  const { reverseGeocode } = require('../../utils/geoUtils');
+  const placeName = await reverseGeocode(lat, lng) || 'Local Area';
+  return [{
+    _id: 'mock-police-1',
+    name: `${placeName} Police Station`,
+    address: `${placeName} Emergency Response Grid`,
     location: {
       type: 'Point',
-      coordinates: [gp.geometry.location.lng, gp.geometry.location.lat]
+      coordinates: [lng + 0.008, lat + 0.006] // Approx 0.9km offset
     },
-    rating: gp.rating,
+    rating: 4.5,
     phoneNumber: '+91 100'
-  }));
-
-  // Sort by physical distance to ensure accuracy
-  finalPolice.sort((a, b) => {
-    const distA = calculateDistance(lat, lng, a.location.coordinates[1], a.location.coordinates[0]);
-    const distB = calculateDistance(lat, lng, b.location.coordinates[1], b.location.coordinates[0]);
-    return distA - distB;
-  });
-
-  return finalPolice.slice(0, 3);
+  }];
 }
 
 module.exports = { selectHospital, selectPoliceStation };
