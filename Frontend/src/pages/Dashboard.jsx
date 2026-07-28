@@ -272,12 +272,22 @@ const Dashboard = () => {
 
   const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
+  const mapInitRef = useRef(false);
+
   // Load and initialize Google Maps dynamically
   useEffect(() => {
-    if (!mapContainerRef.current) return;
+    if (!mapContainerRef.current) {
+      console.log("[Google Map] Container element not mounted yet.");
+      return;
+    }
 
     const initMap = () => {
-      if (window.googleMapObject) return; // Prevent double init
+      if (mapInitRef.current) {
+        console.log("[Google Map] Already initialized. Skipping duplicate init.");
+        return;
+      }
+      mapInitRef.current = true;
+      console.log("[Google Map] Initializing new Google Map instance at center:", mapCenter);
       const isDark = theme === 'dark';
       
       const darkStyles = [
@@ -303,30 +313,42 @@ const Dashboard = () => {
         styles: isDark ? darkStyles : [],
       };
 
-      const map = new window.google.maps.Map(mapContainerRef.current, mapOptions);
-      googleMapRef.current = map;
+      try {
+        const map = new window.google.maps.Map(mapContainerRef.current, mapOptions);
+        googleMapRef.current = map;
+        console.log("[Google Map] Map object created successfully:", map);
 
-      // Directions render setup to draw premium route overlays
-      directionsRendererRef.current = new window.google.maps.DirectionsRenderer({
-        map: map,
-        suppressMarkers: true, // Hide default ugly pins, we render our custom ones
-        polylineOptions: {
-          strokeColor: "#ef4444",
-          strokeOpacity: 0.85,
-          strokeWeight: 4
-        }
-      });
+        // Directions render setup to draw premium route overlays
+        directionsRendererRef.current = new window.google.maps.DirectionsRenderer({
+          map: map,
+          suppressMarkers: true,
+          polylineOptions: {
+            strokeColor: "#ef4444",
+            strokeOpacity: 0.85,
+            strokeWeight: 4
+          }
+        });
+        console.log("[Google Map] Directions renderer initialized.");
+      } catch (err) {
+        console.error("[Google Map] Error creating Map instance:", err);
+      }
     };
 
     if (window.google && window.google.maps) {
+      console.log("[Google Map] Google Maps API already loaded in window. Initializing map.");
       initMap();
     } else {
+      console.log("[Google Map] Google Maps API not present on window. Creating script tag...");
       const script = document.createElement('script');
       script.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places`;
       script.async = true;
       script.defer = true;
       script.onload = () => {
+        console.log("[Google Map] Script loaded successfully. Calling initMap.");
         initMap();
+      };
+      script.onerror = (err) => {
+        console.error("[Google Map] Script failed to load:", err);
       };
       document.head.appendChild(script);
     }
@@ -878,13 +900,12 @@ const Dashboard = () => {
                 )}
               </div>
             ) : (
-              <div style={{ flex: 1, position: 'relative' }}>
+              <div style={{ flex: 1, position: 'relative', height: '750px', minHeight: '350px' }}>
                 <div 
                   ref={mapContainerRef} 
                   style={{ 
                     width: '100%', 
                     height: '100%', 
-                    minHeight: '350px', 
                     borderRadius: '12px',
                     zIndex: 1 
                   }} 
