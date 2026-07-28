@@ -65,11 +65,9 @@ The RastaSaathi platform is built using a highly resilient, modern engineering s
 ---
 
 ## 👥 The Engineering Team
-*   **Dr. Lakshmi**
 *   **Sadiq**
-*   **Krishna**
-*   **Chakravarthi**
-*   **Hasini**
+*   **Vamshikrishna**
+*   **Dhananjay**
 
 ---
 

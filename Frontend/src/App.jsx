@@ -385,7 +385,7 @@ const App = () => {
                 {t('made_with')} ❤️ {t('by_team')}
               </div>
               <div style={{ color: 'var(--text-secondary)', opacity: 0.6, fontSize: '0.8rem', fontWeight: '500', letterSpacing: '1px' }}>
-                Dr.Lakshmi | Sadiq | Krishna | Chakravarthi | Hasini
+                Sadiq | Vamshikrishna | Dhananjay
               </div>
               <div style={{ color: 'var(--text-secondary)', opacity: 0.4, fontSize: '0.75rem', marginTop: '10px' }}>
                 &copy; 2026 RastaSaathi. All Rights Reserved.
