@@ -640,6 +640,46 @@ const Dashboard = () => {
             color: white;
             align-self: flex-end;
           }
+
+          /* Mobile Phone Screens Optimization */
+          @media (max-width: 600px) {
+            .glass-panel-hud {
+              padding: 12px 16px !important;
+            }
+            .info-grid-hud {
+              grid-template-columns: repeat(2, 1fr) !important;
+              gap: 12px 16px !important;
+              margin-bottom: 12px !important;
+            }
+            .hud-column {
+              border-left: none !important;
+              padding-left: 0 !important;
+            }
+            .info-grid-hud-item-title {
+              font-size: 0.5rem !important;
+              letter-spacing: 0.5px !important;
+            }
+            .info-grid-hud-item-value {
+              font-size: 0.75rem !important;
+              white-space: nowrap !important;
+              overflow: hidden !important;
+              text-overflow: ellipsis !important;
+            }
+            .info-grid-hud-item-sub {
+              font-size: 0.65rem !important;
+              margin-top: 2px !important;
+            }
+            .actions-row-hud {
+              flex-direction: column !important;
+              gap: 8px !important;
+            }
+            .actions-row-hud > button {
+              max-width: 100% !important;
+              width: 100% !important;
+              padding: 10px 14px !important;
+              font-size: 0.75rem !important;
+            }
+          }
         `}</style>
         
         <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
@@ -778,28 +818,28 @@ const Dashboard = () => {
                 </div>
 
                 <div style={{ position: 'absolute', bottom: '15px', left: '15px', right: '15px', zIndex: 1000 }}>
-                  <div className="glass-panel" style={{ padding: '20px 24px', background: 'rgba(15, 23, 42, 0.82)', border: '1px solid var(--border-glass)', boxShadow: '0 8px 32px rgba(0,0,0,0.5)', backdropFilter: 'blur(16px)' }}>
+                  <div className="glass-panel glass-panel-hud" style={{ padding: '20px 24px', background: 'rgba(15, 23, 42, 0.82)', border: '1px solid var(--border-glass)', boxShadow: '0 8px 32px rgba(0,0,0,0.5)', backdropFilter: 'blur(16px)' }}>
                     {/* Top Row: Information Grid */}
-                    <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr 1fr 1fr', gap: '20px', alignItems: 'center', marginBottom: hospitalLocation && victimLocation ? '16px' : '0' }}>
+                    <div className="info-grid-hud" style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr 1fr 1fr', gap: '20px', alignItems: 'center', marginBottom: hospitalLocation && victimLocation ? '16px' : '0' }}>
                       {/* Column 1: System Status */}
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                      <div className="hud-column" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                         <div style={{ width: '40px', height: '40px', background: 'var(--brand-red-glow)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                           {apiLoading ? <Loader2 className="animate-spin" color="#ef4444" size={20} /> : <Activity size={20} color="#ef4444" />}
                         </div>
                         <div>
-                          <div style={{ color: 'var(--text-secondary)', fontSize: '0.6rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('system_status')}</div>
-                          <div style={{ fontSize: '1rem', fontWeight: '900', color: 'var(--text-primary)', whiteSpace: 'nowrap' }}>{apiLoading ? t('sync_grid') : t('dispatched_alerts')}</div>
+                          <div className="info-grid-hud-item-title" style={{ color: 'var(--text-secondary)', fontSize: '0.6rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('system_status')}</div>
+                          <div className="info-grid-hud-item-value" style={{ fontSize: '1rem', fontWeight: '900', color: 'var(--text-primary)', whiteSpace: 'nowrap' }}>{apiLoading ? t('sync_grid') : t('dispatched_alerts')}</div>
                         </div>
                       </div>
 
                       {/* Column 2: Nearest Police */}
-                      <div style={{ borderLeft: '1px solid var(--border-glass)', paddingLeft: '20px' }}>
-                        <div style={{ color: 'var(--text-secondary)', fontSize: '0.6rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('nearest_police') || 'Nearest Police'}</div>
-                        <div style={{ fontSize: '0.9rem', fontWeight: '800', color: '#3b82f6', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', lineHeight: '1.3' }}>
+                      <div className="hud-column" style={{ borderLeft: '1px solid var(--border-glass)', paddingLeft: '20px' }}>
+                        <div className="info-grid-hud-item-title" style={{ color: 'var(--text-secondary)', fontSize: '0.6rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('nearest_police') || 'Nearest Police'}</div>
+                        <div className="info-grid-hud-item-value" style={{ fontSize: '0.9rem', fontWeight: '800', color: '#3b82f6', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', lineHeight: '1.3' }}>
                           {policeStations[0]?.name || 'Locating...'}
                         </div>
                         {policeDistEta && (
-                          <div style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontWeight: '700', marginTop: '4px', display: 'flex', gap: '8px' }}>
+                          <div className="info-grid-hud-item-sub" style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontWeight: '700', marginTop: '4px', display: 'flex', gap: '8px' }}>
                             <span>📍 {policeDistEta.distanceStr}</span>
                             <span>⏱️ {policeDistEta.etaStr}</span>
                           </div>
@@ -807,13 +847,13 @@ const Dashboard = () => {
                       </div>
 
                       {/* Column 3: Target Trauma Center */}
-                      <div style={{ borderLeft: '1px solid var(--border-glass)', paddingLeft: '20px' }}>
-                        <div style={{ color: 'var(--text-secondary)', fontSize: '0.6rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('target_center')}</div>
-                        <div style={{ fontSize: '0.9rem', fontWeight: '800', color: '#10b981', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', lineHeight: '1.3' }}>
+                      <div className="hud-column" style={{ borderLeft: '1px solid var(--border-glass)', paddingLeft: '20px' }}>
+                        <div className="info-grid-hud-item-title" style={{ color: 'var(--text-secondary)', fontSize: '0.6rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>{t('target_center')}</div>
+                        <div className="info-grid-hud-item-value" style={{ fontSize: '0.9rem', fontWeight: '800', color: '#10b981', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', lineHeight: '1.3' }}>
                           {selectedHospitalName || (apiLoading ? t('calculating') : 'Manual Mode')}
                         </div>
                         {hospitalDistEta && (
-                          <div style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontWeight: '700', marginTop: '4px', display: 'flex', gap: '8px' }}>
+                          <div className="info-grid-hud-item-sub" style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontWeight: '700', marginTop: '4px', display: 'flex', gap: '8px' }}>
                             <span>📍 {hospitalDistEta.distanceStr}</span>
                             <span>⏱️ {hospitalDistEta.etaStr}</span>
                           </div>
@@ -821,13 +861,13 @@ const Dashboard = () => {
                       </div>
 
                       {/* Column 4: Assigned Ambulance */}
-                      <div style={{ borderLeft: '1px solid var(--border-glass)', paddingLeft: '20px' }}>
-                        <div style={{ color: 'var(--text-secondary)', fontSize: '0.6rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>Assigned Ambulance</div>
-                        <div style={{ fontSize: '0.9rem', fontWeight: '800', color: '#f59e0b', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', lineHeight: '1.3' }}>
+                      <div className="hud-column" style={{ borderLeft: '1px solid var(--border-glass)', paddingLeft: '20px' }}>
+                        <div className="info-grid-hud-item-title" style={{ color: 'var(--text-secondary)', fontSize: '0.6rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>Assigned Ambulance</div>
+                        <div className="info-grid-hud-item-value" style={{ fontSize: '0.9rem', fontWeight: '800', color: '#f59e0b', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', lineHeight: '1.3' }}>
                           {selectedAmbulanceName || (apiLoading ? t('calculating') : 'PENDING DISPATCH')}
                         </div>
                         {ambulanceDistEta && (
-                          <div style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontWeight: '700', marginTop: '4px', display: 'flex', gap: '8px' }}>
+                          <div className="info-grid-hud-item-sub" style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontWeight: '700', marginTop: '4px', display: 'flex', gap: '8px' }}>
                             <span>📍 {ambulanceDistEta.distanceStr}</span>
                             <span>⏱️ {ambulanceDistEta.etaStr}</span>
                           </div>
@@ -842,7 +882,7 @@ const Dashboard = () => {
 
                     {/* Bottom Row: Actions */}
                     {hospitalLocation && victimLocation && (
-                      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px' }}>
+                      <div className="actions-row-hud" style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px' }}>
                         <motion.button 
                           whileHover={{ scale: 1.02, boxShadow: '0 0 20px rgba(239, 68, 68, 0.3)' }}
                           whileTap={{ scale: 0.98 }}
