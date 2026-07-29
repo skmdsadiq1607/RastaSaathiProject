@@ -230,8 +230,7 @@ async function callGroqVisionWithRetry({ base64Data, mimeType, prompt }) {
               ]
             }
           ],
-          temperature: 0.1,
-          response_format: { type: 'json_object' }
+          temperature: 0.1
         },
         {
           headers: {
@@ -264,7 +263,7 @@ async function callGeminiVisionWithRetry({ base64Data, mimeType, prompt }) {
 
     try {
       const genAI = new GoogleGenerativeAI(key);
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
 
       const imagePart = {
         inlineData: {
