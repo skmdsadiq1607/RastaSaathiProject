@@ -1254,6 +1254,90 @@ const Dashboard = () => {
                       </div>
                     </div>
 
+                    {/* Emergency Contacts Fallback Block */}
+                    {hospitalLocation && victimLocation && user.emergencyContacts && user.emergencyContacts.length > 0 && (
+                      <div style={{
+                        background: 'rgba(239, 68, 68, 0.05)',
+                        border: '1px solid rgba(239, 68, 68, 0.2)',
+                        borderRadius: '12px',
+                        padding: '16px',
+                        marginBottom: '16px',
+                        textAlign: 'left'
+                      }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                          <span style={{ fontSize: '1.2rem' }}>⚠️</span>
+                          <span style={{ fontSize: '0.85rem', fontWeight: '800', color: '#ef4444', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                            Emergency Contacts Fallback
+                          </span>
+                        </div>
+                        <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '12px', lineHeight: '1.4' }}>
+                          Automated Twilio SMS limits might restrict delivery. Use these one-click buttons to send pre-written alerts manually:
+                        </p>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                          {user.emergencyContacts.map((contact, idx) => {
+                            const messageText = `EMERGENCY ALERT: I am in danger and triggered a Road-SoS alert! My location is: https://maps.google.com/?q=${victimLocation?.lat || 17.3730},${victimLocation?.lng || 78.5290}. Nearest Hospital: ${selectedHospitalName || 'Calculating...'}. Please check on me!`;
+                            const whatsappUrl = `https://api.whatsapp.com/send?phone=${contact.phone.replace(/[^0-9]/g, '')}&text=${encodeURIComponent(messageText)}`;
+                            const smsUrl = `sms:${contact.phone}?body=${encodeURIComponent(messageText)}`;
+                            
+                            return (
+                              <div key={idx} style={{ 
+                                display: 'flex', 
+                                alignItems: 'center', 
+                                justifyContent: 'space-between', 
+                                background: 'var(--bg-deep)', 
+                                padding: '10px 14px', 
+                                borderRadius: '8px',
+                                border: '1px solid var(--border-glass)'
+                              }}>
+                                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                  <span style={{ fontSize: '0.85rem', fontWeight: '800', color: 'var(--text-primary)' }}>{contact.name}</span>
+                                  <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{contact.phone}</span>
+                                </div>
+                                <div style={{ display: 'flex', gap: '8px' }}>
+                                  <a 
+                                    href={whatsappUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style={{
+                                      padding: '6px 12px',
+                                      borderRadius: '6px',
+                                      background: '#22c55e',
+                                      color: 'white',
+                                      fontSize: '0.75rem',
+                                      fontWeight: '800',
+                                      textDecoration: 'none',
+                                      display: 'flex',
+                                      alignItems: 'center',
+                                      gap: '4px'
+                                    }}
+                                  >
+                                    💬 WhatsApp
+                                  </a>
+                                  <a 
+                                    href={smsUrl}
+                                    style={{
+                                      padding: '6px 12px',
+                                      borderRadius: '6px',
+                                      background: '#3b82f6',
+                                      color: 'white',
+                                      fontSize: '0.75rem',
+                                      fontWeight: '800',
+                                      textDecoration: 'none',
+                                      display: 'flex',
+                                      alignItems: 'center',
+                                      gap: '4px'
+                                    }}
+                                  >
+                                    📱 SMS
+                                  </a>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+
                     {/* Separator Line */}
                     {hospitalLocation && victimLocation && (
                       <div style={{ height: '1px', background: 'var(--border-glass)', marginBottom: '16px' }}></div>
