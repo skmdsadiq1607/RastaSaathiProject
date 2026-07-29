@@ -177,6 +177,12 @@ const Dashboard = () => {
   const [manualCoords, setManualCoords] = useState(null);
   const [geocodingError, setGeocodingError] = useState('');
   const [isGeocoding, setIsGeocoding] = useState(false);
+  const [hospitalDistance, setHospitalDistance] = useState('');
+  const [hospitalEta, setHospitalEta] = useState('');
+  const [policeDistance, setPoliceDistance] = useState('');
+  const [policeEta, setPoliceEta] = useState('');
+  const [ambulanceDistance, setAmbulanceDistance] = useState('');
+  const [ambulanceEta, setAmbulanceEta] = useState('');
   
   // SOS countdown states (declared at top of component)
   const [countdownActive, setCountdownActive] = useState(false);
@@ -442,7 +448,7 @@ const Dashboard = () => {
       }
     });
 
-    // Draw route path to Hospital
+    // Draw route path to Hospital & capture exact distance/duration
     if (victimLocation && hospitalLocation && directionsRendererRef.current) {
       const directionsService = new window.google.maps.DirectionsService();
       directionsService.route({
@@ -452,6 +458,42 @@ const Dashboard = () => {
       }, (result, status) => {
         if (status === window.google.maps.DirectionsStatus.OK) {
           directionsRendererRef.current.setDirections(result);
+          const leg = result.routes[0].legs[0];
+          setHospitalDistance(leg.distance.text);
+          setHospitalEta(leg.duration.text);
+        }
+      });
+    }
+
+    // Capture exact distance/duration to nearest Police Station
+    const firstPolice = policeStations[0];
+    if (victimLocation && firstPolice && firstPolice.location && firstPolice.location.coordinates) {
+      const directionsService = new window.google.maps.DirectionsService();
+      directionsService.route({
+        origin: { lat: victimLocation.lat, lng: victimLocation.lng },
+        destination: { lat: firstPolice.location.coordinates[1], lng: firstPolice.location.coordinates[0] },
+        travelMode: window.google.maps.TravelMode.DRIVING
+      }, (result, status) => {
+        if (status === window.google.maps.DirectionsStatus.OK) {
+          const leg = result.routes[0].legs[0];
+          setPoliceDistance(leg.distance.text);
+          setPoliceEta(leg.duration.text);
+        }
+      });
+    }
+
+    // Capture exact distance/duration to Assigned Ambulance
+    if (victimLocation && ambulanceLocation) {
+      const directionsService = new window.google.maps.DirectionsService();
+      directionsService.route({
+        origin: { lat: victimLocation.lat, lng: victimLocation.lng },
+        destination: { lat: ambulanceLocation.lat, lng: ambulanceLocation.lng },
+        travelMode: window.google.maps.TravelMode.DRIVING
+      }, (result, status) => {
+        if (status === window.google.maps.DirectionsStatus.OK) {
+          const leg = result.routes[0].legs[0];
+          setAmbulanceDistance(leg.distance.text);
+          setAmbulanceEta(leg.duration.text);
         }
       });
     }
@@ -1175,10 +1217,10 @@ const Dashboard = () => {
                         <div className="info-grid-hud-item-value" style={{ fontSize: '0.9rem', fontWeight: '800', color: '#3b82f6', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', lineHeight: '1.3' }}>
                           {policeStations[0]?.name || 'Locating...'}
                         </div>
-                        {policeDistEta && (
+                        {(policeDistance || policeDistEta) && (
                           <div className="info-grid-hud-item-sub" style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontWeight: '700', marginTop: '4px', display: 'flex', gap: '8px' }}>
-                            <span>📍 {policeDistEta.distanceStr}</span>
-                            <span>⏱️ {policeDistEta.etaStr}</span>
+                            <span>📍 {policeDistance || policeDistEta.distanceStr}</span>
+                            <span>⏱️ {policeEta || policeDistEta.etaStr}</span>
                           </div>
                         )}
                       </div>
@@ -1189,10 +1231,10 @@ const Dashboard = () => {
                         <div className="info-grid-hud-item-value" style={{ fontSize: '0.9rem', fontWeight: '800', color: '#10b981', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', lineHeight: '1.3' }}>
                           {selectedHospitalName || (apiLoading ? t('calculating') : 'Manual Mode')}
                         </div>
-                        {hospitalDistEta && (
+                        {(hospitalDistance || hospitalDistEta) && (
                           <div className="info-grid-hud-item-sub" style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontWeight: '700', marginTop: '4px', display: 'flex', gap: '8px' }}>
-                            <span>📍 {hospitalDistEta.distanceStr}</span>
-                            <span>⏱️ {hospitalDistEta.etaStr}</span>
+                            <span>📍 {hospitalDistance || hospitalDistEta.distanceStr}</span>
+                            <span>⏱️ {hospitalEta || hospitalDistEta.etaStr}</span>
                           </div>
                         )}
                       </div>
@@ -1203,10 +1245,10 @@ const Dashboard = () => {
                         <div className="info-grid-hud-item-value" style={{ fontSize: '0.9rem', fontWeight: '800', color: '#f59e0b', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', lineHeight: '1.3' }}>
                           {selectedAmbulanceName || (apiLoading ? t('calculating') : 'PENDING DISPATCH')}
                         </div>
-                        {ambulanceDistEta && (
+                        {(ambulanceDistance || ambulanceDistEta) && (
                           <div className="info-grid-hud-item-sub" style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontWeight: '700', marginTop: '4px', display: 'flex', gap: '8px' }}>
-                            <span>📍 {ambulanceDistEta.distanceStr}</span>
-                            <span>⏱️ {ambulanceDistEta.etaStr}</span>
+                            <span>📍 {ambulanceDistance || ambulanceDistEta.distanceStr}</span>
+                            <span>⏱️ {ambulanceEta || ambulanceDistEta.etaStr}</span>
                           </div>
                         )}
                       </div>
