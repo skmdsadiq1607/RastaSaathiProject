@@ -59,8 +59,7 @@ async function findNearbyPoliceStations({ lat, lng, radius = 50000 }) {
   return data.results;
 }
 
-async function searchNearbyNominatim({ lat, lng, q, limit = 10 }) {
-  const delta = 0.085; // ~10km bounding box in degrees
+async function searchNearbyNominatim({ lat, lng, q, limit = 10, delta = 0.025 }) {
   const minLat = lat - delta;
   const maxLat = lat + delta;
   const minLng = lng - delta;
@@ -83,6 +82,13 @@ async function searchNearbyNominatim({ lat, lng, q, limit = 10 }) {
       },
       timeout: 8000
     });
+
+    // If we found fewer than 3 results and used a tight viewbox, automatically zoom out to a wider 10km grid
+    if ((!data || data.length < 3) && delta === 0.025) {
+      console.log(`[Nominatim Search] Tight grid returned only ${data?.length || 0} results for ${q}. Retrying with zoomed-out grid.`);
+      return searchNearbyNominatim({ lat, lng, q, limit, delta: 0.085 });
+    }
+
     return data || [];
   } catch (err) {
     console.error(`[Nominatim Search] Failed for query: ${q}`, err.message);

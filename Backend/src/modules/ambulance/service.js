@@ -45,7 +45,7 @@ async function selectAmbulance({ lat, lng }) {
     try {
       console.log('[Ambulance Service] Querying Nominatim for medical centers to place ambulances...');
       const { searchNearbyNominatim } = require('../../services/maps.service');
-      const osmMedical = await searchNearbyNominatim({ lat, lng, q: 'hospital', limit: 3 });
+      const osmMedical = await searchNearbyNominatim({ lat, lng, q: 'hospital', limit: 20 });
       if (osmMedical && osmMedical.length > 0) {
         const { cleanNominatimName } = require('../../services/maps.service');
         googleAmbulances = osmMedical.map(om => {

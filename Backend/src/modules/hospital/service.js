@@ -49,7 +49,7 @@ async function selectHospital({ lat, lng, severityLevel, injuryType, requiredSpe
     try {
       console.log('[Hospital Service] Querying Nominatim for live hospitals...');
       const { searchNearbyNominatim } = require('../../services/maps.service');
-      const osmHospitals = await searchNearbyNominatim({ lat, lng, q: 'hospital', limit: 15 });
+      const osmHospitals = await searchNearbyNominatim({ lat, lng, q: 'hospital', limit: 40 });
       if (osmHospitals && osmHospitals.length > 0) {
         const { cleanNominatimName } = require('../../services/maps.service');
         googleHospitals = osmHospitals.map(oh => ({
@@ -223,7 +223,7 @@ async function selectPoliceStation({ lat, lng }) {
     try {
       console.log('[Police Service] Querying Nominatim for live police stations...');
       const { searchNearbyNominatim } = require('../../services/maps.service');
-      const osmPolice = await searchNearbyNominatim({ lat, lng, q: 'police station', limit: 5 });
+      const osmPolice = await searchNearbyNominatim({ lat, lng, q: 'police station', limit: 20 });
       if (osmPolice && osmPolice.length > 0) {
         const { cleanNominatimName } = require('../../services/maps.service');
         googlePolice = osmPolice.map(op => ({
