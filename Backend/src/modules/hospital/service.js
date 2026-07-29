@@ -61,12 +61,12 @@ async function selectHospital({ lat, lng, severityLevel, injuryType, requiredSpe
       isGoogleResult: true
     }));
   } else {
-    // Fallback: Find top 25 closest hospitals from our local DB
+    // Fallback: Find top 25 closest hospitals from our local DB (within 5km)
     finalHospitals = await Hospital.find({
       location: {
         $near: {
           $geometry: { type: 'Point', coordinates: [lng, lat] },
-          $maxDistance: 50000 
+          $maxDistance: 5000 // 5km radius limit
         }
       }
     }).limit(25).lean();
@@ -204,12 +204,12 @@ async function selectPoliceStation({ lat, lng }) {
     return finalPolice.slice(0, 3);
   }
 
-  // 2. Fallback: Try local database
+  // 2. Fallback: Try local database (only within 5km to keep it relevant)
   const localPolice = await PoliceStation.find({
     location: {
       $near: {
         $geometry: { type: 'Point', coordinates: [lng, lat] },
-        $maxDistance: 50000 // 50km
+        $maxDistance: 5000 // 5km
       }
     }
   }).limit(5).lean();

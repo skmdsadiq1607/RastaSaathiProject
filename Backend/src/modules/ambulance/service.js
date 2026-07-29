@@ -57,13 +57,13 @@ async function selectAmbulance({ lat, lng }) {
     }));
   }
 
-  // 2. Fallback: Try local database
+  // 2. Fallback: Try local database (only within 5km to keep it relevant)
   if (finalAmbulances.length === 0) {
     const localAmbulances = await Ambulance.find({
       location: {
         $near: {
           $geometry: { type: 'Point', coordinates: [lng, lat] },
-          $maxDistance: 50000
+          $maxDistance: 5000 // 5km radius limit
         }
       },
       status: 'AVAILABLE'
