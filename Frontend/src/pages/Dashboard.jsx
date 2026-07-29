@@ -870,12 +870,39 @@ const Dashboard = () => {
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="container" style={{ maxWidth: '1600px', width: '95%', paddingBottom: '40px' }}>
       <div className="dashboard-grid">
         <style>{`
-          .dashboard-grid { display: grid; grid-template-columns: 1fr 480px; gap: 30px; }
-          @media (max-width: 1100px) { .dashboard-grid { grid-template-columns: 1fr; } }
+          /* ─── Dashboard Grid ─── */
+          .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 460px;
+            gap: 24px;
+          }
+          @media (max-width: 1100px) {
+            .dashboard-grid {
+              grid-template-columns: 1fr;
+            }
+          }
+
+          /* ─── SOS Button ─── */
+          @media (max-width: 640px) {
+            .sos-trigger-btn {
+              width: 140px !important;
+              height: 140px !important;
+              font-size: 0.8rem !important;
+            }
+          }
+
+          /* ─── Pulse Animation ─── */
           .pulse-sos { animation: pulse-red 2s infinite; }
           @keyframes pulse-red { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-          /* High-Tech Custom Leaflet Markers */
+          /* ─── Map container ─── */
+          @media (max-width: 640px) {
+            .map-container-wrap {
+              height: 280px !important;
+            }
+          }
+
+          /* ─── Custom Leaflet-style Markers ─── */
           .leaflet-custom-marker {
             display: flex;
             flex-direction: column;
@@ -922,8 +949,9 @@ const Dashboard = () => {
           .type-hospital .marker-glowing-pulse { background: rgba(16, 185, 129, 0.5); }
 
           @keyframes marker-pulse {
-            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0.8; }
-            100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+            0% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+            70% { opacity: 0; transform: translate(-50%, -50%) scale(2.2); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(2.2); }
           }
 
           .marker-label {
@@ -945,7 +973,7 @@ const Dashboard = () => {
             text-overflow: ellipsis;
             transition: all 0.3s ease;
           }
-          
+
           .leaflet-custom-marker:hover .marker-icon-circle {
             transform: translate(-50%, -50%) scale(1.2);
             box-shadow: 0 8px 24px rgba(0,0,0,0.5);
@@ -956,12 +984,13 @@ const Dashboard = () => {
             border-color: rgba(255,255,255,0.25);
             box-shadow: 0 6px 20px rgba(0,0,0,0.5);
           }
-          
+
+          /* ─── Chat Bubbles ─── */
           .chat-bubble {
             max-width: 85%;
-            padding: 16px 20px;
+            padding: 14px 18px;
             border-radius: 18px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             line-height: 1.5;
             position: relative;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
@@ -980,14 +1009,14 @@ const Dashboard = () => {
             align-self: flex-end;
           }
 
-          /* Mobile Phone Screens Optimization */
-          @media (max-width: 600px) {
+          /* ─── HUD Panel — Mobile ─── */
+          @media (max-width: 640px) {
             .glass-panel-hud {
-              padding: 12px 16px !important;
+              padding: 14px 12px !important;
             }
             .info-grid-hud {
               grid-template-columns: repeat(2, 1fr) !important;
-              gap: 12px 16px !important;
+              gap: 12px !important;
               margin-bottom: 12px !important;
             }
             .hud-column {
@@ -996,16 +1025,15 @@ const Dashboard = () => {
             }
             .info-grid-hud-item-title {
               font-size: 0.5rem !important;
-              letter-spacing: 0.5px !important;
+              letter-spacing: 0.3px !important;
             }
             .info-grid-hud-item-value {
-              font-size: 0.75rem !important;
-              white-space: nowrap !important;
-              overflow: hidden !important;
-              text-overflow: ellipsis !important;
+              font-size: 0.72rem !important;
+              white-space: normal !important;
+              overflow: visible !important;
             }
             .info-grid-hud-item-sub {
-              font-size: 0.65rem !important;
+              font-size: 0.6rem !important;
               margin-top: 2px !important;
             }
             .actions-row-hud {
@@ -1015,11 +1043,20 @@ const Dashboard = () => {
             .actions-row-hud > button {
               max-width: 100% !important;
               width: 100% !important;
-              padding: 10px 14px !important;
-              font-size: 0.75rem !important;
+              padding: 12px 14px !important;
+              font-size: 0.78rem !important;
+            }
+          }
+
+          /* ─── Sidebar — full-width on small screens ─── */
+          @media (max-width: 640px) {
+            .dashboard-sidebar-panel {
+              min-height: auto !important;
+              max-height: none !important;
             }
           }
         `}</style>
+
         
         <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
           <div className="glass-panel" style={{ padding: '0', overflow: 'hidden', minHeight: '750px', position: 'relative', display: 'flex', flexDirection: 'column' }}>
@@ -1027,8 +1064,8 @@ const Dashboard = () => {
               <div style={{ padding: '60px 20px', textAlign: 'center', flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                  <motion.div initial={{ y: 20 }} animate={{ y: 0 }} style={{ marginBottom: '40px' }}>
                   <div style={{ color: '#ef4444', fontWeight: '900', letterSpacing: '2px', fontSize: '0.7rem', marginBottom: '12px' }}>{t('secure_terminal')}</div>
-                  <h1 style={{ fontSize: '2.8rem', marginBottom: '16px', fontWeight: '900' }}>{t('ready_dispatch')}</h1>
-                  <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '450px', margin: '0 auto', marginBottom: '24px' }}>
+                  <h1 style={{ fontSize: 'clamp(1.6rem, 5vw, 2.8rem)', marginBottom: '16px', fontWeight: '900' }}>{t('ready_dispatch')}</h1>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: 'clamp(0.9rem, 2.5vw, 1.1rem)', maxWidth: '420px', margin: '0 auto', marginBottom: '24px' }}>
                     {t('trigger_sub')}
                   </p>
                   
