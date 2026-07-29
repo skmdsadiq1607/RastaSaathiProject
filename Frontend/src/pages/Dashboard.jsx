@@ -1329,9 +1329,9 @@ const Dashboard = () => {
                         )}
                       </div>
 
-                      {/* Column 4: Assigned Ambulance */}
+                      {/* Column 4: Dispatched Transit Fleet */}
                       <div className="hud-column" style={{ borderLeft: '1px solid var(--border-glass)', paddingLeft: '20px' }}>
-                        <div className="info-grid-hud-item-title" style={{ color: 'var(--text-secondary)', fontSize: '0.6rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>Assigned Ambulance</div>
+                        <div className="info-grid-hud-item-title" style={{ color: 'var(--text-secondary)', fontSize: '0.6rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>Dispatched Transit Fleet</div>
                         <div className="info-grid-hud-item-value" style={{ fontSize: '0.9rem', fontWeight: '800', color: '#f59e0b', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', lineHeight: '1.3' }}>
                           {selectedAmbulanceName || (apiLoading ? t('calculating') : 'PENDING DISPATCH')}
                         </div>
@@ -1382,7 +1382,7 @@ const Dashboard = () => {
                           ) : (
                             <FileDown size={16} />
                           )}
-                          {pdfGenerating ? 'Generating...' : 'Download Report'}
+                          {pdfGenerating ? 'Generating...' : 'Generate Incident Report (PDF)'}
                         </motion.button>
 
                         <motion.button 
@@ -1394,7 +1394,7 @@ const Dashboard = () => {
                           }}
                           style={{ 
                             flex: 1,
-                            maxWidth: '180px',
+                            maxWidth: '220px',
                             padding: '12px 20px', 
                             background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', 
                             color: 'white', 
@@ -1410,7 +1410,7 @@ const Dashboard = () => {
                           }}
                         >
                           <Navigation size={16} />
-                          Hospital Route
+                          Trauma Facility Route
                         </motion.button>
 
                         <motion.button 
@@ -1425,7 +1425,7 @@ const Dashboard = () => {
                           }}
                           style={{ 
                             flex: 1,
-                            maxWidth: '180px',
+                            maxWidth: '220px',
                             padding: '12px 20px', 
                             background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)', 
                             color: 'white', 
@@ -1441,7 +1441,7 @@ const Dashboard = () => {
                           }}
                         >
                           <Navigation size={16} />
-                          Police Route
+                          Law Enforcement Route
                         </motion.button>
 
                         <motion.button 
@@ -1455,7 +1455,7 @@ const Dashboard = () => {
                           }}
                           style={{ 
                             flex: 1,
-                            maxWidth: '180px',
+                            maxWidth: '220px',
                             padding: '12px 20px', 
                             background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)', 
                             color: 'white', 
@@ -1471,7 +1471,7 @@ const Dashboard = () => {
                           }}
                         >
                           <Navigation size={16} />
-                          Ambulance Route
+                          Emergency Transit Route
                         </motion.button>
                       </div>
                     )}
@@ -1515,7 +1515,7 @@ const Dashboard = () => {
                 transition: 'all 0.3s ease'
               }}
             >
-              💬 Chat Medic
+              💬 Clinical Assistant
             </button>
             <button
               type="button"
@@ -1533,7 +1533,7 @@ const Dashboard = () => {
                 transition: 'all 0.3s ease'
               }}
             >
-              📸 Visual Scan
+              📸 AI Wound Diagnostics
             </button>
           </div>
           
@@ -1603,9 +1603,9 @@ const Dashboard = () => {
                   <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(239, 68, 68, 0.1)', display: 'flex', alignItems: 'center', justify: 'center', marginBottom: '16px' }}>
                     <span style={{ fontSize: '1.8rem' }}>📸</span>
                   </div>
-                  <h4 style={{ fontSize: '1.05rem', fontWeight: '800', marginBottom: '8px' }}>Upload Injury Image</h4>
+                  <h4 style={{ fontSize: '1.05rem', fontWeight: '800', marginBottom: '8px' }}>Ingest Wound / Trauma Image</h4>
                   <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', maxWidth: '240px' }}>
-                    Select or snap a photo of the wound for real-time visual analysis.
+                    Upload or capture trauma imagery for high-fidelity clinical assessment.
                   </p>
                 </div>
               ) : (
@@ -1669,14 +1669,14 @@ const Dashboard = () => {
                         transition: 'all 0.3s ease'
                       }}
                     >
-                      🔍 Analyze Injury & Get First Aid
+                      🔍 Execute Trauma Assessment
                     </button>
                   )}
 
                   {isVisionLoading && (
                     <div style={{ display: 'flex', alignItems: 'center', justify: 'center', gap: '10px', padding: '20px', background: 'var(--bg-deep)', borderRadius: '12px', border: '1px solid var(--border-glass)' }}>
                       <Loader2 className="animate-spin" size={16} color="#ef4444" />
-                      <span style={{ fontSize: '0.85rem', fontWeight: '800', color: 'var(--text-primary)' }}>AI SCANNING INJURY...</span>
+                      <span style={{ fontSize: '0.85rem', fontWeight: '800', color: 'var(--text-primary)' }}>EXECUTING CLINICAL SCAN...</span>
                     </div>
                   )}
 
@@ -1703,7 +1703,7 @@ const Dashboard = () => {
                         justifyContent: 'space-between'
                       }}>
                         <div>
-                          <span style={{ fontSize: '0.65rem', fontWeight: '800', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Detected Condition</span>
+                          <span style={{ fontSize: '0.65rem', fontWeight: '800', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Clinical Impression</span>
                           <h4 style={{ fontSize: '1.1rem', fontWeight: '900', color: '#ef4444', marginTop: '4px' }}>{visionResult.injuryType}</h4>
                         </div>
                         <div style={{
@@ -1721,7 +1721,7 @@ const Dashboard = () => {
 
                       {/* First Aid Steps */}
                       <div>
-                        <span style={{ fontSize: '0.75rem', fontWeight: '900', color: 'var(--text-secondary)', display: 'block', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>👉 First Aid Treatment</span>
+                        <span style={{ fontSize: '0.75rem', fontWeight: '900', color: 'var(--text-secondary)', display: 'block', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>📋 Recommended Treatment Protocol</span>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                           {visionResult.firstAidSteps?.map((step, idx) => (
                             <div key={idx} style={{ display: 'flex', gap: '10px', background: 'var(--bg-deep)', padding: '12px', borderRadius: '8px', border: '1px solid var(--border-glass)' }}>
@@ -1741,7 +1741,7 @@ const Dashboard = () => {
                           padding: '14px',
                           textAlign: 'left'
                         }}>
-                          <span style={{ fontSize: '0.7rem', fontWeight: '900', color: '#ef4444', display: 'block', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>❌ Critical Warnings</span>
+                          <span style={{ fontSize: '0.7rem', fontWeight: '900', color: '#ef4444', display: 'block', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>⚠️ Contraindications</span>
                           <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '4px' }}>
                             {visionResult.warnings.map((w, idx) => (
                               <li key={idx} style={{ lineHeight: '1.4' }}>{w}</li>
@@ -1759,7 +1759,7 @@ const Dashboard = () => {
                           padding: '14px',
                           textAlign: 'left'
                         }}>
-                          <span style={{ fontSize: '0.7rem', fontWeight: '900', color: '#f59e0b', display: 'block', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>🚨 Escalation Criteria</span>
+                          <span style={{ fontSize: '0.7rem', fontWeight: '900', color: '#f59e0b', display: 'block', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>🚨 Critical Escalation Indicators</span>
                           <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '4px' }}>
                             {visionResult.whenToEscalate.map((e, idx) => (
                               <li key={idx} style={{ lineHeight: '1.4' }}>{e}</li>
