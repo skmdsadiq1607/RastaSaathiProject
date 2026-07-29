@@ -1610,7 +1610,7 @@ const Dashboard = () => {
                 </div>
               ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', paddingBottom: '10px' }}>
-                  <div style={{ position: 'relative', width: '100%', height: '200px', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border-glass)' }}>
+                  <div style={{ position: 'relative', width: '100%', height: '300px', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border-glass)' }}>
                     <img src={selectedImage} alt="Injury preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     <button
                       type="button"
