@@ -90,11 +90,36 @@ async function searchNearbyNominatim({ lat, lng, q, limit = 10 }) {
   }
 }
 
+function cleanNominatimName(item, type) {
+  const parts = (item.display_name || '').split(',').map(p => p.trim()).filter(Boolean);
+  let name = item.name || parts[0] || '';
+  
+  const lowerName = name.toLowerCase();
+  if (type === 'hospital') {
+    if (lowerName === 'hospital' || lowerName === 'clinic' || lowerName === 'doctors' || !name) {
+      if (parts[1]) {
+        return `${parts[1]} Medical Center`;
+      }
+      return 'City Emergency Hospital';
+    }
+  } else if (type === 'police') {
+    if (lowerName === 'police' || lowerName === 'police station' || !name) {
+      if (parts[1]) {
+        return `${parts[1]} Police Station`;
+      }
+      return 'District Police Station';
+    }
+  }
+  
+  return name.replace(/^["']|["']$/g, '');
+}
+
 module.exports = { 
   distanceMatrix, 
   directions, 
   findNearbyHospitals, 
   findNearbyPoliceStations,
-  searchNearbyNominatim 
+  searchNearbyNominatim,
+  cleanNominatimName
 };
 

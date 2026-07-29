@@ -47,17 +47,21 @@ async function selectAmbulance({ lat, lng }) {
       const { searchNearbyNominatim } = require('../../services/maps.service');
       const osmMedical = await searchNearbyNominatim({ lat, lng, q: 'hospital', limit: 3 });
       if (osmMedical && osmMedical.length > 0) {
-        googleAmbulances = osmMedical.map(om => ({
-          place_id: om.place_id || om.osm_id,
-          name: `${om.name || om.display_name.split(',')[0]} Rapid Ambulance`,
-          vicinity: om.display_name,
-          geometry: {
-            location: {
-              lat: parseFloat(om.lat) + 0.001, // Slightly offset from the hospital coordinates
-              lng: parseFloat(om.lon) - 0.001
+        const { cleanNominatimName } = require('../../services/maps.service');
+        googleAmbulances = osmMedical.map(om => {
+          const baseHospitalName = cleanNominatimName(om, 'hospital');
+          return {
+            place_id: om.place_id || om.osm_id,
+            name: `${baseHospitalName} Rapid Ambulance`,
+            vicinity: om.display_name,
+            geometry: {
+              location: {
+                lat: parseFloat(om.lat) + 0.001, // Slightly offset from the hospital coordinates
+                lng: parseFloat(om.lon) - 0.001
+              }
             }
-          }
-        }));
+          };
+        });
       }
     } catch (osmErr) {
       console.error('[Ambulance Service] Nominatim search failed:', osmErr.message);
