@@ -26,13 +26,15 @@ async function dispatchAlerts({ io, incident, victimUser, severityLevel, hospita
   const title = t(lang, 'alerts.SOS_TITLE');
   const body = t(lang, 'alerts.SOS_BODY');
 
-  // Dashboard broadcast
-  io.of('/dashboard').to('dashboard').emit('dashboard:alert', {
-    incidentId: String(incident._id),
-    severityLevel,
-    lat: incident.location.coordinates[1],
-    lng: incident.location.coordinates[0]
-  });
+  // Dashboard broadcast (if Socket.io is active)
+  if (io) {
+    io.of('/dashboard').to('dashboard').emit('dashboard:alert', {
+      incidentId: String(incident._id),
+      severityLevel,
+      lat: incident.location.coordinates[1],
+      lng: incident.location.coordinates[0]
+    });
+  }
   alerts.deliveries.push({ channel: 'SOCKET', to: 'dashboard', status: 'SENT' });
 
   // FCM to responders
