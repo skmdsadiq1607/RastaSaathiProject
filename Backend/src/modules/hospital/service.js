@@ -131,6 +131,13 @@ async function selectHospital({ lat, lng, severityLevel, injuryType, requiredSpe
     };
   });
 
+  // Sort by physical distance first, so that the top 15 sliced candidates are the absolute closest ones!
+  enrichedHospitals.sort((a, b) => {
+    const distA = calculateDistance(lat, lng, a.location.coordinates[1], a.location.coordinates[0]);
+    const distB = calculateDistance(lat, lng, b.location.coordinates[1], b.location.coordinates[0]);
+    return distA - distB;
+  });
+
   // 3. Get accurate ETA via Distance Matrix
   let elements = [];
   try {
