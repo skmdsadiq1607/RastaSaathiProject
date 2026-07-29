@@ -172,6 +172,11 @@ const Dashboard = () => {
   const [sosTimestamp, setSosTimestamp] = useState(null);
   const [pdfGenerating, setPdfGenerating] = useState(false);
   const [customEmergencyMessage, setCustomEmergencyMessage] = useState('');
+  const [useLiveLocation, setUseLiveLocation] = useState(true);
+  const [manualAddress, setManualAddress] = useState('');
+  const [manualCoords, setManualCoords] = useState(null);
+  const [geocodingError, setGeocodingError] = useState('');
+  const [isGeocoding, setIsGeocoding] = useState(false);
   
   // SOS countdown states (declared at top of component)
   const [countdownActive, setCountdownActive] = useState(false);
@@ -512,87 +517,149 @@ const Dashboard = () => {
     setCountdownSeconds(5);
   };
 
+  const handleGeocodeAddress = async (addressText) => {
+    if (!addressText.trim()) return null;
+    setIsGeocoding(true);
+    setGeocodingError('');
+    try {
+      const res = await axios.get('https://nominatim.openstreetmap.org/search', {
+        params: {
+          q: addressText,
+          format: 'json',
+          limit: 1
+        },
+        headers: { 'User-Agent': 'RastaSaathiEmergencyApp/1.0 (sadiq@rastasaathi.com)' }
+      });
+      
+      if (res.data && res.data.length > 0) {
+        const first = res.data[0];
+        const coords = { lat: parseFloat(first.lat), lng: parseFloat(first.lon) };
+        setManualCoords(coords);
+        setGeocodingError('');
+        return coords;
+      } else {
+        setGeocodingError('Location not found. Please try a different name.');
+        setManualCoords(null);
+        return null;
+      }
+    } catch (err) {
+      setGeocodingError('Error resolving address. Please try again.');
+      setManualCoords(null);
+      return null;
+    } finally {
+      setIsGeocoding(false);
+    }
+  };
+
+  const triggerSOSAPI = async (latitude, longitude) => {
+    const loc = { lat: latitude, lng: longitude };
+    setVictimLocation(loc);
+    setMapCenter(loc);
+
+    setMessages(prev => [...prev, { role: 'bot', text: `${t('gps_acquired')} [${latitude.toFixed(4)}, ${longitude.toFixed(4)}]\n${t('sync_national')}` }]);
+
+    try {
+      const token = localStorage.getItem('token');
+      console.log('Dispatching SOS to:', `${API_BASE_URL}/sos/trigger`);
+      const sosRes = await axios.post(`${API_BASE_URL}/sos/trigger`, {
+        lat: latitude,
+        lng: longitude,
+        injuryType: 'Traffic collision trauma',
+        message: customEmergencyMessage
+      }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      const { hospitalSelection, policeSelection, aiGuidance, incident } = sosRes.data.data;
+      if (incident && incident.ticketNumber) {
+        setTicketNumber(sosRes.data.data.incident?.ticketNumber || '');
+      }
+      const hs = sosRes.data.data.hospitalSelection;
+      if (hs && hs.length > 0) {
+        setHospitalLocation({ lat: hs[0].hospital.location.coordinates[1], lng: hs[0].hospital.location.coordinates[0] });
+        setSelectedHospitalName(hs[0].hospital.name);
+      }
+      const as = sosRes.data.data.ambulanceSelection;
+      if (as && as.ambulance) {
+        setAmbulanceLocation({ lat: as.ambulance.location.coordinates[1], lng: as.ambulance.location.coordinates[0] });
+        setSelectedAmbulanceName(as.ambulance.name);
+      }
+      setPoliceStations(sosRes.data.data.policeSelection || []);
+      
+      const nearest = hospitalSelection?.[0]?.hospital;
+      if (nearest) {
+        const hLoc = { lat: nearest.location.coordinates[1], lng: nearest.location.coordinates[0] };
+        setMapCenter({ lat: (latitude + hLoc.lat) / 2, lng: (longitude + hLoc.lng) / 2 });
+        
+        let botMessage = `${t('sos_success')}\n\n${t('contacts_notified')}\n${t('nearest_hospital')} ${nearest.name}`;
+        
+        if (policeSelection && policeSelection.length > 0) {
+          botMessage += `\n🚓 ${t('nearest_police')} ${policeSelection[0].name}`;
+        }
+        if (as && as.ambulance) {
+          botMessage += `\n🚑 Ambulance: ${as.ambulance.name}`;
+        }
+        
+        botMessage += `\n${t('eta')} ${hospitalSelection[0].etaSeconds ? Math.round(hospitalSelection[0].etaSeconds / 60) + ' min' : t('calculating')}`;
+
+        setMessages(prev => [...prev, { 
+          role: 'bot', 
+          text: botMessage
+        }]);
+      } else {
+        setMessages(prev => [...prev, { role: 'bot', text: t('no_hospitals') }]);
+      }
+
+      if (aiGuidance) {
+        setSessionId(aiGuidance.sessionId);
+        setMessages(prev => [...prev, { role: 'bot', text: `${t('ai_activated')}\n${aiGuidance.guidance?.answer || 'Stay calm. Help is on the way.'}` }]);
+      }
+    } catch (err) {
+      console.error('SOS Error:', err);
+      const errMsg = err.response?.data?.error?.message || 'Network grid unreachable.';
+      setMessages(prev => [...prev, { role: 'bot', text: `${t('critical_error')} ${errMsg}` }]);
+    } finally {
+      setApiLoading(false);
+    }
+  };
+
   const executeSOS = async () => {
     setSosActive(true);
     setSosTimestamp(new Date());
     setApiLoading(true);
     setMessages(prev => [...prev, { role: 'bot', text: t('initiating_protocol') }]);
 
-    navigator.geolocation.getCurrentPosition(async (pos) => {
-      const { latitude, longitude } = pos.coords;
-      const loc = { lat: latitude, lng: longitude };
-      setVictimLocation(loc);
-      setMapCenter(loc);
-
-      setMessages(prev => [...prev, { role: 'bot', text: `${t('gps_acquired')} [${latitude.toFixed(4)}, ${longitude.toFixed(4)}]\n${t('sync_national')}` }]);
-
-      try {
-        const token = localStorage.getItem('token');
-        console.log('Dispatching SOS to:', `${API_BASE_URL}/sos/trigger`);
-        const sosRes = await axios.post(`${API_BASE_URL}/sos/trigger`, {
-          lat: latitude,
-          lng: longitude,
-          injuryType: 'Traffic collision trauma',
-          message: customEmergencyMessage
-        }, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-
-        const { hospitalSelection, policeSelection, aiGuidance, incident } = sosRes.data.data;
-        if (incident && incident.ticketNumber) {
-          setTicketNumber(sosRes.data.data.incident?.ticketNumber || '');
-        }
-        const hs = sosRes.data.data.hospitalSelection;
-        if (hs && hs.length > 0) {
-          setHospitalLocation({ lat: hs[0].hospital.location.coordinates[1], lng: hs[0].hospital.location.coordinates[0] });
-          setSelectedHospitalName(hs[0].hospital.name);
-        }
-        const as = sosRes.data.data.ambulanceSelection;
-        if (as && as.ambulance) {
-          setAmbulanceLocation({ lat: as.ambulance.location.coordinates[1], lng: as.ambulance.location.coordinates[0] });
-          setSelectedAmbulanceName(as.ambulance.name);
-        }
-        setPoliceStations(sosRes.data.data.policeSelection || []);
-        
-        const nearest = hospitalSelection?.[0]?.hospital;
-        if (nearest) {
-          const hLoc = { lat: nearest.location.coordinates[1], lng: nearest.location.coordinates[0] };
-          setMapCenter({ lat: (latitude + hLoc.lat) / 2, lng: (longitude + hLoc.lng) / 2 });
-          
-          let botMessage = `${t('sos_success')}\n\n${t('contacts_notified')}\n${t('nearest_hospital')} ${nearest.name}`;
-          
-          if (policeSelection && policeSelection.length > 0) {
-            botMessage += `\n🚓 ${t('nearest_police')} ${policeSelection[0].name}`;
-          }
-          if (as && as.ambulance) {
-            botMessage += `\n🚑 Ambulance: ${as.ambulance.name}`;
-          }
-          
-          botMessage += `\n${t('eta')} ${hospitalSelection[0].etaSeconds ? Math.round(hospitalSelection[0].etaSeconds / 60) + ' min' : t('calculating')}`;
-
-          setMessages(prev => [...prev, { 
-            role: 'bot', 
-            text: botMessage
-          }]);
-        } else {
-          setMessages(prev => [...prev, { role: 'bot', text: t('no_hospitals') }]);
-        }
-
-        if (aiGuidance) {
-          setSessionId(aiGuidance.sessionId);
-          setMessages(prev => [...prev, { role: 'bot', text: `${t('ai_activated')}\n${aiGuidance.guidance?.answer || 'Stay calm. Help is on the way.'}` }]);
-        }
-      } catch (err) {
-        console.error('SOS Error:', err);
-        const errMsg = err.response?.data?.error?.message || 'Network grid unreachable.';
-        setMessages(prev => [...prev, { role: 'bot', text: `${t('critical_error')} ${errMsg}` }]);
-      } finally {
-        setApiLoading(false);
+    if (useLiveLocation) {
+      navigator.geolocation.getCurrentPosition(
+        async (pos) => {
+          const { latitude, longitude } = pos.coords;
+          await triggerSOSAPI(latitude, longitude);
+        },
+        async (err) => {
+          console.warn('Live location retrieval failed, using fallback Hyderabad center:', err.message);
+          setMessages(prev => [...prev, { role: 'bot', text: 'GPS failed. Using default Hyderabad coordinates.' }]);
+          await triggerSOSAPI(17.3730, 78.5290);
+        },
+        { enableHighAccuracy: true, timeout: 8000 }
+      );
+    } else {
+      let activeCoords = manualCoords;
+      if (!activeCoords && manualAddress.trim()) {
+        setMessages(prev => [...prev, { role: 'bot', text: 'Resolving manual location address...' }]);
+        activeCoords = await handleGeocodeAddress(manualAddress);
       }
-    }, (err) => {
-      setApiLoading(false);
-      setMessages(prev => [...prev, { role: 'bot', text: t('geo_denied') }]);
-    });
+      
+      if (!activeCoords) {
+        setMessages(prev => [...prev, { role: 'bot', text: 'Geocoding failed. Manual location is invalid.' }]);
+        alert('Could not resolve your manual location. Please double check the spelling and try again.');
+        cancelSOSCountdown();
+        setSosActive(false);
+        setApiLoading(false);
+        return;
+      }
+      
+      await triggerSOSAPI(activeCoords.lat, activeCoords.lng);
+    }
   };
 
   const sendMessage = async () => {
@@ -802,6 +869,137 @@ const Dashboard = () => {
                     {t('trigger_sub')}
                   </p>
                   
+                  {/* Location Mode Selector */}
+                  <div style={{ margin: '0 auto 20px', maxWidth: '380px', width: '100%', textAlign: 'left' }}>
+                    <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '800', color: 'var(--text-secondary)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                      📍 Emergency Location Mode
+                    </label>
+                    <div style={{ 
+                      display: 'flex', 
+                      background: 'var(--bg-deep)', 
+                      borderRadius: '12px', 
+                      padding: '4px', 
+                      border: '1px solid var(--border-glass)',
+                      marginBottom: '12px'
+                    }}>
+                      <button
+                        type="button"
+                        onClick={() => { setUseLiveLocation(true); setGeocodingError(''); }}
+                        style={{
+                          flex: 1,
+                          padding: '10px',
+                          borderRadius: '10px',
+                          border: 'none',
+                          fontSize: '0.85rem',
+                          fontWeight: '800',
+                          cursor: 'pointer',
+                          background: useLiveLocation ? 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)' : 'transparent',
+                          color: useLiveLocation ? '#ffffff' : 'var(--text-secondary)',
+                          transition: 'all 0.3s ease',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '6px'
+                        }}
+                      >
+                        📡 Live GPS
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setUseLiveLocation(false)}
+                        style={{
+                          flex: 1,
+                          padding: '10px',
+                          borderRadius: '10px',
+                          border: 'none',
+                          fontSize: '0.85rem',
+                          fontWeight: '800',
+                          cursor: 'pointer',
+                          background: !useLiveLocation ? 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)' : 'transparent',
+                          color: !useLiveLocation ? '#ffffff' : 'var(--text-secondary)',
+                          transition: 'all 0.3s ease',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '6px'
+                        }}
+                      >
+                        ✍️ Manual Entry
+                      </button>
+                    </div>
+
+                    {!useLiveLocation && (
+                      <motion.div 
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}
+                      >
+                        <div style={{ display: 'flex', gap: '8px' }}>
+                          <input 
+                            type="text"
+                            placeholder="e.g., Kukatpally, Hyderabad..."
+                            value={manualAddress}
+                            onChange={(e) => {
+                              setManualAddress(e.target.value);
+                              setManualCoords(null);
+                              setGeocodingError('');
+                            }}
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter') {
+                                e.preventDefault();
+                                handleGeocodeAddress(manualAddress);
+                              }
+                            }}
+                            style={{ 
+                              flex: 1, 
+                              background: 'var(--bg-deep)', 
+                              border: '1px solid var(--border-glass)',
+                              borderRadius: '12px',
+                              padding: '14px 18px',
+                              fontSize: '0.95rem',
+                              color: 'var(--text-primary)',
+                              outline: 'none',
+                              boxSizing: 'border-box'
+                            }}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => handleGeocodeAddress(manualAddress)}
+                            disabled={isGeocoding}
+                            style={{
+                              padding: '0 16px',
+                              borderRadius: '12px',
+                              border: 'none',
+                              background: 'var(--border-glass)',
+                              color: 'var(--text-primary)',
+                              cursor: 'pointer',
+                              fontWeight: '700',
+                              fontSize: '0.85rem',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              minWidth: '90px'
+                            }}
+                          >
+                            {isGeocoding ? 'Finding...' : 'Verify'}
+                          </button>
+                        </div>
+                        
+                        {manualCoords && (
+                          <div style={{ fontSize: '0.8rem', color: '#10b981', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                            <span>✔️ Location verified [Coordinates: {manualCoords.lat.toFixed(4)}, {manualCoords.lng.toFixed(4)}]</span>
+                          </div>
+                        )}
+                        
+                        {geocodingError && (
+                          <div style={{ fontSize: '0.8rem', color: '#ef4444', fontWeight: '700' }}>
+                            ⚠️ {geocodingError}
+                          </div>
+                        )}
+                      </motion.div>
+                    )}
+                  </div>
+
                   <div style={{ margin: '20px auto 0', maxWidth: '380px', width: '100%', textAlign: 'left' }}>
                     <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '800', color: 'var(--text-secondary)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>
                       📝 Custom Emergency Note / Message (Optional)
