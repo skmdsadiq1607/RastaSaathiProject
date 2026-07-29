@@ -535,6 +535,8 @@ const Dashboard = () => {
           const first = res.data[0];
           const coords = { lat: parseFloat(first.lat), lng: parseFloat(first.lon) };
           setManualCoords(coords);
+          setVictimLocation(coords);
+          setMapCenter(coords);
           setGeocodingError('');
           return coords;
         } else {
@@ -563,6 +565,8 @@ const Dashboard = () => {
               lng: first.geometry.location.lng()
             };
             setManualCoords(coords);
+            setVictimLocation(coords);
+            setMapCenter(coords);
             setGeocodingError('');
             setIsGeocoding(false);
             resolve(coords);
