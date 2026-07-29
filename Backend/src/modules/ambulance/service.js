@@ -68,38 +68,45 @@ async function selectAmbulance({ lat, lng }) {
     }
   }
 
-  let finalAmbulances = [];
+  const liveAmbulances = (googleAmbulances || []).map(ga => ({
+    _id: ga.place_id,
+    name: ga.name.includes('Ambulance') ? ga.name : `${ga.name} Emergency Unit`,
+    address: ga.vicinity,
+    phone: '+91 108',
+    location: {
+      type: 'Point',
+      coordinates: [ga.geometry.location.lng, ga.geometry.location.lat]
+    },
+    status: 'AVAILABLE',
+    isLiveResult: true
+  }));
 
-  if (googleAmbulances && googleAmbulances.length > 0) {
-    finalAmbulances = googleAmbulances.map(ga => ({
-      _id: ga.place_id,
-      name: ga.name.includes('Ambulance') ? ga.name : `${ga.name} Emergency Unit`,
-      address: ga.vicinity,
-      phone: '+91 108',
-      location: {
-        type: 'Point',
-        coordinates: [ga.geometry.location.lng, ga.geometry.location.lat]
-      },
-      status: 'AVAILABLE'
-    }));
-  }
+  // Fetch local database ambulances (only within 5km radius to keep it close/relevant)
+  const localAmbulances = await Ambulance.find({
+    location: {
+      $near: {
+        $geometry: { type: 'Point', coordinates: [lng, lat] },
+        $maxDistance: 5000 // 5km radius limit
+      }
+    },
+    status: 'AVAILABLE'
+  }).limit(5).lean();
 
-  // 2. Fallback: Try local database (only within 5km to keep it relevant)
-  if (finalAmbulances.length === 0) {
-    const localAmbulances = await Ambulance.find({
-      location: {
-        $near: {
-          $geometry: { type: 'Point', coordinates: [lng, lat] },
-          $maxDistance: 5000 // 5km radius limit
-        }
-      },
-      status: 'AVAILABLE'
-    }).limit(5).lean();
-    finalAmbulances = localAmbulances;
-  }
+  // Combine lists avoiding duplicates by name similarity
+  const combinedAmbulances = [...localAmbulances];
+  liveAmbulances.forEach(la => {
+    const isDuplicate = combinedAmbulances.some(ca => 
+      ca.name.toLowerCase().includes(la.name.toLowerCase()) || 
+      la.name.toLowerCase().includes(ca.name.toLowerCase())
+    );
+    if (!isDuplicate) {
+      combinedAmbulances.push(la);
+    }
+  });
 
-  // 3. Absolute Fallback: Dynamic mock relative offset
-  if (finalAmbulances.length === 0) {
+  let finalAmbulances = combinedAmbulances;
+
+  if (!finalAmbulances.length) {
     const { reverseGeocode } = require('../../utils/geoUtils');
     const placeName = await reverseGeocode(lat, lng) || 'Local Area';
     finalAmbulances = [{
@@ -115,7 +122,7 @@ async function selectAmbulance({ lat, lng }) {
     }];
   }
 
-  // Sort by physical distance
+  // Sort strictly by physical distance
   finalAmbulances.sort((a, b) => {
     const distA = calculateDistance(lat, lng, a.location.coordinates[1], a.location.coordinates[0]);
     const distB = calculateDistance(lat, lng, b.location.coordinates[1], b.location.coordinates[0]);

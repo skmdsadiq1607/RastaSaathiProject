@@ -71,38 +71,48 @@ async function selectHospital({ lat, lng, severityLevel, injuryType, requiredSpe
     }
   }
 
-  let finalHospitals = [];
+  // Map Google/OSM results to our internal structure
+  const liveHospitals = (googleHospitals || []).map(gh => ({
+    _id: gh.place_id,
+    name: gh.name,
+    address: gh.vicinity,
+    location: {
+      type: 'Point',
+      coordinates: [gh.geometry.location.lng, gh.geometry.location.lat]
+    },
+    rating: gh.rating || 4.5,
+    userRatingsTotal: gh.user_ratings_total || 10,
+    isGoogleResult: true
+  }));
 
-  if (googleHospitals && googleHospitals.length > 0) {
-    // Map Google/OSM results to our internal structure
-    finalHospitals = googleHospitals.map(gh => ({
-      _id: gh.place_id,
-      name: gh.name,
-      address: gh.vicinity,
-      location: {
-        type: 'Point',
-        coordinates: [gh.geometry.location.lng, gh.geometry.location.lat]
-      },
-      rating: gh.rating,
-      userRatingsTotal: gh.user_ratings_total,
-      isGoogleResult: true
-    }));
-  } else {
-    // Fallback: Find top 25 closest hospitals from our local DB (within 5km)
-    finalHospitals = await Hospital.find({
-      location: {
-        $near: {
-          $geometry: { type: 'Point', coordinates: [lng, lat] },
-          $maxDistance: 5000 // 5km radius limit
-        }
+  // Fetch local database hospitals (only within 5km radius to keep it extremely close/relevant)
+  const localHospitals = await Hospital.find({
+    location: {
+      $near: {
+        $geometry: { type: 'Point', coordinates: [lng, lat] },
+        $maxDistance: 5000 // 5km limit
       }
-    }).limit(25).lean();
-  }
+    }
+  }).limit(10).lean();
+
+  // Combine lists avoiding duplicates by name similarity
+  const combinedHospitals = [...localHospitals];
+  liveHospitals.forEach(lh => {
+    const isDuplicate = combinedHospitals.some(ch => 
+      ch.name.toLowerCase().includes(lh.name.toLowerCase()) || 
+      lh.name.toLowerCase().includes(ch.name.toLowerCase())
+    );
+    if (!isDuplicate) {
+      combinedHospitals.push(lh);
+    }
+  });
+
+  let finalHospitals = combinedHospitals;
 
   if (!finalHospitals.length) {
     const { reverseGeocode } = require('../../utils/geoUtils');
     const placeName = await reverseGeocode(lat, lng) || 'Local Area';
-    // Mock Fallback when Google API fails and no local hospitals are within 50km
+    // Mock Fallback when Google API fails and no local hospitals are within 5km
     finalHospitals = [{
       _id: 'mock-hospital-1',
       name: `${placeName} Emergency Hospital`,
@@ -117,7 +127,7 @@ async function selectHospital({ lat, lng, severityLevel, injuryType, requiredSpe
   }
 
   // 2. Enrich with local database metadata if available
-  // We try to match by name or proximity if it's a Google result
+  // We try to match by name or proximity if it's a Google/OSM result
   const dbHospitals = await Hospital.find({}).lean();
   
   const enrichedHospitals = finalHospitals.map(h => {
@@ -234,57 +244,67 @@ async function selectPoliceStation({ lat, lng }) {
     }
   }
 
-  if (googlePolice && googlePolice.length > 0) {
-    const finalPolice = googlePolice.map(gp => ({
-      _id: gp.place_id,
-      name: gp.name,
-      address: gp.vicinity,
-      location: {
-        type: 'Point',
-        coordinates: [gp.geometry.location.lng, gp.geometry.location.lat]
-      },
-      rating: gp.rating || 4.5,
-      phoneNumber: '+91 100'
-    }));
+  const livePolice = (googlePolice || []).map(gp => ({
+    _id: gp.place_id,
+    name: gp.name,
+    address: gp.vicinity,
+    location: {
+      type: 'Point',
+      coordinates: [gp.geometry.location.lng, gp.geometry.location.lat]
+    },
+    rating: gp.rating || 4.5,
+    phoneNumber: '+91 100',
+    isLiveResult: true
+  }));
 
-    // Sort by physical distance to ensure accuracy
-    finalPolice.sort((a, b) => {
-      const distA = calculateDistance(lat, lng, a.location.coordinates[1], a.location.coordinates[0]);
-      const distB = calculateDistance(lat, lng, b.location.coordinates[1], b.location.coordinates[0]);
-      return distA - distB;
-    });
-
-    return finalPolice.slice(0, 3);
-  }
-
-  // 2. Fallback: Try local database (only within 5km to keep it relevant)
+  // Fetch local database police stations (within 5km limit to keep them extremely close/relevant)
   const localPolice = await PoliceStation.find({
     location: {
       $near: {
         $geometry: { type: 'Point', coordinates: [lng, lat] },
-        $maxDistance: 5000 // 5km
+        $maxDistance: 5000 // 5km radius limit
       }
     }
   }).limit(5).lean();
 
-  if (localPolice.length > 0) {
-    return localPolice;
+  // Combine lists avoiding duplicates by name similarity
+  const combinedPolice = [...localPolice];
+  livePolice.forEach(lp => {
+    const isDuplicate = combinedPolice.some(cp => 
+      cp.name.toLowerCase().includes(lp.name.toLowerCase()) || 
+      lp.name.toLowerCase().includes(cp.name.toLowerCase())
+    );
+    if (!isDuplicate) {
+      combinedPolice.push(lp);
+    }
+  });
+
+  let finalPolice = combinedPolice;
+
+  if (!finalPolice.length) {
+    const { reverseGeocode } = require('../../utils/geoUtils');
+    const placeName = await reverseGeocode(lat, lng) || 'Local Area';
+    finalPolice = [{
+      _id: 'mock-police-1',
+      name: `${placeName} Police Station`,
+      address: `${placeName} Emergency Response Grid`,
+      location: {
+        type: 'Point',
+        coordinates: [lng + 0.008, lat + 0.006] // Approx 0.9km offset
+      },
+      rating: 4.5,
+      phoneNumber: '+91 100'
+    }];
   }
 
-  // 3. Absolute Fallback: Dynamic mock relative offset
-  const { reverseGeocode } = require('../../utils/geoUtils');
-  const placeName = await reverseGeocode(lat, lng) || 'Local Area';
-  return [{
-    _id: 'mock-police-1',
-    name: `${placeName} Police Station`,
-    address: `${placeName} Emergency Response Grid`,
-    location: {
-      type: 'Point',
-      coordinates: [lng + 0.008, lat + 0.006] // Approx 0.9km offset
-    },
-    rating: 4.5,
-    phoneNumber: '+91 100'
-  }];
+  // Sort strictly by physical distance to ensure accuracy
+  finalPolice.sort((a, b) => {
+    const distA = calculateDistance(lat, lng, a.location.coordinates[1], a.location.coordinates[0]);
+    const distB = calculateDistance(lat, lng, b.location.coordinates[1], b.location.coordinates[0]);
+    return distA - distB;
+  });
+
+  return finalPolice.slice(0, 3);
 }
 
 module.exports = { selectHospital, selectPoliceStation };
