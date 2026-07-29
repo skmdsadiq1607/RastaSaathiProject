@@ -521,33 +521,60 @@ const Dashboard = () => {
     if (!addressText.trim()) return null;
     setIsGeocoding(true);
     setGeocodingError('');
-    try {
-      const res = await axios.get('https://nominatim.openstreetmap.org/search', {
-        params: {
-          q: addressText,
-          format: 'json',
-          limit: 1
-        },
-        headers: { 'User-Agent': 'RastaSaathiEmergencyApp/1.0 (sadiq@rastasaathi.com)' }
-      });
-      
-      if (res.data && res.data.length > 0) {
-        const first = res.data[0];
-        const coords = { lat: parseFloat(first.lat), lng: parseFloat(first.lon) };
-        setManualCoords(coords);
-        setGeocodingError('');
-        return coords;
-      } else {
-        setGeocodingError('Location not found. Please try a different name.');
+
+    const geocodeWithNominatim = async (text) => {
+      try {
+        const res = await axios.get('https://nominatim.openstreetmap.org/search', {
+          params: {
+            q: text,
+            format: 'json',
+            limit: 1
+          }
+        });
+        if (res.data && res.data.length > 0) {
+          const first = res.data[0];
+          const coords = { lat: parseFloat(first.lat), lng: parseFloat(first.lon) };
+          setManualCoords(coords);
+          setGeocodingError('');
+          return coords;
+        } else {
+          setGeocodingError('Location not found. Please try a different name.');
+          setManualCoords(null);
+          return null;
+        }
+      } catch (err) {
+        setGeocodingError('Error resolving address. Please try again.');
         setManualCoords(null);
         return null;
+      } finally {
+        setIsGeocoding(false);
       }
-    } catch (err) {
-      setGeocodingError('Error resolving address. Please try again.');
-      setManualCoords(null);
-      return null;
-    } finally {
-      setIsGeocoding(false);
+    };
+
+    if (window.google && window.google.maps && window.google.maps.Geocoder) {
+      console.log('[Geocoder] Invoking Google Geocoder...');
+      const geocoder = new window.google.maps.Geocoder();
+      return new Promise((resolve) => {
+        geocoder.geocode({ address: addressText }, (results, status) => {
+          if (status === 'OK' && results && results.length > 0) {
+            const first = results[0];
+            const coords = {
+              lat: first.geometry.location.lat(),
+              lng: first.geometry.location.lng()
+            };
+            setManualCoords(coords);
+            setGeocodingError('');
+            setIsGeocoding(false);
+            resolve(coords);
+          } else {
+            console.warn('[Geocoder] Google Geocoder failed, falling back to OSM:', status);
+            resolve(geocodeWithNominatim(addressText));
+          }
+        });
+      });
+    } else {
+      console.log('[Geocoder] Google Maps SDK not available. Using OSM Nominatim.');
+      return geocodeWithNominatim(addressText);
     }
   };
 
