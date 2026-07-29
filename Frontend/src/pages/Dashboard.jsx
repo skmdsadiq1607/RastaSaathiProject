@@ -184,6 +184,13 @@ const Dashboard = () => {
   const [ambulanceDistance, setAmbulanceDistance] = useState('');
   const [ambulanceEta, setAmbulanceEta] = useState('');
   
+  // Vision states for Injury Detection
+  const [sidebarMode, setSidebarMode] = useState('chat'); // 'chat' or 'vision'
+  const [selectedImage, setSelectedImage] = useState(null); // base64 data url
+  const [isVisionLoading, setIsVisionLoading] = useState(false);
+  const [visionResult, setVisionResult] = useState(null);
+  const [visionError, setVisionError] = useState('');
+  
   // SOS countdown states (declared at top of component)
   const [countdownActive, setCountdownActive] = useState(false);
   const [countdownSeconds, setCountdownSeconds] = useState(5);
@@ -811,6 +818,47 @@ const Dashboard = () => {
     }
   };
 
+  const handleImageUpload = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setSelectedImage(reader.result);
+      setVisionResult(null);
+      setVisionError('');
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleAnalyzeInjury = async () => {
+    if (!selectedImage) return;
+    setIsVisionLoading(true);
+    setVisionError('');
+    setVisionResult(null);
+
+    try {
+      const token = localStorage.getItem('token');
+      const res = await axios.post(`${API_BASE_URL}/firstaid/detect-injury`, {
+        image: selectedImage
+      }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      
+      if (res.data && res.data.success) {
+        setVisionResult(res.data.data);
+      } else {
+        setVisionError('Analysis failed. Please try a different image.');
+      }
+    } catch (err) {
+      console.error('[Vision Scan Error]:', err);
+      const errMsg = err.response?.data?.error?.message || 'Could not connect to the vision service.';
+      setVisionError(errMsg);
+    } finally {
+      setIsVisionLoading(false);
+    }
+  };
+
   const policeCoordinates = policeStations[0]?.location?.coordinates;
   const policeLoc = policeCoordinates ? { lat: policeCoordinates[1], lng: policeCoordinates[0] } : null;
 
@@ -1435,14 +1483,63 @@ const Dashboard = () => {
         </div>
 
         <div className="glass-panel sidebar-chat" style={{ padding: '24px', display: 'flex', flexDirection: 'column', height: '750px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '15px', borderBottom: '1px solid var(--border-glass)', paddingBottom: '20px', marginBottom: '20px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '15px', borderBottom: '1px solid var(--border-glass)', paddingBottom: '16px', marginBottom: '16px' }}>
             <div style={{ width: '42px', height: '42px', background: 'rgba(16, 185, 129, 0.1)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Zap color="#10b981" fill="#10b981" size={20} />
             </div>
             <h3 style={{ fontSize: '1.2rem', fontWeight: '900' }}>{t('ai_medic')}</h3>
           </div>
+
+          {/* Sidebar Mode Selector */}
+          <div style={{ 
+            display: 'flex', 
+            background: 'var(--bg-deep)', 
+            borderRadius: '12px', 
+            padding: '4px', 
+            border: '1px solid var(--border-glass)',
+            marginBottom: '20px'
+          }}>
+            <button
+              type="button"
+              onClick={() => setSidebarMode('chat')}
+              style={{
+                flex: 1,
+                padding: '10px',
+                borderRadius: '10px',
+                border: 'none',
+                fontSize: '0.85rem',
+                fontWeight: '800',
+                cursor: 'pointer',
+                background: sidebarMode === 'chat' ? 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)' : 'transparent',
+                color: sidebarMode === 'chat' ? '#ffffff' : 'var(--text-secondary)',
+                transition: 'all 0.3s ease'
+              }}
+            >
+              💬 Chat Medic
+            </button>
+            <button
+              type="button"
+              onClick={() => setSidebarMode('vision')}
+              style={{
+                flex: 1,
+                padding: '10px',
+                borderRadius: '10px',
+                border: 'none',
+                fontSize: '0.85rem',
+                fontWeight: '800',
+                cursor: 'pointer',
+                background: sidebarMode === 'vision' ? 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)' : 'transparent',
+                color: sidebarMode === 'vision' ? '#ffffff' : 'var(--text-secondary)',
+                transition: 'all 0.3s ease'
+              }}
+            >
+              📸 Visual Scan
+            </button>
+          </div>
           
-          <div ref={chatContainerRef} style={{ flex: 1, overflowY: 'auto', padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          {sidebarMode === 'chat' ? (
+            <>
+              <div ref={chatContainerRef} style={{ flex: 1, overflowY: 'auto', padding: '10px 0', display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 {messages.map((m, i) => (
                   <div key={i} style={{ 
                     display: 'flex', 
@@ -1469,11 +1566,213 @@ const Dashboard = () => {
                 )}
                 <div ref={chatEndRef} />
               </div>
-          
-          <div style={{ marginTop: '20px', display: 'flex', gap: '10px' }}>
-            <input type="text" className="form-input" placeholder={t('emergency_guidance')} style={{ flex: 1, padding: '14px 18px', fontSize: '0.95rem' }} value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && sendMessage()} />
-            <button onClick={sendMessage} className="premium-button" style={{ width: '50px', height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Send size={20} /></button>
-          </div>
+              
+              <div style={{ marginTop: '20px', display: 'flex', gap: '10px' }}>
+                <input type="text" className="form-input" placeholder={t('emergency_guidance')} style={{ flex: 1, padding: '14px 18px', fontSize: '0.95rem' }} value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && sendMessage()} />
+                <button onClick={sendMessage} className="premium-button" style={{ width: '50px', height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Send size={20} /></button>
+              </div>
+            </>
+          ) : (
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflowY: 'auto' }}>
+              {!selectedImage ? (
+                <div style={{
+                  flex: 1,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: '2px dashed var(--border-glass)',
+                  borderRadius: '16px',
+                  padding: '40px 20px',
+                  background: 'rgba(255,255,255,0.01)',
+                  cursor: 'pointer',
+                  textAlign: 'center',
+                  transition: 'all 0.3s ease'
+                }}
+                onClick={() => document.getElementById('vision-file-input').click()}
+                onMouseOver={(e) => e.currentTarget.style.borderColor = '#ef4444'}
+                onMouseOut={(e) => e.currentTarget.style.borderColor = 'var(--border-glass)'}
+                >
+                  <input
+                    id="vision-file-input"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    style={{ display: 'none' }}
+                  />
+                  <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(239, 68, 68, 0.1)', display: 'flex', alignItems: 'center', justify: 'center', marginBottom: '16px' }}>
+                    <span style={{ fontSize: '1.8rem' }}>📸</span>
+                  </div>
+                  <h4 style={{ fontSize: '1.05rem', fontWeight: '800', marginBottom: '8px' }}>Upload Injury Image</h4>
+                  <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', maxWidth: '240px' }}>
+                    Select or snap a photo of the wound for real-time visual analysis.
+                  </p>
+                </div>
+              ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', paddingBottom: '10px' }}>
+                  <div style={{ position: 'relative', width: '100%', height: '200px', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border-glass)' }}>
+                    <img src={selectedImage} alt="Injury preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <button
+                      type="button"
+                      onClick={() => { setSelectedImage(null); setVisionResult(null); setVisionError(''); }}
+                      style={{
+                        position: 'absolute',
+                        top: '10px',
+                        right: '10px',
+                        background: 'rgba(15, 23, 42, 0.8)',
+                        border: 'none',
+                        color: 'white',
+                        borderRadius: '50%',
+                        width: '30px',
+                        height: '30px',
+                        cursor: 'pointer',
+                        fontWeight: '900',
+                        fontSize: '0.8rem'
+                      }}
+                    >
+                      ✕
+                    </button>
+                    {isVisionLoading && (
+                      <div className="vision-scan-line" style={{
+                        position: 'absolute',
+                        left: 0,
+                        width: '100%',
+                        height: '4px',
+                        background: 'linear-gradient(90deg, transparent, #ef4444, transparent)',
+                        boxShadow: '0 0 10px #ef4444',
+                        animation: 'scan 2s infinite linear'
+                      }}>
+                        <style>{`
+                          @keyframes scan {
+                            0% { top: 0%; }
+                            50% { top: 100%; }
+                            100% { top: 0%; }
+                          }
+                        `}</style>
+                      </div>
+                    )}
+                  </div>
+
+                  {!visionResult && !isVisionLoading && (
+                    <button
+                      type="button"
+                      onClick={handleAnalyzeInjury}
+                      style={{
+                        padding: '14px',
+                        background: 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)',
+                        color: 'white',
+                        borderRadius: '12px',
+                        border: 'none',
+                        fontWeight: '900',
+                        fontSize: '0.9rem',
+                        cursor: 'pointer',
+                        transition: 'all 0.3s ease'
+                      }}
+                    >
+                      🔍 Analyze Injury & Get First Aid
+                    </button>
+                  )}
+
+                  {isVisionLoading && (
+                    <div style={{ display: 'flex', alignItems: 'center', justify: 'center', gap: '10px', padding: '20px', background: 'var(--bg-deep)', borderRadius: '12px', border: '1px solid var(--border-glass)' }}>
+                      <Loader2 className="animate-spin" size={16} color="#ef4444" />
+                      <span style={{ fontSize: '0.85rem', fontWeight: '800', color: 'var(--text-primary)' }}>AI SCANNING INJURY...</span>
+                    </div>
+                  )}
+
+                  {visionError && (
+                    <div style={{ padding: '14px', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)', borderRadius: '12px', color: '#ef4444', fontSize: '0.8rem', fontWeight: '700' }}>
+                      ⚠️ {visionError}
+                    </div>
+                  )}
+
+                  {visionResult && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
+                    >
+                      {/* Detected Heading */}
+                      <div style={{
+                        background: 'var(--bg-deep)',
+                        border: '1px solid var(--border-glass)',
+                        padding: '16px',
+                        borderRadius: '12px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between'
+                      }}>
+                        <div>
+                          <span style={{ fontSize: '0.65rem', fontWeight: '800', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Detected Condition</span>
+                          <h4 style={{ fontSize: '1.1rem', fontWeight: '900', color: '#ef4444', marginTop: '4px' }}>{visionResult.injuryType}</h4>
+                        </div>
+                        <div style={{
+                          background: 'rgba(16, 185, 129, 0.1)',
+                          border: '1px solid rgba(16, 185, 129, 0.2)',
+                          color: '#10b981',
+                          padding: '6px 10px',
+                          borderRadius: '8px',
+                          fontSize: '0.75rem',
+                          fontWeight: '800'
+                        }}>
+                          {Math.round(visionResult.confidence * 100)}% Match
+                        </div>
+                      </div>
+
+                      {/* First Aid Steps */}
+                      <div>
+                        <span style={{ fontSize: '0.75rem', fontWeight: '900', color: 'var(--text-secondary)', display: 'block', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>👉 First Aid Treatment</span>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                          {visionResult.firstAidSteps?.map((step, idx) => (
+                            <div key={idx} style={{ display: 'flex', gap: '10px', background: 'var(--bg-deep)', padding: '12px', borderRadius: '8px', border: '1px solid var(--border-glass)' }}>
+                              <span style={{ color: '#10b981', fontWeight: '900', fontSize: '0.85rem' }}>{idx + 1}.</span>
+                              <span style={{ fontSize: '0.8rem', color: 'var(--text-primary)', lineHeight: '1.4' }}>{step}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Warnings */}
+                      {visionResult.warnings?.length > 0 && (
+                        <div style={{
+                          background: 'rgba(239, 68, 68, 0.05)',
+                          border: '1px solid rgba(239, 68, 68, 0.15)',
+                          borderRadius: '12px',
+                          padding: '14px',
+                          textAlign: 'left'
+                        }}>
+                          <span style={{ fontSize: '0.7rem', fontWeight: '900', color: '#ef4444', display: 'block', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>❌ Critical Warnings</span>
+                          <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                            {visionResult.warnings.map((w, idx) => (
+                              <li key={idx} style={{ lineHeight: '1.4' }}>{w}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {/* When To Escalate */}
+                      {visionResult.whenToEscalate?.length > 0 && (
+                        <div style={{
+                          background: 'rgba(245, 158, 11, 0.05)',
+                          border: '1px solid rgba(245, 158, 11, 0.15)',
+                          borderRadius: '12px',
+                          padding: '14px',
+                          textAlign: 'left'
+                        }}>
+                          <span style={{ fontSize: '0.7rem', fontWeight: '900', color: '#f59e0b', display: 'block', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>🚨 Escalation Criteria</span>
+                          <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                            {visionResult.whenToEscalate.map((e, idx) => (
+                              <li key={idx} style={{ lineHeight: '1.4' }}>{e}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </motion.div>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
 

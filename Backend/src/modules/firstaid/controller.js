@@ -1,5 +1,5 @@
 const { ok } = require('../../utils/responseFormatter');
-const { startSession, followup } = require('./service');
+const { startSession, followup, detectInjury } = require('./service');
 
 async function guideController(req, res, next) {
   try {
@@ -27,5 +27,17 @@ async function followupController(req, res, next) {
   }
 }
 
-module.exports = { guideController, followupController };
+async function detectInjuryController(req, res, next) {
+  try {
+    const { image } = req.body;
+    console.log('[FirstAid Controller] Running Vision Injury Detection...');
+    const result = await detectInjury({ image });
+    res.json(ok({ data: result, message: 'Injury detected' }));
+  } catch (err) {
+    console.error('[FirstAid Controller] Vision error:', err);
+    next(err);
+  }
+}
+
+module.exports = { guideController, followupController, detectInjuryController };
 

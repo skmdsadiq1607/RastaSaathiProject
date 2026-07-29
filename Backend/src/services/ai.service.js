@@ -204,4 +204,112 @@ async function callAi({ system, user, maxTokens = 600 }) {
   }
 }
 
-module.exports = { callAi };
+async function callGroqVisionWithRetry({ base64Data, mimeType, prompt }) {
+  const maxRetries = groqKeyManager.keys.length;
+  let attempt = 0;
+  while (attempt < maxRetries) {
+    const key = groqKeyManager.getCurrentKey();
+    if (!key) throw new Error('No Groq API key available');
+
+    try {
+      const response = await axios.post(
+        'https://api.groq.com/openai/v1/chat/completions',
+        {
+          model: 'llama-3.2-11b-vision-preview',
+          messages: [
+            {
+              role: 'user',
+              content: [
+                { type: 'text', text: prompt },
+                {
+                  type: 'image_url',
+                  image_url: {
+                    url: `data:${mimeType};base64,${base64Data}`
+                  }
+                }
+              ]
+            }
+          ],
+          temperature: 0.1,
+          response_format: { type: 'json_object' }
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${key}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      const text = response.data?.choices?.[0]?.message?.content;
+      return { text, provider: 'groq-vision' };
+    } catch (error) {
+      logger.error(`[Groq Vision API Error] Key: ${key.slice(0, 8)}... | Error: ${error.message}`);
+      if (error.response?.status === 429) {
+        groqKeyManager.rotateKey();
+        attempt++;
+      } else {
+        throw error;
+      }
+    }
+  }
+  throw new Error('Exhausted all Groq API retries for Vision');
+}
+
+async function callGeminiVisionWithRetry({ base64Data, mimeType, prompt }) {
+  const maxRetries = geminiKeyManager.keys.length;
+  let attempt = 0;
+  while (attempt < maxRetries) {
+    const key = geminiKeyManager.getCurrentKey();
+    if (!key) throw new Error('No Gemini API key available');
+
+    try {
+      const genAI = new GoogleGenerativeAI(key);
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+      const imagePart = {
+        inlineData: {
+          data: base64Data,
+          mimeType: mimeType
+        }
+      };
+
+      const result = await model.generateContent([
+        prompt,
+        imagePart
+      ]);
+
+      const text = result.response.text();
+      return { text, provider: 'gemini-vision' };
+    } catch (error) {
+      logger.error(`[Gemini Vision API Error] Key: ${key.slice(0, 8)}... | Error: ${error.message}`);
+      if (error.message?.includes('429')) {
+        geminiKeyManager.rotateKey();
+        attempt++;
+      } else {
+        throw error;
+      }
+    }
+  }
+  throw new Error('Exhausted all Gemini API retries for Vision');
+}
+
+async function callAiVision({ base64Data, mimeType, prompt }) {
+  try {
+    const result = await callGroqVisionWithRetry({ base64Data, mimeType, prompt });
+    logger.info('[AI Vision Service] Groq Vision responded successfully.');
+    return result;
+  } catch (groqError) {
+    logger.warn(`[AI Vision Service] Groq Vision Failed: ${groqError.message}. Falling back to Gemini...`);
+  }
+
+  try {
+    const result = await callGeminiVisionWithRetry({ base64Data, mimeType, prompt });
+    logger.info('[AI Vision Service] Gemini Vision responded successfully.');
+    return result;
+  } catch (geminiError) {
+    logger.error(`[AI Vision Service] Gemini Vision Failed: ${geminiError.message}. Throwing error.`);
+    throw geminiError;
+  }
+}
+
+module.exports = { callAi, callAiVision };
