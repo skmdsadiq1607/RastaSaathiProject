@@ -85,29 +85,7 @@ async function selectHospital({ lat, lng, severityLevel, injuryType, requiredSpe
     isGoogleResult: true
   }));
 
-  // Fetch local database hospitals (only within 5km radius to keep it extremely close/relevant)
-  const localHospitals = await Hospital.find({
-    location: {
-      $near: {
-        $geometry: { type: 'Point', coordinates: [lng, lat] },
-        $maxDistance: 5000 // 5km limit
-      }
-    }
-  }).limit(10).lean();
-
-  // Combine lists avoiding duplicates by name similarity
-  const combinedHospitals = [...localHospitals];
-  liveHospitals.forEach(lh => {
-    const isDuplicate = combinedHospitals.some(ch => 
-      ch.name.toLowerCase().includes(lh.name.toLowerCase()) || 
-      lh.name.toLowerCase().includes(ch.name.toLowerCase())
-    );
-    if (!isDuplicate) {
-      combinedHospitals.push(lh);
-    }
-  });
-
-  let finalHospitals = combinedHospitals;
+  let finalHospitals = liveHospitals;
 
   if (!finalHospitals.length) {
     const { reverseGeocode } = require('../../utils/geoUtils');
@@ -257,29 +235,7 @@ async function selectPoliceStation({ lat, lng }) {
     isLiveResult: true
   }));
 
-  // Fetch local database police stations (within 5km limit to keep them extremely close/relevant)
-  const localPolice = await PoliceStation.find({
-    location: {
-      $near: {
-        $geometry: { type: 'Point', coordinates: [lng, lat] },
-        $maxDistance: 5000 // 5km radius limit
-      }
-    }
-  }).limit(5).lean();
-
-  // Combine lists avoiding duplicates by name similarity
-  const combinedPolice = [...localPolice];
-  livePolice.forEach(lp => {
-    const isDuplicate = combinedPolice.some(cp => 
-      cp.name.toLowerCase().includes(lp.name.toLowerCase()) || 
-      lp.name.toLowerCase().includes(cp.name.toLowerCase())
-    );
-    if (!isDuplicate) {
-      combinedPolice.push(lp);
-    }
-  });
-
-  let finalPolice = combinedPolice;
+  let finalPolice = livePolice;
 
   if (!finalPolice.length) {
     const { reverseGeocode } = require('../../utils/geoUtils');

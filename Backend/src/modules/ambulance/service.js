@@ -81,30 +81,7 @@ async function selectAmbulance({ lat, lng }) {
     isLiveResult: true
   }));
 
-  // Fetch local database ambulances (only within 5km radius to keep it close/relevant)
-  const localAmbulances = await Ambulance.find({
-    location: {
-      $near: {
-        $geometry: { type: 'Point', coordinates: [lng, lat] },
-        $maxDistance: 5000 // 5km radius limit
-      }
-    },
-    status: 'AVAILABLE'
-  }).limit(5).lean();
-
-  // Combine lists avoiding duplicates by name similarity
-  const combinedAmbulances = [...localAmbulances];
-  liveAmbulances.forEach(la => {
-    const isDuplicate = combinedAmbulances.some(ca => 
-      ca.name.toLowerCase().includes(la.name.toLowerCase()) || 
-      la.name.toLowerCase().includes(ca.name.toLowerCase())
-    );
-    if (!isDuplicate) {
-      combinedAmbulances.push(la);
-    }
-  });
-
-  let finalAmbulances = combinedAmbulances;
+  let finalAmbulances = liveAmbulances;
 
   if (!finalAmbulances.length) {
     const { reverseGeocode } = require('../../utils/geoUtils');
