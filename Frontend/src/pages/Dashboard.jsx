@@ -267,6 +267,11 @@ const Dashboard = () => {
   const googleMapRef = useRef(null);
   const googleMarkersRef = useRef([]);
   const directionsRendererRef = useRef(null);
+  const sosActiveRef = useRef(false);
+
+  useEffect(() => {
+    sosActiveRef.current = sosActive;
+  }, [sosActive]);
 
   const getMarkerIconSvg = (type) => {
     if (type === 'victim') {
@@ -334,6 +339,54 @@ const Dashboard = () => {
         const map = new window.google.maps.Map(mapContainerRef.current, mapOptions);
         googleMapRef.current = map;
         console.log("[Google Map] Map object created successfully:", map);
+
+        const reverseGeocodeOSM = async (latVal, lngVal) => {
+          try {
+            const res = await axios.get('https://nominatim.openstreetmap.org/reverse', {
+              params: {
+                lat: latVal,
+                lon: lngVal,
+                format: 'json'
+              }
+            });
+            if (res.data && res.data.display_name) {
+              setManualAddress(res.data.display_name);
+            }
+          } catch (err) {
+            console.warn('OSM Reverse geocode failed:', err);
+          }
+        };
+
+        map.addListener('click', (event) => {
+          if (!sosActiveRef.current) {
+            const clickedLat = event.latLng.lat();
+            const clickedLng = event.latLng.lng();
+            const coords = { lat: clickedLat, lng: clickedLng };
+            
+            setUseLiveLocation(false);
+            setManualCoords(coords);
+            setVictimLocation(coords);
+            setGeocodingError('');
+            
+            // Reverse geocode clicked coordinates to populate address input
+            try {
+              if (window.google && window.google.maps && window.google.maps.Geocoder) {
+                const geocoder = new window.google.maps.Geocoder();
+                geocoder.geocode({ location: coords }, (results, status) => {
+                  if (status === 'OK' && results && results[0]) {
+                    setManualAddress(results[0].formatted_address);
+                  } else {
+                    reverseGeocodeOSM(clickedLat, clickedLng);
+                  }
+                });
+              } else {
+                reverseGeocodeOSM(clickedLat, clickedLng);
+              }
+            } catch (err) {
+              console.error('Reverse geocode failed:', err);
+            }
+          }
+        });
 
         // Directions render setup to draw premium route overlays
         directionsRendererRef.current = new window.google.maps.DirectionsRenderer({
