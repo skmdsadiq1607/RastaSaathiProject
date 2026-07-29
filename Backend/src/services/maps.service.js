@@ -59,5 +59,42 @@ async function findNearbyPoliceStations({ lat, lng, radius = 50000 }) {
   return data.results;
 }
 
-module.exports = { distanceMatrix, directions, findNearbyHospitals, findNearbyPoliceStations };
+async function searchNearbyNominatim({ lat, lng, q, limit = 10 }) {
+  const delta = 0.085; // ~10km bounding box in degrees
+  const minLat = lat - delta;
+  const maxLat = lat + delta;
+  const minLng = lng - delta;
+  const maxLng = lng + delta;
+  const viewbox = `${minLng},${maxLat},${maxLng},${minLat}`;
+
+  try {
+    const { data } = await axios.get('https://nominatim.openstreetmap.org/search', {
+      params: {
+        q,
+        format: 'json',
+        lat,
+        lon: lng,
+        bounded: 1,
+        viewbox,
+        limit
+      },
+      headers: {
+        'User-Agent': 'RastaSaathiEmergencyApp/1.0 (sadiq@rastasaathi.com)'
+      },
+      timeout: 8000
+    });
+    return data || [];
+  } catch (err) {
+    console.error(`[Nominatim Search] Failed for query: ${q}`, err.message);
+    return [];
+  }
+}
+
+module.exports = { 
+  distanceMatrix, 
+  directions, 
+  findNearbyHospitals, 
+  findNearbyPoliceStations,
+  searchNearbyNominatim 
+};
 

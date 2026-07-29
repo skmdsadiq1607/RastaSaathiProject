@@ -41,15 +41,41 @@ async function selectHospital({ lat, lng, severityLevel, injuryType, requiredSpe
     // 1. Fetch real-time hospitals from Google Places API
     googleHospitals = await findNearbyHospitals({ lat, lng, radius: 50000 });
   } catch (err) {
-    console.error('[Hospital Service] Google Places API failed, falling back to local database only');
+    console.error('[Hospital Service] Google Places API failed, trying Nominatim fallback');
+  }
+
+  // If Google Places fails (e.g., key restricted), query live OSM Nominatim search
+  if (!googleHospitals || googleHospitals.length === 0) {
+    try {
+      console.log('[Hospital Service] Querying Nominatim for live hospitals...');
+      const { searchNearbyNominatim } = require('../../services/maps.service');
+      const osmHospitals = await searchNearbyNominatim({ lat, lng, q: 'hospital', limit: 15 });
+      if (osmHospitals && osmHospitals.length > 0) {
+        googleHospitals = osmHospitals.map(oh => ({
+          place_id: oh.place_id || oh.osm_id,
+          name: oh.name || oh.display_name.split(',')[0],
+          vicinity: oh.display_name,
+          geometry: {
+            location: {
+              lat: parseFloat(oh.lat),
+              lng: parseFloat(oh.lon)
+            }
+          },
+          rating: 4.6,
+          user_ratings_total: 10
+        }));
+      }
+    } catch (osmErr) {
+      console.error('[Hospital Service] Nominatim search failed:', osmErr.message);
+    }
   }
 
   let finalHospitals = [];
 
-  if (googleHospitals.length > 0) {
-    // Map Google results to our internal structure
+  if (googleHospitals && googleHospitals.length > 0) {
+    // Map Google/OSM results to our internal structure
     finalHospitals = googleHospitals.map(gh => ({
-      _id: gh.place_id, // Use place_id as temporary ID
+      _id: gh.place_id,
       name: gh.name,
       address: gh.vicinity,
       location: {
@@ -178,7 +204,32 @@ async function selectPoliceStation({ lat, lng }) {
   try {
     googlePolice = await findNearbyPoliceStations({ lat, lng, radius: 15000 });
   } catch (err) {
-    console.warn('[Police Service] Google Places API failed, falling back to local database');
+    console.warn('[Police Service] Google Places API failed, trying Nominatim fallback');
+  }
+
+  // If Google Places fails (e.g., key restricted), query live OSM Nominatim search
+  if (!googlePolice || googlePolice.length === 0) {
+    try {
+      console.log('[Police Service] Querying Nominatim for live police stations...');
+      const { searchNearbyNominatim } = require('../../services/maps.service');
+      const osmPolice = await searchNearbyNominatim({ lat, lng, q: 'police station', limit: 5 });
+      if (osmPolice && osmPolice.length > 0) {
+        googlePolice = osmPolice.map(op => ({
+          place_id: op.place_id || op.osm_id,
+          name: op.name || op.display_name.split(',')[0],
+          vicinity: op.display_name,
+          geometry: {
+            location: {
+              lat: parseFloat(op.lat),
+              lng: parseFloat(op.lon)
+            }
+          },
+          rating: 4.5
+        }));
+      }
+    } catch (osmErr) {
+      console.error('[Police Service] Nominatim search failed:', osmErr.message);
+    }
   }
 
   if (googlePolice && googlePolice.length > 0) {

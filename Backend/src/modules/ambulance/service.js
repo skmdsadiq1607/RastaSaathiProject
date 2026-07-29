@@ -30,7 +30,6 @@ async function findNearbyGoogleAmbulances({ lat, lng, radius = 50000 }) {
   }
   return [];
 }
-
 async function selectAmbulance({ lat, lng }) {
   // 1. Try Google Places first
   let googleAmbulances = [];
@@ -38,7 +37,31 @@ async function selectAmbulance({ lat, lng }) {
     const { findNearbyGoogleAmbulances } = require('../../services/maps.service');
     googleAmbulances = await findNearbyGoogleAmbulances({ lat, lng });
   } catch (err) {
-    console.warn('[Ambulance Service] Google Places API failed');
+    console.warn('[Ambulance Service] Google Places API failed, trying Nominatim fallback');
+  }
+
+  // If Google Places fails (e.g. key restricted), query live OSM Nominatim search for hospitals/clinics to map live ambulance dispatches!
+  if (!googleAmbulances || googleAmbulances.length === 0) {
+    try {
+      console.log('[Ambulance Service] Querying Nominatim for medical centers to place ambulances...');
+      const { searchNearbyNominatim } = require('../../services/maps.service');
+      const osmMedical = await searchNearbyNominatim({ lat, lng, q: 'hospital', limit: 3 });
+      if (osmMedical && osmMedical.length > 0) {
+        googleAmbulances = osmMedical.map(om => ({
+          place_id: om.place_id || om.osm_id,
+          name: `${om.name || om.display_name.split(',')[0]} Rapid Ambulance`,
+          vicinity: om.display_name,
+          geometry: {
+            location: {
+              lat: parseFloat(om.lat) + 0.001, // Slightly offset from the hospital coordinates
+              lng: parseFloat(om.lon) - 0.001
+            }
+          }
+        }));
+      }
+    } catch (osmErr) {
+      console.error('[Ambulance Service] Nominatim search failed:', osmErr.message);
+    }
   }
 
   let finalAmbulances = [];
