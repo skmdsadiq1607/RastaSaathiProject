@@ -187,7 +187,7 @@ const TRANSLATIONS = {
     guide_use_step2_title: "Build Safety Network",
     guide_use_step2_desc: "Add your emergency contacts. They will receive automated WhatsApp alerts with your live location if you trigger an SOS.",
     guide_use_step3_title: "Activate WhatsApp Alerts",
-    guide_use_step3_desc: "Join our automated alert grid. Send 'join soft-peace' to our Twilio number to enable real-time messaging.",
+    guide_use_step3_desc: "Join our automated alert grid. Send 'join do-hit' to our Twilio number to enable real-time messaging.",
     guide_use_step4_title: "Trigger SOS Protocol",
     guide_use_step4_desc: "In an emergency, hit the SOS button. Our geospatial engine immediately matches you with the best available trauma center.",
     guide_use_step5_title: "Consult AI Medic",
@@ -369,7 +369,7 @@ const TRANSLATIONS = {
     guide_use_step2_title: "सुरक्षा नेटवर्क बनाएं",
     guide_use_step2_desc: "अपने आपातकालीन संपर्क जोड़ें। यदि आप SOS ट्रिगर करते हैं तो उन्हें आपके लाइव स्थान के साथ स्वचालित व्हाट्सएप अलर्ट प्राप्त होंगे।",
     guide_use_step3_title: "व्हाट्सएप अलर्ट सक्रिय करें",
-    guide_use_step3_desc: "हमारे स्वचालित अलर्ट ग्रिड से जुड़ें। रीयल-टाइम मैसेजिंग सक्षम करने के लिए हमारे नंबर पर 'join soft-peace' भेजें।",
+    guide_use_step3_desc: "हमारे स्वचालित अलर्ट ग्रिड से जुड़ें। रीयल-टाइम मैसेजिंग सक्षम करने के लिए हमारे नंबर पर 'join do-hit' भेजें।",
     guide_use_step4_title: "SOS प्रोटोकॉल ट्रिगर करें",
     guide_use_step4_desc: "आपातकालीन स्थिति में, SOS बटन दबाएं। हमारा इंजन तुरंत आपको सर्वोत्तम उपलब्ध ट्रॉमा सेंटर से मिलाता है।",
     guide_use_step5_title: "AI मेडिक से परामर्श करें",
@@ -648,7 +648,7 @@ const TRANSLATIONS = {
     high_severity: "زیادہ",
     medium_severity: "درمیانہ",
     low_severity: "کم",
-    twilio_command: "Join soft-peace"
+    twilio_command: "Join do-hit"
   }
 };
 

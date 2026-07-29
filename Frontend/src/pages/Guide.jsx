@@ -29,7 +29,7 @@ const SETUP_STEPS = [
     isHighlight: true,
     desc: 'To receive and send WhatsApp SOS alerts, link your number to our WhatsApp service with one quick message.',
     tips: [
-      'Send "join soft-peace" to +1 415 523 8886 on WhatsApp',
+      'Send "join do-hit" to +1 415 523 8886 on WhatsApp',
       'Or scan the QR code below to open the chat instantly',
       'You only need to do this once — alerts work forever after',
     ],
@@ -111,7 +111,7 @@ const FAQS = [
   },
   {
     q: 'Why does my WhatsApp need to be linked?',
-    a: 'WhatsApp alerts are sent through Twilio\'s WhatsApp gateway. To receive messages from this gateway, your number needs to be opted in once by sending "join soft-peace" to the sandbox number. It\'s a one-time step.',
+    a: 'WhatsApp alerts are sent through Twilio\'s WhatsApp gateway. To receive messages from this gateway, your number needs to be opted in once by sending "join do-hit" to the sandbox number. It\'s a one-time step.',
   },
   {
     q: 'Is my location always being tracked?',
@@ -275,7 +275,7 @@ const Guide = () => {
                             Scan this QR with your phone camera to open WhatsApp with the message pre-filled.
                           </div>
                           <a
-                            href="https://wa.me/14155238886?text=join%20soft-peace"
+                            href="https://wa.me/14155238886?text=join%20do-hit"
                             target="_blank"
                             rel="noopener noreferrer"
                             style={{
