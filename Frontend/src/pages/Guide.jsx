@@ -14,25 +14,25 @@ const Guide = () => {
         animate={{ opacity: 1, y: 0 }}
         style={{ maxWidth: '1000px', margin: '0 auto' }}
       >
-        <div style={{ textAlign: 'center', marginBottom: '80px' }}>
+        <div style={{ textAlign: 'center', marginBottom: 'clamp(40px, 6vw, 80px)' }}>
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            style={{ display: 'inline-flex', padding: '8px 20px', borderRadius: '100px', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', fontWeight: '800', fontSize: '0.8rem', letterSpacing: '2px', marginBottom: '24px' }}
+            style={{ display: 'inline-flex', padding: '8px 20px', borderRadius: '100px', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', fontWeight: '800', fontSize: '0.8rem', letterSpacing: '2px', marginBottom: '20px' }}
           >
             {t('official_protocol')}
           </motion.div>
-          <h1 style={{ fontSize: 'clamp(2.5rem, 8vw, 4rem)', fontWeight: '900', marginBottom: '24px', lineHeight: '1.1' }}>
+          <h1 style={{ fontWeight: '900', marginBottom: '20px', lineHeight: '1.1' }}>
             {t('golden_minute_title')}
           </h1>
-          <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: '850px', margin: '0 auto', lineHeight: '1.6' }}>
+          <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.2rem)', color: 'var(--text-secondary)', maxWidth: '750px', margin: '0 auto', lineHeight: '1.7' }}>
             {t('golden_minute_sub')}
           </p>
         </div>
 
-        {/* STEP BY STEP JOURNEY - NEW VISUALS */}
-        <div style={{ marginBottom: '120px' }}>
-           <h2 style={{ fontSize: '2.5rem', fontWeight: '900', textAlign: 'center', marginBottom: '60px' }}>{t('guide_usage_title')}</h2>
+        {/* STEP BY STEP JOURNEY */}
+        <div style={{ marginBottom: 'clamp(60px, 8vw, 120px)' }}>
+           <h2 style={{ textAlign: 'center', marginBottom: 'clamp(32px, 5vw, 56px)' }}>{t('guide_usage_title')}</h2>
            
            <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
               {[
@@ -51,30 +51,31 @@ const Guide = () => {
                   transition={{ delay: idx * 0.1 }}
                   className="glass-panel"
                   style={{ 
-                    padding: '32px', 
+                    padding: 'clamp(18px, 4vw, 32px)', 
                     display: 'flex', 
-                    gap: '24px', 
+                    gap: '20px', 
                     alignItems: 'flex-start',
-                    borderLeft: `6px solid ${step.color}`,
-                    background: step.isHighlight ? `linear-gradient(90deg, ${step.color}15 0%, transparent 100%)` : 'rgba(30, 41, 59, 0.5)',
+                    borderLeft: `5px solid ${step.color}`,
+                    background: step.isHighlight ? `linear-gradient(90deg, ${step.color}15 0%, transparent 100%)` : undefined,
                     boxShadow: step.isHighlight ? `0 10px 30px ${step.color}10` : 'none'
                   }}
                 >
                    <div style={{ 
-                     minWidth: '56px', 
-                     height: '56px', 
-                     borderRadius: '16px', 
+                     minWidth: '48px', 
+                     height: '48px', 
+                     borderRadius: '14px', 
                      background: `${step.color}20`, 
                      color: step.color, 
                      display: 'flex', 
                      alignItems: 'center', 
-                     justifyContent: 'center' 
+                     justifyContent: 'center',
+                     flexShrink: 0
                    }}>
-                      {React.cloneElement(step.icon, { size: 28 })}
+                      {React.cloneElement(step.icon, { size: 24 })}
                    </div>
-                   <div>
-                      <h3 style={{ fontSize: '1.4rem', marginBottom: '8px', fontWeight: '800', color: step.isHighlight ? step.color : 'white' }}>{step.title}</h3>
-                      <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6', fontSize: '1.05rem' }}>{step.desc}</p>
+                   <div style={{ flex: 1, minWidth: 0 }}>
+                      <h3 style={{ fontSize: 'clamp(1rem, 2.5vw, 1.3rem)', marginBottom: '8px', fontWeight: '800', color: step.isHighlight ? step.color : 'var(--text-primary)' }}>{step.title}</h3>
+                      <p style={{ color: 'var(--text-secondary)', lineHeight: '1.65', fontSize: 'clamp(0.9rem, 2vw, 1rem)' }}>{step.desc}</p>
                       {step.isHighlight && (
                         <div style={{ marginTop: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
                           <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap', alignItems: 'center' }}>
@@ -114,20 +115,20 @@ const Guide = () => {
         </div>
 
         {/* FEATURE HIGHLIGHTS */}
-        <div style={{ marginBottom: '120px' }}>
-          <div className="responsive-grid-3">
+        <div style={{ marginBottom: 'clamp(48px, 8vw, 100px)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px' }}>
              <HighlightCard 
-                icon={<Activity size={32} color="#3b82f6" />}
+                icon={<Activity size={28} color="#3b82f6" />}
                 title={t('orch_feature1_title')}
                 desc={t('orch_feature1_desc')}
              />
              <HighlightCard 
-                icon={<Zap size={32} color="#ef4444" />}
+                icon={<Zap size={28} color="#ef4444" />}
                 title={t('orch_feature2_title')}
                 desc={t('orch_feature2_desc')}
              />
              <HighlightCard 
-                icon={<ShieldCheck size={32} color="#10b981" />}
+                icon={<ShieldCheck size={28} color="#10b981" />}
                 title={t('orch_feature3_title')}
                 desc={t('orch_feature3_desc')}
              />
@@ -135,22 +136,22 @@ const Guide = () => {
         </div>
 
         {/* CRITICAL SAFETY SECTION */}
-        <div className="glass-panel" style={{ padding: '60px', border: '1px solid rgba(239, 68, 68, 0.4)', background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, transparent 100%)', borderRadius: '32px' }}>
-           <div style={{ display: 'flex', gap: '24px', alignItems: 'center', marginBottom: '32px' }}>
-              <AlertTriangle size={48} color="#ef4444" />
-              <h2 style={{ fontSize: '2.2rem', fontWeight: '900' }}>{t('safety_first')}</h2>
+        <div className="glass-panel" style={{ padding: 'clamp(24px, 5vw, 56px)', border: '1px solid rgba(239, 68, 68, 0.4)', background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, transparent 100%)', borderRadius: '24px' }}>
+           <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap' }}>
+              <AlertTriangle size={36} color="#ef4444" />
+              <h2 style={{ fontSize: 'clamp(1.3rem, 3.5vw, 2rem)', fontWeight: '900' }}>{t('safety_first')}</h2>
            </div>
-           <p style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', lineHeight: '1.8', marginBottom: '32px' }}>
+           <p style={{ fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', color: 'var(--text-secondary)', lineHeight: '1.8', marginBottom: '24px' }}>
              {t('safety_assist_text')}
            </p>
-           <div className="responsive-grid-2" style={{ gap: '20px' }}>
-              <div style={{ padding: '24px', background: 'rgba(0,0,0,0.2)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
-                 <div style={{ fontWeight: '800', color: '#ef4444', marginBottom: '12px', fontSize: '1.1rem' }}>{t('do_not')}</div>
-                 <p style={{ fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>{t('do_not_move')}</p>
+           <div className="responsive-grid-2" style={{ gap: '16px' }}>
+              <div style={{ padding: 'clamp(16px, 3vw, 24px)', background: 'rgba(0,0,0,0.2)', borderRadius: '14px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                 <div style={{ fontWeight: '800', color: '#ef4444', marginBottom: '10px', fontSize: '1rem' }}>{t('do_not')}</div>
+                 <p style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: '1.6' }}>{t('do_not_move')}</p>
               </div>
-              <div style={{ padding: '24px', background: 'rgba(0,0,0,0.2)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
-                 <div style={{ fontWeight: '800', color: '#10b981', marginBottom: '12px', fontSize: '1.1rem' }}>{t('do')}</div>
-                 <p style={{ fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>{t('do_stay_line')}</p>
+              <div style={{ padding: 'clamp(16px, 3vw, 24px)', background: 'rgba(0,0,0,0.2)', borderRadius: '14px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                 <div style={{ fontWeight: '800', color: '#10b981', marginBottom: '10px', fontSize: '1rem' }}>{t('do')}</div>
+                 <p style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: '1.6' }}>{t('do_stay_line')}</p>
               </div>
            </div>
         </div>
@@ -160,10 +161,10 @@ const Guide = () => {
 };
 
 const HighlightCard = ({ icon, title, desc }) => (
-  <motion.div whileHover={{ y: -10 }} className="glass-panel" style={{ padding: '40px' }}>
-    <div style={{ marginBottom: '24px' }}>{icon}</div>
-    <h3 style={{ fontSize: '1.5rem', marginBottom: '16px', fontWeight: '800' }}>{title}</h3>
-    <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7' }}>{desc}</p>
+  <motion.div whileHover={{ y: -6 }} className="glass-panel" style={{ padding: 'clamp(20px, 4vw, 36px)' }}>
+    <div style={{ marginBottom: '18px' }}>{icon}</div>
+    <h3 style={{ fontSize: 'clamp(1.05rem, 2.5vw, 1.3rem)', marginBottom: '12px', fontWeight: '800' }}>{title}</h3>
+    <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', fontSize: '0.95rem' }}>{desc}</p>
   </motion.div>
 );
 
