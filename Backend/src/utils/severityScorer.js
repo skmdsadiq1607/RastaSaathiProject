@@ -27,14 +27,33 @@ function predictSeverityRuleBased({ speed = 0, impactForce = 0, vehicleType, inj
 
   const injury = String(injuryDescription || '').toLowerCase();
   const injuryRisk =
-    injury.includes('bleed') || injury.includes('head') || injury.includes('fracture') ? 0.8 : injury.length > 0 ? 0.5 : 0.35;
+    injury.includes('bleed') || 
+    injury.includes('head') || 
+    injury.includes('fracture') ||
+    injury.includes('trauma') ||
+    injury.includes('severe') ||
+    injury.includes('collision')
+      ? 0.8 
+      : injury.length > 0 ? 0.5 : 0.35;
 
-  // Weighted formula: tuneable
-  const score = clamp(
-    Math.round(100 * (0.28 * s + 0.22 * f + 0.18 * c + 0.12 * a + 0.10 * vehicleRisk + 0.10 * injuryRisk)),
-    0,
-    100
-  );
+  // Weighted formula: adapt weights if it's a manual trigger (sensors = 0)
+  const isSensorTrigger = (Number(speed) > 0 || Number(impactForce) > 0);
+  let score;
+
+  if (isSensorTrigger) {
+    score = clamp(
+      Math.round(100 * (0.28 * s + 0.22 * f + 0.18 * c + 0.12 * a + 0.10 * vehicleRisk + 0.10 * injuryRisk)),
+      0,
+      100
+    );
+  } else {
+    // Manual trigger: scale weights since speed/force sensors are not active
+    score = clamp(
+      Math.round(100 * (0.45 * c + 0.35 * injuryRisk + 0.15 * vehicleRisk + 0.05 * a)),
+      0,
+      100
+    );
+  }
 
   const level = levelFromScore(score);
 

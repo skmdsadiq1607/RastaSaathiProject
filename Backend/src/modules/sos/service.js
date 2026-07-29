@@ -34,8 +34,11 @@ async function triggerSos({ io, redis, queues, lat, lng, userId, injuryType, veh
     vehicleType
   });
 
-  // 1. Determine Severity
-  const severity = predictSeverityRuleBased({ injuryType, vehicleType });
+  // 1. Determine Severity (mapping message/injuryType to injuryDescription)
+  const severity = predictSeverityRuleBased({ 
+    injuryDescription: message || injuryType, 
+    vehicleType 
+  });
 
   const hospitalSelection = await selectHospital({ 
     lat, lng, 
