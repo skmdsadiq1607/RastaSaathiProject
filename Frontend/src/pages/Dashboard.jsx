@@ -1552,7 +1552,7 @@ const Dashboard = () => {
                 transition: 'all 0.3s ease'
               }}
             >
-              💬 AI Chat Assistant
+              💬 {t('dash_chat_tab')}
             </button>
             <button
               type="button"
@@ -1570,7 +1570,7 @@ const Dashboard = () => {
                 transition: 'all 0.3s ease'
               }}
             >
-              📸 AI Injury Scanner
+              📸 {t('dash_vision_tab')}
             </button>
           </div>
           
@@ -1598,7 +1598,7 @@ const Dashboard = () => {
                 {loadingMsg && (
                   <div style={{ display: 'flex', gap: '8px', padding: '12px', background: 'var(--bg-deep)', border: '1px solid var(--border-glass)', borderRadius: '12px', width: 'fit-content' }}>
                     <Loader2 className="animate-spin" size={14} color="#3b82f6" />
-                    <span style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--text-secondary)' }}>AI ANALYSIS IN PROGRESS...</span>
+                    <span style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--text-secondary)' }}>{t('dash_analysis_progress')}</span>
                   </div>
                 )}
                 <div ref={chatEndRef} />
@@ -1640,9 +1640,9 @@ const Dashboard = () => {
                   <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(239, 68, 68, 0.1)', display: 'flex', alignItems: 'center', justify: 'center', marginBottom: '16px' }}>
                     <span style={{ fontSize: '1.8rem' }}>📸</span>
                   </div>
-                  <h4 style={{ fontSize: '1.05rem', fontWeight: '800', marginBottom: '8px' }}>Upload Injury Photo</h4>
+                  <h4 style={{ fontSize: '1.05rem', fontWeight: '800', marginBottom: '8px' }}>{t('dash_upload_photo')}</h4>
                   <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', maxWidth: '240px' }}>
-                    Upload or snap a photo of the wound for real-time AI analysis.
+                    {t('dash_upload_desc')}
                   </p>
                 </div>
               ) : (
@@ -1706,14 +1706,14 @@ const Dashboard = () => {
                         transition: 'all 0.3s ease'
                       }}
                     >
-                      🔍 Analyze Injury
+                      🔍 {t('dash_analyze_btn')}
                     </button>
                   )}
 
                   {isVisionLoading && (
                     <div style={{ display: 'flex', alignItems: 'center', justify: 'center', gap: '10px', padding: '20px', background: 'var(--bg-deep)', borderRadius: '12px', border: '1px solid var(--border-glass)' }}>
                       <Loader2 className="animate-spin" size={16} color="#ef4444" />
-                      <span style={{ fontSize: '0.85rem', fontWeight: '800', color: 'var(--text-primary)' }}>ANALYZING INJURY...</span>
+                      <span style={{ fontSize: '0.85rem', fontWeight: '800', color: 'var(--text-primary)' }}>{t('dash_analyzing')}</span>
                     </div>
                   )}
 
@@ -1740,7 +1740,7 @@ const Dashboard = () => {
                         justifyContent: 'space-between'
                       }}>
                         <div>
-                          <span style={{ fontSize: '0.65rem', fontWeight: '800', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Detected Injury</span>
+                          <span style={{ fontSize: '0.65rem', fontWeight: '800', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{t('dash_detected_injury')}</span>
                           <h4 style={{ fontSize: '1.1rem', fontWeight: '900', color: '#ef4444', marginTop: '4px' }}>{visionResult.injuryType}</h4>
                         </div>
                         <div style={{
@@ -1752,13 +1752,13 @@ const Dashboard = () => {
                           fontSize: '0.75rem',
                           fontWeight: '800'
                         }}>
-                          {Math.round(visionResult.confidence * 100)}% Match
+                          {Math.round(visionResult.confidence * 100)}% {t('dash_match_pct')}
                         </div>
                       </div>
 
                       {/* First Aid Steps */}
                       <div>
-                        <span style={{ fontSize: '0.75rem', fontWeight: '900', color: 'var(--text-secondary)', display: 'block', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>📋 First Aid Steps</span>
+                        <span style={{ fontSize: '0.75rem', fontWeight: '900', color: 'var(--text-secondary)', display: 'block', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>📋 {t('dash_first_aid_steps')}</span>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                           {visionResult.firstAidSteps?.map((step, idx) => (
                             <div key={idx} style={{ display: 'flex', gap: '10px', background: 'var(--bg-deep)', padding: '12px', borderRadius: '8px', border: '1px solid var(--border-glass)' }}>
@@ -1778,7 +1778,7 @@ const Dashboard = () => {
                           padding: '14px',
                           textAlign: 'left'
                         }}>
-                          <span style={{ fontSize: '0.7rem', fontWeight: '900', color: '#ef4444', display: 'block', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>⚠️ Critical Warnings</span>
+                          <span style={{ fontSize: '0.7rem', fontWeight: '900', color: '#ef4444', display: 'block', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>⚠️ {t('dash_critical_warnings')}</span>
                           <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '4px' }}>
                             {visionResult.warnings.map((w, idx) => (
                               <li key={idx} style={{ lineHeight: '1.4' }}>{w}</li>
@@ -1796,7 +1796,7 @@ const Dashboard = () => {
                           padding: '14px',
                           textAlign: 'left'
                         }}>
-                          <span style={{ fontSize: '0.7rem', fontWeight: '900', color: '#f59e0b', display: 'block', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>🚨 When to Escalate</span>
+                          <span style={{ fontSize: '0.7rem', fontWeight: '900', color: '#f59e0b', display: 'block', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>🚨 {t('dash_when_escalate')}</span>
                           <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '4px' }}>
                             {visionResult.whenToEscalate.map((e, idx) => (
                               <li key={idx} style={{ lineHeight: '1.4' }}>{e}</li>

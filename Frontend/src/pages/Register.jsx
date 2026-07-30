@@ -28,7 +28,7 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.password) {
-      setError('Please fill in all fields.');
+      setError(t('auth_fill_fields'));
       return;
     }
 
@@ -54,7 +54,7 @@ const Register = () => {
       if (issues && issues.length > 0) {
         setError(`Validation Error: ${issues.map(i => i.message).join(', ')}`);
       } else {
-        setError(serverMsg || 'Registration failed. Please try again.');
+        setError(serverMsg || t('auth_register_fail'));
       }
     } finally {
       setLoading(false);
@@ -75,12 +75,12 @@ const Register = () => {
         navigate('/dashboard');
       } catch (err) {
         console.error("Registration Error:", err);
-        setError(err.response?.data?.message || 'Failed to create account.');
+        setError(err.response?.data?.message || t('auth_register_fail'));
       } finally {
         setLoading(false);
       }
     },
-    onError: () => setError('Google Registration Failed')
+    onError: () => setError(t('auth_google_fail'))
   });
 
   return (
@@ -113,7 +113,7 @@ const Register = () => {
 
         <form onSubmit={handleRegister}>
           <div style={{ marginBottom: '24px' }}>
-            <label style={{ display: 'block', marginBottom: '12px', fontSize: '0.85rem', fontWeight: '800', color: 'var(--text-secondary)', letterSpacing: '1.5px', textTransform: 'uppercase' }}>Full Name</label>
+            <label style={{ display: 'block', marginBottom: '12px', fontSize: '0.85rem', fontWeight: '800', color: 'var(--text-secondary)', letterSpacing: '1.5px', textTransform: 'uppercase' }}>{t('full_name')}</label>
             <input 
               type="text" 
               name="name"
@@ -152,12 +152,12 @@ const Register = () => {
             disabled={loading}
             style={{ width: '100%', marginBottom: '20px', padding: '18px', border: 'none', cursor: 'pointer', opacity: loading ? 0.7 : 1 }}
           >
-            {loading ? 'Creating Account...' : t('register_btn')}
+            {loading ? t('auth_creating_account') : t('register_btn')}
           </button>
           
           <div style={{ position: 'relative', textAlign: 'center', margin: '32px 0' }}>
             <div style={{ position: 'absolute', top: '50%', left: 0, right: 0, height: '1px', background: 'var(--border-glass)' }}></div>
-            <span style={{ position: 'relative', background: 'var(--bg-primary)', padding: '0 16px', color: 'var(--text-secondary)', fontSize: '0.875rem', fontWeight: '600' }}>or continue with</span>
+            <span style={{ position: 'relative', background: 'var(--bg-primary)', padding: '0 16px', color: 'var(--text-secondary)', fontSize: '0.875rem', fontWeight: '600' }}>{t('auth_or_continue')}</span>
           </div>
 
           <button 
@@ -188,12 +188,12 @@ const Register = () => {
               <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
               <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 12-4.53z" fill="#EA4335"/>
             </svg>
-            {loading ? 'Authenticating...' : 'Sign up with Google'}
+            {loading ? t('auth_authenticating') : t('auth_google_signup')}
           </button>
         </form>
 
         <p style={{ textAlign: 'center', marginTop: '40px', color: 'var(--text-secondary)', fontSize: '1rem' }}>
-          {t('have_account')} <Link to="/login" style={{ color: 'var(--accent-red)', textDecoration: 'none', fontWeight: '700' }}>Login here</Link>
+          {t('have_account')} <Link to="/login" style={{ color: 'var(--accent-red)', textDecoration: 'none', fontWeight: '700' }}>{t('auth_login_link')}</Link>
         </p>
       </motion.div>
     </motion.div>

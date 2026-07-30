@@ -56,11 +56,11 @@ const Contact = () => {
         </div>
 
         <div className="glass-panel" style={{ padding: '50px' }}>
-          <h3 style={{ marginBottom: '32px', fontSize: '1.8rem', fontWeight: '800', color: 'var(--text-primary)' }}>Send a Message</h3>
+          <h3 style={{ marginBottom: '32px', fontSize: '1.8rem', fontWeight: '800', color: 'var(--text-primary)' }}>{t('contact_send_title')}</h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-            <input type="text" className="form-input" placeholder="Your Name" />
-            <input type="email" className="form-input" placeholder="Your Email" />
-            <textarea className="form-input" rows="4" placeholder="How can we help?" style={{ resize: 'none' }}></textarea>
+            <input type="text" className="form-input" placeholder={t('contact_name_placeholder')} />
+            <input type="email" className="form-input" placeholder={t('contact_email_placeholder')} />
+            <textarea className="form-input" rows="4" placeholder={t('contact_help_placeholder')} style={{ resize: 'none' }}></textarea>
             <button 
               className="premium-button" 
               style={{ 

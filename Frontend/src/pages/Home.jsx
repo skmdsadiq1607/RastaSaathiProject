@@ -79,7 +79,7 @@ const Home = () => {
               <div style={{ color: '#ef4444', fontWeight: '800', letterSpacing: '3px', marginBottom: '16px', fontSize: '0.75rem', textTransform: 'uppercase' }}>{t('precision_eng')}</div>
               <h2 style={{ marginBottom: '20px' }}>{t('impact_title')}</h2>
               <p style={{ color: 'var(--text-secondary)', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', lineHeight: '1.8', marginBottom: '32px' }}>
-                Our architecture combines high-frequency geospatial indexing with state-of-the-art AI triage to ensure zero-latency emergency response.
+                {t('impact_sub')}
               </p>
               
               <div style={{ display: 'flex', gap: '36px', flexWrap: 'wrap' }}>
@@ -133,7 +133,7 @@ const Home = () => {
         >
           <h2 style={{ marginBottom: '20px' }}>{t('join_national_mission')}</h2>
           <p style={{ fontSize: 'clamp(0.95rem, 2vw, 1.2rem)', color: 'var(--text-secondary)', maxWidth: '680px', margin: '0 auto 36px', lineHeight: '1.6' }}>
-            RastaSaathi is scaling its emergency grid across major urban corridors. Join our mission today.
+            {t('home_mission_sub')}
           </p>
           
           <Link to="/register" className="btn btn-primary" style={{ padding: '14px 40px', fontSize: '1rem' }}>
