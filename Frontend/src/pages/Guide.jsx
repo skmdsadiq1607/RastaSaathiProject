@@ -5,150 +5,151 @@ import {
   AlertTriangle, CheckCircle, XCircle, ChevronDown, MapPin,
   Phone, MessageSquare, Shield, Info, ArrowRight
 } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 import whatsappQr from '../assets/whatsapp-qr.png';
 
-/* ─── Data ─── */
-const SETUP_STEPS = [
-  {
-    num: '01',
-    icon: <UserPlus size={22} />,
-    color: '#3b82f6',
-    title: 'Create an Account',
-    desc: 'Sign up on RastaSaathi with your name, phone number, and emergency contacts. This takes less than 2 minutes.',
-    tips: [
-      'Use a real phone number — alerts are sent to your WhatsApp',
-      'Add at least one emergency contact (family member or friend)',
-      'Your data is stored securely and never shared with third parties',
-    ],
-  },
-  {
-    num: '02',
-    icon: <MessageSquare size={22} />,
-    color: '#10b981',
-    title: 'Activate WhatsApp Alerts',
-    isHighlight: true,
-    desc: 'To receive and send WhatsApp SOS alerts, link your number to our WhatsApp service with one quick message.',
-    tips: [
-      'Send "join do-hit" to +1 415 523 8886 on WhatsApp',
-      'Or scan the QR code below to open the chat instantly',
-      'You only need to do this once — alerts work forever after',
-    ],
-  },
-  {
-    num: '03',
-    icon: <Smartphone size={22} />,
-    color: '#8b5cf6',
-    title: 'Open the Dashboard',
-    desc: 'After logging in, go to the Dashboard. This is your emergency control centre — it shows your SOS button, AI assistant, map, and injury scanner.',
-    tips: [
-      'Bookmark the dashboard page on your phone browser for quick access',
-      'Allow location permission when prompted — it\'s essential for SOS',
-      'The dashboard works best in full-screen mobile browser mode',
-    ],
-  },
-  {
-    num: '04',
-    icon: <Radio size={22} />,
-    color: '#ef4444',
-    title: 'Trigger SOS in an Emergency',
-    desc: 'Press the red SOS button. Your GPS coordinates are captured automatically. The system finds the nearest hospital, ambulance and police station within seconds.',
-    tips: [
-      'A 5-second countdown gives you time to cancel if triggered by mistake',
-      'Use "Manual Entry" if GPS is unavailable — type the nearest landmark',
-      'Your emergency contacts get a WhatsApp message with your live location',
-    ],
-  },
-  {
-    num: '05',
-    icon: <Brain size={22} />,
-    color: '#f59e0b',
-    title: 'Use the AI First Aid Chat',
-    desc: 'While waiting for help, use the AI Chat Assistant tab to get step-by-step first aid guidance. Just describe the situation in simple words.',
-    tips: [
-      'Type things like "person is bleeding from the leg" or "victim is unconscious"',
-      'The AI gives calm, clear instructions — no medical knowledge needed',
-      'Ask follow-up questions — the AI remembers the conversation context',
-    ],
-  },
-  {
-    num: '06',
-    icon: <Camera size={22} />,
-    color: '#ec4899',
-    title: 'Use AI Injury Scanner',
-    desc: 'Switch to the AI Injury Scanner tab and upload a photo of the wound. The AI identifies the injury type and gives specific first aid steps for that wound.',
-    tips: [
-      'Take a clear, close-up photo of the injury in good lighting',
-      'The scanner works for cuts, burns, fractures, bruises, and more',
-      'Follow the "Critical Warnings" — they tell you what NOT to do',
-    ],
-  },
-  {
-    num: '07',
-    icon: <FileText size={22} />,
-    color: '#06b6d4',
-    title: 'Download the Incident Report',
-    desc: 'After the SOS is handled, download a full PDF incident report from the dashboard. It includes timestamp, location, severity score, hospitals found, and actions taken.',
-    tips: [
-      'Useful for insurance claims, police reports, or hospital admission records',
-      'The PDF includes GPS coordinates and nearest facility details',
-      'Report is generated automatically — just click "Download Report"',
-    ],
-  },
-];
-
-const FAQS = [
-  {
-    q: 'Does it work without internet?',
-    a: 'The SOS button requires an internet connection to dispatch alerts and find nearby hospitals. However, you can use the "Manual Entry" mode to type your location if GPS fails. We are building an offline-capable version for future release.',
-  },
-  {
-    q: 'What happens after I press SOS?',
-    a: 'Your GPS is captured instantly. The system finds the nearest hospital, ambulance, and police station. Your emergency contacts receive a WhatsApp message with your coordinates. The AI assistant activates to guide you with first aid. A live map shows all responders.',
-  },
-  {
-    q: 'Do I need to call anyone manually?',
-    a: 'No. RastaSaathi handles the alert dispatch automatically. However, you can also call 108 (ambulance) or 100 (police) directly if needed. The dashboard shows route buttons for all three emergency services.',
-  },
-  {
-    q: 'Why does my WhatsApp need to be linked?',
-    a: 'WhatsApp alerts are sent through Twilio\'s WhatsApp gateway. To receive messages from this gateway, your number needs to be opted in once by sending "join do-hit" to the sandbox number. It\'s a one-time step.',
-  },
-  {
-    q: 'Is my location always being tracked?',
-    a: 'No. Your location is only captured at the moment you press SOS. We do not continuously track your position. Location permission is required only so GPS can be read instantly when you need it.',
-  },
-  {
-    q: 'What if I trigger SOS by accident?',
-    a: 'A 5-second countdown appears before SOS is activated. You can cancel it within that window. If it goes through, you\'ll see a cancel option on the active SOS screen.',
-  },
-  {
-    q: 'Does the AI replace a real doctor?',
-    a: 'No. The AI provides immediate first aid guidance to help you stabilize the situation until professional help arrives. It should never replace calling 108 or getting the victim to a hospital. Always escalate to medical professionals.',
-  },
-];
-
-const DO_DONTS = {
-  do: [
-    'Stay calm — press SOS once and let the system work',
-    'Keep the victim still and warm while waiting for help',
-    'Stay on the line with emergency services if they call back',
-    'Use the AI chat for step-by-step first aid instructions',
-    'Share your live location link with bystanders if needed',
-    'Call 108 directly as a backup if signals are weak',
-  ],
-  dont: [
-    'Do not move a victim who may have a spinal or neck injury',
-    'Do not remove embedded objects from wounds',
-    'Do not give food or water to an unconscious person',
-    'Do not leave the victim alone unless absolutely necessary',
-    'Do not press SOS multiple times — one trigger is enough',
-    'Do not ignore the "When to Escalate" warnings from the AI scanner',
-  ],
-};
-
-/* ─── Component ─── */
 const Guide = () => {
+  const { t } = useLanguage();
   const [openFaq, setOpenFaq] = useState(null);
+
+  /* ─── Data ─── */
+  const SETUP_STEPS = [
+    {
+      num: '01',
+      icon: <UserPlus size={22} />,
+      color: '#3b82f6',
+      title: t('guide_step1_title'),
+      desc: t('guide_step1_desc'),
+      tips: [
+        t('guide_step1_tip1'),
+        t('guide_step1_tip2'),
+        t('guide_step1_tip3'),
+      ],
+    },
+    {
+      num: '02',
+      icon: <MessageSquare size={22} />,
+      color: '#10b981',
+      title: t('guide_step2_title'),
+      isHighlight: true,
+      desc: t('guide_step2_desc'),
+      tips: [
+        t('guide_step2_tip1'),
+        t('guide_step2_tip2'),
+        t('guide_step2_tip3'),
+      ],
+    },
+    {
+      num: '03',
+      icon: <Smartphone size={22} />,
+      color: '#8b5cf6',
+      title: t('guide_step3_title'),
+      desc: t('guide_step3_desc'),
+      tips: [
+        t('guide_step3_tip1'),
+        t('guide_step3_tip2'),
+        t('guide_step3_tip3'),
+      ],
+    },
+    {
+      num: '04',
+      icon: <Radio size={22} />,
+      color: '#ef4444',
+      title: t('guide_step4_title'),
+      desc: t('guide_step4_desc'),
+      tips: [
+        t('guide_step4_tip1'),
+        t('guide_step4_tip2'),
+        t('guide_step4_tip3'),
+      ],
+    },
+    {
+      num: '05',
+      icon: <Brain size={22} />,
+      color: '#f59e0b',
+      title: t('guide_step5_title'),
+      desc: t('guide_step5_desc'),
+      tips: [
+        t('guide_step5_tip1'),
+        t('guide_step5_tip2'),
+        t('guide_step5_tip3'),
+      ],
+    },
+    {
+      num: '06',
+      icon: <Camera size={22} />,
+      color: '#ec4899',
+      title: t('guide_step6_title'),
+      desc: t('guide_step6_desc'),
+      tips: [
+        t('guide_step6_tip1'),
+        t('guide_step6_tip2'),
+        t('guide_step6_tip3'),
+      ],
+    },
+    {
+      num: '07',
+      icon: <FileText size={22} />,
+      color: '#06b6d4',
+      title: t('guide_step7_title'),
+      desc: t('guide_step7_desc'),
+      tips: [
+        t('guide_step7_tip1'),
+        t('guide_step7_tip2'),
+        t('guide_step7_tip3'),
+      ],
+    },
+  ];
+
+  const FAQS = [
+    {
+      q: t('guide_faq1_q'),
+      a: t('guide_faq1_a'),
+    },
+    {
+      q: t('guide_faq2_q'),
+      a: t('guide_faq2_a'),
+    },
+    {
+      q: t('guide_faq3_q'),
+      a: t('guide_faq3_a'),
+    },
+    {
+      q: t('guide_faq4_q'),
+      a: t('guide_faq4_a'),
+    },
+    {
+      q: t('guide_faq5_q'),
+      a: t('guide_faq5_a'),
+    },
+    {
+      q: t('guide_faq6_q'),
+      a: t('guide_faq6_a'),
+    },
+    {
+      q: t('guide_faq7_q'),
+      a: t('guide_faq7_a'),
+    },
+  ];
+
+  const DO_DONTS = {
+    do: [
+      t('guide_do1'),
+      t('guide_do2'),
+      t('guide_do3'),
+      t('guide_do4'),
+      t('guide_do5'),
+      t('guide_do6'),
+    ],
+    dont: [
+      t('guide_dont1'),
+      t('guide_dont2'),
+      t('guide_dont3'),
+      t('guide_dont4'),
+      t('guide_dont5'),
+      t('guide_dont6'),
+    ],
+  };
 
   return (
     <div style={{ position: 'relative', overflow: 'hidden' }}>
@@ -169,24 +170,26 @@ const Guide = () => {
             borderRadius: '100px', color: '#ef4444', fontSize: '0.78rem',
             fontWeight: '800', letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '22px'
           }}>
-            User Guide
+            {t('guide_hero_label')}
           </span>
           <h1 style={{ marginBottom: '18px', fontWeight: 900 }}>
-            How to Use{' '}
-            <span style={{ color: '#ef4444' }}>RastaSaathi</span>
+            {t('guide_hero_title').includes("How to Use RastaSaathi") ? (
+              <>How to Use <span style={{ color: '#ef4444' }}>RastaSaathi</span></>
+            ) : t('guide_hero_title').includes("रास्तासाथी का उपयोग कैसे करें") ? (
+              <>रास्तासाथी का <span style={{ color: '#ef4444' }}>उपयोग कैसे करें</span></>
+            ) : t('guide_hero_title')}
           </h1>
           <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.15rem)', color: 'var(--text-secondary)', lineHeight: 1.75, maxWidth: '680px', margin: '0 auto' }}>
-            A complete step-by-step guide — from setting up your account to triggering SOS, 
-            using the AI assistant, and downloading your incident report.
+            {t('guide_hero_desc')}
           </p>
         </motion.div>
 
         {/* ── SETUP STEPS ── */}
         <div style={{ marginBottom: 'clamp(56px, 8vw, 100px)' }}>
           <div style={{ textAlign: 'center', marginBottom: 'clamp(32px, 5vw, 52px)' }}>
-            <h2 style={{ marginBottom: '12px' }}>Step-by-Step Setup & Usage</h2>
+            <h2 style={{ marginBottom: '12px' }}>{t('guide_steps_title')}</h2>
             <p style={{ color: 'var(--text-secondary)', fontSize: 'clamp(0.9rem, 2vw, 1rem)', maxWidth: '520px', margin: '0 auto' }}>
-              Follow these steps in order to get fully set up and ready for an emergency.
+              {t('guide_steps_desc')}
             </p>
           </div>
 
@@ -229,7 +232,7 @@ const Guide = () => {
                       {step.title}
                       {step.isHighlight && (
                         <span style={{ marginLeft: '10px', fontSize: '0.7rem', fontWeight: 900, background: step.color, color: 'white', padding: '3px 8px', borderRadius: '6px', verticalAlign: 'middle' }}>
-                          REQUIRED
+                          {t('guide_step2_required')}
                         </span>
                       )}
                     </h3>
@@ -269,10 +272,10 @@ const Guide = () => {
                         />
                         <div>
                           <div style={{ fontWeight: 800, color: '#10b981', fontSize: '0.95rem', marginBottom: '6px' }}>
-                            📱 Scan to Activate Instantly
+                            {t('guide_step2_scan')}
                           </div>
                           <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '10px' }}>
-                            Scan this QR with your phone camera to open WhatsApp with the message pre-filled.
+                            {t('guide_step2_scan_desc')}
                           </div>
                           <a
                             href="https://wa.me/14155238886?text=join%20do-hit"
@@ -285,7 +288,7 @@ const Guide = () => {
                               fontSize: '0.82rem', fontWeight: 800, textDecoration: 'none'
                             }}
                           >
-                            Tap to Open WhatsApp <ArrowRight size={14} />
+                            {t('guide_step2_btn')} <ArrowRight size={14} />
                           </a>
                         </div>
                       </motion.div>
@@ -305,9 +308,9 @@ const Guide = () => {
           style={{ marginBottom: 'clamp(56px, 8vw, 100px)' }}
         >
           <div style={{ textAlign: 'center', marginBottom: 'clamp(28px, 5vw, 44px)' }}>
-            <h2 style={{ marginBottom: '12px' }}>During an Emergency — Do's & Don'ts</h2>
+            <h2 style={{ marginBottom: '12px' }}>{t('guide_do_title')}</h2>
             <p style={{ color: 'var(--text-secondary)', fontSize: 'clamp(0.9rem, 2vw, 1rem)', maxWidth: '520px', margin: '0 auto' }}>
-              Staying calm and doing the right things can make a life-saving difference.
+              {t('guide_do_desc')}
             </p>
           </div>
 
@@ -320,7 +323,7 @@ const Guide = () => {
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
                 <CheckCircle size={22} color="#10b981" />
-                <h3 style={{ fontSize: 'clamp(1rem, 2.5vw, 1.15rem)', fontWeight: 800, color: '#10b981' }}>Do This</h3>
+                <h3 style={{ fontSize: 'clamp(1rem, 2.5vw, 1.15rem)', fontWeight: 800, color: '#10b981' }}>{t('guide_do_heading')}</h3>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 {DO_DONTS.do.map((item, i) => (
@@ -340,7 +343,7 @@ const Guide = () => {
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
                 <XCircle size={22} color="#ef4444" />
-                <h3 style={{ fontSize: 'clamp(1rem, 2.5vw, 1.15rem)', fontWeight: 800, color: '#ef4444' }}>Avoid This</h3>
+                <h3 style={{ fontSize: 'clamp(1rem, 2.5vw, 1.15rem)', fontWeight: 800, color: '#ef4444' }}>{t('guide_dont_heading')}</h3>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 {DO_DONTS.dont.map((item, i) => (
@@ -362,17 +365,17 @@ const Guide = () => {
           style={{ marginBottom: 'clamp(56px, 8vw, 100px)' }}
         >
           <div style={{ textAlign: 'center', marginBottom: 'clamp(28px, 5vw, 40px)' }}>
-            <h2 style={{ marginBottom: '12px' }}>Emergency Numbers to Know</h2>
+            <h2 style={{ marginBottom: '12px' }}>{t('guide_numbers_title')}</h2>
             <p style={{ color: 'var(--text-secondary)', fontSize: 'clamp(0.9rem, 2vw, 1rem)', maxWidth: '480px', margin: '0 auto' }}>
-              Keep these saved in your phone — use them alongside RastaSaathi.
+              {t('guide_numbers_desc')}
             </p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '14px' }}>
             {[
-              { num: '108', label: 'Ambulance', sub: 'Medical emergency — free service', color: '#ef4444' },
-              { num: '100', label: 'Police', sub: 'Law enforcement & accidents', color: '#3b82f6' },
-              { num: '101', label: 'Fire Brigade', sub: 'Fire & rescue operations', color: '#f59e0b' },
-              { num: '112', label: 'National Emergency', sub: 'All-in-one emergency number', color: '#10b981' },
+              { num: '108', label: t('guide_num1_label'), sub: t('guide_num1_sub'), color: '#ef4444' },
+              { num: '100', label: t('guide_num2_label'), sub: t('guide_num2_sub'), color: '#3b82f6' },
+              { num: '101', label: t('guide_num3_label'), sub: t('guide_num3_sub'), color: '#f59e0b' },
+              { num: '112', label: t('guide_num4_label'), sub: t('guide_num4_sub'), color: '#10b981' },
             ].map((item, i) => (
               <motion.div
                 key={i}
@@ -399,9 +402,9 @@ const Guide = () => {
           viewport={{ once: true }}
         >
           <div style={{ textAlign: 'center', marginBottom: 'clamp(28px, 5vw, 44px)' }}>
-            <h2 style={{ marginBottom: '12px' }}>Frequently Asked Questions</h2>
+            <h2 style={{ marginBottom: '12px' }}>{t('guide_faq_title')}</h2>
             <p style={{ color: 'var(--text-secondary)', fontSize: 'clamp(0.9rem, 2vw, 1rem)', maxWidth: '480px', margin: '0 auto' }}>
-              Common questions answered clearly.
+              {t('guide_faq_desc')}
             </p>
           </div>
 

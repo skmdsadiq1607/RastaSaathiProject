@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Eye, Target, Heart, Zap, Rocket, CheckCircle, MapPin, Brain, Shield, Clock, Users, Globe } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const Mission = () => {
+  const { t } = useLanguage();
+
   return (
     <div style={{ position: 'relative', overflow: 'hidden' }}>
       {/* Ambient glows */}
@@ -24,15 +27,17 @@ const Mission = () => {
             borderRadius: '100px', color: '#ef4444', fontSize: '0.78rem',
             fontWeight: '800', letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '24px'
           }}>
-            Our Purpose
+            {t('mission_hero_label')}
           </span>
           <h1 style={{ marginBottom: '20px', fontWeight: 900 }}>
-            Vision &{' '}
-            <span style={{ color: '#ef4444' }}>Mission</span>
+            {t('mission_hero_title').includes("Vision & Mission") ? (
+              <>Vision & <span style={{ color: '#ef4444' }}>Mission</span></>
+            ) : t('mission_hero_title').includes("विजन और मिशन") ? (
+              <>विजन और <span style={{ color: '#ef4444' }}>मिशन</span></>
+            ) : t('mission_hero_title')}
           </h1>
           <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.2rem)', color: 'var(--text-secondary)', lineHeight: 1.75, maxWidth: '680px', margin: '0 auto' }}>
-            We believe no one should die on the road just because help didn't arrive in time.
-            This is the belief that drives every line of code in RastaSaathi.
+            {t('mission_hero_desc')}
           </p>
         </motion.div>
 
@@ -57,18 +62,23 @@ const Mission = () => {
                 <Eye size={22} color="#ef4444" />
               </div>
               <div>
-                <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#ef4444', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '2px' }}>Our Vision</div>
-                <h2 style={{ fontSize: 'clamp(1.2rem, 3vw, 1.6rem)', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>Zero Preventable Deaths</h2>
+                <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#ef4444', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '2px' }}>{t('vision_label')}</div>
+                <h2 style={{ fontSize: 'clamp(1.2rem, 3vw, 1.6rem)', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>{t('vision_title')}</h2>
               </div>
             </div>
             <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: 'clamp(0.95rem, 2vw, 1.05rem)' }}>
-              A future where <strong style={{ color: 'var(--text-primary)' }}>no road accident victim</strong> loses their life 
-              due to delayed emergency response. We envision a country where pressing SOS 
-              guarantees help arriving within minutes — not hours.
+              {t('vision_p1').includes("no road accident victim") ? (
+                <>A future where <strong style={{ color: 'var(--text-primary)' }}>no road accident victim</strong> loses their life due to delayed emergency response. We envision a country where pressing SOS guarantees help arriving within minutes — not hours.</>
+              ) : t('vision_p1').includes("सड़क दुर्घटना पीड़ित की जान न जाए") ? (
+                <>एक ऐसा भविष्य जहां आपातकालीन प्रतिक्रिया में देरी के कारण किसी भी <strong style={{ color: 'var(--text-primary)' }}>सड़क दुर्घटना पीड़ित की जान न जाए</strong>। हम एक ऐसे देश की कल्पना करते हैं जहां एसओएस दबाने से मिनटों में मदद मिलने की गारंटी मिलती है - घंटों में नहीं।</>
+              ) : t('vision_p1')}
             </p>
             <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: 'clamp(0.95rem, 2vw, 1.05rem)' }}>
-              We see RastaSaathi as India's backbone emergency layer — connecting every road, 
-              every hospital, every ambulance into one intelligent, real-time grid.
+              {t('vision_p2').includes("backbone emergency layer") ? (
+                <>We see RastaSaathi as India's <strong style={{ color: 'var(--text-primary)' }}>backbone emergency layer</strong> — connecting every road, every hospital, every ambulance into one intelligent, real-time grid.</>
+              ) : t('vision_p2').includes("रीढ़ की हड्डी वाली आपातकालीन परत") ? (
+                <>हम रास्तासाथी को भारत की <strong style={{ color: 'var(--text-primary)' }}>रीढ़ की हड्डी वाली आपातकालीन परत</strong> के रूप में देखते हैं - हर सड़क, हर अस्पताल, हर एम्बुलेंस को एक बुद्धिमान, वास्तविक समय के ग्रिड में जोड़ना।</>
+              ) : t('vision_p2')}
             </p>
           </motion.div>
 
@@ -90,18 +100,23 @@ const Mission = () => {
                 <Target size={22} color="#3b82f6" />
               </div>
               <div>
-                <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#3b82f6', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '2px' }}>Our Mission</div>
-                <h2 style={{ fontSize: 'clamp(1.2rem, 3vw, 1.6rem)', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>Help in Seconds, Not Minutes</h2>
+                <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#3b82f6', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '2px' }}>{t('mission_label')}</div>
+                <h2 style={{ fontSize: 'clamp(1.2rem, 3vw, 1.6rem)', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>{t('mission_title')}</h2>
               </div>
             </div>
             <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: 'clamp(0.95rem, 2vw, 1.05rem)' }}>
-              To build a platform that <strong style={{ color: 'var(--text-primary)' }}>any person on any road in India</strong> can 
-              use in a crisis — without needing to know addresses, make multiple calls, or wait 
-              for someone else to act.
+              {t('mission_p1').includes("any person on any road in India") ? (
+                <>To build a platform that <strong style={{ color: 'var(--text-primary)' }}>any person on any road in India</strong> can use in a crisis — without needing to know addresses, make multiple calls, or wait for someone else to act.</>
+              ) : t('mission_p1').includes("भारत की किसी भी सड़क पर कोई भी व्यक्ति") ? (
+                <>एक ऐसा मंच तैयार करना जिसे <strong style={{ color: 'var(--text-primary)' }}>भारत की किसी भी सड़क पर कोई भी व्यक्ति</strong> संकट के समय उपयोग कर सके - बिना पते जानने, कई कॉल करने या किसी और के कार्रवाई करने का इंतजार किए।</>
+              ) : t('mission_p1')}
             </p>
             <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: 'clamp(0.95rem, 2vw, 1.05rem)' }}>
-              One tap. Instant GPS capture. Hospitals found. Ambulance dispatched. 
-              AI guidance activated. WhatsApp alert sent. That's our mission — working, in real time.
+              {t('mission_p2').includes("One tap") ? (
+                <><strong style={{ color: 'var(--text-primary)' }}>One tap</strong>. Instant GPS capture. Hospitals found. Ambulance dispatched. AI guidance activated. WhatsApp alert sent. That's our mission — working, in real time.</>
+              ) : t('mission_p2').includes("एक टैप") ? (
+                <><strong style={{ color: 'var(--text-primary)' }}>एक टैप</strong>। त्वरित जीपीएस कैप्चर। अस्पताल मिले। एम्बुलेंस भेजी गई। एआई मार्गदर्शन सक्रिय। व्हाट्सएप अलर्ट भेजा गया। यही हमारा मिशन है - वास्तविक समय में काम करना।</>
+              ) : t('mission_p2')}
             </p>
           </motion.div>
         </div>
@@ -114,17 +129,17 @@ const Mission = () => {
           style={{ marginBottom: 'clamp(48px, 7vw, 80px)' }}
         >
           <div style={{ textAlign: 'center', marginBottom: 'clamp(28px, 5vw, 44px)' }}>
-            <h2 style={{ marginBottom: '12px' }}>The Problem in Numbers</h2>
+            <h2 style={{ marginBottom: '12px' }}>{t('problem_numbers_title')}</h2>
             <p style={{ color: 'var(--text-secondary)', fontSize: 'clamp(0.95rem, 2vw, 1.05rem)', maxWidth: '560px', margin: '0 auto' }}>
-              These aren't just statistics. Each number is a life that could have been saved.
+              {t('problem_numbers_desc')}
             </p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
             {[
-              { val: '1.5 Lakh', label: 'Deaths per year', sub: 'from road accidents in India', color: '#ef4444' },
-              { val: '1 every 4 min', label: 'Frequency', sub: 'someone dies on an Indian road', color: '#f59e0b' },
-              { val: '50%+', label: 'Preventable', sub: 'with faster emergency response', color: '#10b981' },
-              { val: '~18 min', label: 'Average delay', sub: 'before help reaches the victim', color: '#3b82f6' },
+              { val: t('stat1_val'), label: t('stat1_label'), sub: t('stat1_sub'), color: '#ef4444' },
+              { val: t('stat2_val'), label: t('stat2_label'), sub: t('stat2_sub'), color: '#f59e0b' },
+              { val: t('stat3_val'), label: t('stat3_label'), sub: t('stat3_sub'), color: '#10b981' },
+              { val: t('stat4_val'), label: t('stat4_label'), sub: t('stat4_sub'), color: '#3b82f6' },
             ].map((s, i) => (
               <motion.div
                 key={i}
@@ -153,27 +168,27 @@ const Mission = () => {
           style={{ marginBottom: 'clamp(48px, 7vw, 80px)' }}
         >
           <div style={{ textAlign: 'center', marginBottom: 'clamp(28px, 5vw, 44px)' }}>
-            <h2 style={{ marginBottom: '12px' }}>What We Stand For</h2>
+            <h2 style={{ marginBottom: '12px' }}>{t('values_title')}</h2>
             <p style={{ color: 'var(--text-secondary)', fontSize: 'clamp(0.95rem, 2vw, 1.05rem)', maxWidth: '520px', margin: '0 auto' }}>
-              Three principles that guide every decision we make.
+              {t('values_desc')}
             </p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px' }}>
             {[
               {
                 icon: <Zap size={24} />, color: '#ef4444',
-                title: 'Speed First',
-                desc: 'Every second costs someone their life. We optimize relentlessly for response speed — GPS capture in under 1 second, nearest resource in under 2 seconds.'
+                title: t('value1_title'),
+                desc: t('value1_desc')
               },
               {
                 icon: <Users size={24} />, color: '#3b82f6',
-                title: 'Accessible to Everyone',
-                desc: 'RastaSaathi is designed for any person — rural or urban, tech-savvy or not. Simple UI, multilingual support, and manual location entry for areas with weak GPS.'
+                title: t('value2_title'),
+                desc: t('value2_desc')
               },
               {
                 icon: <Shield size={24} />, color: '#10b981',
-                title: 'Privacy & Trust',
-                desc: 'Your location and personal data are used only during an active SOS. We never share data with third parties. Your safety information belongs to you.'
+                title: t('value3_title'),
+                desc: t('value3_desc')
               },
             ].map((v, i) => (
               <motion.div
@@ -214,14 +229,14 @@ const Mission = () => {
                 <Rocket size={24} color="#ef4444" />
               </div>
               <div style={{ flex: 1, minWidth: '240px' }}>
-                <h2 style={{ fontSize: 'clamp(1.3rem, 3.5vw, 2rem)', marginBottom: '16px' }}>What We're Building Towards</h2>
+                <h2 style={{ fontSize: 'clamp(1.3rem, 3.5vw, 2rem)', marginBottom: '16px' }}>{t('roadmap_title')}</h2>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
                   {[
-                    { icon: <Globe size={16} />, text: 'Expanding RastaSaathi across all major Indian states and highway corridors' },
-                    { icon: <Brain size={16} />, text: 'Improving AI first aid accuracy with medical expert validation and real-world injury datasets' },
-                    { icon: <MapPin size={16} />, text: 'Partnering with government hospitals, 108 ambulance services, and traffic police' },
-                    { icon: <Clock size={16} />, text: 'Reducing average emergency response time from 18 minutes to under 5 minutes' },
-                    { icon: <CheckCircle size={16} />, text: 'Building an offline-capable version for areas with poor internet connectivity' },
+                    { icon: <Globe size={16} />, text: t('roadmap1') },
+                    { icon: <Brain size={16} />, text: t('roadmap2') },
+                    { icon: <MapPin size={16} />, text: t('roadmap3') },
+                    { icon: <Clock size={16} />, text: t('roadmap4') },
+                    { icon: <CheckCircle size={16} />, text: t('roadmap5') },
                   ].map((item, i) => (
                     <div key={i} style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
                       <div style={{ color: '#ef4444', marginTop: '2px', flexShrink: 0 }}>{item.icon}</div>
@@ -257,11 +272,10 @@ const Mission = () => {
             margin: '0 auto 20px',
             fontStyle: 'italic'
           }}>
-            "The 'Golden Hour' after an accident is not a medical concept —
-            it's a promise. RastaSaathi exists to keep that promise."
+            {t('closing_quote')}
           </blockquote>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', fontWeight: 600 }}>
-            — Team RastaSaathi
+            {t('closing_by')}
           </p>
         </motion.div>
 
