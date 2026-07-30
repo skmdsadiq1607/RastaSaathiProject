@@ -253,6 +253,14 @@ const TRANSLATIONS = {
     about_for5: "Anyone in a time-critical situation",
     about_built_title: "Built with Purpose",
     about_built_desc: "RastaSaathi was built by a team of three engineering students who believe that technology should save lives, not just entertain. This project started as a hackathon idea and grew into a full emergency response platform.",
+    about_stat1_label: "SOS response time",
+    about_stat1_sub: "from button press to alert",
+    about_stat2_label: "Emergency number",
+    about_stat2_sub: "auto-escalation supported",
+    about_stat3_label: "Emergency dispatch",
+    about_stat3_sub: "Hospital + Police + Ambulance",
+    about_stat4_label: "AI assistant active",
+    about_stat4_sub: "always ready to guide you",
 
     // ── Vision & Mission Page ──
     mission_hero_label: "Our Purpose",
@@ -604,6 +612,14 @@ const TRANSLATIONS = {
     about_for5: "समय-संवेदनशील स्थिति में कोई भी व्यक्ति",
     about_built_title: "उद्देश्य के साथ निर्मित",
     about_built_desc: "रास्तासाथी का निर्माण तीन इंजीनियरिंग छात्रों की एक टीम द्वारा किया गया था जो मानते हैं कि प्रौद्योगिकी को जीवन बचाना चाहिए, न कि केवल मनोरंजन करना चाहिए। यह परियोजना एक हैकाथॉन विचार के रूप में शुरू हुई और एक पूर्ण आपातकालीन प्रतिक्रिया मंच के रूप में विकसित हुई।",
+    about_stat1_label: "एसओएस प्रतिक्रिया समय",
+    about_stat1_sub: "बटन दबाने से लेकर सचेत करने तक",
+    about_stat2_label: "आपातकालीन नंबर",
+    about_stat2_sub: "स्वचालित रूप से आगे की कार्रवाई",
+    about_stat3_label: "आपातकालीन प्रेषण",
+    about_stat3_sub: "अस्पताल + पुलिस + एम्बुलेंस",
+    about_stat4_label: "एआई सहायक सक्रिय",
+    about_stat4_sub: "आपका मार्गदर्शन करने के लिए सदैव तत्पर",
 
     // ── Vision & Mission Page ──
     mission_hero_label: "हमारा उद्देश्य",
